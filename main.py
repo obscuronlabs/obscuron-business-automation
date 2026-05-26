@@ -1,15 +1,30 @@
-# Obscuron Labs // Core Scraper Engine v1.4.2
+import os
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 
-An enterprise-grade asynchronous web scraping pipeline engineered for rapid DOM restructuring, defensive anti-bot evasion, and automated semantic data enrichment.
+class ObscuronScraper:
+    def __init__(self, core_id="OBS-VECTOR-13"):
+        self.session = requests.Session()
+        self.session.headers.update({"User-Agent": "ObscuronLabs-AutonomousCore/1.4"})
+        print(f"[Obscuron Labs Engine] Initialization successful. Core ID: {core_id}")
 
-## 🧠 Developed By
-* **Vanta Crowe** (Intelligence Gathering Specialist / Scraping)
-* **Cain Holloway** (Backend Systems Engineer / Python)
+    def execute_pipeline(self, target, location):
+        print(f"[Vanta Crowe] Executing targeting matrix for: {target} in {location}")
+        
+        mock_pipeline_data = {
+            "Company Name": [f"{location} Global {target} Ltd", f"Prime {target} Analytics", f"Apex {target} Systems"],
+            "Corporate Email": [f"operations@{location.lower()}global.com", f"info@prime{target.lower()}.com", f"contact@apex{target.lower()}.com"],
+            "Telemetry Phone": ["+44 20 7946 0192", "+44 20 7946 0543", "+44 20 7946 0881"],
+            "Verification Status": ["VERIFIED", "VERIFIED", "PENDING_SOPHIA_QA"]
+        }
+        
+        df = pd.DataFrame(mock_pipeline_data)
+        output_path = f"obscuron_output_{location.lower()}_{target.lower()}.csv"
+        df.to_csv(output_path, index=False)
+        print(f"[Cain Holloway] Data stream successfully structured and written to: {output_path}")
+        return output_path
 
-## 🛠️ Architecture Overview
-This engine deploys a highly resilient extraction layer designed to crawl complex target infrastructures, parse raw business data, and stream structured data pipelines into our central data intelligence layers managed by Aris Halcyon.
-
-## 🚀 Quick Start
-```bash
-pip install pandas requests beautifulsoup4
-python main.py --target "Real Estate" --location "London."
+if __name__ == "__main__":
+    scraper = ObscuronScraper()
+    scraper.execute_pipeline("Logistics", "Berlin")
