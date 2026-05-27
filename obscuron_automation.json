@@ -1,0 +1,632 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -2304,
+        -384
+      ],
+      "id": "53ca0780-9913-475d-9b9a-c69541a3bca8",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"You are an AI business operations assistant. Generate a professional lead analysis report for a potential client, including business summary, growth opportunities, automation suggestions, and actionable insights.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -384
+      ],
+      "id": "5e33a19d-9e7f-4910-971b-497bb48dacaa",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508983523933945876",
+          "mode": "list",
+          "cachedResultName": "automation-reports",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508983523933945876"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -384
+      ],
+      "id": "a7192e2c-4f2d-46ed-ac58-488fc1cb3901",
+      "name": "Send a message",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze a client business and generate a professional AI automation strategy report including workflow improvements, operational bottlenecks, growth opportunities, and automation recommendations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -512
+      ],
+      "id": "a55730df-59be-4694-84a3-c764df164f6b",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a professional business operations report including workflow efficiency, automation status, productivity insights, operational risks, and optimization recommendations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -256
+      ],
+      "id": "4d08e2b9-32e9-4be3-8ab8-4fda9e635cc6",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a workflow monitoring report including automation health status, execution warnings, failed process risks, API connection status, and system optimization recommendations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -624
+      ],
+      "id": "5b8f040b-435f-4f5e-a6f1-45a1df0e0c21",
+      "name": "HTTP Request3"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508991254762094592",
+          "mode": "list",
+          "cachedResultName": "client-analysis",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508991254762094592"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -512
+      ],
+      "id": "c3771ca4-31b2-4bc2-a9fe-924ff6c2f17b",
+      "name": "Send a message1",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508991314258169928",
+          "mode": "list",
+          "cachedResultName": "operations",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508991314258169928"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -256
+      ],
+      "id": "44924c26-6249-49e6-849d-7ebad91bb4f4",
+      "name": "Send a message2",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508991463005098014",
+          "mode": "list",
+          "cachedResultName": "workflow-alerts",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508991463005098014"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -624
+      ],
+      "id": "9f00b49a-ec81-4967-8b0b-dbf34202cf2f",
+      "name": "Send a message3",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a professional market research report including AI trends, automation opportunities, emerging business sectors, competitor insights, and actionable business intelligence.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -112
+      ],
+      "id": "a70eb062-cd91-496f-bed2-3f96ac6c345b",
+      "name": "HTTP Request4"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508996146092052480",
+          "mode": "list",
+          "cachedResultName": "market-research",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508996146092052480"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -112
+      ],
+      "id": "49b5be2d-4ca5-4732-b546-f3885b2d057d",
+      "name": "Send a message4",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a professional sales performance report including conversion opportunities, customer acquisition insights, revenue growth strategies, automation opportunities, and sales optimization recommendations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        -736
+      ],
+      "id": "7a2e4bee-27b8-43dd-8b10-5f5ebc471c5b",
+      "name": "HTTP Request5"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508997565222228079",
+          "mode": "list",
+          "cachedResultName": "sales-reports",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508997565222228079"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        -736
+      ],
+      "id": "97a6dd77-03ab-4abb-b86d-822376fc8cde",
+      "name": "Send a message5",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a professional AI lead generation report including high-potential business sectors, automation opportunities, customer acquisition ideas, lead qualification insights, and growth recommendations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -2080,
+        32
+      ],
+      "id": "213a2884-f8d6-471c-987c-a848e588ba27",
+      "name": "HTTP Request6"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1507951917538476183",
+          "mode": "list",
+          "cachedResultName": "obscuron's server",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1508990965631680552",
+          "mode": "list",
+          "cachedResultName": "ai-leads",
+          "cachedResultUrl": "https://discord.com/channels/1507951917538476183/1508990965631680552"
+        },
+        "content": "={{$json[\"choices\"][0][\"message\"][\"content\"]}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        32
+      ],
+      "id": "ebeea557-4233-4f43-8847-ecd52941d259",
+      "name": "Send a message6",
+      "webhookId": "594b4656-b233-4f51-b533-4c6e4b3269b8",
+      "credentials": {
+        "discordBotApi": {
+          "id": "wHueLTu10eUfDO3i",
+          "name": "Discord Bot account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request4": {
+      "main": [
+        [
+          {
+            "node": "Send a message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request5": {
+      "main": [
+        [
+          {
+            "node": "Send a message5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Send a message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1,
+    "availableInMCP": false
+  },
+  "versionId": "7a58076d-0449-4412-9e2a-7fa6f52391fb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c40bbbb79bc9a8cc21b856028518030dfc422f0a48543fd9da8f514a531e093e"
+  },
+  "id": "St4CDcm2S3Dl8vUR",
+  "tags": []
+}
