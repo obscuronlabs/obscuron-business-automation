@@ -1,26 +1,24 @@
-# Obscuron Labs Core
+# Obscuron Labs — Production Dependencies
+# Python 3.11+
 
-Experimental AI workflow automation and multi-agent orchestration framework developed by Obscuron Labs.
+# ── LLM & AI ──────────────────────────────────────────────────
+langchain==0.2.16
+langchain-openai==0.1.25
+openai==1.51.0
 
-## Overview
+# ── Web Scraping ───────────────────────────────────────────────
+requests==2.32.3
+beautifulsoup4==4.12.3
+lxml==5.3.0
 
-This package contains a starter infrastructure for autonomous AI workflows, orchestration logic, and experimental agent-based automation systems.
+# ── Data Processing ────────────────────────────────────────────
+pandas==2.2.3
 
-Designed for developers, automation enthusiasts, and AI workflow experimentation.
+# ── Config & Environment ───────────────────────────────────────
+python-dotenv==1.0.1
 
----
+# ── Optional: Faster HTML parsing ─────────────────────────────
+# html5lib==1.1
 
-## Included Files
-
-- main.py
-- obscuron_core_agents.py
-- requirements.txt
-
----
-
-## Installation
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
+# ── Optional: SerpAPI for search-based lead gen ───────────────
+# google-search-results==2.4.2
