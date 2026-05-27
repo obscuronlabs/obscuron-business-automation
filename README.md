@@ -38,6 +38,11 @@ Designed for developers, startups, automation enthusiasts, and AI workflow exper
 ## Installation
 
 Install dependencies:
+---
+
+## Download
+
+[Get the Automation Package on Gumroad](https://obscuron.gumroad.com/l/jkfld)
 
 ```bash
 pip install -r requirements.txt
