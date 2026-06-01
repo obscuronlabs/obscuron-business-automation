@@ -1,5 +1,5 @@
 {
-  "name": "My workflow",
+  "name": "Obscuron Labs — Hourly AI Reports",
   "nodes": [
     {
       "parameters": {
@@ -29,7 +29,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -96,7 +96,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -127,7 +127,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -158,7 +158,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -168,7 +168,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a workflow monitoring report including automation health status, execution warnings, failed process risks, API connection status, and system optimization recommendations.\"\n    }\n  ]\n}",
+        "jsonBody": "{\n  \"model\": \"openai/gpt-4o-mini\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate a workflow monitoring report including automation health status, execution warnings, failed process risks, API connection status, and system optimization recommendations.\"\n    }\n  ]\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -297,7 +297,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -364,7 +364,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -431,7 +431,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_OPENROUTER_API_KEY"
+              "value": "={{ 'Bearer ' + $env.OPENROUTER_API_KEY }}"
             },
             {
               "name": "Content-Type",

@@ -21,7 +21,6 @@ logging.basicConfig(
     handlers=[
         logging.FileHandler("obscuron.log", encoding='utf-8'),
         logging.StreamHandler(),
-        logging.FileHandler("obscuron.log"),
     ],
 )
 logger = logging.getLogger("ObscuronCore")

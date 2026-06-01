@@ -19,7 +19,7 @@ load_dotenv()
 
 
 def cmd_pipeline(args):
-    from core.agents import ObscuronPipeline
+    from agents import ObscuronPipeline
 
     use_router = os.getenv("USE_OPENROUTER", "false").lower() == "true"
     pipeline = ObscuronPipeline(openrouter_mode=use_router)
@@ -45,7 +45,7 @@ def cmd_pipeline(args):
 
 
 def cmd_scrape(args):
-    from core.scraper import ObscuronScraper
+    from scraper import ObscuronScraper
 
     scraper = ObscuronScraper(request_delay=args.delay)
     leads = scraper.scrape_list(args.urls)
@@ -59,7 +59,7 @@ def cmd_scrape(args):
 
 
 def cmd_search(args):
-    from core.scraper import ObscuronScraper
+    from scraper import ObscuronScraper
 
     scraper = ObscuronScraper(request_delay=args.delay)
     leads = scraper.search_and_scrape(args.query, num_results=args.results)
