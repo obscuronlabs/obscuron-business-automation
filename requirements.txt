@@ -4,7 +4,11 @@
 # ── LLM & AI ──────────────────────────────────────────────────
 langchain==0.2.16
 langchain-openai==0.1.25
+langchain-community==0.2.16
 openai==1.51.0
+
+# ── Web Search (free, no API key required) ────────────────────
+duckduckgo-search==6.3.5
 
 # ── Web Scraping ───────────────────────────────────────────────
 requests==2.32.3
@@ -17,8 +21,5 @@ pandas==2.2.3
 # ── Config & Environment ───────────────────────────────────────
 python-dotenv==1.0.1
 
-# ── Optional: Faster HTML parsing ─────────────────────────────
-# html5lib==1.1
-
-# ── Optional: SerpAPI for search-based lead gen ───────────────
+# ── Optional: SerpAPI for paid search-based lead gen ──────────
 # google-search-results==2.4.2
