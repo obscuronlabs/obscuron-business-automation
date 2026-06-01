@@ -89,6 +89,16 @@ class AgentChatRequest(BaseModel):
     message: str
 
 
+class WebhookOrderRequest(BaseModel):
+    name: str = ""
+    email: str
+    subject: str = ""
+    message: str
+    service: str = ""        # e.g. "Music Production", "Mixing", "Consultation"
+    budget: str = ""
+    source: str = "website"  # where the order came from
+
+
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def make_job(client_email: str, message: str, mode: str, agent_name: Optional[str] = None) -> Dict[str, Any]:
@@ -278,6 +288,32 @@ def run_pipeline_background(job_id: str):
             "orchestration_summary": r_nyra.output,
         }
         emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": True})
+
+        # ── Discord notifications ─────────────────────────────────────────
+        try:
+            from discord_reporter import get_webhooks_from_env
+            webhooks = get_webhooks_from_env()
+            if webhooks:
+                import requests as req_lib
+                ts = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+                for channel, url in webhooks.items():
+                    if "reports" in channel or "automation" in channel:
+                        summary = r_nyra.output[:1800] if len(r_nyra.output) > 1800 else r_nyra.output
+                        payload = {"embeds": [{
+                            "title": "🤖 New Order Processed — Obscuron Labs",
+                            "description": summary,
+                            "color": 0x00D26A,
+                            "fields": [
+                                {"name": "Client", "value": job.get("client_email", "N/A"), "inline": True},
+                                {"name": "Job ID", "value": job_id, "inline": True},
+                                {"name": "Source", "value": job.get("source", "dashboard"), "inline": True},
+                            ],
+                            "footer": {"text": f"Obscuron Automation • {ts}"},
+                        }]}
+                        req_lib.post(url, json=payload, timeout=8)
+                        break
+        except Exception as disc_err:
+            logger.warning(f"Discord notification failed: {disc_err}")
 
     except Exception as e:
         logger.error(f"Pipeline error for job {job_id}: {e}")
@@ -532,6 +568,95 @@ async def list_agents():
         }
         for key in agent_status
     ]
+
+
+@app.post("/api/webhook/order")
+async def webhook_order(req: WebhookOrderRequest, request: Request):
+    """
+    Receives an incoming order/contact from obscuronlabs.com and
+    automatically triggers the full 15-agent pipeline.
+
+    Connect your Webflow / Netlify form to POST here with JSON:
+        { "name": "...", "email": "...", "message": "...", "service": "..." }
+    """
+    # Build a rich context message for the pipeline
+    context_lines = []
+    if req.name:
+        context_lines.append(f"Client Name: {req.name}")
+    context_lines.append(f"Client Email: {req.email}")
+    if req.service:
+        context_lines.append(f"Service Requested: {req.service}")
+    if req.subject:
+        context_lines.append(f"Subject: {req.subject}")
+    if req.budget:
+        context_lines.append(f"Budget: {req.budget}")
+    context_lines.append(f"Source: {req.source}")
+    context_lines.append("")
+    context_lines.append("Message:")
+    context_lines.append(req.message)
+
+    full_message = "\n".join(context_lines)
+
+    job = make_job(req.email, full_message, "pipeline")
+    job["source"] = req.source
+    job["client_name"] = req.name
+    job_id = job["id"]
+    jobs[job_id] = job
+    job_queues[job_id] = queue.Queue()
+
+    t = threading.Thread(target=run_pipeline_background, args=(job_id,), daemon=True)
+    t.start()
+
+    logger.info(f"Auto-triggered pipeline for website order from {req.email} — job {job_id}")
+
+    # Alert Discord immediately when order arrives
+    try:
+        from discord_reporter import get_webhooks_from_env
+        import requests as req_lib
+        webhooks = get_webhooks_from_env()
+        for channel, url in webhooks.items():
+            if "alerts" in channel or "reports" in channel or "leads" in channel:
+                ts = datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC")
+                payload = {"embeds": [{
+                    "title": "📥 New Order Received!",
+                    "description": f"**{req.name or req.email}** submitted a new order from **{req.source}**\n\n> {req.message[:500]}",
+                    "color": 0x5865F2,
+                    "fields": [
+                        {"name": "Email", "value": req.email, "inline": True},
+                        {"name": "Service", "value": req.service or "Not specified", "inline": True},
+                        {"name": "Job ID", "value": job_id, "inline": True},
+                    ],
+                    "footer": {"text": f"Agents activated — processing now • {ts}"},
+                }]}
+                req_lib.post(url, json=payload, timeout=8)
+                break
+    except Exception as e:
+        logger.warning(f"Discord order alert failed: {e}")
+
+    return {
+        "job_id": job_id,
+        "status": "processing",
+        "message": "Order received. 15 agents activated. Results will be sent to Discord.",
+    }
+
+
+@app.get("/api/status")
+async def system_status():
+    """Quick health check — shows active jobs, agent states, env config."""
+    active = sum(1 for j in jobs.values() if j["status"] == "running")
+    done = sum(1 for j in jobs.values() if j["status"] == "done")
+    errors = sum(1 for j in jobs.values() if j["status"] == "error")
+    return {
+        "status": "ok",
+        "jobs": {"active": active, "done": done, "errors": errors, "total": len(jobs)},
+        "agents": {k: v for k, v in agent_status.items()},
+        "config": {
+            "openrouter": bool(os.getenv("OPENROUTER_API_KEY")),
+            "openai": bool(os.getenv("OPENAI_API_KEY")),
+            "discord_configured": bool(os.getenv("DISCORD_WEBHOOK_REPORTS")),
+            "n8n_configured": bool(os.getenv("N8N_WEBHOOK_URL")),
+        },
+    }
 
 
 # ── Entry point ──────────────────────────────────────────────────────────────

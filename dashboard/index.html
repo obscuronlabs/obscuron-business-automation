@@ -244,7 +244,43 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="logo">Obscuron<span>Labs</span></div>
   <div id="clock">--:--:--</div>
   <div class="sys-status"><div class="sys-dot"></div><span>Systems Operational</span></div>
+  <button id="btn-webhook-info" style="background:var(--bg3);color:var(--muted);border:1px solid var(--border2);padding:7px 14px;border-radius:var(--r);font-size:12px;cursor:pointer;margin-right:4px" title="Website Order Webhook">🌐 Webhook</button>
   <button id="btn-new-job">+ New Job</button>
+</div>
+
+<!-- WEBHOOK INFO MODAL -->
+<div id="webhook-modal-overlay" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);align-items:center;justify-content:center">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r-lg);padding:24px;width:560px;max-width:calc(100vw - 32px);box-shadow:0 24px 80px rgba(0,0,0,.6)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <h3 style="font-size:15px;font-weight:700">🌐 Website Order Integration</h3>
+      <button id="webhook-modal-close" style="background:none;border:none;color:var(--dim);font-size:20px;cursor:pointer">×</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px">
+      Connect your <strong style="color:var(--text)">obscuronlabs.com</strong> contact form to this endpoint. When a client submits an order, all 15 agents will activate automatically and send results to Discord.
+    </p>
+    <div style="margin-bottom:14px">
+      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Webhook URL</div>
+      <div style="display:flex;gap:6px">
+        <code id="webhook-url-display" style="flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--accent2);padding:9px 12px;border-radius:var(--r);font-size:12px;font-family:monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></code>
+        <button onclick="copyWebhookUrl()" style="background:var(--accent);color:#fff;border:none;padding:8px 14px;border-radius:var(--r);font-size:12px;cursor:pointer;flex-shrink:0">Copy</button>
+      </div>
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">POST Body (JSON)</div>
+      <pre style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px;font-size:11px;color:var(--text);overflow:auto;line-height:1.6">{
+  "name": "Client Name",
+  "email": "client@example.com",
+  "service": "Music Production",
+  "subject": "Project inquiry",
+  "message": "I need help with...",
+  "budget": "$500",
+  "source": "website"
+}</pre>
+    </div>
+    <div style="background:var(--green-dim);border:1px solid rgba(29,186,138,.3);border-radius:var(--r);padding:12px;font-size:11px;color:var(--green);line-height:1.6">
+      ✅ <strong>How to connect:</strong> In Webflow/Netlify Forms, add a form submission webhook pointing to this URL. Or add this fetch() call to your form's submit handler.
+    </div>
+  </div>
 </div>
 
 <!-- MAIN -->
@@ -311,21 +347,21 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 <script>
 // ── AGENT DATA ──────────────────────────────────────────────────────────────
 const AGENTS = [
-  {key:"bob_captain",    name:"Bob Captain",    role:"CEO & Founder",           color:"#6c5fff"},
-  {key:"nox_vale",       name:"Nox Vale",        role:"AI Research Lead",         color:"#a855f7"},
-  {key:"pery_ashcroft",  name:"Pery Ashcroft",   role:"Backend Engineer",         color:"#3b82f6"},
-  {key:"echo_virel",     name:"Echo Virel",      role:"Data Analyst",             color:"#06b6d4"},
-  {key:"maya_serrin",    name:"Maya Serrin",     role:"Senior Client Relations",  color:"#10b981"},
-  {key:"selene_ward",    name:"Selene Ward",     role:"UX Designer",              color:"#ec4899"},
-  {key:"damon_cross",    name:"Damon Cross",     role:"Security Specialist",      color:"#ef4444"},
-  {key:"kael_draven",    name:"Kael Draven",     role:"DevOps Engineer",          color:"#f97316"},
-  {key:"leo_mercer",     name:"Leo Mercer",      role:"Operations Director",      color:"#eab308"},
-  {key:"atlas_reed",     name:"Atlas Reed",      role:"Marketing Lead",           color:"#84cc16"},
-  {key:"vera_hollow",    name:"Vera Hollow",     role:"Financial Analyst",        color:"#14b8a6"},
-  {key:"orion_graves",   name:"Orion Graves",    role:"Product Manager",          color:"#8b5cf6"},
-  {key:"iris_vale",      name:"Iris Vale",       role:"QA Engineer",              color:"#d946ef"},
-  {key:"sophia_everdain",name:"Sophia Everdain", role:"Head of Communications",   color:"#f43f5e"},
-  {key:"nyra_solis",     name:"Nyra Solis",      role:"Legal Advisor",            color:"#64748b"},
+  {key:"bob_captain",    name:"Bob Captain",    role:"Founder · Strategic Coordination", color:"#6c5fff"},
+  {key:"nox_vale",       name:"Nox Vale",        role:"Threat Analysis AI",               color:"#a855f7"},
+  {key:"pery_ashcroft",  name:"Pery Ashcroft",   role:"Psychology · Human Pattern AI",    color:"#3b82f6"},
+  {key:"echo_virel",     name:"Echo Virel",      role:"Signal Intel · Surveillance AI",   color:"#06b6d4"},
+  {key:"maya_serrin",    name:"Maya Serrin",     role:"CRM · Client Relations AI",        color:"#10b981"},
+  {key:"selene_ward",    name:"Selene Ward",     role:"Market Intel · Trend AI",          color:"#ec4899"},
+  {key:"damon_cross",    name:"Damon Cross",     role:"Lead Gen · Acquisition AI",        color:"#ef4444"},
+  {key:"kael_draven",    name:"Kael Draven",     role:"Security · Cybersecurity AI",      color:"#f97316"},
+  {key:"leo_mercer",     name:"Leo Mercer",      role:"Operations · Workflow AI",         color:"#eab308"},
+  {key:"atlas_reed",     name:"Atlas Reed",      role:"Revenue · Sales AI",               color:"#84cc16"},
+  {key:"vera_hollow",    name:"Vera Hollow",     role:"Brand · Content AI",               color:"#14b8a6"},
+  {key:"orion_graves",   name:"Orion Graves",    role:"Infrastructure · DevOps AI",       color:"#8b5cf6"},
+  {key:"iris_vale",      name:"Iris Vale",       role:"Analytics · Reporting AI",         color:"#d946ef"},
+  {key:"sophia_everdain",name:"Sophia Everdain", role:"QA · Client Communications AI",   color:"#f43f5e"},
+  {key:"nyra_solis",     name:"Nyra Solis",      role:"Orchestration · Coordinator AI",  color:"#64748b"},
 ];
 
 function initials(name){return name.split(' ').map(p=>p[0]).join('').toUpperCase()}
@@ -843,6 +879,40 @@ function escHtml(str){
   if(!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+// ── WEBHOOK MODAL ────────────────────────────────────────────────────────────
+function openWebhookModal(){
+  const url = window.location.origin + '/api/webhook/order';
+  document.getElementById('webhook-url-display').textContent = url;
+  const overlay = document.getElementById('webhook-modal-overlay');
+  overlay.style.display = 'flex';
+}
+function closeWebhookModal(){
+  document.getElementById('webhook-modal-overlay').style.display = 'none';
+}
+function copyWebhookUrl(){
+  const url = document.getElementById('webhook-url-display').textContent;
+  navigator.clipboard.writeText(url).then(()=>toast('Webhook URL copied!','success'));
+}
+document.getElementById('btn-webhook-info').addEventListener('click', openWebhookModal);
+document.getElementById('webhook-modal-close').addEventListener('click', closeWebhookModal);
+document.getElementById('webhook-modal-overlay').addEventListener('click', e=>{
+  if(e.target===document.getElementById('webhook-modal-overlay')) closeWebhookModal();
+});
+
+// Poll for new website orders every 10s
+setInterval(async()=>{
+  try{
+    const res = await fetch('/api/jobs');
+    const list = await res.json();
+    let changed = false;
+    list.forEach(j=>{
+      if(!jobs[j.id]){ jobs[j.id] = j; changed = true; addFeedItem(`📥 New order from ${j.client_email}`, true); }
+      else if(jobs[j.id].status !== j.status){ jobs[j.id].status = j.status; updateJobItem(j.id); }
+    });
+    if(changed) renderJobList();
+  }catch(e){}
+}, 10000);
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
 buildAgentGrid();
