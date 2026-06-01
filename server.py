@@ -49,21 +49,21 @@ agent_status: Dict[str, str] = {
 }
 
 AGENT_DISPLAY = {
-    "bob_captain": {"display_name": "Bob Captain", "role": "CEO & Founder"},
-    "nox_vale": {"display_name": "Nox Vale", "role": "AI Research Lead"},
-    "pery_ashcroft": {"display_name": "Pery Ashcroft", "role": "Backend Engineer"},
-    "echo_virel": {"display_name": "Echo Virel", "role": "Data Analyst"},
-    "maya_serrin": {"display_name": "Maya Serrin", "role": "Senior Client Relations"},
-    "selene_ward": {"display_name": "Selene Ward", "role": "UX Designer"},
-    "damon_cross": {"display_name": "Damon Cross", "role": "Security Specialist"},
-    "kael_draven": {"display_name": "Kael Draven", "role": "DevOps Engineer"},
-    "leo_mercer": {"display_name": "Leo Mercer", "role": "Operations Director"},
-    "atlas_reed": {"display_name": "Atlas Reed", "role": "Marketing Lead"},
-    "vera_hollow": {"display_name": "Vera Hollow", "role": "Financial Analyst"},
-    "orion_graves": {"display_name": "Orion Graves", "role": "Product Manager"},
-    "iris_vale": {"display_name": "Iris Vale", "role": "QA Engineer"},
-    "sophia_everdain": {"display_name": "Sophia Everdain", "role": "Head of Communications"},
-    "nyra_solis": {"display_name": "Nyra Solis", "role": "Legal Advisor"},
+    "bob_captain":    {"display_name": "Bob Captain",    "role": "Founder · Strategic Coordination"},
+    "nox_vale":       {"display_name": "Nox Vale",       "role": "Threat Analysis AI"},
+    "pery_ashcroft":  {"display_name": "Pery Ashcroft",  "role": "Psychology · Human Pattern AI"},
+    "echo_virel":     {"display_name": "Echo Virel",     "role": "Signal Intel · Surveillance AI"},
+    "maya_serrin":    {"display_name": "Maya Serrin",    "role": "CRM · Client Relations AI"},
+    "selene_ward":    {"display_name": "Selene Ward",    "role": "Market Intel · Trend AI"},
+    "damon_cross":    {"display_name": "Damon Cross",    "role": "Lead Gen · Acquisition AI"},
+    "kael_draven":    {"display_name": "Kael Draven",    "role": "Security · Cybersecurity AI"},
+    "leo_mercer":     {"display_name": "Leo Mercer",     "role": "Operations · Workflow AI"},
+    "atlas_reed":     {"display_name": "Atlas Reed",     "role": "Revenue · Sales AI"},
+    "vera_hollow":    {"display_name": "Vera Hollow",    "role": "Brand · Content AI"},
+    "orion_graves":   {"display_name": "Orion Graves",   "role": "Infrastructure · DevOps AI"},
+    "iris_vale":      {"display_name": "Iris Vale",      "role": "Analytics · Reporting AI"},
+    "sophia_everdain":{"display_name": "Sophia Everdain","role": "QA · Client Communications AI"},
+    "nyra_solis":     {"display_name": "Nyra Solis",     "role": "Orchestration · Coordinator AI"},
 }
 
 # Map agent keys to pipeline stage names
@@ -120,6 +120,31 @@ def set_agent_status(job_id: str, agent_key: str, status: str):
     })
 
 
+def _emit_stage(job_id: str, agent_key: str, stage_name: str, result):
+    """Helper: set status working→result→idle and emit SSE event."""
+    display = AGENT_DISPLAY[agent_key]["display_name"]
+    output = result.output if result.success else f"[ERROR] {result.error}"
+    stage = {
+        "stage": stage_name,
+        "agent": display,
+        "agent_key": agent_key,
+        "output": output,
+        "success": result.success,
+        "duration": round(result.duration_seconds, 2),
+    }
+    jobs[job_id]["stages"].append(stage)
+    emit_event(job_id, {
+        "event": "stage_complete",
+        "stage": stage_name,
+        "agent": display,
+        "agent_key": agent_key,
+        "output": output,
+        "success": result.success,
+        "job_id": job_id,
+    })
+    return result.success
+
+
 def run_pipeline_background(job_id: str):
     job = jobs[job_id]
     job["status"] = "running"
@@ -129,102 +154,138 @@ def run_pipeline_background(job_id: str):
 
         openai_key = os.getenv("OPENAI_API_KEY")
         router_key = os.getenv("OPENROUTER_API_KEY")
-
         if not openai_key and not router_key:
-            raise ValueError("No API key configured. Set OPENAI_API_KEY or OPENROUTER_API_KEY in .env")
+            raise ValueError("No API key found. Set OPENAI_API_KEY or OPENROUTER_API_KEY in .env")
 
-        use_router = bool(router_key) and not openai_key
-
+        use_router = bool(router_key) and not bool(openai_key)
         pipeline = ObscuronPipeline(
             openrouter_mode=use_router,
             openrouter_api_key=router_key if use_router else None,
             openai_api_key=openai_key if not use_router else None,
+            enable_web_research=True,
         )
 
-        # ── Stage 1: Triage (Maya Serrin) ────────────────────────────────
-        set_agent_status(job_id, "maya_serrin", "working")
-        triage_result = pipeline.triage_agent.run(
-            f"Client Email: {job['client_email']}\n\nMessage:\n{job['message']}"
+        ctx = f"Client Email: {job['client_email']}\n\nClient Message:\n{job['message']}"
+
+        # ── Stage 1: Intel Gathering ──────────────────────────────────────
+        for key in ["bob_captain", "nox_vale", "pery_ashcroft", "echo_virel"]:
+            set_agent_status(job_id, key, "working")
+
+        r_bob   = pipeline.bob_captain.run(ctx)
+        set_agent_status(job_id, "bob_captain", "idle")
+        _emit_stage(job_id, "bob_captain", "strategic_brief", r_bob)
+
+        r_nox   = pipeline.nox_vale.run(ctx)
+        set_agent_status(job_id, "nox_vale", "idle")
+        _emit_stage(job_id, "nox_vale", "threat_analysis", r_nox)
+
+        r_pery  = pipeline.pery_ashcroft.run(ctx)
+        set_agent_status(job_id, "pery_ashcroft", "idle")
+        _emit_stage(job_id, "pery_ashcroft", "psychology_profile", r_pery)
+
+        r_echo  = pipeline.echo_virel.run(ctx)
+        set_agent_status(job_id, "echo_virel", "idle")
+        _emit_stage(job_id, "echo_virel", "signal_intel", r_echo)
+
+        stage1_ctx = (
+            f"{ctx}\n\n"
+            f"=== STRATEGIC BRIEF ===\n{r_bob.output}\n\n"
+            f"=== THREAT ANALYSIS ===\n{r_nox.output}\n\n"
+            f"=== PSYCHOLOGY PROFILE ===\n{r_pery.output}\n\n"
+            f"=== SIGNAL INTEL ===\n{r_echo.output}"
         )
+
+        # ── Stage 2: Analysis ─────────────────────────────────────────────
+        for key in ["maya_serrin", "selene_ward", "damon_cross", "kael_draven"]:
+            set_agent_status(job_id, key, "working")
+
+        r_maya  = pipeline.maya_serrin.run(stage1_ctx)
         set_agent_status(job_id, "maya_serrin", "idle")
+        _emit_stage(job_id, "maya_serrin", "triage", r_maya)
 
-        stage_triage = {
-            "stage": "triage",
-            "agent": "Maya Serrin",
-            "agent_key": "maya_serrin",
-            "output": triage_result.output if triage_result.success else f"Error: {triage_result.error}",
-            "success": triage_result.success,
-            "duration": round(triage_result.duration_seconds, 2),
-        }
-        job["stages"].append(stage_triage)
-        emit_event(job_id, {"event": "stage_complete", "stage": "triage",
-                             "agent": "Maya Serrin", "output": stage_triage["output"],
-                             "success": triage_result.success, "job_id": job_id})
+        r_sel   = pipeline.selene_ward.run(stage1_ctx)
+        set_agent_status(job_id, "selene_ward", "idle")
+        _emit_stage(job_id, "selene_ward", "market_research", r_sel)
 
-        if not triage_result.success:
-            job["status"] = "error"
-            emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": False})
-            emit_event(job_id, {"event": "__done__"})
-            return
+        r_damon = pipeline.damon_cross.run(stage1_ctx)
+        set_agent_status(job_id, "damon_cross", "idle")
+        _emit_stage(job_id, "damon_cross", "lead_qualification", r_damon)
 
-        # ── Stage 2: Strategy (Leo Mercer) ───────────────────────────────
-        set_agent_status(job_id, "leo_mercer", "working")
-        strategy_result = pipeline.strategy_agent.run(
-            f"Maya's Triage Report:\n{triage_result.output}\n\nOriginal Message:\n{job['message']}"
+        r_kael  = pipeline.kael_draven.run(stage1_ctx)
+        set_agent_status(job_id, "kael_draven", "idle")
+        _emit_stage(job_id, "kael_draven", "security_assessment", r_kael)
+
+        stage2_ctx = (
+            f"{stage1_ctx}\n\n"
+            f"=== TRIAGE ===\n{r_maya.output}\n\n"
+            f"=== MARKET RESEARCH ===\n{r_sel.output}\n\n"
+            f"=== LEAD QUALIFICATION ===\n{r_damon.output}\n\n"
+            f"=== SECURITY ASSESSMENT ===\n{r_kael.output}"
         )
+
+        # ── Stage 3: Planning ─────────────────────────────────────────────
+        for key in ["leo_mercer", "atlas_reed", "vera_hollow", "orion_graves"]:
+            set_agent_status(job_id, key, "working")
+
+        r_leo   = pipeline.leo_mercer.run(stage2_ctx)
         set_agent_status(job_id, "leo_mercer", "idle")
+        _emit_stage(job_id, "leo_mercer", "strategy", r_leo)
 
-        stage_strategy = {
-            "stage": "strategy",
-            "agent": "Leo Mercer",
-            "agent_key": "leo_mercer",
-            "output": strategy_result.output if strategy_result.success else f"Error: {strategy_result.error}",
-            "success": strategy_result.success,
-            "duration": round(strategy_result.duration_seconds, 2),
-        }
-        job["stages"].append(stage_strategy)
-        emit_event(job_id, {"event": "stage_complete", "stage": "strategy",
-                             "agent": "Leo Mercer", "output": stage_strategy["output"],
-                             "success": strategy_result.success, "job_id": job_id})
+        r_atlas = pipeline.atlas_reed.run(stage2_ctx)
+        set_agent_status(job_id, "atlas_reed", "idle")
+        _emit_stage(job_id, "atlas_reed", "revenue_plan", r_atlas)
 
-        if not strategy_result.success:
-            job["status"] = "error"
-            emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": False})
-            emit_event(job_id, {"event": "__done__"})
-            return
+        r_vera  = pipeline.vera_hollow.run(stage2_ctx)
+        set_agent_status(job_id, "vera_hollow", "idle")
+        _emit_stage(job_id, "vera_hollow", "brand_recommendations", r_vera)
 
-        # ── Stage 3: Response Email (Sophia Everdain) ────────────────────
-        set_agent_status(job_id, "sophia_everdain", "working")
-        response_result = pipeline.response_agent.run(
-            f"Original Client Message:\n{job['message']}\n\nLeo's Strategy:\n{strategy_result.output}"
+        r_orion = pipeline.orion_graves.run(stage2_ctx)
+        set_agent_status(job_id, "orion_graves", "idle")
+        _emit_stage(job_id, "orion_graves", "infra_assessment", r_orion)
+
+        stage3_ctx = (
+            f"{stage2_ctx}\n\n"
+            f"=== STRATEGY ===\n{r_leo.output}\n\n"
+            f"=== REVENUE PLAN ===\n{r_atlas.output}\n\n"
+            f"=== BRAND ===\n{r_vera.output}\n\n"
+            f"=== INFRASTRUCTURE ===\n{r_orion.output}"
+        )
+
+        # ── Stage 4: Delivery ─────────────────────────────────────────────
+        for key in ["iris_vale", "sophia_everdain", "nyra_solis"]:
+            set_agent_status(job_id, key, "working")
+
+        r_iris  = pipeline.iris_vale.run(stage3_ctx)
+        set_agent_status(job_id, "iris_vale", "idle")
+        _emit_stage(job_id, "iris_vale", "analytics_summary", r_iris)
+
+        r_sophia = pipeline.sophia_everdain.run(
+            f"Original Client Message:\n{job['message']}\n\n"
+            f"Leo's Strategy:\n{r_leo.output}\n\n"
+            f"Pery's Psychology:\n{r_pery.output}\n\n"
+            f"Vera's Brand Notes:\n{r_vera.output}"
         )
         set_agent_status(job_id, "sophia_everdain", "idle")
+        _emit_stage(job_id, "sophia_everdain", "final_email", r_sophia)
 
-        stage_response = {
-            "stage": "response",
-            "agent": "Sophia Everdain",
-            "agent_key": "sophia_everdain",
-            "output": response_result.output if response_result.success else f"Error: {response_result.error}",
-            "success": response_result.success,
-            "duration": round(response_result.duration_seconds, 2),
-        }
-        job["stages"].append(stage_response)
-        emit_event(job_id, {"event": "stage_complete", "stage": "response",
-                             "agent": "Sophia Everdain", "output": stage_response["output"],
-                             "success": response_result.success, "job_id": job_id})
+        r_nyra  = pipeline.nyra_solis.run(stage3_ctx)
+        set_agent_status(job_id, "nyra_solis", "idle")
+        _emit_stage(job_id, "nyra_solis", "orchestration_summary", r_nyra)
 
-        job["status"] = "done" if all([triage_result.success, strategy_result.success, response_result.success]) else "error"
+        job["status"] = "done"
         job["result"] = {
-            "triage": triage_result.output,
-            "strategy": strategy_result.output,
-            "final_email": response_result.output,
+            "final_email": r_sophia.output,
+            "orchestration_summary": r_nyra.output,
         }
-        emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": job["status"] == "done"})
+        emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": True})
 
     except Exception as e:
         logger.error(f"Pipeline error for job {job_id}: {e}")
         job["status"] = "error"
         job["result"] = {"error": str(e)}
+        # Reset all agents to idle
+        for key in agent_status:
+            agent_status[key] = "idle"
         emit_event(job_id, {"event": "job_done", "job_id": job_id, "success": False, "error": str(e)})
     finally:
         emit_event(job_id, {"event": "__done__"})
@@ -256,9 +317,25 @@ def run_single_agent_background(job_id: str):
         else:
             llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_key, temperature=0.3)
 
-        display = AGENT_DISPLAY.get(agent_key, {"display_name": agent_key, "role": "Agent"})
-        system_prompt = f"You are {display['display_name']}, {display['role']} at Obscuron Labs. Answer helpfully and professionally."
-        agent = BaseAgent(display["display_name"], llm, system_prompt)
+        # Import the actual agent class with its real system prompt
+        import agents as agent_module
+        agent_class_map = {
+            "bob_captain": "BobCaptainAgent", "nox_vale": "NoxValeAgent",
+            "pery_ashcroft": "PeryAshcroftAgent", "echo_virel": "EchoVirelAgent",
+            "maya_serrin": "MayaSerrinAgent", "selene_ward": "SeleneWardAgent",
+            "damon_cross": "DamonCrossAgent", "kael_draven": "KaelDravenAgent",
+            "leo_mercer": "LeoMercerAgent", "atlas_reed": "AtlasReedAgent",
+            "vera_hollow": "VeraHollowAgent", "orion_graves": "OrionGravesAgent",
+            "iris_vale": "IrisValeAgent", "sophia_everdain": "SophiaEverdainAgent",
+            "nyra_solis": "NyraSolisAgent",
+        }
+        cls_name = agent_class_map.get(agent_key)
+        if cls_name and hasattr(agent_module, cls_name):
+            agent = getattr(agent_module, cls_name)(llm)
+        else:
+            display = AGENT_DISPLAY.get(agent_key, {"display_name": agent_key, "role": "Agent"})
+            system_prompt = f"You are {display['display_name']}, {display['role']} at Obscuron Labs. Answer helpfully and professionally."
+            agent = BaseAgent(display["display_name"], llm, system_prompt)
 
         set_agent_status(job_id, agent_key, "working")
         result = agent.run(f"Client Email: {job['client_email']}\n\nMessage:\n{job['message']}")
@@ -404,9 +481,24 @@ async def agent_chat(agent_name: str, req: AgentChatRequest):
         else:
             llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_key, temperature=0.7)
 
+        import agents as agent_module
+        agent_class_map = {
+            "bob_captain": "BobCaptainAgent", "nox_vale": "NoxValeAgent",
+            "pery_ashcroft": "PeryAshcroftAgent", "echo_virel": "EchoVirelAgent",
+            "maya_serrin": "MayaSerrinAgent", "selene_ward": "SeleneWardAgent",
+            "damon_cross": "DamonCrossAgent", "kael_draven": "KaelDravenAgent",
+            "leo_mercer": "LeoMercerAgent", "atlas_reed": "AtlasReedAgent",
+            "vera_hollow": "VeraHollowAgent", "orion_graves": "OrionGravesAgent",
+            "iris_vale": "IrisValeAgent", "sophia_everdain": "SophiaEverdainAgent",
+            "nyra_solis": "NyraSolisAgent",
+        }
         display = AGENT_DISPLAY.get(agent_name, {"display_name": agent_name, "role": "Agent"})
-        system_prompt = f"You are {display['display_name']}, {display['role']} at Obscuron Labs. Respond in character — professional, helpful, and concise."
-        agent = BaseAgent(display["display_name"], llm, system_prompt)
+        cls_name = agent_class_map.get(agent_name)
+        if cls_name and hasattr(agent_module, cls_name):
+            agent = getattr(agent_module, cls_name)(llm)
+        else:
+            system_prompt = f"You are {display['display_name']}, {display['role']} at Obscuron Labs. Respond in character — professional, helpful, and concise."
+            agent = BaseAgent(display["display_name"], llm, system_prompt)
 
         agent_status[agent_name] = "working"
         result = agent.run(req.message)
