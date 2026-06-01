@@ -511,10 +511,10 @@ function renderJobDetail(id){
             </div>
             <div style="display:flex;align-items:center;gap:6px">
               <span class="detail-duration">${s.duration}s</span>
-              <span class="detail-block-chevron ${isOpen?'open'}">▼</span>
+              <span class="detail-block-chevron ${isOpen?'open':''}">▼</span>
             </div>
           </div>
-          <div class="detail-block-body ${isOpen?'open'}">${escHtml(s.output)}</div>
+          <div class="detail-block-body ${isOpen?'open':''}">${escHtml(s.output)}</div>
         </div>
       `;
     });
