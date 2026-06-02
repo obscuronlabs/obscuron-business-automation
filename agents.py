@@ -87,16 +87,49 @@ class PipelineResult:
 
 # ─── Base Agent ────────────────────────────────────────────────────────────────
 
+def _call_perplexity(system_prompt: str, user_message: str, api_key: str, max_tokens: int = 1200) -> str:
+    """Direct httpx call to Perplexity sonar-pro-search via OpenRouter — real-time web search."""
+    import httpx
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}",
+    }
+    payload = {
+        "model": "perplexity/sonar-pro-search",
+        "max_tokens": max_tokens,
+        "messages": [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_message},
+        ],
+    }
+    with httpx.Client(timeout=60) as client:
+        resp = client.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
+    if resp.status_code != 200:
+        raise RuntimeError(f"OpenRouter error {resp.status_code}: {resp.text[:200]}")
+    data = resp.json()
+    return data["choices"][0]["message"]["content"].strip()
+
+
 class BaseAgent:
     def __init__(self, name: str, llm: ChatOpenAI, system_prompt: str):
         self.name = name
         self.llm = llm
         self.system_prompt = system_prompt
         self.logger = logging.getLogger(f"Agent.{name}")
+        self._router_key = os.getenv("OPENROUTER_API_KEY", "")
 
     def _run_llm(self, context: str) -> str:
+        today = datetime.utcnow().strftime("%B %d, %Y")
+        system = (
+            f"Today is {today}. You have LIVE internet access via built-in web search. "
+            "Always search for current facts, dates, events, and data. Never say you cannot browse the internet.\n\n"
+            + self.system_prompt
+        )
+        if self._router_key:
+            return _call_perplexity(system, context, self._router_key)
+        # fallback to LangChain if no router key
         prompt = ChatPromptTemplate.from_messages([
-            ("system", self.system_prompt),
+            ("system", system),
             ("human", "{input}"),
         ])
         chain = prompt | self.llm
