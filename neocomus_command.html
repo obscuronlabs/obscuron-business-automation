@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neocomus Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: #8B6914;
+    --black: #050505;
+    --black-2: #0D0D0D;
+    --black-3: #141414;
+    --white: #F5F0E8;
+    --white-dim: rgba(245,240,232,0.6);
+    --white-faint: rgba(245,240,232,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 300; min-height: 100vh; }
+
+  header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(5,5,5,0.98);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .header-logo { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 0.3em; color: var(--gold); }
+  .header-sub { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); }
+
+  .main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+  h1 { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 600; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .subtitle { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 2rem; }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.1);
+    margin-bottom: 2rem;
+  }
+  .member-card {
+    background: var(--black-2);
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .member-card:hover { background: var(--black-3); }
+  .member-card.active { background: var(--black-3); }
+  .member-card.active::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--gold);
+  }
+  .member-initials {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 600;
+    color: var(--gold); margin-bottom: 0.7rem;
+  }
+  .member-card.active .member-initials { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+  .member-role { font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.2rem; }
+  .member-name { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .member-spec { font-size: 0.6rem; color: var(--white-dim); }
+  .online-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; position: absolute; top: 1rem; right: 1rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .chat-panel {
+    background: var(--black-2);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .chat-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--black-3);
+  }
+  .chat-header-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+  .chat-header-name { font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--white); }
+  .chat-header-role { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dim); }
+
+  .chat-messages {
+    height: 380px; overflow-y: auto; padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    scroll-behavior: smooth;
+  }
+  .chat-messages::-webkit-scrollbar { width: 3px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+  .msg { display: flex; gap: 0.8rem; max-width: 85%; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; font-family: 'Cinzel', serif; font-weight: 600;
+  }
+  .msg-avatar.agent { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+  .msg-avatar.user-av { background: rgba(245,240,232,0.08); border: 1px solid rgba(245,240,232,0.15); color: var(--white-dim); font-size: 0.55rem; }
+  .msg-bubble { padding: 0.7rem 1rem; font-size: 0.78rem; line-height: 1.6; border-radius: 2px; }
+  .msg.agent .msg-bubble { background: var(--black-3); border: 1px solid rgba(201,168,76,0.1); color: var(--white-dim); }
+  .msg.user .msg-bubble { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); color: var(--white); }
+  .msg-time { font-size: 0.5rem; color: rgba(245,240,232,0.25); margin-top: 0.3rem; }
+
+  .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 0.5rem 0; }
+  .typing-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold-dim); animation: typing 1.2s infinite; }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing { 0%,100%{opacity:0.3;transform:translateY(0)} 50%{opacity:1;transform:translateY(-3px)} }
+
+  .chat-input-area {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex; gap: 0.8rem; align-items: flex-end;
+    background: var(--black-3);
+  }
+  textarea {
+    flex: 1; background: var(--black-2); border: 1px solid rgba(201,168,76,0.15);
+    color: var(--white); padding: 0.7rem 1rem; font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem; font-weight: 300; resize: none; outline: none;
+    border-radius: 2px; line-height: 1.5; min-height: 44px; max-height: 120px;
+    transition: border-color 0.2s;
+  }
+  textarea:focus { border-color: rgba(201,168,76,0.4); }
+  textarea::placeholder { color: rgba(245,240,232,0.2); }
+  .send-btn {
+    background: var(--gold); color: var(--black); border: none;
+    padding: 0.7rem 1.5rem; font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; border-radius: 2px; white-space: nowrap;
+  }
+  .send-btn:hover { background: var(--gold-light); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .welcome-msg {
+    text-align: center; padding: 2rem;
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    color: var(--white-faint); font-size: 1rem; line-height: 1.8;
+  }
+
+  .status-bar {
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.15);
+    padding: 0.6rem 1.2rem; margin-bottom: 1rem; border-radius: 2px;
+    font-size: 0.65rem; color: #22c55e; letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  @media (max-width: 600px) {
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .chat-messages { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="lock-screen" style="position:fixed;inset:0;z-index:9999;background:#050505;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+  <div style="animation:fadeUp 1s ease both;">
+    <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.4em;color:rgba(201,168,76,0.4);text-transform:uppercase;margin-bottom:1rem;">NEOCOMUS MUSIC</p>
+    <h1 style="font-family:'Cinzel',serif;font-size:1.8rem;font-weight:700;color:#C9A84C;letter-spacing:0.2em;margin-bottom:0.5rem;">COMMAND CENTER</h1>
+    <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,232,0.2);margin-bottom:2.5rem;">Restricted Access</p>
+    <input id="pass-input" type="password" placeholder="Enter access code..."
+      style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.2);color:#F5F0E8;padding:0.8rem 1.5rem;font-family:'Montserrat',sans-serif;font-size:0.8rem;letter-spacing:0.1em;outline:none;border-radius:2px;width:280px;text-align:center;"
+      onkeydown="if(event.key==='Enter')checkPass()"
+    />
+    <br><br>
+    <button onclick="checkPass()" style="background:#C9A84C;color:#050505;border:none;padding:0.7rem 2rem;font-family:'Montserrat',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;border-radius:2px;">ENTER</button>
+    <p id="pass-error" style="color:#ef4444;font-size:0.6rem;margin-top:1rem;opacity:0;transition:opacity 0.3s;">Incorrect access code</p>
+  </div>
+</div>
+
+<header>
+  <div>
+    <div class="header-logo">NEOCOMUS</div>
+    <div class="header-sub">Command Center</div>
+  </div>
+  <div style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:#22c55e;">● 9 Members Active</div>
+</header>
+
+<div class="main">
+  <h1>Command Center</h1>
+  <p class="subtitle">Select a team member · Give a command · Get results</p>
+
+  <div class="status-bar">⚙ All systems active · Claude AI powered · Ready for commands</div>
+
+  <div class="team-grid" id="team-grid"></div>
+
+  <div class="chat-panel">
+    <div class="chat-header" id="chat-header">
+      <div class="chat-header-avatar" id="chat-avatar">?</div>
+      <div>
+        <div class="chat-header-name" id="chat-name">Select a team member</div>
+        <div class="chat-header-role" id="chat-role">Choose from the grid above</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="welcome-msg">Select a team member above to start a conversation.<br>Each member is specialized in their domain.</div>
+    </div>
+    <div class="chat-input-area">
+      <textarea id="chat-input" placeholder="Give a command or ask a question..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// No API keys here — all requests go through the local backend server
+
+const NEOCOMUS_CONTEXT = `
+=== NEOCOMUS MUSIC — FULL KNOWLEDGE BASE ===
+
+LABEL INFO:
+- Name: Neocomus Music
+- Founded: 2025 | Location: Nashville, TN
+- Email: neocomusmusic@gmail.com | WhatsApp: +19544456195
+- Website: neocomusmusic.com
+- Slogan: "I sing the music, you hear the universe"
+- Tech Partner: ObscuronLabs (obscuronlabs.com)
+
+SOCIAL MEDIA:
+- Spotify: https://open.spotify.com/user/31a4e5dwlu252us2jbwhjdq5vkse
+- Apple Music: https://music.apple.com/us/artist/olivia-oya-kaptan/1895782369
+- YouTube: https://www.youtube.com/@NeoComusMusic
+- Instagram: https://www.instagram.com/neocomusmusic2026/
+- TikTok: https://www.tiktok.com/@neocomusmusic6
+- Facebook: https://www.facebook.com/NeoComusMusic/
+
+MAIN ARTIST — OLIVIA OYA KAPTAN:
+- Role: Founder, Lead Producer, Vocalist
+- Performing since 1995, sings in 8 languages: English, Turkish, Spanish, French, Italian, Portuguese, Greek, Arabic
+- Genres: jazz, blues, Latin, pop, soft rock
+- Education: 9 Eylül University Musicology graduate, Berklee College of Music certified
+- Personal Instagram: https://www.instagram.com/olivia_oya_kaptan/
+- Personal YouTube: https://www.youtube.com/@oliviaoyak.8886
+- Twitter/X: https://x.com/jazzsinger1tr
+
+CO-FOUNDER — BARBAROS KAPTAN (Bob Captain):
+- Role: Co-Founder, Co-Producer, Chief Architect of Neocomus Music and ObscuronLabs
+
+CATALOG — ALL SONGS:
+1. I RISE — English | Genre: Pop/Empowerment | Spotify: https://open.spotify.com/track/1Ham8rUrFLnK9ZuRRziemo
+2. ATEŞİN DİLİ — Turkish | Genre: Turkish Pop | Spotify: https://open.spotify.com/track/7bniVrVBPAED2YK5exocUM
+3. RIDE THROUGH FIRE — English | Genre: Cinematic Pop | Spotify: https://open.spotify.com/track/5XD1GKQRsmJrhNuXn6Rk3P
+4. HU FREKANSI — Turkish | Genre: Spiritual/Ambient | Spotify: https://open.spotify.com/track/7fVNp9EwTvFnK0cvb4QODE
+5. SENSİZ KALAN YILLAR — Turkish | Genre: Turkish Ballad | Spotify: https://open.spotify.com/track/0Pn9BfFiEFMUVIsmGjLurT
+6. EGE ATEŞİ — AEGEAN FIRE — Turkish | Genre: Turkish Folk-Pop | Spotify: https://open.spotify.com/track/09cNoABpWeq5IBGykd28ns
+
+SERVICE PACKAGES:
+- Starter: $99/mo — Music Distribution, Basic Promotion, Social Media Setup, Monthly Report
+- Professional: $299/mo — Everything in Starter + Playlist Pitching, PR Campaign, Weekly Reports, Priority Support
+- Elite: $499/mo — Everything in Professional + Full Music Production, Music Video, Sync Licensing, Daily Reports, Dedicated Manager
+
+INDIVIDUAL SERVICES:
+- Music Production: Full production from concept to master
+- Global Distribution: 50+ platforms worldwide
+- Organic Growth: $99/mo
+- Social Media Management: $199/mo
+- Music Licensing: $50/track (sync for TV, film, ads)
+- Playlist Pitching: $49
+
+DISTROKID STATS (Last updated: May 2026):
+- Spotify Streams Last 365 days: 23,340
+- Spotify Streams Last 30 days: 22,979
+- Spotify Streams Last 7 days: 244
+- Top Countries: Turkey 20,877 streams (89%), USA 1,232, Romania 147, Kazakhstan 22, Germany 20
+- Discovery Sources: Collection 52.47%, Radio 36.90%, Others/Playlist 7.68%, Album 2.09%, Artist 0.67%
+
+Always use this knowledge when answering questions. Respond in the same language the user writes in (Turkish or English).
+`;
+
+const members = [
+  { initials:'BC', role:'Chief Architect', name:'Barbaros Kaptan', spec:'Strategy & System Design', persona:'You are Barbaros Kaptan (Bob Captain), Chief Architect of Neocomus Music. You oversee all operations, strategy, and coordination between team members. You are analytical, decisive, and think in systems. You help with strategic decisions, project planning, and cross-team coordination for the music label. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'OOK', role:'Founder & Lead Vocalist', name:'Olivia Oya Kaptan', spec:'Music Direction & Vision', persona:'You are Olivia Oya Kaptan, founder of Neocomus Music, international singer, lead producer and songwriter. You have been performing since 1995, sing in 8 languages across jazz, blues, Latin, pop and soft rock. Berklee College of Music certified. You help with creative direction, songwriting concepts, and artistic vision. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'OL', role:'Creative Director', name:'ObscuronLabs', spec:'Visual Identity & Design', persona:'You are ObscuronLabs, the digital creative director of Neocomus Music. You specialize in visual identity, generative art concepts, brand aesthetics, and experimental sound design. You help create visual concepts, brand guidelines, cover art directions, and social media aesthetics. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'NV', role:'Music Rights', name:'Nox Vale', spec:'Copyright & Licensing', persona:'You are Nox Vale, Music Rights & Protection specialist at Neocomus Music. You handle copyright integrity, licensing compliance, intellectual property protection, royalty tracking, and music rights across all releases. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'PA', role:'Audience Psychology', name:'Pery Ashcroft', spec:'Listener Behavior', persona:'You are Pery Ashcroft, Audience Psychology specialist at Neocomus Music. You analyze listener behavior, emotional response patterns, audience demographics, and engagement metrics. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'MS', role:'Artist Relations', name:'Maya Serrin', spec:'Client & Partner CRM', persona:'You are Maya Serrin, Artist & Client Relations manager at Neocomus Music. You handle communication with artist partners, clients, and collaborators. You draft professional emails, manage relationships, and ensure smooth collaboration. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'SW', role:'Music Trends', name:'Selene Ward', spec:'Market & Trend Research', persona:'You are Selene Ward, Music Trend Research specialist at Neocomus Music. You track emerging genres, playlist trends, streaming data, chart movements, and market shifts. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'VH', role:'Visual & Brand', name:'Vera Hollow', spec:'Content & Branding', persona:'You are Vera Hollow, Visual & Brand Identity specialist at Neocomus Music. You shape the visual language of Neocomus — cover art direction, social content planning, brand consistency, and promotional materials. You can respond in Turkish or English based on what language the user writes in.' },
+  { initials:'AR', role:'Streaming Revenue', name:'Atlas Reed', spec:'Royalties & Monetization', persona:'You are Atlas Reed, Streaming Revenue specialist at Neocomus Music. You optimize revenue streams across Spotify, Apple Music, YouTube and beyond. You track royalties, identify placement opportunities, and recommend monetization strategies. You can respond in Turkish or English based on what language the user writes in.' },
+];
+
+let SESSION_TOKEN = null;
+let currentMember = null;
+let currentIndex = null;
+let conversations = {};
+
+async function checkPass() {
+  var val = document.getElementById('pass-input').value;
+  if (!val) return;
+  try {
+    var res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({password: val})
+    });
+    if (res.ok) {
+      var data = await res.json();
+      SESSION_TOKEN = data.token;
+      var ls = document.getElementById('lock-screen');
+      ls.style.transition = 'opacity 0.5s';
+      ls.style.opacity = '0';
+      setTimeout(function() { ls.style.display = 'none'; }, 500);
+    } else {
+      var err = document.getElementById('pass-error');
+      err.style.opacity = '1';
+      setTimeout(function() { err.style.opacity = '0'; }, 2000);
+      document.getElementById('pass-input').value = '';
+    }
+  } catch(e) {
+    var err = document.getElementById('pass-error');
+    err.textContent = 'Server error — is server.py running?';
+    err.style.opacity = '1';
+    setTimeout(function() { err.style.opacity = '0'; err.textContent = 'Incorrect access code'; }, 3000);
+  }
+}
+
+function buildGrid() {
+  var grid = document.getElementById('team-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  members.forEach(function(m, i) {
+    var card = document.createElement('div');
+    card.className = 'member-card';
+    card.id = 'card-' + i;
+    card.onclick = function() { selectMember(i); };
+    card.innerHTML =
+      '<div class="online-dot"></div>' +
+      '<div class="member-initials">' + m.initials + '</div>' +
+      '<div class="member-role">' + m.role + '</div>' +
+      '<div class="member-name">' + m.name + '</div>' +
+      '<div class="member-spec">' + m.spec + '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function selectMember(i) {
+  document.querySelectorAll('.member-card').forEach(function(c) { c.classList.remove('active'); });
+  var card = document.getElementById('card-' + i);
+  if (card) card.classList.add('active');
+  currentMember = members[i];
+  currentIndex = i;
+  var avatar = document.getElementById('chat-avatar');
+  var name = document.getElementById('chat-name');
+  var role = document.getElementById('chat-role');
+  if (avatar) avatar.textContent = currentMember.initials;
+  if (name) name.textContent = currentMember.name;
+  if (role) role.textContent = currentMember.role + ' · ' + currentMember.spec;
+  renderMessages(i);
+}
+
+function renderMessages(i) {
+  var container = document.getElementById('chat-messages');
+  if (!container) return;
+  var msgs = conversations[i] || [];
+  if (msgs.length === 0) {
+    container.innerHTML = '<div class="welcome-msg">You are now connected to <strong style="color:var(--gold);font-style:normal;">' + members[i].name + '</strong>.<br>' + members[i].spec + ' specialist — ready for your command.</div>';
+    return;
+  }
+  container.innerHTML = '';
+  msgs.forEach(function(m) { appendBubble(m.role, m.content, m.time, false); });
+  container.scrollTop = container.scrollHeight;
+}
+
+function appendBubble(role, content, time, scroll) {
+  var container = document.getElementById('chat-messages');
+  if (!container) return;
+  var isUser = role === 'user';
+  var div = document.createElement('div');
+  div.className = 'msg ' + (isUser ? 'user' : 'agent');
+  div.innerHTML =
+    '<div class="msg-avatar ' + (isUser ? 'user-av' : 'agent') + '">' + (isUser ? 'YOU' : (currentMember ? currentMember.initials : '?')) + '</div>' +
+    '<div><div class="msg-bubble">' + content.replace(/\n/g,'<br>') + '</div><div class="msg-time">' + time + '</div></div>';
+  container.appendChild(div);
+  if (scroll !== false) container.scrollTop = container.scrollHeight;
+}
+
+function showTyping() {
+  var container = document.getElementById('chat-messages');
+  if (!container) return;
+  var div = document.createElement('div');
+  div.className = 'msg agent';
+  div.id = 'typing-msg';
+  div.innerHTML = '<div class="msg-avatar agent">' + (currentMember ? currentMember.initials : '?') + '</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTyping() {
+  var t = document.getElementById('typing-msg');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  if (!currentMember) { alert('Please select a team member first.'); return; }
+  if (!SESSION_TOKEN) { alert('Please log in first.'); return; }
+
+  var input = document.getElementById('chat-input');
+  var text = input.value.trim();
+  if (!text) return;
+
+  var idx = currentIndex;
+  if (!conversations[idx]) conversations[idx] = [];
+
+  var time = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  conversations[idx].push({ role:'user', content: text, time: time });
+  appendBubble('user', text, time);
+  input.value = '';
+  input.style.height = 'auto';
+
+  var btn = document.getElementById('send-btn');
+  if (btn) btn.disabled = true;
+  showTyping();
+
+  var messages = conversations[idx].map(function(m) {
+    return { role: m.role === 'user' ? 'user' : 'assistant', content: m.content };
+  });
+
+  try {
+    var res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        token: SESSION_TOKEN,
+        member_key: currentMember.initials,
+        system_prompt: currentMember.persona + '\n\n' + NEOCOMUS_CONTEXT,
+        messages: messages,
+        max_tokens: 1000
+      })
+    });
+
+    var data = await res.json();
+    removeTyping();
+
+    if (res.ok && data.reply) {
+      var replyTime = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+      conversations[idx].push({ role:'assistant', content: data.reply, time: replyTime });
+      appendBubble('assistant', data.reply, replyTime);
+    } else {
+      appendBubble('assistant', '⚠️ Error: ' + (data.detail || 'Unknown error'), time);
+    }
+  } catch(err) {
+    removeTyping();
+    appendBubble('assistant', '⚠️ Connection error: ' + err.message, time);
+  }
+
+  if (btn) btn.disabled = false;
+  var msgs = document.getElementById('chat-messages');
+  if (msgs) msgs.scrollTop = 999999;
+}
+
+window.onload = function() { buildGrid(); };
+</script>
+</body>
+</html>
