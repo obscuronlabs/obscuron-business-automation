@@ -217,9 +217,19 @@ async def chat(req: ChatRequest):
     # ── 3. Build enriched system prompt ──────────────────────────────────────
     from datetime import datetime
     today = datetime.utcnow().strftime("%B %d, %Y")
-    enriched_system = f"Today's date is {today}.\n\nCRITICAL RULE: Never make up facts, dates, locations, or statistics. If you don't find the information in the web research results below, say clearly 'I couldn't find current information on this' — do NOT guess or hallucinate.\n\n" + req.system_prompt
+    enriched_system = (
+        f"Today's date is {today}.\n\n"
+        "CRITICAL RULES:\n"
+        "1. You have access to LIVE web search results below. Always use them.\n"
+        "2. If search results contain the answer, quote facts directly from them.\n"
+        "3. If search results came back EMPTY for a topic, say: 'I searched the web but found no information about [topic]. This event may not exist, may not have been announced, or is too recent to index.'\n"
+        "4. NEVER say 'I cannot browse the internet' — you have real search results.\n"
+        "5. NEVER hallucinate dates, venues, or stats.\n\n"
+    ) + req.system_prompt
     if research_context:
-        enriched_system += f"\n\n=== LIVE WEB SEARCH RESULTS (retrieved right now) ===\n{research_context}\n\nYOU MUST base your answer on these search results. Quote specific facts from them. If the results answer the question, use that data directly."
+        enriched_system += f"\n\n=== LIVE WEB SEARCH RESULTS ===\n{research_context}\n\nAnswer based on these results. If they answer the question, use that data directly."
+    else:
+        enriched_system += f"\n\n=== SEARCH STATUS ===\nWeb search ran but returned NO RESULTS for this query. Tell the user you searched but found nothing, and explain the event may not exist or hasn't been announced publicly."
     if coord_context:
         enriched_system += coord_context
 
