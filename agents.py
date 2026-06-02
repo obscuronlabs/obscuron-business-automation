@@ -453,18 +453,18 @@ class ObscuronPipeline:
         if openrouter_mode and router_key:
             base_url = "https://openrouter.ai/api/v1"
             fast_llm = ChatOpenAI(
-                model=f"openai/{fast_model}",
+                model="perplexity/sonar-pro-search",
                 api_key=router_key,
                 base_url=base_url,
                 temperature=0.3,
             )
             premium_llm = ChatOpenAI(
-                model=f"openai/{premium_model}",
+                model="perplexity/sonar-pro-search",
                 api_key=router_key,
                 base_url=base_url,
                 temperature=0.1,
             )
-            logger.info("Running via OpenRouter")
+            logger.info("Running via OpenRouter + Perplexity sonar-pro-search")
         elif api_key:
             fast_llm = ChatOpenAI(model=fast_model, api_key=api_key, temperature=0.3)
             premium_llm = ChatOpenAI(model=premium_model, api_key=api_key, temperature=0.1)

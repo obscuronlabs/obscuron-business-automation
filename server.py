@@ -345,13 +345,13 @@ def run_single_agent_background(job_id: str):
 
         if router_key and not openai_key:
             llm = ChatOpenAI(
-                model="openai/gpt-4o-mini",
+                model="perplexity/sonar-pro-search",
                 api_key=router_key,
                 base_url="https://openrouter.ai/api/v1",
                 temperature=0.3,
             )
         else:
-            llm = ChatOpenAI(model="gpt-4o-mini", api_key=openai_key, temperature=0.3)
+            llm = ChatOpenAI(model="gpt-4o", api_key=openai_key, temperature=0.3)
 
         # Import the actual agent class with its real system prompt
         import agents as agent_module
