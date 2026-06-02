@@ -27,8 +27,6 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 ACCESS_PASSWORD = os.getenv("ACCESS_PASSWORD", "")
-SERPAPI_KEY = os.getenv("SERPAPI_KEY", "")
-BRAVE_API_KEY = os.getenv("BRAVE_API_KEY", "")
 
 valid_tokens: set = set()
 
@@ -57,80 +55,41 @@ class ChatRequest(BaseModel):
 
 # ── Web Search ───────────────────────────────────────────────────────────────
 
-async def web_search_serpapi(query: str, max_results: int = 6) -> str:
-    """Google search via SerpAPI — same as Claude's own search."""
-    try:
-        async with httpx.AsyncClient(timeout=15) as client:
-            resp = await client.get(
-                "https://serpapi.com/search",
-                params={"q": query, "api_key": SERPAPI_KEY, "num": max_results, "hl": "en", "gl": "us"}
-            )
-        if resp.status_code != 200:
-            return ""
-        data = resp.json()
-        results = data.get("organic_results", [])
-        if results:
-            return "\n".join(f"• {r.get('title','')}: {r.get('snippet','')}" for r in results[:max_results])
-    except Exception as e:
-        logger.warning(f"SerpAPI error: {e}")
-    return ""
-
-
-async def web_search_brave(query: str, max_results: int = 6) -> str:
-    """Brave Search API — free tier, 2000 queries/month."""
-    try:
-        async with httpx.AsyncClient(timeout=15) as client:
-            resp = await client.get(
-                "https://api.search.brave.com/res/v1/web/search",
-                params={"q": query, "count": max_results},
-                headers={"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY}
-            )
-        if resp.status_code != 200:
-            return ""
-        data = resp.json()
-        results = data.get("web", {}).get("results", [])
-        if results:
-            return "\n".join(f"• {r.get('title','')}: {r.get('description','')}" for r in results[:max_results])
-    except Exception as e:
-        logger.warning(f"Brave search error: {e}")
-    return ""
-
-
-async def web_search_ddg(query: str, max_results: int = 6) -> str:
-    """DuckDuckGo fallback."""
-    import asyncio
-    from concurrent.futures import ThreadPoolExecutor
-    def _search():
-        try:
-            from duckduckgo_search import DDGS
-            with DDGS() as ddgs:
-                results = list(ddgs.text(query, max_results=max_results))
-            if results:
-                return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
-            return ""
-        except Exception as e:
-            logger.warning(f"DDG error: {e}")
-            return ""
-    loop = asyncio.get_event_loop()
-    with ThreadPoolExecutor() as pool:
-        return await loop.run_in_executor(pool, _search)
-
-
 async def web_search(query: str, max_results: int = 6) -> str:
-    """Try SerpAPI → Brave → DuckDuckGo in order."""
-    if SERPAPI_KEY:
-        result = await web_search_serpapi(query, max_results)
-        if result:
-            logger.info(f"SerpAPI hit for: {query[:60]}")
-            return result
-    if BRAVE_API_KEY:
-        result = await web_search_brave(query, max_results)
-        if result:
-            logger.info(f"Brave hit for: {query[:60]}")
-            return result
-    result = await web_search_ddg(query, max_results)
-    logger.info(f"DDG {'hit' if result else 'miss'} for: {query[:60]}")
-    return result
+    """Google HTML scrape — no API key needed."""
+    import re
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    try:
+        async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
+            resp = await client.get(
+                "https://www.google.com/search",
+                params={"q": query, "num": max_results, "hl": "en", "gl": "us"},
+                headers=headers,
+            )
+        if resp.status_code != 200:
+            logger.warning(f"Google returned {resp.status_code}")
+            return ""
+        html = resp.text
+        # Extract snippets between <span> tags in result blocks
+        snippets = re.findall(r'<div[^>]*>\s*<span[^>]*>([^<]{40,300})</span>', html)
+        titles = re.findall(r'<h3[^>]*>([^<]+)</h3>', html)
+        results = []
+        for i, snippet in enumerate(snippets[:max_results]):
+            title = titles[i] if i < len(titles) else "Result"
+            clean = re.sub(r'<[^>]+>', '', snippet).strip()
+            if clean:
+                results.append(f"• {title}: {clean}")
+        if results:
+            logger.info(f"Google scrape: {len(results)} results for '{query[:50]}'")
+            return "\n".join(results)
+        logger.warning(f"Google scrape: no snippets parsed for '{query[:50]}'")
+        return ""
+    except Exception as e:
+        logger.warning(f"Google scrape error: {e}")
+        return ""
 
 
 def build_research_queries(member_key: str, user_message: str) -> List[str]:
