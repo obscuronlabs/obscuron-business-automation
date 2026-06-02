@@ -99,6 +99,9 @@ async def gather_research(member_key: str, user_message: str) -> str:
         result = await web_search(q)
         if result:
             all_results.append(f"[Search: {q}]\n{result}")
+            logger.info(f"Search '{q}' → {len(result)} chars")
+        else:
+            logger.info(f"Search '{q}' → NO RESULTS")
     return "\n\n".join(all_results)
 
 
