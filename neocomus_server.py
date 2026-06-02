@@ -55,7 +55,7 @@ class ChatRequest(BaseModel):
 
 # ── Web Search ───────────────────────────────────────────────────────────────
 
-async def web_search(query: str, max_results: int = 4) -> str:
+async def web_search(query: str, max_results: int = 6) -> str:
     """DuckDuckGo search — runs in thread pool to avoid blocking."""
     import asyncio
     from concurrent.futures import ThreadPoolExecutor
@@ -124,7 +124,9 @@ async def gather_research(member_key: str, user_message: str) -> str:
     msg = re.sub(r'\s+', ' ', msg).strip()
 
     # Build smart queries: original cleaned + force 2025/2026 year
-    queries = [msg[:120], f"{msg[:90]} 2025 OR 2026"]
+    from datetime import datetime
+    year = datetime.utcnow().year
+    queries = [msg[:120], f"{msg[:90]} {year}", f"{msg[:90]} {year-1}"]
 
     all_results = []
     for q in queries:
