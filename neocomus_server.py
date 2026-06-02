@@ -88,19 +88,43 @@ def build_research_queries(member_key: str, user_message: str) -> List[str]:
 
 
 async def gather_research(member_key: str, user_message: str) -> str:
-    # Turkish → English common translations for search
-    translations = {
-        "son konser": "latest concert", "konser": "concert", "tarih": "date",
-        "nerede": "where", "hangi": "which", "bugün": "today", "şarkı": "song",
-        "müzik": "music", "dinlenme": "streams", "akış": "streams",
-        "sanatçı": "artist", "albüm": "album", "liste": "chart",
-        "sene": "year", "yıl": "year", "hafta": "week",
-    }
-    english_msg = user_message
-    for tr, en in translations.items():
-        english_msg = english_msg.replace(tr, en)
+    # Turkish → English: stem-based replacements (handles suffixes via substring match)
+    tr_en = [
+        ("ne zaman", "when"), ("nezaman", "when"), ("nerede", "where"),
+        ("hangi", "which"), ("nasil", "how"), ("nasıl", "how"),
+        ("ne kadar", "how much"), ("kimdi", "who was"), ("kimle", "with who"),
+        ("iptal", "cancelled"), ("ertelendi", "postponed"),
+        ("son konser", "latest concert"), ("konser", "concert"),
+        ("turne", "tour"), ("tur ", "tour "),
+        ("tarih", "date"), ("sehir", "city"), ("şehir", "city"),
+        ("ulke", "country"), ("ülke", "country"),
+        ("bugun", "today"), ("bugün", "today"), ("yarin", "tomorrow"), ("yarın", "tomorrow"),
+        ("sarki", "song"), ("şarkı", "song"), ("muzik", "music"), ("müzik", "music"),
+        ("dinlenme", "streams"), ("akis", "streams"), ("akış", "streams"),
+        ("sanatci", "artist"), ("sanatçı", "artist"),
+        ("album", "album"), ("albüm", "album"),
+        ("liste", "chart"), ("grafik", "chart"),
+        ("sene", "year"), ("yil", "year"), ("yıl", "year"),
+        ("hafta", "week"), ("ay", "month"),
+        ("biletin", "ticket"), ("bilet", "ticket"),
+        ("stadyum", "stadium"), ("arena", "arena"), ("sahne", "stage"),
+        ("kapali", "indoor"), ("kapalı", "indoor"), ("acik", "outdoor"), ("açık", "outdoor"),
+        ("ne zaman", "when"), ("kac", "how many"), ("kaç", "how many"),
+        ("verdi", "performed"), ("yapti", "did"), ("yaptı", "did"),
+        ("geldi", "came"), ("gitti", "went"), ("oldu", "happened"),
+        ("vardi", "was"), ("vardı", "was"), ("neydi", "what was"),
+    ]
+    msg = user_message.lower()
+    for tr, en in tr_en:
+        msg = msg.replace(tr, en)
 
-    queries = [english_msg[:100], f"{english_msg[:80]} 2026"]
+    # Remove leftover Turkish suffix noise (common endings)
+    import re
+    msg = re.sub(r'\b\w*(inde|ında|nda|nde|ını|ini|unu|ünu|dan|den|tan|ten|ları|leri|ında|nın|nin|nun|nün|mı|mi|mu|mü|dı|di|du|dü|tı|ti|tu|tü)\b', '', msg)
+    msg = re.sub(r'\s+', ' ', msg).strip()
+
+    # Build smart queries: original cleaned + force 2025/2026 year
+    queries = [msg[:120], f"{msg[:90]} 2025 OR 2026"]
 
     all_results = []
     for q in queries:
