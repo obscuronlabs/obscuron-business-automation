@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obscuron AI Hub</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#fff;font-family:'Segoe UI',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{background:#111;border-bottom:1px solid #222;padding:14px 28px;display:flex;align-items:center;gap:16px}
+header h1{font-size:1.3rem;font-weight:800}
+header h1 span{color:#6c5fff}
+.badge{background:#1a1a2e;color:#a78bfa;font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid #333}
+.tabs{display:flex;gap:4px;padding:16px 24px 0;border-bottom:1px solid #1a1a1a;background:#0d0d15}
+.tab{padding:10px 20px;border-radius:8px 8px 0 0;cursor:pointer;font-size:13.5px;color:#666;background:transparent;border:none;transition:all .2s}
+.tab:hover{color:#aaa}
+.tab.active{background:#111;color:#a78bfa;border:1px solid #222;border-bottom:1px solid #111}
+.content{flex:1;padding:28px;max-width:900px;width:100%;margin:0 auto}
+.panel{display:none}
+.panel.active{display:flex;flex-direction:column;gap:18px}
+label{font-size:12px;color:#888;display:block;margin-bottom:5px}
+input,textarea,select{width:100%;background:#111;border:1px solid #222;color:#fff;padding:10px 14px;border-radius:8px;font-size:14px;outline:none;font-family:inherit}
+input:focus,textarea:focus,select:focus{border-color:#6c5fff}
+textarea{min-height:100px;resize:vertical}
+.row{display:flex;gap:12px}
+.row>*{flex:1}
+btn,button{background:#6c5fff;color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s}
+button:hover{background:#7c6fff}
+button.sec{background:#1a1a2e;border:1px solid #333;color:#a78bfa}
+button.sec:hover{background:#222}
+button:disabled{opacity:.4;cursor:not-allowed}
+.result-box{background:#111;border:1px solid #222;border-radius:10px;padding:18px;min-height:60px;font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.result-box.hidden{display:none}
+.img-result{max-width:100%;border-radius:10px;display:none}
+audio{width:100%;margin-top:8px;display:none}
+.msg-list{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow-y:auto;background:#0d0d15;border:1px solid #1a1a1a;border-radius:10px;padding:16px}
+.msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13.5px;line-height:1.5}
+.msg.user{background:#6c5fff;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.ai{background:#1a1a2e;color:#e0e0e0;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.system{color:#666;font-style:italic;font-size:12px;align-self:center}
+.chat-input{display:flex;gap:8px}
+.chat-input input{flex:1}
+.model-select{display:flex;gap:8px;flex-wrap:wrap}
+.model-chip{background:#1a1a2e;border:1px solid #333;color:#888;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:12px;transition:all .2s}
+.model-chip.active{border-color:#6c5fff;color:#a78bfa;background:#16163a}
+.spinner{display:none;color:#6c5fff;font-size:13px}
+.spinner.show{display:block}
+.stems-info{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:14px;font-size:13px;color:#888;line-height:1.7}
+.key-row{display:flex;gap:8px;align-items:center}
+.key-row input{flex:1}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.status-dot.ok{background:#4ade80}
+.status-dot.err{background:#f87171}
+.status-dot.warn{background:#fbbf24}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Obscuron <span>AI Hub</span></h1>
+  <span class="badge">All AI. One Place.</span>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('chat')">💬 Chat</button>
+  <button class="tab" onclick="switchTab('image')">🎨 Image</button>
+  <button class="tab" onclick="switchTab('voice')">🎙️ Voice</button>
+  <button class="tab" onclick="switchTab('music')">🎵 Music</button>
+  <button class="tab" onclick="switchTab('stems')">🎛️ Stems</button>
+  <button class="tab" onclick="switchTab('transcribe')">📝 Transcribe</button>
+  <button class="tab" onclick="switchTab('settings')">⚙️ Settings</button>
+</div>
+
+<div class="content">
+
+  <!-- CHAT -->
+  <div id="panel-chat" class="panel active">
+    <div>
+      <label>Model</label>
+      <div class="model-select">
+        <div class="model-chip active" onclick="selectModel(this,'openai/gpt-4o')">GPT-4o</div>
+        <div class="model-chip" onclick="selectModel(this,'openai/gpt-4o-mini')">GPT-4o Mini</div>
+        <div class="model-chip" onclick="selectModel(this,'anthropic/claude-sonnet-4-5')">Claude Sonnet</div>
+        <div class="model-chip" onclick="selectModel(this,'anthropic/claude-haiku-3-5')">Claude Haiku</div>
+        <div class="model-chip" onclick="selectModel(this,'x-ai/grok-3-beta')">Grok 3</div>
+        <div class="model-chip" onclick="selectModel(this,'meta-llama/llama-3.3-70b-instruct')">Llama 3.3</div>
+        <div class="model-chip" onclick="selectModel(this,'perplexity/sonar-pro-search')">Perplexity Web</div>
+      </div>
+    </div>
+    <div>
+      <label>System Prompt (optional)</label>
+      <textarea id="chat-system" rows="2" placeholder="You are a helpful assistant..."></textarea>
+    </div>
+    <div class="msg-list" id="chat-msgs">
+      <div class="msg system">Start a conversation below</div>
+    </div>
+    <div class="chat-input">
+      <input id="chat-inp" type="text" placeholder="Type your message..." onkeydown="if(e.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
+      <button onclick="sendChat()" id="chat-btn">Send</button>
+      <button class="sec" onclick="clearChat()">Clear</button>
+    </div>
+    <div class="spinner" id="chat-spin">Thinking...</div>
+  </div>
+
+  <!-- IMAGE -->
+  <div id="panel-image" class="panel">
+    <div>
+      <label>Prompt</label>
+      <textarea id="img-prompt" placeholder="A futuristic city at night, neon lights, cyberpunk style, 4K..."></textarea>
+    </div>
+    <div class="row">
+      <div>
+        <label>Width</label>
+        <select id="img-w">
+          <option value="512">512</option>
+          <option value="768">768</option>
+          <option value="1024" selected>1024</option>
+        </select>
+      </div>
+      <div>
+        <label>Height</label>
+        <select id="img-h">
+          <option value="512">512</option>
+          <option value="768">768</option>
+          <option value="1024" selected>1024</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="generateImage()" id="img-btn">Generate Image</button>
+    <div class="spinner" id="img-spin">Generating... (15-30 seconds)</div>
+    <img id="img-result" class="img-result" alt="Generated image">
+    <a id="img-dl" style="display:none" download="image.jpg"><button class="sec" style="width:auto">Download Image</button></a>
+  </div>
+
+  <!-- VOICE -->
+  <div id="panel-voice" class="panel">
+    <div>
+      <label>Text to speak</label>
+      <textarea id="voice-text" placeholder="Hello! I'm your AI assistant. How can I help you today?"></textarea>
+    </div>
+    <div class="row">
+      <div>
+        <label>Voice</label>
+        <select id="voice-id">
+          <option value="EXAVITQu4vr4xnSDxMaL">Sarah (Female)</option>
+          <option value="pNInz6obpgDQGcFmaJgB">Adam (Male)</option>
+          <option value="ErXwobaYiN019PkySvjV">Antoni (Male)</option>
+          <option value="MF3mGyEYCl7XYWbV9V6O">Elli (Female)</option>
+          <option value="TxGEqnHWrfWFTfGW9XjX">Josh (Male)</option>
+          <option value="VR6AewLTigWG4xSOukaG">Arnold (Male)</option>
+        </select>
+      </div>
+      <div>
+        <label>Model</label>
+        <select id="voice-model">
+          <option value="eleven_multilingual_v2">Multilingual v2</option>
+          <option value="eleven_monolingual_v1">English v1</option>
+          <option value="eleven_turbo_v2">Turbo v2 (Fast)</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="generateVoice()" id="voice-btn">Generate Voice</button>
+    <div class="spinner" id="voice-spin">Generating audio...</div>
+    <audio id="voice-audio" controls></audio>
+    <a id="voice-dl" style="display:none" download="voice.mp3"><button class="sec" style="width:auto;margin-top:8px">Download MP3</button></a>
+  </div>
+
+  <!-- MUSIC -->
+  <div id="panel-music" class="panel">
+    <div>
+      <label>Music Description</label>
+      <textarea id="music-prompt" placeholder="Upbeat electronic music for a product demo, energetic, modern..."></textarea>
+    </div>
+    <div>
+      <label>Style Tags (optional)</label>
+      <input id="music-style" type="text" placeholder="e.g. electronic, cinematic, lo-fi, hip-hop">
+    </div>
+    <button onclick="generateMusic()" id="music-btn">Generate Music</button>
+    <div class="spinner" id="music-spin">Generating... this may take a minute</div>
+    <div class="result-box hidden" id="music-result"></div>
+  </div>
+
+  <!-- STEMS -->
+  <div id="panel-stems" class="panel">
+    <div class="stems-info">
+      <strong style="color:#a78bfa">Moises AI Stem Separator</strong><br>
+      Separate any song into individual tracks: vocals, drums, bass, instruments.<br>
+      Provide a public URL to an audio file (MP3, WAV).
+    </div>
+    <div>
+      <label>Audio URL (public MP3/WAV link)</label>
+      <input id="stems-url" type="url" placeholder="https://example.com/song.mp3">
+    </div>
+    <div>
+      <label>Separation Type</label>
+      <select id="stems-type">
+        <option value="2stems">2 Stems (Vocals + Accompaniment)</option>
+        <option value="4stems">4 Stems (Vocals, Drums, Bass, Other)</option>
+        <option value="5stems">5 Stems (Vocals, Drums, Bass, Piano, Other)</option>
+      </select>
+    </div>
+    <button onclick="separateStems()" id="stems-btn">Separate Stems</button>
+    <div class="spinner" id="stems-spin">Processing... check status below</div>
+    <div class="result-box hidden" id="stems-result"></div>
+    <div id="stems-status-section" style="display:none">
+      <label>Job ID</label>
+      <div class="row">
+        <input id="stems-job-id" type="text" readonly>
+        <button class="sec" onclick="checkStemsStatus()" style="flex:0;white-space:nowrap">Check Status</button>
+      </div>
+      <div class="result-box hidden" id="stems-status-result" style="margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- TRANSCRIBE -->
+  <div id="panel-transcribe" class="panel">
+    <div>
+      <label>Upload Audio File (MP3, WAV, M4A, WebM)</label>
+      <input id="transcribe-file" type="file" accept="audio/*">
+    </div>
+    <button onclick="transcribeAudio()" id="transcribe-btn">Transcribe</button>
+    <div class="spinner" id="transcribe-spin">Transcribing...</div>
+    <div class="result-box hidden" id="transcribe-result"></div>
+    <button class="sec hidden" id="transcribe-copy" onclick="copyTranscript()" style="width:auto">Copy Text</button>
+  </div>
+
+  <!-- SETTINGS -->
+  <div id="panel-settings" class="panel">
+    <div style="color:#a78bfa;font-size:1rem;font-weight:700;margin-bottom:4px">API Keys</div>
+    <div style="color:#666;font-size:13px;margin-bottom:20px">Keys are stored locally in your browser. Never shared.</div>
+
+    <div>
+      <label><span class="status-dot" id="dot-openrouter"></span>OpenRouter (Chat + Perplexity + Whisper)</label>
+      <div class="key-row">
+        <input type="password" id="key-openrouter" placeholder="sk-or-v1-...">
+        <button class="sec" onclick="saveKey('openrouter')">Save</button>
+      </div>
+    </div>
+    <div>
+      <label><span class="status-dot" id="dot-stability"></span>Stability AI (Image Generation)</label>
+      <div class="key-row">
+        <input type="password" id="key-stability" placeholder="sk-...">
+        <button class="sec" onclick="saveKey('stability')">Save</button>
+      </div>
+    </div>
+    <div>
+      <label><span class="status-dot" id="dot-elevenlabs"></span>ElevenLabs (Voice / TTS)</label>
+      <div class="key-row">
+        <input type="password" id="key-elevenlabs" placeholder="...">
+        <button class="sec" onclick="saveKey('elevenlabs')">Save</button>
+      </div>
+    </div>
+    <div>
+      <label><span class="status-dot" id="dot-moises"></span>Moises (Stem Separation)</label>
+      <div class="key-row">
+        <input type="password" id="key-moises" placeholder="...">
+        <button class="sec" onclick="saveKey('moises')">Save</button>
+      </div>
+    </div>
+
+    <div style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:14px;font-size:13px;color:#888;margin-top:8px">
+      <strong style="color:#a78bfa">Where to get API keys:</strong><br>
+      • OpenRouter: <span style="color:#6c5fff">openrouter.ai/keys</span><br>
+      • Stability AI: <span style="color:#6c5fff">platform.stability.ai</span><br>
+      • ElevenLabs: <span style="color:#6c5fff">elevenlabs.io/app/settings/api-keys</span><br>
+      • Moises: <span style="color:#6c5fff">developer.moises.ai</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+var chatModel = 'openai/gpt-4o';
+var chatHistory = [];
+
+// ── Keys (localStorage) ───────────────────────────────────────────────────
+function getKey(name) { return localStorage.getItem('ob_key_' + name) || ''; }
+function saveKey(name) {
+  var val = document.getElementById('key-' + name).value.trim();
+  if (val) { localStorage.setItem('ob_key_' + name, val); alert('Saved!'); updateDots(); }
+}
+function loadKeys() {
+  ['openrouter','stability','elevenlabs','moises'].forEach(function(k) {
+    var el = document.getElementById('key-' + k);
+    if (el && getKey(k)) el.value = getKey(k);
+  });
+  updateDots();
+}
+function updateDots() {
+  var keys = {openrouter:'openrouter',stability:'stability',elevenlabs:'elevenlabs',moises:'moises'};
+  Object.keys(keys).forEach(function(k) {
+    var dot = document.getElementById('dot-' + k);
+    if (dot) dot.className = 'status-dot ' + (getKey(k) ? 'ok' : 'err');
+  });
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(function(t,i) { t.classList.remove('active'); });
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// ── Chat ──────────────────────────────────────────────────────────────────
+function selectModel(el, model) {
+  document.querySelectorAll('.model-chip').forEach(function(c) { c.classList.remove('active'); });
+  el.classList.add('active');
+  chatModel = model;
+}
+
+function clearChat() { chatHistory = []; document.getElementById('chat-msgs').innerHTML = '<div class="msg system">Conversation cleared</div>'; }
+
+function addChatMsg(role, text) {
+  var msgs = document.getElementById('chat-msgs');
+  var d = document.createElement('div');
+  d.className = 'msg ' + (role === 'user' ? 'user' : 'ai');
+  d.textContent = text;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function sendChat() {
+  var inp = document.getElementById('chat-inp');
+  var text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  addChatMsg('user', text);
+  chatHistory.push({role:'user', content:text});
+
+  var btn = document.getElementById('chat-btn');
+  var spin = document.getElementById('chat-spin');
+  btn.disabled = true;
+  spin.classList.add('show');
+
+  try {
+    var body = {model: chatModel, messages: chatHistory};
+    var sys = document.getElementById('chat-system').value.trim();
+    if (sys) body.system = sys;
+
+    var resp = await fetch('/api/chat', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key': getKey('openrouter')},
+      body: JSON.stringify(body)
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    addChatMsg('ai', data.reply);
+    chatHistory.push({role:'assistant', content:data.reply});
+  } catch(e) {
+    addChatMsg('ai', 'Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+// ── Image ─────────────────────────────────────────────────────────────────
+async function generateImage() {
+  var prompt = document.getElementById('img-prompt').value.trim();
+  if (!prompt) { alert('Enter a prompt'); return; }
+
+  var btn = document.getElementById('img-btn');
+  var spin = document.getElementById('img-spin');
+  var img = document.getElementById('img-result');
+  var dl = document.getElementById('img-dl');
+  btn.disabled = true;
+  spin.classList.add('show');
+  img.style.display = 'none';
+  dl.style.display = 'none';
+
+  try {
+    var resp = await fetch('/api/image', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key': getKey('stability')},
+      body: JSON.stringify({prompt:prompt, width:parseInt(document.getElementById('img-w').value), height:parseInt(document.getElementById('img-h').value)})
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    img.src = 'data:image/jpeg;base64,' + data.image;
+    img.style.display = 'block';
+    dl.href = img.src;
+    dl.style.display = 'inline-block';
+  } catch(e) {
+    alert('Image error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+// ── Voice ─────────────────────────────────────────────────────────────────
+async function generateVoice() {
+  var text = document.getElementById('voice-text').value.trim();
+  if (!text) { alert('Enter text'); return; }
+
+  var btn = document.getElementById('voice-btn');
+  var spin = document.getElementById('voice-spin');
+  btn.disabled = true;
+  spin.classList.add('show');
+
+  try {
+    var resp = await fetch('/api/voice', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key': getKey('elevenlabs')},
+      body: JSON.stringify({text:text, voice_id:document.getElementById('voice-id').value, model:document.getElementById('voice-model').value})
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    var audio = document.getElementById('voice-audio');
+    var src = 'data:audio/mp3;base64,' + data.audio;
+    audio.src = src;
+    audio.style.display = 'block';
+    audio.play();
+    var dl = document.getElementById('voice-dl');
+    dl.href = src;
+    dl.style.display = 'inline-block';
+  } catch(e) {
+    alert('Voice error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+// ── Music ─────────────────────────────────────────────────────────────────
+async function generateMusic() {
+  var prompt = document.getElementById('music-prompt').value.trim();
+  if (!prompt) { alert('Enter a description'); return; }
+
+  var btn = document.getElementById('music-btn');
+  var spin = document.getElementById('music-spin');
+  var result = document.getElementById('music-result');
+  btn.disabled = true;
+  spin.classList.add('show');
+  result.classList.add('hidden');
+
+  try {
+    var resp = await fetch('/api/music', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key': getKey('openrouter')},
+      body: JSON.stringify({prompt:prompt, style:document.getElementById('music-style').value})
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    result.textContent = data.result || JSON.stringify(data);
+    result.classList.remove('hidden');
+  } catch(e) {
+    result.textContent = 'Error: ' + e.message;
+    result.classList.remove('hidden');
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+// ── Stems ─────────────────────────────────────────────────────────────────
+async function separateStems() {
+  var url = document.getElementById('stems-url').value.trim();
+  if (!url) { alert('Enter an audio URL'); return; }
+
+  var btn = document.getElementById('stems-btn');
+  var spin = document.getElementById('stems-spin');
+  var result = document.getElementById('stems-result');
+  btn.disabled = true;
+  spin.classList.add('show');
+  result.classList.add('hidden');
+
+  try {
+    var resp = await fetch('/api/stems', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-API-Key': getKey('moises')},
+      body: JSON.stringify({url:url, stems:document.getElementById('stems-type').value})
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    result.textContent = 'Job started!\nJob ID: ' + data.job_id + '\nStatus: ' + data.status;
+    result.classList.remove('hidden');
+    document.getElementById('stems-job-id').value = data.job_id;
+    document.getElementById('stems-status-section').style.display = 'block';
+  } catch(e) {
+    result.textContent = 'Error: ' + e.message;
+    result.classList.remove('hidden');
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+async function checkStemsStatus() {
+  var jobId = document.getElementById('stems-job-id').value.trim();
+  if (!jobId) return;
+  var result = document.getElementById('stems-status-result');
+  try {
+    var resp = await fetch('/api/stems/status/' + jobId, {headers:{'X-API-Key': getKey('moises')}});
+    var data = await resp.json();
+    result.textContent = JSON.stringify(data, null, 2);
+    result.classList.remove('hidden');
+  } catch(e) {
+    result.textContent = 'Error: ' + e.message;
+    result.classList.remove('hidden');
+  }
+}
+
+// ── Transcribe ────────────────────────────────────────────────────────────
+async function transcribeAudio() {
+  var fileInput = document.getElementById('transcribe-file');
+  if (!fileInput.files[0]) { alert('Select an audio file'); return; }
+
+  var btn = document.getElementById('transcribe-btn');
+  var spin = document.getElementById('transcribe-spin');
+  var result = document.getElementById('transcribe-result');
+  var copyBtn = document.getElementById('transcribe-copy');
+  btn.disabled = true;
+  spin.classList.add('show');
+  result.classList.add('hidden');
+  copyBtn.classList.add('hidden');
+
+  try {
+    var formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    var resp = await fetch('/api/transcribe', {
+      method:'POST',
+      headers:{'X-API-Key': getKey('openrouter')},
+      body: formData
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || 'Error');
+    result.textContent = data.text;
+    result.classList.remove('hidden');
+    copyBtn.classList.remove('hidden');
+  } catch(e) {
+    result.textContent = 'Error: ' + e.message;
+    result.classList.remove('hidden');
+  } finally {
+    btn.disabled = false;
+    spin.classList.remove('show');
+  }
+}
+
+function copyTranscript() {
+  navigator.clipboard.writeText(document.getElementById('transcribe-result').textContent);
+  document.getElementById('transcribe-copy').textContent = 'Copied! ✓';
+  setTimeout(function(){ document.getElementById('transcribe-copy').textContent = 'Copy Text'; }, 2000);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+loadKeys();
+</script>
+</body>
+</html>
