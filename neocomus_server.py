@@ -56,17 +56,26 @@ class ChatRequest(BaseModel):
 # ── Web Search ───────────────────────────────────────────────────────────────
 
 async def web_search(query: str, max_results: int = 4) -> str:
-    """DuckDuckGo search using duckduckgo-search package."""
-    try:
-        from duckduckgo_search import DDGS
-        with DDGS() as ddgs:
-            results = list(ddgs.text(query, max_results=max_results))
-        if results:
-            return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
-        return ""
-    except Exception as e:
-        logger.warning(f"Web search failed: {e}")
-        return ""
+    """DuckDuckGo search — runs in thread pool to avoid blocking."""
+    import asyncio
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _search():
+        try:
+            from duckduckgo_search import DDGS
+            with DDGS() as ddgs:
+                results = list(ddgs.text(query, max_results=max_results))
+            if results:
+                return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
+            return ""
+        except Exception as e:
+            logger.warning(f"DDG search error: {e}")
+            return ""
+
+    loop = asyncio.get_event_loop()
+    with ThreadPoolExecutor() as pool:
+        result = await loop.run_in_executor(pool, _search)
+    return result
 
 
 def build_research_queries(member_key: str, user_message: str) -> List[str]:
