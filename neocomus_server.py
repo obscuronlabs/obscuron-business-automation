@@ -114,7 +114,7 @@ async def call_llm(system_prompt: str, messages: list, max_tokens: int = 1200) -
         api_url = "https://openrouter.ai/api/v1/chat/completions"
         headers = {"Content-Type": "application/json", "Authorization": f"Bearer {OPENROUTER_API_KEY}"}
         payload = {
-            "model": "openai/gpt-4o-mini",
+            "model": "openai/gpt-4o",
             "max_tokens": max_tokens,
             "messages": [{"role": "system", "content": system_prompt}] + messages,
         }
