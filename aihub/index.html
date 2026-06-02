@@ -335,19 +335,21 @@ async function sendChat() {
   spin.classList.add('show');
 
   try {
-    var body = {model: chatModel, messages: chatHistory};
+    var messages = [];
     var sys = document.getElementById('chat-system').value.trim();
-    if (sys) body.system = sys;
+    if (sys) messages.push({role:'system', content:sys});
+    messages = messages.concat(chatHistory);
 
-    var resp = await fetch('/api/chat', {
+    var resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method:'POST',
-      headers:{'Content-Type':'application/json','X-API-Key': getKey('openrouter')},
-      body: JSON.stringify(body)
+      headers:{'Content-Type':'application/json','Authorization':'Bearer ' + getKey('openrouter')},
+      body: JSON.stringify({model: chatModel, messages: messages, max_tokens: 2000})
     });
     var data = await resp.json();
-    if (!resp.ok) throw new Error(data.detail || 'Error');
-    addChatMsg('ai', data.reply);
-    chatHistory.push({role:'assistant', content:data.reply});
+    if (!resp.ok) throw new Error((data.error && data.error.message) || 'Error');
+    var reply = data.choices[0].message.content.trim();
+    addChatMsg('ai', reply);
+    chatHistory.push({role:'assistant', content:reply});
   } catch(e) {
     addChatMsg('ai', 'Error: ' + e.message);
   } finally {
@@ -371,13 +373,16 @@ async function generateImage() {
   dl.style.display = 'none';
 
   try {
-    var resp = await fetch('/api/image', {
+    var formData = new FormData();
+    formData.append('prompt', prompt);
+    formData.append('output_format', 'jpeg');
+    var resp = await fetch('https://api.stability.ai/v2beta/stable-image/generate/core', {
       method:'POST',
-      headers:{'Content-Type':'application/json','X-API-Key': getKey('stability')},
-      body: JSON.stringify({prompt:prompt, width:parseInt(document.getElementById('img-w').value), height:parseInt(document.getElementById('img-h').value)})
+      headers:{'Authorization':'Bearer ' + getKey('stability'), 'Accept':'application/json'},
+      body: formData
     });
     var data = await resp.json();
-    if (!resp.ok) throw new Error(data.detail || 'Error');
+    if (!resp.ok) throw new Error((data.errors && data.errors[0]) || 'Error');
     img.src = 'data:image/jpeg;base64,' + data.image;
     img.style.display = 'block';
     dl.href = img.src;
@@ -401,15 +406,16 @@ async function generateVoice() {
   spin.classList.add('show');
 
   try {
-    var resp = await fetch('/api/voice', {
+    var voiceId = document.getElementById('voice-id').value;
+    var resp = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + voiceId, {
       method:'POST',
-      headers:{'Content-Type':'application/json','X-API-Key': getKey('elevenlabs')},
-      body: JSON.stringify({text:text, voice_id:document.getElementById('voice-id').value, model:document.getElementById('voice-model').value})
+      headers:{'xi-api-key': getKey('elevenlabs'), 'Content-Type':'application/json'},
+      body: JSON.stringify({text:text, model_id:document.getElementById('voice-model').value, voice_settings:{stability:0.5,similarity_boost:0.75}})
     });
-    var data = await resp.json();
-    if (!resp.ok) throw new Error(data.detail || 'Error');
+    if (!resp.ok) throw new Error('ElevenLabs error: ' + resp.status);
+    var blob = await resp.blob();
+    var src = URL.createObjectURL(blob);
     var audio = document.getElementById('voice-audio');
-    var src = 'data:audio/mp3;base64,' + data.audio;
     audio.src = src;
     audio.style.display = 'block';
     audio.play();
