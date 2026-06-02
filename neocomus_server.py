@@ -1,7 +1,7 @@
 """
 Neocomus Music — Command Center Backend
-- OpenRouter / Anthropic AI
-- DuckDuckGo web research per agent
+- Perplexity (sonar) for real-time web search via OpenRouter
+- Anthropic fallback
 - Cross-agent coordination
 """
 
@@ -29,9 +29,7 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 ACCESS_PASSWORD = os.getenv("ACCESS_PASSWORD", "")
 
 valid_tokens: set = set()
-
-# ── Agent coordination memory (cross-agent context) ──────────────────────────
-agent_memory: dict = {}  # member_key → last output
+agent_memory: dict = {}
 
 
 class AuthRequest(BaseModel):
@@ -50,91 +48,43 @@ class ChatRequest(BaseModel):
     messages: List[Message]
     max_tokens: int = 1200
     enable_research: bool = True
-    coordinate_with: Optional[List[str]] = None  # other agent keys to pull context from
-
-
-# ── Web Search ───────────────────────────────────────────────────────────────
-
-async def web_search(query: str, max_results: int = 6) -> str:
-    """DuckDuckGo search (works best with English queries)."""
-    import asyncio
-    from concurrent.futures import ThreadPoolExecutor
-
-    def _search():
-        try:
-            from duckduckgo_search import DDGS
-            with DDGS() as ddgs:
-                results = list(ddgs.text(query, max_results=max_results, region="us-en"))
-            if results:
-                return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
-            return ""
-        except Exception as e:
-            logger.warning(f"DDG error: {e}")
-            return ""
-
-    loop = asyncio.get_event_loop()
-    with ThreadPoolExecutor() as pool:
-        result = await loop.run_in_executor(pool, _search)
-    if result:
-        logger.info(f"DDG: {len(result)} chars for '{query[:50]}'")
-    else:
-        logger.warning(f"DDG: NO RESULTS for '{query[:50]}'")
-    return result
-
-
-async def translate_to_english_query(user_message: str) -> str:
-    """Use LLM to convert any language message into a clean English search query."""
-    try:
-        prompt = f"Convert this message into a short, effective English Google search query (max 10 words, no punctuation). Output ONLY the query, nothing else.\n\nMessage: {user_message}"
-        result = await call_llm(
-            "You are a search query translator. Output only the search query, nothing else.",
-            [{"role": "user", "content": prompt}],
-            max_tokens=40
-        )
-        query = result.strip().strip('"').strip("'")
-        logger.info(f"Translated query: '{user_message[:50]}' → '{query}'")
-        return query
-    except Exception as e:
-        logger.warning(f"Translation failed: {e}")
-        return user_message
-
-
-async def gather_research(member_key: str, user_message: str) -> str:
-    from datetime import datetime
-    year = datetime.utcnow().year
-
-    english_query = await translate_to_english_query(user_message)
-    queries = [english_query, f"{english_query} {year}"]
-
-    all_results = []
-    for q in queries:
-        result = await web_search(q)
-        if result:
-            all_results.append(f"[Search: {q}]\n{result}")
-            logger.info(f"Search '{q}' → {len(result)} chars")
-            break  # got results, no need for second query
-        else:
-            logger.info(f"Search '{q}' → NO RESULTS")
-    return "\n\n".join(all_results)
+    coordinate_with: Optional[List[str]] = None
 
 
 # ── LLM Call ─────────────────────────────────────────────────────────────────
 
-async def call_llm(system_prompt: str, messages: list, max_tokens: int = 1200) -> str:
-    use_openrouter = bool(OPENROUTER_API_KEY) and not bool(ANTHROPIC_API_KEY)
-
-    if use_openrouter:
+async def call_llm(system_prompt: str, messages: list, max_tokens: int = 1200, search: bool = False) -> str:
+    """
+    search=True  → uses perplexity/sonar-pro (built-in live web search, like Claude)
+    search=False → uses openai/gpt-4o for regular tasks
+    Falls back to Anthropic if no OpenRouter key.
+    """
+    if OPENROUTER_API_KEY:
+        model = "perplexity/sonar-pro" if search else "openai/gpt-4o"
         api_url = "https://openrouter.ai/api/v1/chat/completions"
-        headers = {"Content-Type": "application/json", "Authorization": f"Bearer {OPENROUTER_API_KEY}"}
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        }
         payload = {
-            "model": "openai/gpt-4o",
+            "model": model,
             "max_tokens": max_tokens,
             "messages": [{"role": "system", "content": system_prompt}] + messages,
         }
+        logger.info(f"LLM call → {model}")
     else:
         api_url = "https://api.anthropic.com/v1/messages"
-        headers = {"Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01"}
-        payload = {"model": "claude-sonnet-4-6", "max_tokens": max_tokens, "system": system_prompt, "messages": messages}
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": ANTHROPIC_API_KEY,
+            "anthropic-version": "2023-06-01",
+        }
+        payload = {
+            "model": "claude-sonnet-4-6",
+            "max_tokens": max_tokens,
+            "system": system_prompt,
+            "messages": messages,
+        }
 
     async with httpx.AsyncClient(timeout=60) as client:
         resp = await client.post(api_url, headers=headers, json=payload)
@@ -144,7 +94,7 @@ async def call_llm(system_prompt: str, messages: list, max_tokens: int = 1200) -
         raise HTTPException(status_code=502, detail="AI service error. Try again.")
 
     data = resp.json()
-    if use_openrouter:
+    if OPENROUTER_API_KEY:
         return data["choices"][0]["message"]["content"] if data.get("choices") else ""
     else:
         return data["content"][0]["text"] if data.get("content") else ""
@@ -180,12 +130,7 @@ async def chat(req: ChatRequest):
     user_message = req.messages[-1].content if req.messages else ""
     messages = [{"role": m.role, "content": m.content} for m in req.messages]
 
-    # ── 1. Web research ───────────────────────────────────────────────────────
-    research_context = ""
-    if req.enable_research and user_message:
-        research_context = await gather_research(req.member_key, user_message)
-
-    # ── 2. Cross-agent coordination context ──────────────────────────────────
+    # ── Cross-agent coordination context ─────────────────────────────────────
     coord_context = ""
     if req.coordinate_with:
         parts = []
@@ -195,41 +140,35 @@ async def chat(req: ChatRequest):
         if parts:
             coord_context = "\n\n=== TEAM INSIGHTS ===\n" + "\n\n".join(parts)
 
-    # ── 3. Build enriched system prompt ──────────────────────────────────────
+    # ── Build system prompt ───────────────────────────────────────────────────
     from datetime import datetime
     today = datetime.utcnow().strftime("%B %d, %Y")
+
     enriched_system = (
         f"Today's date is {today}.\n\n"
-        "CRITICAL RULES:\n"
-        "1. You have access to LIVE web search results below. Always use them.\n"
-        "2. If search results contain the answer, quote facts directly from them.\n"
-        "3. If search results came back EMPTY for a topic, say: 'I searched the web but found no information about [topic]. This event may not exist, may not have been announced, or is too recent to index.'\n"
-        "4. NEVER say 'I cannot browse the internet' — you have real search results.\n"
-        "5. NEVER hallucinate dates, venues, or stats.\n\n"
-    ) + req.system_prompt
-    if research_context:
-        enriched_system += f"\n\n=== LIVE WEB SEARCH RESULTS ===\n{research_context}\n\nAnswer based on these results. If they answer the question, use that data directly."
-    else:
-        enriched_system += f"\n\n=== SEARCH STATUS ===\nWeb search ran but returned NO RESULTS for this query. Tell the user you searched but found nothing, and explain the event may not exist or hasn't been announced publicly."
+        "You have LIVE internet access. Search the web for current facts, dates, events, charts, and news. "
+        "Always give specific, accurate answers with real data. "
+        "Never say 'I cannot browse the internet' — you can and must search.\n\n"
+        + req.system_prompt
+    )
     if coord_context:
         enriched_system += coord_context
 
-    # ── 4. Call LLM ──────────────────────────────────────────────────────────
-    reply = await call_llm(enriched_system, messages, req.max_tokens)
+    # ── Call LLM (Perplexity sonar = built-in web search) ────────────────────
+    use_search = req.enable_research and bool(OPENROUTER_API_KEY)
+    reply = await call_llm(enriched_system, messages, req.max_tokens, search=use_search)
 
-    # ── 5. Store in agent memory for coordination ─────────────────────────────
     agent_memory[req.member_key] = reply[:600]
 
     return {
         "reply": reply,
-        "research_used": bool(research_context),
+        "research_used": use_search,
         "coordination_used": bool(coord_context),
     }
 
 
 @app.get("/api/agent-memory")
 async def get_agent_memory():
-    """Returns what each agent last said — for cross-agent awareness."""
     return agent_memory
 
 
