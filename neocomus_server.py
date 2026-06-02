@@ -56,38 +56,14 @@ class ChatRequest(BaseModel):
 # ── Web Search ───────────────────────────────────────────────────────────────
 
 async def web_search(query: str, max_results: int = 4) -> str:
-    """DuckDuckGo instant search — no API key needed."""
+    """DuckDuckGo search using duckduckgo-search package."""
     try:
-        async with httpx.AsyncClient(timeout=10, follow_redirects=True) as client:
-            resp = await client.get(
-                "https://api.duckduckgo.com/",
-                params={"q": query, "format": "json", "no_html": "1", "skip_disambig": "1"},
-                headers={"User-Agent": "NeocomusBot/2.0"},
-            )
-            data = resp.json()
-
-        results = []
-        # Abstract
-        if data.get("AbstractText"):
-            results.append(data["AbstractText"])
-        # Related topics
-        for topic in data.get("RelatedTopics", [])[:max_results]:
-            if isinstance(topic, dict) and topic.get("Text"):
-                results.append(topic["Text"])
-
+        from duckduckgo_search import DDGS
+        with DDGS() as ddgs:
+            results = list(ddgs.text(query, max_results=max_results))
         if results:
-            return "\n".join(f"• {r}" for r in results[:max_results])
-
-        # Fallback: search via HTML scrape
-        resp2 = await httpx.AsyncClient(timeout=10).get(
-            f"https://duckduckgo.com/html/?q={query}",
-            headers={"User-Agent": "Mozilla/5.0"},
-        )
-        import re
-        snippets = re.findall(r'class="result__snippet"[^>]*>(.*?)</a>', resp2.text)
-        clean = [re.sub(r'<[^>]+>', '', s).strip() for s in snippets[:max_results]]
-        return "\n".join(f"• {s}" for s in clean if s) or "No results found."
-
+            return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
+        return ""
     except Exception as e:
         logger.warning(f"Web search failed: {e}")
         return ""
