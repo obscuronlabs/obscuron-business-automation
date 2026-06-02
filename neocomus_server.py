@@ -188,7 +188,7 @@ async def chat(req: ChatRequest):
     today = datetime.utcnow().strftime("%B %d, %Y")
     enriched_system = f"Today's date is {today}.\n\nCRITICAL RULE: Never make up facts, dates, locations, or statistics. If you don't find the information in the web research results below, say clearly 'I couldn't find current information on this' — do NOT guess or hallucinate.\n\n" + req.system_prompt
     if research_context:
-        enriched_system += f"\n\n=== CURRENT WEB RESEARCH ===\n{research_context}\n\nUse this real-time data in your response where relevant."
+        enriched_system += f"\n\n=== LIVE WEB SEARCH RESULTS (retrieved right now) ===\n{research_context}\n\nYOU MUST base your answer on these search results. Quote specific facts from them. If the results answer the question, use that data directly."
     if coord_context:
         enriched_system += coord_context
 
