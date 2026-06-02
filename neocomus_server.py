@@ -175,7 +175,9 @@ async def chat(req: ChatRequest):
             coord_context = "\n\n=== TEAM INSIGHTS ===\n" + "\n\n".join(parts)
 
     # ── 3. Build enriched system prompt ──────────────────────────────────────
-    enriched_system = req.system_prompt
+    from datetime import datetime
+    today = datetime.utcnow().strftime("%B %d, %Y")
+    enriched_system = f"Today's date is {today}.\n\n" + req.system_prompt
     if research_context:
         enriched_system += f"\n\n=== CURRENT WEB RESEARCH ===\n{research_context}\n\nUse this real-time data in your response where relevant."
     if coord_context:
