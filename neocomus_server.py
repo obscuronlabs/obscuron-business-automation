@@ -79,21 +79,17 @@ async def web_search(query: str, max_results: int = 4) -> str:
 
 
 def build_research_queries(member_key: str, user_message: str) -> List[str]:
-    """Generate relevant search queries per agent role."""
-    queries = [f"Neocomus Music {user_message[:60]}"]
-    role_queries = {
-        "SW": [f"music industry trends {user_message[:50]}", "streaming music market 2025"],
-        "AR": [f"Spotify royalties streaming revenue {user_message[:50]}", "music monetization 2025"],
-        "NV": [f"music copyright licensing {user_message[:50]}"],
-        "PA": [f"music listener behavior psychology {user_message[:50]}"],
-        "OOK": [f"jazz blues world music trends {user_message[:50]}"],
-        "VH": [f"music branding visual identity {user_message[:50]}"],
-        "MS": [f"artist relations music label {user_message[:50]}"],
-        "BC": [f"music business strategy {user_message[:50]}"],
-        "OL": [f"music visual design creative direction {user_message[:50]}"],
-    }
-    queries += role_queries.get(member_key, [f"music business {user_message[:50]}"])
-    return queries[:2]
+    """Generate search queries based on the actual user message."""
+    # Primary query: exactly what the user asked
+    primary = user_message[:120]
+    # Secondary: add context if music-related
+    music_keys = ["spotify", "stream", "chart", "album", "song", "müzik", "şarkı", "dinlenme", "playlist"]
+    is_music = any(k in user_message.lower() for k in music_keys)
+    if is_music:
+        secondary = f"music {user_message[:80]}"
+    else:
+        secondary = f"{user_message[:80]} 2026"
+    return [primary, secondary]
 
 
 async def gather_research(member_key: str, user_message: str) -> str:
