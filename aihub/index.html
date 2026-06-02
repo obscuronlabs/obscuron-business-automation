@@ -78,13 +78,13 @@ audio{width:100%;margin-top:8px;display:none}
     <div>
       <label>Model</label>
       <div class="model-select">
-        <div class="model-chip active" onclick="selectModel(this,'openai/gpt-4o')">GPT-4o</div>
+        <div class="model-chip active" onclick="selectModel(this,'perplexity/sonar-pro-search')">🌐 Perplexity Web</div>
+        <div class="model-chip" onclick="selectModel(this,'openai/gpt-4o')">GPT-4o</div>
         <div class="model-chip" onclick="selectModel(this,'openai/gpt-4o-mini')">GPT-4o Mini</div>
         <div class="model-chip" onclick="selectModel(this,'anthropic/claude-sonnet-4-5')">Claude Sonnet</div>
         <div class="model-chip" onclick="selectModel(this,'anthropic/claude-haiku-3-5')">Claude Haiku</div>
         <div class="model-chip" onclick="selectModel(this,'x-ai/grok-3-beta')">Grok 3</div>
         <div class="model-chip" onclick="selectModel(this,'meta-llama/llama-3.3-70b-instruct')">Llama 3.3</div>
-        <div class="model-chip" onclick="selectModel(this,'perplexity/sonar-pro-search')">Perplexity Web</div>
       </div>
     </div>
     <div>
@@ -271,7 +271,7 @@ audio{width:100%;margin-top:8px;display:none}
 
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
-var chatModel = 'openai/gpt-4o';
+var chatModel = 'perplexity/sonar-pro-search';
 var chatHistory = [];
 
 // ── Keys (localStorage) ───────────────────────────────────────────────────
