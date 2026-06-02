@@ -56,40 +56,30 @@ class ChatRequest(BaseModel):
 # ── Web Search ───────────────────────────────────────────────────────────────
 
 async def web_search(query: str, max_results: int = 6) -> str:
-    """Google HTML scrape — no API key needed."""
-    import re
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept-Language": "en-US,en;q=0.9",
-    }
-    try:
-        async with httpx.AsyncClient(timeout=15, follow_redirects=True) as client:
-            resp = await client.get(
-                "https://www.google.com/search",
-                params={"q": query, "num": max_results, "hl": "en", "gl": "us"},
-                headers=headers,
-            )
-        if resp.status_code != 200:
-            logger.warning(f"Google returned {resp.status_code}")
+    """DuckDuckGo search (works best with English queries)."""
+    import asyncio
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _search():
+        try:
+            from duckduckgo_search import DDGS
+            with DDGS() as ddgs:
+                results = list(ddgs.text(query, max_results=max_results, region="us-en"))
+            if results:
+                return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
             return ""
-        html = resp.text
-        # Extract snippets between <span> tags in result blocks
-        snippets = re.findall(r'<div[^>]*>\s*<span[^>]*>([^<]{40,300})</span>', html)
-        titles = re.findall(r'<h3[^>]*>([^<]+)</h3>', html)
-        results = []
-        for i, snippet in enumerate(snippets[:max_results]):
-            title = titles[i] if i < len(titles) else "Result"
-            clean = re.sub(r'<[^>]+>', '', snippet).strip()
-            if clean:
-                results.append(f"• {title}: {clean}")
-        if results:
-            logger.info(f"Google scrape: {len(results)} results for '{query[:50]}'")
-            return "\n".join(results)
-        logger.warning(f"Google scrape: no snippets parsed for '{query[:50]}'")
-        return ""
-    except Exception as e:
-        logger.warning(f"Google scrape error: {e}")
-        return ""
+        except Exception as e:
+            logger.warning(f"DDG error: {e}")
+            return ""
+
+    loop = asyncio.get_event_loop()
+    with ThreadPoolExecutor() as pool:
+        result = await loop.run_in_executor(pool, _search)
+    if result:
+        logger.info(f"DDG: {len(result)} chars for '{query[:50]}'")
+    else:
+        logger.warning(f"DDG: NO RESULTS for '{query[:50]}'")
+    return result
 
 
 async def translate_to_english_query(user_message: str) -> str:
