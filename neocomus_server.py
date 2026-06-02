@@ -79,21 +79,29 @@ async def web_search(query: str, max_results: int = 4) -> str:
 
 
 def build_research_queries(member_key: str, user_message: str) -> List[str]:
-    """Generate search queries based on the actual user message."""
-    # Primary query: exactly what the user asked
-    primary = user_message[:120]
-    # Secondary: add context if music-related
-    music_keys = ["spotify", "stream", "chart", "album", "song", "müzik", "şarkı", "dinlenme", "playlist"]
-    is_music = any(k in user_message.lower() for k in music_keys)
-    if is_music:
-        secondary = f"music {user_message[:80]}"
-    else:
-        secondary = f"{user_message[:80]} 2026"
+    """Generate English search queries for better results."""
+    # Always search in English for better coverage
+    msg = user_message[:100]
+    primary = msg
+    secondary = f"{msg} 2025 2026"
     return [primary, secondary]
 
 
 async def gather_research(member_key: str, user_message: str) -> str:
-    queries = build_research_queries(member_key, user_message)
+    # Turkish → English common translations for search
+    translations = {
+        "son konser": "latest concert", "konser": "concert", "tarih": "date",
+        "nerede": "where", "hangi": "which", "bugün": "today", "şarkı": "song",
+        "müzik": "music", "dinlenme": "streams", "akış": "streams",
+        "sanatçı": "artist", "albüm": "album", "liste": "chart",
+        "sene": "year", "yıl": "year", "hafta": "week",
+    }
+    english_msg = user_message
+    for tr, en in translations.items():
+        english_msg = english_msg.replace(tr, en)
+
+    queries = [english_msg[:100], f"{english_msg[:80]} 2026"]
+
     all_results = []
     for q in queries:
         result = await web_search(q)
