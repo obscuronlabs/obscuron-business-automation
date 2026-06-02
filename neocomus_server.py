@@ -186,7 +186,7 @@ async def chat(req: ChatRequest):
     # ── 3. Build enriched system prompt ──────────────────────────────────────
     from datetime import datetime
     today = datetime.utcnow().strftime("%B %d, %Y")
-    enriched_system = f"Today's date is {today}.\n\n" + req.system_prompt
+    enriched_system = f"Today's date is {today}.\n\nCRITICAL RULE: Never make up facts, dates, locations, or statistics. If you don't find the information in the web research results below, say clearly 'I couldn't find current information on this' — do NOT guess or hallucinate.\n\n" + req.system_prompt
     if research_context:
         enriched_system += f"\n\n=== CURRENT WEB RESEARCH ===\n{research_context}\n\nUse this real-time data in your response where relevant."
     if coord_context:
