@@ -299,7 +299,7 @@ function generateWidget() {
     g: 'Hi! Welcome to ' + name + '. How can I help you today?'
   }));
 
-  var code = '<script src="https://aichat.obscuronlabs.com/widget.js" data-config="' + config + '" data-key="YOUR_OPENROUTER_KEY"><\/script>';
+  var code = '<script src="https://aichat.obscuronlabs.com/widget.js" data-config="' + config + '"><\/script>';
   document.getElementById('embed-code-display').textContent = code;
   document.getElementById('result-box').style.display = 'block';
   document.getElementById('result-box').scrollIntoView({behavior:'smooth', block:'nearest'});
