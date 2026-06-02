@@ -336,8 +336,11 @@ async function sendChat() {
 
   try {
     var messages = [];
-    var sys = document.getElementById('chat-system').value.trim();
-    if (sys) messages.push({role:'system', content:sys});
+    var today = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    var defaultSys = 'Today is ' + today + '. You are a helpful AI assistant. Answer accurately and concisely.';
+    var userSys = document.getElementById('chat-system').value.trim();
+    var sys = userSys ? ('Today is ' + today + '. ' + userSys) : defaultSys;
+    messages.push({role:'system', content:sys});
     messages = messages.concat(chatHistory);
 
     var resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
