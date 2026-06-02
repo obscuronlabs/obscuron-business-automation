@@ -27,6 +27,8 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 ACCESS_PASSWORD = os.getenv("ACCESS_PASSWORD", "")
+SERPAPI_KEY = os.getenv("SERPAPI_KEY", "")
+BRAVE_API_KEY = os.getenv("BRAVE_API_KEY", "")
 
 valid_tokens: set = set()
 
@@ -55,11 +57,49 @@ class ChatRequest(BaseModel):
 
 # ── Web Search ───────────────────────────────────────────────────────────────
 
-async def web_search(query: str, max_results: int = 6) -> str:
-    """DuckDuckGo search — runs in thread pool to avoid blocking."""
+async def web_search_serpapi(query: str, max_results: int = 6) -> str:
+    """Google search via SerpAPI — same as Claude's own search."""
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            resp = await client.get(
+                "https://serpapi.com/search",
+                params={"q": query, "api_key": SERPAPI_KEY, "num": max_results, "hl": "en", "gl": "us"}
+            )
+        if resp.status_code != 200:
+            return ""
+        data = resp.json()
+        results = data.get("organic_results", [])
+        if results:
+            return "\n".join(f"• {r.get('title','')}: {r.get('snippet','')}" for r in results[:max_results])
+    except Exception as e:
+        logger.warning(f"SerpAPI error: {e}")
+    return ""
+
+
+async def web_search_brave(query: str, max_results: int = 6) -> str:
+    """Brave Search API — free tier, 2000 queries/month."""
+    try:
+        async with httpx.AsyncClient(timeout=15) as client:
+            resp = await client.get(
+                "https://api.search.brave.com/res/v1/web/search",
+                params={"q": query, "count": max_results},
+                headers={"Accept": "application/json", "X-Subscription-Token": BRAVE_API_KEY}
+            )
+        if resp.status_code != 200:
+            return ""
+        data = resp.json()
+        results = data.get("web", {}).get("results", [])
+        if results:
+            return "\n".join(f"• {r.get('title','')}: {r.get('description','')}" for r in results[:max_results])
+    except Exception as e:
+        logger.warning(f"Brave search error: {e}")
+    return ""
+
+
+async def web_search_ddg(query: str, max_results: int = 6) -> str:
+    """DuckDuckGo fallback."""
     import asyncio
     from concurrent.futures import ThreadPoolExecutor
-
     def _search():
         try:
             from duckduckgo_search import DDGS
@@ -69,12 +109,27 @@ async def web_search(query: str, max_results: int = 6) -> str:
                 return "\n".join(f"• {r['title']}: {r['body']}" for r in results)
             return ""
         except Exception as e:
-            logger.warning(f"DDG search error: {e}")
+            logger.warning(f"DDG error: {e}")
             return ""
-
     loop = asyncio.get_event_loop()
     with ThreadPoolExecutor() as pool:
-        result = await loop.run_in_executor(pool, _search)
+        return await loop.run_in_executor(pool, _search)
+
+
+async def web_search(query: str, max_results: int = 6) -> str:
+    """Try SerpAPI → Brave → DuckDuckGo in order."""
+    if SERPAPI_KEY:
+        result = await web_search_serpapi(query, max_results)
+        if result:
+            logger.info(f"SerpAPI hit for: {query[:60]}")
+            return result
+    if BRAVE_API_KEY:
+        result = await web_search_brave(query, max_results)
+        if result:
+            logger.info(f"Brave hit for: {query[:60]}")
+            return result
+    result = await web_search_ddg(query, max_results)
+    logger.info(f"DDG {'hit' if result else 'miss'} for: {query[:60]}")
     return result
 
 
