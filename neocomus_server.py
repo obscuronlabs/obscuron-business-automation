@@ -60,7 +60,7 @@ async def call_llm(system_prompt: str, messages: list, max_tokens: int = 1200, s
     Falls back to Anthropic if no OpenRouter key.
     """
     if OPENROUTER_API_KEY:
-        model = "perplexity/sonar-pro" if search else "openai/gpt-4o"
+        model = "perplexity/sonar-pro-search" if search else "openai/gpt-4o"
         api_url = "https://openrouter.ai/api/v1/chat/completions"
         headers = {
             "Content-Type": "application/json",
