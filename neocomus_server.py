@@ -92,55 +92,29 @@ async def web_search(query: str, max_results: int = 6) -> str:
         return ""
 
 
-def build_research_queries(member_key: str, user_message: str) -> List[str]:
-    """Generate English search queries for better results."""
-    # Always search in English for better coverage
-    msg = user_message[:100]
-    primary = msg
-    secondary = f"{msg} 2025 2026"
-    return [primary, secondary]
+async def translate_to_english_query(user_message: str) -> str:
+    """Use LLM to convert any language message into a clean English search query."""
+    try:
+        prompt = f"Convert this message into a short, effective English Google search query (max 10 words, no punctuation). Output ONLY the query, nothing else.\n\nMessage: {user_message}"
+        result = await call_llm(
+            "You are a search query translator. Output only the search query, nothing else.",
+            [{"role": "user", "content": prompt}],
+            max_tokens=40
+        )
+        query = result.strip().strip('"').strip("'")
+        logger.info(f"Translated query: '{user_message[:50]}' → '{query}'")
+        return query
+    except Exception as e:
+        logger.warning(f"Translation failed: {e}")
+        return user_message
 
 
 async def gather_research(member_key: str, user_message: str) -> str:
-    # Turkish → English: stem-based replacements (handles suffixes via substring match)
-    tr_en = [
-        ("ne zaman", "when"), ("nezaman", "when"), ("nerede", "where"),
-        ("hangi", "which"), ("nasil", "how"), ("nasıl", "how"),
-        ("ne kadar", "how much"), ("kimdi", "who was"), ("kimle", "with who"),
-        ("iptal", "cancelled"), ("ertelendi", "postponed"),
-        ("son konser", "latest concert"), ("konser", "concert"),
-        ("turne", "tour"), ("tur ", "tour "),
-        ("tarih", "date"), ("sehir", "city"), ("şehir", "city"),
-        ("ulke", "country"), ("ülke", "country"),
-        ("bugun", "today"), ("bugün", "today"), ("yarin", "tomorrow"), ("yarın", "tomorrow"),
-        ("sarki", "song"), ("şarkı", "song"), ("muzik", "music"), ("müzik", "music"),
-        ("dinlenme", "streams"), ("akis", "streams"), ("akış", "streams"),
-        ("sanatci", "artist"), ("sanatçı", "artist"),
-        ("album", "album"), ("albüm", "album"),
-        ("liste", "chart"), ("grafik", "chart"),
-        ("sene", "year"), ("yil", "year"), ("yıl", "year"),
-        ("hafta", "week"), ("ay", "month"),
-        ("biletin", "ticket"), ("bilet", "ticket"),
-        ("stadyum", "stadium"), ("arena", "arena"), ("sahne", "stage"),
-        ("kapali", "indoor"), ("kapalı", "indoor"), ("acik", "outdoor"), ("açık", "outdoor"),
-        ("ne zaman", "when"), ("kac", "how many"), ("kaç", "how many"),
-        ("verdi", "performed"), ("yapti", "did"), ("yaptı", "did"),
-        ("geldi", "came"), ("gitti", "went"), ("oldu", "happened"),
-        ("vardi", "was"), ("vardı", "was"), ("neydi", "what was"),
-    ]
-    msg = user_message.lower()
-    for tr, en in tr_en:
-        msg = msg.replace(tr, en)
-
-    # Remove leftover Turkish suffix noise (common endings)
-    import re
-    msg = re.sub(r'\b\w*(inde|ında|nda|nde|ını|ini|unu|ünu|dan|den|tan|ten|ları|leri|ında|nın|nin|nun|nün|mı|mi|mu|mü|dı|di|du|dü|tı|ti|tu|tü)\b', '', msg)
-    msg = re.sub(r'\s+', ' ', msg).strip()
-
-    # Build smart queries: original cleaned + force 2025/2026 year
     from datetime import datetime
     year = datetime.utcnow().year
-    queries = [msg[:120], f"{msg[:90]} {year}", f"{msg[:90]} {year-1}"]
+
+    english_query = await translate_to_english_query(user_message)
+    queries = [english_query, f"{english_query} {year}"]
 
     all_results = []
     for q in queries:
@@ -148,6 +122,7 @@ async def gather_research(member_key: str, user_message: str) -> str:
         if result:
             all_results.append(f"[Search: {q}]\n{result}")
             logger.info(f"Search '{q}' → {len(result)} chars")
+            break  # got results, no need for second query
         else:
             logger.info(f"Search '{q}' → NO RESULTS")
     return "\n\n".join(all_results)
