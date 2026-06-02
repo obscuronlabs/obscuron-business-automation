@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neocomus Music AI — Nashville's AI Music Team</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #fff; font-family: 'Segoe UI', sans-serif; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 60px 20px;
+    background: radial-gradient(ellipse at 50% 0%, #1a0a3e 0%, #0a0a0f 70%);
+  }
+  .badge { background: #6c5fff22; border: 1px solid #6c5fff66; color: #a78bfa; padding: 6px 18px; border-radius: 20px; font-size: 13px; margin-bottom: 24px; display: inline-block; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+  .hero h1 span { color: #a78bfa; }
+  .hero p { font-size: 1.2rem; color: #999; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
+  .cta-btn { background: linear-gradient(135deg, #6c5fff, #a855f7); color: #fff; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px #6c5fff66; }
+
+  .stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 60px; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 2rem; font-weight: 800; color: #a78bfa; }
+  .stat .label { font-size: 13px; color: #666; margin-top: 4px; }
+
+  section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+
+  .section-title { text-align: center; font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+  .section-sub { text-align: center; color: #666; margin-bottom: 50px; font-size: 1rem; }
+
+  /* Team */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .team-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; }
+  .team-avatar { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; margin: 0 auto 12px; }
+  .team-card h4 { font-size: 0.9rem; margin-bottom: 4px; }
+  .team-card p { font-size: 0.75rem; color: #666; }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .price-card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 32px; position: relative; }
+  .price-card.featured { border-color: #6c5fff; background: linear-gradient(135deg, #1a0a3e, #111); }
+  .price-card .popular { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #6c5fff; color: #fff; padding: 4px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .price-card h3 { font-size: 1.3rem; margin-bottom: 8px; }
+  .price-card .price { font-size: 2.5rem; font-weight: 800; color: #a78bfa; margin: 16px 0 4px; }
+  .price-card .price span { font-size: 1rem; color: #666; font-weight: 400; }
+  .price-card .desc { color: #666; font-size: 0.9rem; margin-bottom: 24px; }
+  .price-card ul { list-style: none; }
+  .price-card ul li { padding: 8px 0; border-bottom: 1px solid #1a1a1a; font-size: 0.9rem; color: #ccc; }
+  .price-card ul li::before { content: '✓ '; color: #a78bfa; font-weight: 700; }
+  .price-card .get-btn { display: block; text-align: center; margin-top: 24px; background: #6c5fff; color: #fff; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; transition: background 0.2s; }
+  .price-card .get-btn:hover { background: #a855f7; }
+
+  /* DM Template */
+  .dm-box { background: #111; border: 1px solid #333; border-radius: 16px; padding: 32px; max-width: 700px; margin: 0 auto; }
+  .dm-box h3 { margin-bottom: 16px; color: #a78bfa; }
+  .dm-text { background: #0a0a0f; border: 1px solid #222; border-radius: 8px; padding: 20px; font-size: 0.95rem; line-height: 1.8; color: #ccc; white-space: pre-wrap; }
+  .copy-btn { margin-top: 16px; background: #222; border: 1px solid #333; color: #fff; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; }
+  .copy-btn:hover { background: #6c5fff; }
+
+  /* Contact */
+  .contact-section { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #1a0a3e22, #0a0a0f); }
+  .contact-section h2 { font-size: 2rem; margin-bottom: 16px; }
+  .contact-section p { color: #666; margin-bottom: 32px; }
+  .contact-section a { color: #a78bfa; text-decoration: none; font-weight: 700; font-size: 1.1rem; }
+
+  @media (max-width: 600px) {
+    .stats { gap: 24px; }
+    .hero h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">🎵 Nashville's First AI Music Team</div>
+  <h1>Your Music Career,<br>Powered by <span>9 AI Specialists</span></h1>
+  <p>From streaming optimization to content strategy — Neocomus gives independent artists a full professional team working 24/7, at a fraction of the cost.</p>
+  <a href="mailto:info@neocomusmusic.com" class="cta-btn">Get Started Today</a>
+
+  <div class="stats">
+    <div class="stat"><div class="num">9</div><div class="label">AI Specialists</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="label">Always Working</div></div>
+    <div class="stat"><div class="num">8</div><div class="label">Languages</div></div>
+    <div class="stat"><div class="num">$0</div><div class="label">Setup Fee</div></div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section>
+  <div class="section-title">Meet Your AI Team</div>
+  <div class="section-sub">9 specialists, each an expert in their field — available instantly.</div>
+  <div class="team-grid">
+    <div class="team-card"><div class="team-avatar" style="background:#6c5fff22;color:#a78bfa">BC</div><h4>Bob Captain</h4><p>Strategic Direction</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#a855f722;color:#d946ef">OOK</div><h4>Olivia Oya Kaptan</h4><p>Creative Vision</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#06b6d422;color:#22d3ee">SW</div><h4>Selene Ward</h4><p>Music Trends & Charts</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#10b98122;color:#34d399">AR</div><h4>Atlas Reed</h4><p>Streaming Revenue</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#f59e0b22;color:#fbbf24">VH</div><h4>Vera Hollow</h4><p>Brand & Content</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#ef444422;color:#f87171">NV</div><h4>Nox Vale</h4><p>Music Rights</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#8b5cf622;color:#c4b5fd">PA</div><h4>Pery Ashcroft</h4><p>Audience Psychology</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#14b8a622;color:#2dd4bf">MS</div><h4>Maya Serrin</h4><p>Artist Relations</p></div>
+    <div class="team-card"><div class="team-avatar" style="background:#f97316;color:#fff">OL</div><h4>ObscuronLabs</h4><p>Creative Direction</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section>
+  <div class="section-title">Simple, Transparent Pricing</div>
+  <div class="section-sub">No contracts. Cancel anytime. Start getting results in 24 hours.</div>
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <h3>Starter</h3>
+      <div class="price">$99 <span>/month</span></div>
+      <div class="desc">Perfect for emerging artists just getting started.</div>
+      <ul>
+        <li>3 AI specialists</li>
+        <li>Streaming strategy</li>
+        <li>Weekly trend reports</li>
+        <li>Content ideas (4/month)</li>
+        <li>Email support</li>
+      </ul>
+      <a href="mailto:info@neocomusmusic.com?subject=Starter Plan" class="get-btn">Get Starter</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="popular">⭐ Most Popular</div>
+      <h3>Professional</h3>
+      <div class="price">$249 <span>/month</span></div>
+      <div class="desc">Full team access for serious independent artists.</div>
+      <ul>
+        <li>All 9 AI specialists</li>
+        <li>Real-time internet research</li>
+        <li>Streaming + revenue optimization</li>
+        <li>Content strategy (unlimited)</li>
+        <li>Copyright & licensing guidance</li>
+        <li>Audience psychology insights</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="mailto:info@neocomusmusic.com?subject=Professional Plan" class="get-btn">Get Professional</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Label / Agency</h3>
+      <div class="price">$499 <span>/month</span></div>
+      <div class="desc">For labels and agencies managing multiple artists.</div>
+      <ul>
+        <li>Everything in Professional</li>
+        <li>Up to 10 artist profiles</li>
+        <li>Custom AI personas</li>
+        <li>White-label option</li>
+        <li>Monthly strategy call</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="mailto:info@neocomusmusic.com?subject=Label Plan" class="get-btn">Get Label Plan</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- DM TEMPLATES -->
+<section>
+  <div class="section-title">Ready-to-Send Outreach</div>
+  <div class="section-sub">Copy and send to Nashville artists on Instagram or email.</div>
+
+  <div class="dm-box">
+    <h3>📱 Instagram DM — Indie Artist</h3>
+    <div class="dm-text" id="dm1">Hey [Name]! 👋
+
+Love your sound — been following your releases on Spotify.
+
+I'm part of the Neocomus Music team in Nashville. We've built an AI-powered music team (9 specialists) that helps independent artists like you with streaming growth, content strategy, and music rights — all in one place.
+
+Most of our artists see a noticeable difference in their first 30 days.
+
+Would you be open to a quick demo? First month is on us.
+
+— Olivia @ Neocomus Music
+neocomusmusic.com</div>
+    <button class="copy-btn" onclick="copyDM('dm1')">Copy Message</button>
+  </div>
+
+  <br><br>
+
+  <div class="dm-box">
+    <h3>📧 Email — Music Producer / Studio</h3>
+    <div class="dm-text" id="dm2">Subject: AI Music Team for Your Artists — Nashville-Based
+
+Hi [Name],
+
+I'm Olivia Kaptan, founder of Neocomus Music. We're a Nashville-based AI music platform giving independent artists access to a 9-specialist AI team — streaming optimization, trend research, content strategy, and copyright guidance — all powered by real-time data.
+
+Think of it as giving every artist on your roster a full management team at $249/month.
+
+I'd love to show you a 10-minute demo. Are you available this week?
+
+Best,
+Olivia Oya Kaptan
+Founder, Neocomus Music
+neocomusmusic.com</div>
+    <button class="copy-btn" onclick="copyDM('dm2')">Copy Message</button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section">
+  <h2>Ready to grow your music career?</h2>
+  <p>Join Nashville artists already using Neocomus AI.</p>
+  <a href="mailto:info@neocomusmusic.com">info@neocomusmusic.com</a>
+</div>
+
+<script>
+function copyDM(id) {
+  var text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    event.target.textContent = 'Copied! ✓';
+    setTimeout(function() { event.target.textContent = 'Copy Message'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
