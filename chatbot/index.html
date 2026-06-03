@@ -167,10 +167,6 @@ footer a{color:#666}
         <textarea id="biz-info" placeholder="e.g. We are open Mon-Fri 9am-6pm. We offer free consultations. Our packages start at $500..."></textarea>
       </div>
       <div class="form-row">
-        <label>OpenRouter API Key <span style="color:#555;font-size:0.8rem;">(free at openrouter.ai — needed for live demo)</span></label>
-        <input id="api-key" type="password" placeholder="sk-or-v1-...">
-      </div>
-      <div class="form-row">
         <label>Brand Color</label>
         <div class="color-row">
           <div class="color-swatch active" style="background:#6c5fff" onclick="setColor('#6c5fff',this)"></div>
@@ -312,14 +308,12 @@ function generateWidget() {
   var info = document.getElementById('biz-info').value.trim();
   if (!name || !type) { alert('Please fill in your business name and type.'); return; }
 
-  var apiKey = document.getElementById('api-key').value.trim();
   var config = btoa(JSON.stringify({
     n: name,
     t: type,
     i: info,
     c: selectedColor,
-    g: 'Hi! Welcome to ' + name + '. How can I help you today?',
-    k: apiKey
+    g: 'Hi! Welcome to ' + name + '. How can I help you today?'
   }));
 
   var code = '<script src="https://aichat.obscuronlabs.com/widget.js" data-config="' + config + '"><\/script>';

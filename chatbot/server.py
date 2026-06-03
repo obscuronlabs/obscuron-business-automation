@@ -44,7 +44,8 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    widget_id: str
+    config: Optional[str] = None   # base64 encoded config from widget
+    widget_id: Optional[str] = None
     messages: List[ChatMessage]
     visitor_id: Optional[str] = None
 
@@ -87,18 +88,38 @@ async def register_client(req: RegisterRequest):
 
 @app.post("/api/chat")
 async def chat(req: ChatRequest):
-    client = CLIENTS.get(req.widget_id)
-    if not client:
-        raise HTTPException(status_code=404, detail="Widget not found.")
-
     if not OPENROUTER_API_KEY:
         raise HTTPException(status_code=503, detail="API not configured.")
 
-    messages = [{"role": m.role, "content": m.content} for m in req.messages]
+    # Support config-based (new widget) or widget_id-based (legacy)
+    import base64, json as _json
+    client = None
+    if req.config:
+        try:
+            cfg = _json.loads(base64.b64decode(req.config).decode())
+            name = cfg.get("n", "this business")
+            biz_type = cfg.get("t", "business")
+            info = cfg.get("i", "")
+            from datetime import datetime
+            today = datetime.utcnow().strftime("%B %d, %Y")
+            system = (
+                f"Today is {today}. You are a helpful AI assistant for {name}, a {biz_type}. "
+                + (f"{info} " if info else "")
+                + "Answer questions professionally, keep responses concise and friendly. "
+                "If unsure about specific details, politely suggest contacting the business directly. "
+                "Respond in the same language the user writes in."
+            )
+        except Exception:
+            raise HTTPException(status_code=400, detail="Invalid config.")
+    else:
+        client = CLIENTS.get(req.widget_id)
+        if not client:
+            raise HTTPException(status_code=404, detail="Widget not found.")
+        from datetime import datetime
+        today = datetime.utcnow().strftime("%B %d, %Y")
+        system = f"Today is {today}.\n\n{client['system_prompt']}"
 
-    from datetime import datetime
-    today = datetime.utcnow().strftime("%B %d, %Y")
-    system = f"Today is {today}.\n\n{client['system_prompt']}"
+    messages = [{"role": m.role, "content": m.content} for m in req.messages]
 
     headers = {
         "Content-Type": "application/json",
