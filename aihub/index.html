@@ -390,17 +390,14 @@ async function generateImage() {
   dl.style.display = 'none';
 
   try {
-    var resp = await fetch('https://openrouter.ai/api/v1/images/generations', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer ' + getKey('openrouter')},
-      body: JSON.stringify({model:'openai/dall-e-3', prompt:prompt, n:1, size:'1024x1024', response_format:'b64_json'})
-    });
-    var data = await resp.json();
-    if (!resp.ok) throw new Error((data.error && data.error.message) || 'Error');
-    img.src = 'data:image/png;base64,' + data.data[0].b64_json;
-    img.style.display = 'block';
-    dl.href = img.src;
-    dl.style.display = 'inline-block';
+    var encodedPrompt = encodeURIComponent(prompt);
+    var w = document.getElementById('img-w').value;
+    var h = document.getElementById('img-h').value;
+    var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=' + w + '&height=' + h + '&nologo=true&seed=' + Math.floor(Math.random()*99999);
+    img.src = imageUrl;
+    img.onload = function() { img.style.display = 'block'; dl.href = imageUrl; dl.style.display = 'inline-block'; spin.classList.remove('show'); btn.disabled = false; };
+    img.onerror = function() { alert('Image generation failed'); spin.classList.remove('show'); btn.disabled = false; };
+    return;
   } catch(e) {
     alert('Image error: ' + e.message);
   } finally {
