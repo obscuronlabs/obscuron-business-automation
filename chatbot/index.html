@@ -163,8 +163,9 @@ footer a{color:#666}
         <input id="biz-type" type="text" placeholder="e.g. restaurant, law firm, real estate agent">
       </div>
       <div class="form-row">
-        <label>What should the AI know? (hours, services, prices, FAQ…)</label>
+        <label>What should the AI know? (hours, services, prices, FAQ…) <a href="/example_visual" target="_blank" style="color:#6c5fff;font-size:0.78rem;margin-left:6px;">See example →</a></label>
         <textarea id="biz-info" placeholder="e.g. We are open Mon-Fri 9am-6pm. We offer free consultations. Our packages start at $500..."></textarea>
+        <button type="button" onclick="fillExample()" style="margin-top:6px;background:transparent;border:1px dashed #333;color:#555;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:0.78rem;">Try with example data</button>
       </div>
       <div class="form-row">
         <label>Brand Color</label>
@@ -294,6 +295,13 @@ footer a{color:#666}
 <script>
 var selectedColor = '#6c5fff';
 var selectedPlan = '';
+
+function fillExample() {
+  document.getElementById('biz-name').value = 'Sunrise Yoga Studio';
+  document.getElementById('biz-type').value = 'yoga & wellness studio';
+  document.getElementById('biz-info').value = 'We are open Mon-Fri 7am-9pm, Sat-Sun 8am-6pm.\nClasses: Hatha, Vinyasa, Yin, Meditation.\nDrop-in $20, Monthly membership $120.\nLocation: 45 Oak Street, 2nd floor.\nFirst class is FREE for new members.\nBooking available online or by phone.';
+  setColor('#6c5fff', document.querySelector('.color-swatch'));
+}
 
 function setColor(c, el) {
   selectedColor = c;
