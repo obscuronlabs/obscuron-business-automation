@@ -33,7 +33,7 @@
     var config = params.get('config');
     if (config) {
       try {
-        var data = JSON.parse(atob(config));
+        var data = JSON.parse(decodeURIComponent(escape(atob(config))));
         if (data.n) document.getElementById('biz-title').textContent = data.n;
       } catch(e) {}
       window._ob_config = config;

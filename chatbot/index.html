@@ -307,7 +307,11 @@ function generateWidget() {
   var info = document.getElementById('biz-info').value.trim();
   if (!name || !type) { alert('Please fill in your business name and type.'); return; }
 
-  var config = btoa(JSON.stringify({
+  function safebtoa(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  var config = safebtoa(JSON.stringify({
     n: name,
     t: type,
     i: info,
