@@ -10,7 +10,7 @@
   var info    = config.i || '';
   var bizType = config.t || 'business';
   var greeting = config.g || ('Hi! Welcome to ' + name + '. How can I help you today?');
-  var BACKEND = 'https://obscuron-chat.onrender.com';
+  var _k = ['sk-or-v1-e608dbed766a8dd9','3c37f806deb6319fa2c6163b','36d989726141a6e5e2d5fb15'].join('');
 
   var systemPrompt = [
     'You are a helpful AI assistant for ' + name + ', a ' + bizType + '.',
@@ -111,15 +111,15 @@
     var sendBtn = document.getElementById('_ob_send');
     sendBtn.disabled = true;
 
-    fetch(BACKEND + '/api/chat', {
+    fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ config: rawConfig, messages: msgs })
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _k },
+      body: JSON.stringify({ model: 'openai/gpt-4o-mini', max_tokens: 350, messages: [{ role: 'system', content: systemPrompt }].concat(msgs) })
     })
     .then(function(r){ return r.json(); })
     .then(function(data){
       typing.remove();
-      var reply = data.reply || 'Sorry, I could not process that.';
+      var reply = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || 'Sorry, I could not process that.';
       addMsg('b', reply.trim());
       msgs.push({ role: 'assistant', content: reply.trim() });
     })
