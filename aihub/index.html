@@ -95,7 +95,7 @@ audio{width:100%;margin-top:8px;display:none}
       <div class="msg system">Start a conversation below</div>
     </div>
     <div class="chat-input">
-      <input id="chat-inp" type="text" placeholder="Type your message..." onkeydown="if(e.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
+      <input id="chat-inp" type="text" placeholder="Type your message..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
       <button onclick="sendChat()" id="chat-btn">Send</button>
       <button class="sec" onclick="clearChat()">Clear</button>
     </div>
