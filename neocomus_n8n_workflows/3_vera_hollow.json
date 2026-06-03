@@ -4,13 +4,21 @@
     {
       "parameters": {
         "rule": {
-          "interval": [{"field": "cronExpression", "expression": "0 11 * * */3"}]
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 11 * * 1"
+            }
+          ]
         }
       },
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [250, 300],
+      "position": [
+        250,
+        300
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000001"
     },
     {
@@ -24,7 +32,10 @@
       "name": "AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
-      "position": [500, 300],
+      "position": [
+        500,
+        300
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000002"
     },
     {
@@ -35,7 +46,10 @@
       "name": "OpenRouter Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
-      "position": [400, 500],
+      "position": [
+        400,
+        500
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000003"
     },
     {
@@ -43,7 +57,10 @@
       "name": "SerpAPI",
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "typeVersion": 1,
-      "position": [600, 500],
+      "position": [
+        600,
+        500
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000004"
     },
     {
@@ -58,15 +75,60 @@
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [750, 300],
+      "position": [
+        750,
+        300
+      ],
       "id": "a1b2c3d4-0003-0003-0003-000000000005"
     }
   ],
   "connections": {
-    "Schedule Trigger": {"main": [[{"node": "AI Agent", "type": "main", "index": 0}]]},
-    "AI Agent": {"main": [[{"node": "Send Email", "type": "main", "index": 0}]]},
-    "OpenRouter Chat Model": {"ai_languageModel": [[{"node": "AI Agent", "type": "ai_languageModel", "index": 0}]]},
-    "SerpAPI": {"ai_tool": [[{"node": "AI Agent", "type": "ai_tool", "index": 0}]]}
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
-  "settings": {"executionOrder": "v1"}
+  "settings": {
+    "executionOrder": "v1"
+  }
 }
