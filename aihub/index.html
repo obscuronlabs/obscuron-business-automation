@@ -390,17 +390,14 @@ async function generateImage() {
   dl.style.display = 'none';
 
   try {
-    var formData = new FormData();
-    formData.append('prompt', prompt);
-    formData.append('output_format', 'jpeg');
-    var resp = await fetch('https://api.stability.ai/v2beta/stable-image/generate/core', {
+    var resp = await fetch('https://openrouter.ai/api/v1/images/generations', {
       method:'POST',
-      headers:{'Authorization':'Bearer ' + getKey('stability'), 'Accept':'application/json'},
-      body: formData
+      headers:{'Content-Type':'application/json','Authorization':'Bearer ' + getKey('openrouter')},
+      body: JSON.stringify({model:'openai/dall-e-3', prompt:prompt, n:1, size:'1024x1024', response_format:'b64_json'})
     });
     var data = await resp.json();
-    if (!resp.ok) throw new Error((data.errors && data.errors[0]) || 'Error');
-    img.src = 'data:image/jpeg;base64,' + data.image;
+    if (!resp.ok) throw new Error((data.error && data.error.message) || 'Error');
+    img.src = 'data:image/png;base64,' + data.data[0].b64_json;
     img.style.display = 'block';
     dl.href = img.src;
     dl.style.display = 'inline-block';
