@@ -31,9 +31,9 @@
         var data = JSON.parse(atob(config));
         if (data.n) document.getElementById('biz-title').textContent = data.n;
       } catch(e) {}
+      window._ob_config = config;
       var s = document.createElement('script');
       s.src = 'https://aichat.obscuronlabs.com/widget.js';
-      s.setAttribute('data-config', config);
       document.body.appendChild(s);
     }
   </script>

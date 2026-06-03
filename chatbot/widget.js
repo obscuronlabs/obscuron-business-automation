@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   var s = document.currentScript;
-  var rawConfig = s && s.getAttribute('data-config');
+  var rawConfig = (s && s.getAttribute('data-config')) || window._ob_config || '';
   var config = {};
-  try { config = JSON.parse(atob(rawConfig || '')); } catch(e) {}
+  try { config = JSON.parse(atob(rawConfig)); } catch(e) {}
 
   var color   = config.c || '#6c5fff';
   var name    = config.n || 'AI Assistant';
