@@ -1,0 +1,77 @@
+{
+  "name": "6. Dex Vance — Sales Intelligence",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * 1"
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300],
+      "id": "ob006-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Generate a weekly sales strategy and conversion tips report for Obscuron Labs.",
+        "options": {
+          "systemMessage": "You are Dex Vance, Sales Intelligence at Obscuron Labs. We sell AI chatbot widgets ($45-$195/mo) and n8n automation ($49-$199) to small businesses. Every Monday you provide: 1) Top 3 industries to target this week based on market signals (e.g. real estate agents, restaurants, clinics) and WHY 2) Best outreach approach for each industry — what pain point to lead with 3) Objection handling scripts for the most common objections ('I don't need a chatbot', 'too expensive', 'my website is simple') 4) One case study angle — how to frame our chatbot as ROI (e.g. 'saves 2 hours/day answering the same questions') 5) Suggested follow-up sequence for cold leads (day 1, day 3, day 7 messages) 6) This week's sales goal recommendation based on market conditions. Be specific and actionable. Sign as 'Dex Vance — Sales Intelligence, Obscuron Labs'"
+        }
+      },
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300],
+      "id": "ob006-0001-0001-0001-000000000002"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [400, 500],
+      "id": "ob006-0001-0001-0001-000000000003"
+    },
+    {
+      "parameters": {},
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500],
+      "id": "ob006-0001-0001-0001-000000000004"
+    },
+    {
+      "parameters": {
+        "fromEmail": "barbaroscaptain70@gmail.com",
+        "toEmail": "barbaroscaptain70@gmail.com",
+        "subject": "💰 Dex Vance — Weekly Sales Intelligence",
+        "emailFormat": "text",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300],
+      "id": "ob006-0001-0001-0001-000000000005"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]] },
+    "AI Agent": { "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "SerpAPI": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

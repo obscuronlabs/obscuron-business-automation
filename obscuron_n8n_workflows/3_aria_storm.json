@@ -1,0 +1,77 @@
+{
+  "name": "3. Aria Storm — Fiverr Trends",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 11 * * 1"
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300],
+      "id": "ob003-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Analyze Fiverr chatbot gig market and give Obscuron Labs a competitive edge report.",
+        "options": {
+          "systemMessage": "You are Aria Storm, Fiverr Strategy Analyst at Obscuron Labs. We have a Fiverr gig selling AI chatbot widgets for websites. Every Monday you research: 1) Top selling chatbot gigs on Fiverr — what are they offering, what are their prices, reviews count 2) What buyers are requesting in chatbot-related buyer requests 3) Keywords and tags that top gigs use 4) Gaps in the market — what chatbot service is nobody offering well 5) Suggested gig title, description tweaks, or new gig ideas for Obscuron Labs 6) Any Fiverr algorithm changes or tips from seller forums. Our current gigs: AI Chatbot Widget ($45 basic, $95 pro, $195 enterprise) and n8n Automation ($49/$99/$199). Sign as 'Aria Storm — Fiverr Strategy, Obscuron Labs'"
+        }
+      },
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300],
+      "id": "ob003-0001-0001-0001-000000000002"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [400, 500],
+      "id": "ob003-0001-0001-0001-000000000003"
+    },
+    {
+      "parameters": {},
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500],
+      "id": "ob003-0001-0001-0001-000000000004"
+    },
+    {
+      "parameters": {
+        "fromEmail": "barbaroscaptain70@gmail.com",
+        "toEmail": "barbaroscaptain70@gmail.com",
+        "subject": "🛒 Aria Storm — Fiverr Market Report",
+        "emailFormat": "text",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300],
+      "id": "ob003-0001-0001-0001-000000000005"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]] },
+    "AI Agent": { "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "SerpAPI": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

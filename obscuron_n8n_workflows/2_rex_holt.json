@@ -1,0 +1,77 @@
+{
+  "name": "2. Rex Holt — Market Intelligence",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * 1"
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300],
+      "id": "ob002-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Research the AI chatbot market and report trends relevant to Obscuron Labs this week.",
+        "options": {
+          "systemMessage": "You are Rex Holt, Market Intelligence Analyst at Obscuron Labs. We sell AI chatbot widgets that businesses embed on their websites. Every Monday you research: 1) Latest AI chatbot market news and growth statistics 2) New AI chatbot tools or competitors launched recently 3) What industries are adopting chatbots fastest right now 4) Pricing trends — what are businesses paying for chatbot services 5) Key pain points businesses mention about chatbots 6) Opportunities Obscuron Labs can capitalize on this week. Provide actionable insights we can use to position our $45-$195/mo chatbot service. Sign as 'Rex Holt — Market Intelligence, Obscuron Labs'"
+        }
+      },
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300],
+      "id": "ob002-0001-0001-0001-000000000002"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [400, 500],
+      "id": "ob002-0001-0001-0001-000000000003"
+    },
+    {
+      "parameters": {},
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500],
+      "id": "ob002-0001-0001-0001-000000000004"
+    },
+    {
+      "parameters": {
+        "fromEmail": "barbaroscaptain70@gmail.com",
+        "toEmail": "barbaroscaptain70@gmail.com",
+        "subject": "📊 Rex Holt — Weekly Market Intelligence",
+        "emailFormat": "text",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300],
+      "id": "ob002-0001-0001-0001-000000000005"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]] },
+    "AI Agent": { "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "SerpAPI": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

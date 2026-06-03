@@ -1,0 +1,77 @@
+{
+  "name": "4. Zane Mercer — Competitor Watch",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 12 * * 1"
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300],
+      "id": "ob004-0001-0001-0001-000000000001"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Track competitors of Obscuron Labs AI chatbot service and report findings.",
+        "options": {
+          "systemMessage": "You are Zane Mercer, Competitive Intelligence at Obscuron Labs. We offer embeddable AI chatbot widgets for small business websites. Every Monday you monitor our competitors: Tidio, Crisp, Intercom, Drift, LiveChat, Freshchat, and any new players. Research: 1) Any new features or pricing changes by competitors this week 2) Negative reviews or complaints about competitors (opportunities for us) 3) What competitors are NOT offering that we could offer 4) How our $45/mo starting price compares to market 5) Weaknesses in competitor products mentioned by users on Reddit/G2/Capterra 6) One clear competitive advantage Obscuron Labs should highlight this week. Be specific with sources. Sign as 'Zane Mercer — Competitor Intelligence, Obscuron Labs'"
+        }
+      },
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300],
+      "id": "ob004-0001-0001-0001-000000000002"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {}
+      },
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [400, 500],
+      "id": "ob004-0001-0001-0001-000000000003"
+    },
+    {
+      "parameters": {},
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500],
+      "id": "ob004-0001-0001-0001-000000000004"
+    },
+    {
+      "parameters": {
+        "fromEmail": "barbaroscaptain70@gmail.com",
+        "toEmail": "barbaroscaptain70@gmail.com",
+        "subject": "🔍 Zane Mercer — Competitor Watch Report",
+        "emailFormat": "text",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300],
+      "id": "ob004-0001-0001-0001-000000000005"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "AI Agent", "type": "main", "index": 0 }]] },
+    "AI Agent": { "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]] },
+    "OpenRouter Chat Model": { "ai_languageModel": [[{ "node": "AI Agent", "type": "ai_languageModel", "index": 0 }]] },
+    "SerpAPI": { "ai_tool": [[{ "node": "AI Agent", "type": "ai_tool", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}
