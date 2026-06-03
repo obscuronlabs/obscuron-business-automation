@@ -181,10 +181,15 @@ footer a{color:#666}
       </div>
       <button class="generate-btn" onclick="generateWidget()">✨ Generate My Widget</button>
       <div class="result-box" id="result-box">
-        <h4>✅ Your embed code is ready:</h4>
-        <div class="code-display" id="embed-code-display"></div>
-        <button class="copy-code-btn" onclick="copyEmbedCode()">Copy Code</button>
-        <div class="result-note">Paste this single line anywhere inside your website's &lt;body&gt; tag. Works on Shopify, WordPress, Wix, Webflow, Squarespace, and any custom site.</div>
+        <h4>✅ Your chatbot is ready!</h4>
+        <a id="demo-link-btn" href="#" target="_blank" style="display:block;text-align:center;background:linear-gradient(135deg,#6c5fff,#ff6b9d);color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;margin-bottom:14px;">👁 Preview Your Chatbot Live →</a>
+        <button class="copy-code-btn" id="copy-link-btn" onclick="copyDemoLink()" style="width:100%;margin-bottom:10px;padding:10px;">Copy Demo Link</button>
+        <details style="margin-top:10px;">
+          <summary style="color:#555;font-size:0.82rem;cursor:pointer;">Need the embed code for your website?</summary>
+          <div class="code-display" id="embed-code-display" style="margin-top:10px;"></div>
+          <button class="copy-code-btn" onclick="copyEmbedCode()">Copy Code</button>
+          <div class="result-note">Paste this single line anywhere inside your website's &lt;body&gt; tag. Works on Shopify, WordPress, Wix, Webflow, Squarespace, and any custom site.</div>
+        </details>
       </div>
     </div>
   </div>
@@ -300,9 +305,20 @@ function generateWidget() {
   }));
 
   var code = '<script src="https://aichat.obscuronlabs.com/widget.js" data-config="' + config + '"><\/script>';
+  var demoUrl = 'https://aichat.obscuronlabs.com/demo?config=' + config;
   document.getElementById('embed-code-display').textContent = code;
+  document.getElementById('demo-link-btn').href = demoUrl;
+  document.getElementById('demo-link-btn').dataset.url = demoUrl;
   document.getElementById('result-box').style.display = 'block';
   document.getElementById('result-box').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function copyDemoLink() {
+  var url = document.getElementById('demo-link-btn').dataset.url;
+  navigator.clipboard.writeText(url);
+  var btn = document.getElementById('copy-link-btn');
+  btn.textContent = 'Copied! ✓';
+  setTimeout(function(){btn.textContent='Copy Demo Link'},2000);
 }
 
 function copyEmbedCode() {

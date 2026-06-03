@@ -139,10 +139,29 @@ async def serve_widget():
 
 
 @app.get("/demo")
-async def demo_page():
-    html_path = os.path.join(os.path.dirname(__file__), "demo.html")
-    with open(html_path, "r", encoding="utf-8") as f:
-        return HTMLResponse(content=f.read())
+async def demo_page(config: str = ""):
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chatbot Demo — Obscuron AI Chat</title>
+<style>
+  * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+  body {{ background: #0a0a0f; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; gap: 20px; }}
+  .logo {{ font-size: 1.4rem; font-weight: 700; color: #6c5fff; letter-spacing: 0.05em; }}
+  .msg {{ color: #888; font-size: 0.95rem; text-align: center; max-width: 400px; line-height: 1.6; }}
+  .cta {{ background: linear-gradient(135deg, #6c5fff, #ff6b9d); color: #fff; padding: 12px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; margin-top: 10px; }}
+</style>
+</head>
+<body>
+  <div class="logo">Obscuron AI Chat</div>
+  <p class="msg">Your AI chatbot is running in the bottom right corner. Click the chat icon to try it out.</p>
+  <a href="https://aichat.obscuronlabs.com" class="cta">Get This For Your Website →</a>
+  <script src="https://aichat.obscuronlabs.com/widget.js" data-config="{config}"></script>
+</body>
+</html>"""
+    return HTMLResponse(content=html)
 
 
 if __name__ == "__main__":

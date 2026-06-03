@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gig Thumbnail – AI Chatbot</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 1280px;
+      height: 769px;
+      overflow: hidden;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #ffffff;
+    }
+
+    /* ── canvas ── */
+    .canvas {
+      position: relative;
+      width: 1280px;
+      height: 769px;
+      background: #0a0a0f;
+      overflow: hidden;
+    }
+
+    /* ── background decorations ── */
+    .bg-glow-left {
+      position: absolute;
+      top: -120px;
+      left: -160px;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,95,255,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .bg-glow-right {
+      position: absolute;
+      bottom: -140px;
+      right: 60px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,95,255,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(108,95,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,95,255,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    /* subtle diagonal line accent */
+    .bg-line {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg,
+        transparent 42%,
+        rgba(108,95,255,0.04) 42%,
+        rgba(108,95,255,0.04) 43%,
+        transparent 43%
+      );
+      pointer-events: none;
+    }
+
+    /* ── left content ── */
+    .left {
+      position: absolute;
+      top: 0; left: 0;
+      width: 660px;
+      height: 769px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 72px;
+    }
+
+    /* badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(108,95,255,0.15);
+      border: 1px solid rgba(108,95,255,0.45);
+      border-radius: 100px;
+      padding: 7px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #a99eff;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      width: fit-content;
+    }
+    .badge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #6c5fff;
+      box-shadow: 0 0 6px #6c5fff;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+    }
+
+    /* headline */
+    .headline {
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .headline-accent {
+      background: linear-gradient(135deg, #6c5fff 0%, #a99eff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 42px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -1px;
+      margin-bottom: 36px;
+    }
+
+    /* features */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.80);
+    }
+    .feature-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(108,95,255,0.20);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* pills row */
+    .pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.02em;
+    }
+
+    /* price */
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .price-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.40);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .price-value {
+      font-size: 52px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .price-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #6c5fff;
+      border-radius: 14px;
+      padding: 13px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      margin-left: 18px;
+      box-shadow: 0 4px 24px rgba(108,95,255,0.45);
+    }
+    .arrow {
+      font-size: 18px;
+    }
+
+    /* ── right – chat widget ── */
+    .right {
+      position: absolute;
+      top: 0; right: 0;
+      width: 560px;
+      height: 769px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .widget-wrapper {
+      position: relative;
+    }
+
+    /* subtle glow behind widget */
+    .widget-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 380px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(108,95,255,0.30) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .chat-widget {
+      position: relative;
+      z-index: 1;
+      width: 340px;
+      background: #13131e;
+      border-radius: 24px;
+      border: 1px solid rgba(108,95,255,0.30);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 32px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(108,95,255,0.12);
+      overflow: hidden;
+    }
+
+    /* widget header */
+    .widget-header {
+      background: linear-gradient(135deg, #6c5fff 0%, #5547e0 100%);
+      padding: 18px 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .widget-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.20);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .widget-header-info { flex: 1; }
+    .widget-name {
+      font-size: 14px; font-weight: 700; color: #fff;
+      line-height: 1.2;
+    }
+    .widget-status {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500;
+    }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 5px #4ade80;
+    }
+    .widget-menu { font-size: 18px; color: rgba(255,255,255,0.6); }
+
+    /* chat body */
+    .widget-body {
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #0f0f1a;
+    }
+
+    /* bubbles */
+    .bubble-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .bubble-row.bot { justify-content: flex-start; }
+    .bubble-row.user { justify-content: flex-end; }
+
+    .bubble-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #6c5fff, #5547e0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; flex-shrink: 0;
+    }
+
+    .bubble {
+      max-width: 220px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .bubble.bot {
+      background: #1e1e2e;
+      border: 1px solid rgba(108,95,255,0.20);
+      color: rgba(255,255,255,0.85);
+      border-bottom-left-radius: 6px;
+    }
+    .bubble.user {
+      background: linear-gradient(135deg, #6c5fff, #5547e0);
+      color: #fff;
+      border-bottom-right-radius: 6px;
+    }
+
+    /* typing indicator */
+    .typing {
+      display: flex; gap: 4px; align-items: center;
+      padding: 10px 14px;
+    }
+    .typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(108,95,255,0.7);
+      display: inline-block;
+      animation: bounce 1.2s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.15s; }
+    .typing span:nth-child(3) { animation-delay: 0.30s; }
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+
+    /* quick replies */
+    .quick-replies {
+      display: flex; gap: 6px; flex-wrap: wrap; padding: 0 16px 4px;
+    }
+    .qr {
+      background: rgba(108,95,255,0.12);
+      border: 1px solid rgba(108,95,255,0.35);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 11px; font-weight: 600;
+      color: #a99eff;
+    }
+
+    /* widget input */
+    .widget-input {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px 16px;
+      background: #0f0f1a;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .input-field {
+      flex: 1;
+      background: #1a1a28;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 9px 16px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      font-family: inherit;
+    }
+    .send-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #6c5fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 2px 10px rgba(108,95,255,0.5);
+      flex-shrink: 0;
+    }
+
+    /* floating setup badge */
+    .setup-badge {
+      position: absolute;
+      top: -18px;
+      right: -24px;
+      background: linear-gradient(135deg, #6c5fff, #5547e0);
+      border-radius: 16px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(108,95,255,0.55);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .setup-badge-icon { font-size: 16px; }
+
+    /* floating powered tag */
+    .powered-tag {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: #13131e;
+      border: 1px solid rgba(108,95,255,0.35);
+      border-radius: 12px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.70);
+      z-index: 2;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .ai-chip {
+      background: linear-gradient(135deg, #6c5fff, #a99eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+    }
+
+    /* divider */
+    .divider {
+      position: absolute;
+      top: 80px; bottom: 80px;
+      left: 640px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(108,95,255,0.25) 30%, rgba(108,95,255,0.25) 70%, transparent);
+    }
+
+    /* bottom bar */
+    .bottom-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent 0%, #6c5fff 40%, #a99eff 60%, transparent 100%);
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+<div class="canvas">
+
+  <!-- backgrounds -->
+  <div class="bg-grid"></div>
+  <div class="bg-line"></div>
+  <div class="bg-glow-left"></div>
+  <div class="bg-glow-right"></div>
+
+  <!-- vertical divider -->
+  <div class="divider"></div>
+
+  <!-- ── LEFT ── -->
+  <div class="left">
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      AI-Powered Live Chat
+    </div>
+
+    <div class="headline">
+      <span>AI</span><br>
+      <span class="headline-accent">Chatbot</span>
+    </div>
+    <div class="subtitle">For Any Website</div>
+
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">🌐</div>
+        Supports Any Language, Any Region
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        Instant Answers, 24 / 7 Availability
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔧</div>
+        One Script Tag — No Coding Needed
+      </div>
+    </div>
+
+    <div class="pills">
+      <div class="pill">24 / 7</div>
+      <div class="pill">Any Language</div>
+      <div class="pill">Any Website</div>
+      <div class="pill">GPT-4 Powered</div>
+    </div>
+
+    <div class="price-row">
+      <span class="price-label">Starting at</span>
+      <span class="price-value">$45</span>
+      <div class="price-cta">
+        Order Now <span class="arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT ── -->
+  <div class="right">
+    <div class="widget-wrapper">
+
+      <!-- glow -->
+      <div class="widget-glow"></div>
+
+      <!-- floating setup badge -->
+      <div class="setup-badge">
+        <span class="setup-badge-icon">⚡</span>
+        60 Seconds Setup
+      </div>
+
+      <!-- chat widget card -->
+      <div class="chat-widget">
+
+        <div class="widget-header">
+          <div class="widget-avatar">🤖</div>
+          <div class="widget-header-info">
+            <div class="widget-name">AI Assistant</div>
+            <div class="widget-status">
+              <span class="status-dot"></span> Online now
+            </div>
+          </div>
+          <div class="widget-menu">⋯</div>
+        </div>
+
+        <div class="widget-body">
+
+          <div class="bubble-row bot">
+            <div class="bubble-avatar">🤖</div>
+            <div class="bubble bot">
+              👋 Hi! How can I help you today?
+            </div>
+          </div>
+
+          <div class="bubble-row user">
+            <div class="bubble user">
+              What are your business hours?
+            </div>
+          </div>
+
+          <div class="bubble-row bot">
+            <div class="bubble-avatar">🤖</div>
+            <div class="bubble bot">
+              We're available <strong style="color:#a99eff">24/7</strong>! Our team is always here to help you anytime. 🚀
+            </div>
+          </div>
+
+          <div class="bubble-row user">
+            <div class="bubble user">
+              Do you support multiple languages?
+            </div>
+          </div>
+
+          <div class="bubble-row bot">
+            <div class="bubble-avatar">🤖</div>
+            <div class="bubble bot" style="display:flex;gap:6px;align-items:center;">
+              <div class="typing">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="quick-replies">
+          <div class="qr">Pricing</div>
+          <div class="qr">Features</div>
+          <div class="qr">Get Started</div>
+        </div>
+
+        <div class="widget-input">
+          <div class="input-field">Type a message…</div>
+          <div class="send-btn">➤</div>
+        </div>
+
+      </div>
+
+      <!-- powered tag -->
+      <div class="powered-tag">
+        Powered by <span class="ai-chip">&nbsp;GPT-4</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- bottom accent bar -->
+  <div class="bottom-bar"></div>
+
+</div>
+</body>
+</html>
