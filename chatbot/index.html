@@ -179,7 +179,6 @@ footer a{color:#666}
           <div class="color-swatch" style="background:#111827;border:1px solid #444" onclick="setColor('#111827',this)"></div>
         </div>
       </div>
-      <button class="generate-btn" onclick="generateWidget()">✨ Generate My Widget</button>
       <div class="result-box" id="result-box">
         <h4>✅ Your chatbot is ready!</h4>
         <a id="demo-link-btn" href="#" target="_blank" style="display:block;text-align:center;background:linear-gradient(135deg,#6c5fff,#ff6b9d);color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;margin-bottom:14px;">👁 Preview Your Chatbot Live →</a>
@@ -202,6 +201,7 @@ footer a{color:#666}
           <button class="copy-code-btn" onclick="copyEmbedCode()">Copy Code</button>
         </details>
       </div>
+      <button class="generate-btn" id="gen-btn" onclick="generateWidget()">✨ Generate My Widget</button>
     </div>
   </div>
 </section>
@@ -314,8 +314,10 @@ function generateWidget() {
   document.getElementById('demo-link-btn').href = demoUrl;
   document.getElementById('demo-link-btn').setAttribute('data-url', demoUrl);
   document.getElementById('embed-code-display').textContent = 'https://aichat.obscuronlabs.com/widget.js  data-config="' + config + '"';
-  document.getElementById('result-box').style.display = 'block';
-  document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  var box = document.getElementById('result-box');
+  box.style.display = 'block';
+  document.getElementById('gen-btn').textContent = '✅ Widget Ready — See Below';
+  setTimeout(function(){ box.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
 }
 
 var installGuides = {
