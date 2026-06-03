@@ -6,3 +6,5 @@ outputs/
 .claude/worktrees/
 chatbot/
 chatbot_deploy.zip
+chatbot_BACKUP_*.zip
+chatbot_backup_*/
