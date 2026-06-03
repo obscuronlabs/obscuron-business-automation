@@ -184,11 +184,23 @@ footer a{color:#666}
         <h4>✅ Your chatbot is ready!</h4>
         <a id="demo-link-btn" href="#" target="_blank" style="display:block;text-align:center;background:linear-gradient(135deg,#6c5fff,#ff6b9d);color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;margin-bottom:14px;">👁 Preview Your Chatbot Live →</a>
         <button class="copy-code-btn" id="copy-link-btn" onclick="copyDemoLink()" style="width:100%;margin-bottom:10px;padding:10px;">Copy Demo Link</button>
+        <div style="margin-top:18px;">
+          <p style="color:#aaa;font-size:0.9rem;margin-bottom:12px;font-weight:600;">📦 How to add it to your website:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+            <button onclick="showInstall('wordpress')" style="background:#21759b;color:#fff;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">WordPress</button>
+            <button onclick="showInstall('shopify')" style="background:#96bf48;color:#fff;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Shopify</button>
+            <button onclick="showInstall('wix')" style="background:#faad08;color:#000;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Wix</button>
+            <button onclick="showInstall('webflow')" style="background:#4353ff;color:#fff;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Webflow</button>
+            <button onclick="showInstall('squarespace')" style="background:#222;color:#fff;border:1px solid #555;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Squarespace</button>
+          </div>
+          <div id="install-instructions" style="display:none;background:#0f0f1a;border:1px solid #2a2a3e;border-radius:8px;padding:16px;margin-bottom:14px;">
+            <div id="install-text"></div>
+          </div>
+        </div>
         <details style="margin-top:10px;">
-          <summary style="color:#555;font-size:0.82rem;cursor:pointer;">Need the embed code for your website?</summary>
+          <summary style="color:#555;font-size:0.82rem;cursor:pointer;">Show embed code</summary>
           <div class="code-display" id="embed-code-display" style="margin-top:10px;"></div>
           <button class="copy-code-btn" onclick="copyEmbedCode()">Copy Code</button>
-          <div class="result-note">Paste this single line anywhere inside your website's &lt;body&gt; tag. Works on Shopify, WordPress, Wix, Webflow, Squarespace, and any custom site.</div>
         </details>
       </div>
     </div>
@@ -311,6 +323,44 @@ function generateWidget() {
   document.getElementById('demo-link-btn').dataset.url = demoUrl;
   document.getElementById('result-box').style.display = 'block';
   document.getElementById('result-box').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+var installGuides = {
+  wordpress: {
+    steps: ['Go to your WordPress Dashboard', 'Click <b>Appearance → Theme Editor</b> (or use a plugin like "Insert Headers and Footers")', 'Find <b>footer.php</b> and paste the code just before <b>&lt;/body&gt;</b>', 'Click <b>Update File</b> — done!'],
+    video: 'https://www.youtube.com/results?search_query=how+to+add+custom+code+to+wordpress+footer',
+    color: '#21759b'
+  },
+  shopify: {
+    steps: ['Go to your Shopify Admin', 'Click <b>Online Store → Themes</b>', 'Click <b>Actions → Edit Code</b>', 'Open <b>theme.liquid</b> and paste the code just before <b>&lt;/body&gt;</b>', 'Click <b>Save</b> — done!'],
+    video: 'https://www.youtube.com/results?search_query=how+to+add+custom+code+to+shopify+theme',
+    color: '#96bf48'
+  },
+  wix: {
+    steps: ['Go to your Wix Editor', 'Click <b>Settings → Custom Code</b> (in the left menu)', 'Click <b>+ Add Custom Code</b>', 'Paste the code, choose <b>Body - end</b>', 'Click <b>Apply</b> — done!'],
+    video: 'https://www.youtube.com/results?search_query=how+to+add+custom+code+to+wix+website',
+    color: '#faad08'
+  },
+  webflow: {
+    steps: ['Go to your Webflow Designer', 'Click the <b>Pages</b> icon on the left', 'Click the <b>settings</b> gear on your page', 'Scroll to <b>Before &lt;/body&gt; tag</b> and paste the code', 'Publish your site — done!'],
+    video: 'https://www.youtube.com/results?search_query=how+to+add+custom+code+to+webflow',
+    color: '#4353ff'
+  },
+  squarespace: {
+    steps: ['Go to your Squarespace Dashboard', 'Click <b>Settings → Advanced → Code Injection</b>', 'Paste the code in the <b>Footer</b> box', 'Click <b>Save</b> — done!'],
+    video: 'https://www.youtube.com/results?search_query=how+to+add+custom+code+to+squarespace',
+    color: '#555'
+  }
+};
+
+function showInstall(platform) {
+  var guide = installGuides[platform];
+  var html = '<p style="color:#a78bfa;font-weight:700;margin-bottom:10px;">Installation steps:</p><ol style="color:#ccc;font-size:0.85rem;line-height:2;padding-left:18px;">';
+  guide.steps.forEach(function(s){ html += '<li>' + s + '</li>'; });
+  html += '</ol>';
+  html += '<a href="' + guide.video + '" target="_blank" style="display:inline-block;margin-top:12px;color:#6c5fff;font-size:0.82rem;">▶ Watch video tutorial →</a>';
+  document.getElementById('install-text').innerHTML = html;
+  document.getElementById('install-instructions').style.display = 'block';
 }
 
 function copyDemoLink() {
