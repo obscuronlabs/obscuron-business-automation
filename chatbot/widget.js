@@ -10,7 +10,7 @@
   var info    = config.i || '';
   var bizType = config.t || 'business';
   var greeting = config.g || ('Hi! Welcome to ' + name + '. How can I help you today?');
-  var API_KEY = s && (s.getAttribute('data-key') || '');
+  var API_KEY = (config.k) || (s && s.getAttribute('data-key')) || '';
 
   var systemPrompt = [
     'You are a helpful AI assistant for ' + name + ', a ' + bizType + '.',
