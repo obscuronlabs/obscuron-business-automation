@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Obscuron AI Chat</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0a0a0f;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.card {
+  background: #111;
+  border: 1px solid #1e1e2e;
+  border-radius: 24px;
+  padding: 48px;
+  max-width: 860px;
+  width: 100%;
+}
+
+.logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #6c5fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
+
+.headline {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.sub {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+@media(max-width: 640px) {
+  .flow { grid-template-columns: 1fr; }
+  .arrow { transform: rotate(90deg); }
+  .card { padding: 28px 20px; }
+  .headline { font-size: 1.3rem; }
+}
+
+.box {
+  background: #0d0d17;
+  border: 1px solid #2a2a3e;
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.box-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field-label {
+  font-size: 0.75rem;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.field-value {
+  background: #111;
+  border: 1px solid #2a2a3e;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #ccc;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.field-value.highlight {
+  border-color: #6c5fff55;
+  background: #0f0f1f;
+}
+
+.info-block {
+  background: #111;
+  border: 1px solid #2a2a3e;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #888;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+.info-block span {
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c5fff;
+  font-size: 1.4rem;
+}
+
+/* CHAT PREVIEW */
+.chat-preview {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.chat-header {
+  background: #6c5fff;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; }
+
+.chat-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f5f5f7;
+  min-height: 200px;
+}
+
+.msg { max-width: 85%; padding: 9px 13px; border-radius: 14px; font-size: 0.82rem; line-height: 1.5; }
+.msg.b { background: #fff; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.msg.u { background: #6c5fff; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+
+.chat-input {
+  display: flex;
+  padding: 10px 12px;
+  gap: 8px;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+.chat-input-field {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #999;
+  background: #fff;
+}
+
+.chat-send {
+  background: #6c5fff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.powered {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #ccc;
+  padding: 6px;
+  background: #fff;
+}
+
+.badge {
+  display: inline-block;
+  background: #4ade8022;
+  border: 1px solid #4ade8055;
+  color: #4ade80;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.tip {
+  margin-top: 32px;
+  background: #6c5fff11;
+  border: 1px solid #6c5fff33;
+  border-radius: 12px;
+  padding: 18px 22px;
+  color: #a78bfa;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.tip strong { color: #fff; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">Obscuron AI Chat</div>
+  <div class="headline">You type it. Your AI learns it. Instantly.</div>
+  <p class="sub">No technical setup. Just describe your business — your chatbot knows everything.</p>
+
+  <div class="flow">
+    <!-- LEFT: INPUT FORM -->
+    <div class="box">
+      <div class="box-label">① What you fill in</div>
+      <div class="badge">✓ Takes 2 minutes</div>
+
+      <div class="field">
+        <div class="field-label">Business Name</div>
+        <div class="field-value">Sunrise Yoga Studio</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">Business Type</div>
+        <div class="field-value">yoga & wellness studio</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label">What should the AI know?</div>
+        <div class="info-block">
+          <span>Hours:</span> Mon–Fri 7am–9pm, Sat–Sun 8am–6pm<br>
+          <span>Classes:</span> Hatha, Vinyasa, Yin, Meditation<br>
+          <span>Price:</span> Drop-in $20, Monthly $120<br>
+          <span>Location:</span> 45 Oak Street, 2nd floor<br>
+          <span>Booking:</span> Online or by phone<br>
+          <span>First class:</span> Free for new members
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW -->
+    <div class="arrow">→</div>
+
+    <!-- RIGHT: CHAT OUTPUT -->
+    <div class="box">
+      <div class="box-label">② What your customers see</div>
+      <div class="chat-preview">
+        <div class="chat-header">
+          <div class="dot"></div>
+          Sunrise Yoga Studio
+        </div>
+        <div class="chat-body">
+          <div class="msg b">Hi! Welcome to Sunrise Yoga Studio. How can I help you today?</div>
+          <div class="msg u">Do you have beginner classes?</div>
+          <div class="msg b">Yes! Our Hatha and Yin classes are perfect for beginners. Drop-in is $20, and your first class is completely free. We're open Mon–Fri from 7am to 9pm. Would you like to book a spot?</div>
+          <div class="msg u">What's the price for a monthly plan?</div>
+          <div class="msg b">Our monthly membership is $120 — unlimited classes, all styles included. You can sign up online or give us a call!</div>
+        </div>
+        <div class="chat-input">
+          <div class="chat-input-field">Type a message…</div>
+          <button class="chat-send">Send</button>
+        </div>
+        <div class="powered">Powered by Obscuron AI</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>The more you write, the smarter it gets.</strong><br>
+    Add your menu, prices, FAQs, location, hours — anything a customer might ask. Your AI will answer 24/7 in any language.
+  </div>
+</div>
+</body>
+</html>
