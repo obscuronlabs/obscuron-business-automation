@@ -393,10 +393,12 @@ async function generateImage() {
     var encodedPrompt = encodeURIComponent(prompt);
     var w = document.getElementById('img-w').value;
     var h = document.getElementById('img-h').value;
-    var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=' + w + '&height=' + h + '&nologo=true&seed=' + Math.floor(Math.random()*99999);
+    var seed = Math.floor(Math.random()*99999);
+    var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=' + w + '&height=' + h + '&nologo=true&seed=' + seed + '&model=flux';
+    spin.textContent = 'Generating... please wait up to 60 seconds';
     img.src = imageUrl;
-    img.onload = function() { img.style.display = 'block'; dl.href = imageUrl; dl.style.display = 'inline-block'; spin.classList.remove('show'); btn.disabled = false; };
-    img.onerror = function() { alert('Image generation failed'); spin.classList.remove('show'); btn.disabled = false; };
+    img.onload = function() { img.style.display = 'block'; dl.href = imageUrl; dl.style.display = 'inline-block'; spin.classList.remove('show'); spin.textContent = 'Generating... (15-30 seconds)'; btn.disabled = false; };
+    img.onerror = function() { alert('Image generation failed — try again or use a simpler prompt'); spin.classList.remove('show'); spin.textContent = 'Generating... (15-30 seconds)'; btn.disabled = false; };
     return;
   } catch(e) {
     alert('Image error: ' + e.message);
