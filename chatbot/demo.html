@@ -3,78 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Obscuron AI Chatbot — Live Demo</title>
+<title>Chatbot Demo — Obscuron AI Chat</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0a0a0f; color:#fff; font-family:'Segoe UI',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 20px; }
-  h1 { font-size:2.5rem; font-weight:800; margin-bottom:12px; text-align:center; }
-  h1 span { color:#6c5fff; }
-  p { color:#666; text-align:center; margin-bottom:40px; font-size:1.1rem; max-width:500px; }
-  .demo-box { background:#111; border:1px solid #222; border-radius:16px; padding:32px; max-width:500px; width:100%; }
-  .demo-box h2 { margin-bottom:20px; font-size:1.2rem; color:#a78bfa; }
-  label { display:block; margin-bottom:6px; font-size:0.9rem; color:#999; }
-  input, textarea, select { width:100%; background:#0a0a0f; border:1px solid #333; color:#fff; padding:10px 14px; border-radius:8px; font-size:0.95rem; margin-bottom:16px; outline:none; }
-  input:focus, textarea:focus { border-color:#6c5fff; }
-  textarea { min-height:80px; resize:vertical; }
-  button { background:#6c5fff; color:#fff; border:none; padding:12px 28px; border-radius:8px; font-size:1rem; font-weight:700; cursor:pointer; width:100%; transition:background 0.2s; }
-  button:hover { background:#a855f7; }
-  .result { display:none; margin-top:24px; background:#0a0a0f; border:1px solid #333; border-radius:8px; padding:20px; }
-  .result h3 { color:#a78bfa; margin-bottom:12px; }
-  .code-block { background:#111; border:1px solid #333; border-radius:6px; padding:12px; font-family:monospace; font-size:0.85rem; color:#4ade80; word-break:break-all; }
-  .copy-btn { background:#222; color:#fff; border:1px solid #333; width:auto; margin-top:10px; padding:8px 20px; font-size:0.85rem; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; gap: 20px; text-align: center; padding: 40px 20px; }
+  .logo { font-size: 1.6rem; font-weight: 700; color: #6c5fff; letter-spacing: 0.05em; }
+  .msg { color: #aaa; font-size: 1rem; max-width: 420px; line-height: 1.7; }
+  .arrow { font-size: 2rem; animation: bounce 1.5s infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+  .cta { background: linear-gradient(135deg, #6c5fff, #ff6b9d); color: #fff; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 10px; display: inline-block; }
+  .cta:hover { opacity: 0.9; }
+  .biz-name { color: #fff; font-size: 1.1rem; font-weight: 600; }
 </style>
 </head>
 <body>
-<h1>Obscuron <span>AI Chatbot</span></h1>
-<p>Add a smart AI assistant to any website in 60 seconds. Works worldwide.</p>
+  <div class="logo">Obscuron AI Chat</div>
+  <p class="biz-name" id="biz-title"></p>
+  <p class="msg">Your AI chatbot is live and running in the bottom right corner.<br>Click the chat icon to try it out!</p>
+  <div class="arrow">↘</div>
+  <a href="https://aichat.obscuronlabs.com" class="cta">Get This For Your Website →</a>
 
-<div class="demo-box">
-  <h2>🚀 Create Your Widget</h2>
-  <label>Business Name</label>
-  <input id="biz-name" type="text" placeholder="e.g. Nashville Guitar Studio">
-  <label>Business Type</label>
-  <input id="biz-type" type="text" placeholder="e.g. music studio, restaurant, law firm">
-  <label>What should the AI know about your business?</label>
-  <textarea id="biz-info" placeholder="e.g. We are a guitar studio in Nashville, open Mon-Sat 9am-6pm, we offer lessons for all levels, prices start at $60/hour..."></textarea>
-  <label>Brand Color</label>
-  <input id="biz-color" type="color" value="#6c5fff" style="height:44px;cursor:pointer">
-  <button onclick="createWidget()">Generate My Widget</button>
-
-  <div class="result" id="result">
-    <h3>✅ Your embed code:</h3>
-    <div class="code-block" id="embed-code"></div>
-    <button class="copy-btn" onclick="copyCode()">Copy Code</button>
-    <p style="margin-top:12px;color:#666;font-size:0.85rem">Paste this 1 line into your website's &lt;body&gt; tag. That's it.</p>
-  </div>
-</div>
-
-<script>
-async function createWidget() {
-  var name = document.getElementById('biz-name').value.trim();
-  var type = document.getElementById('biz-type').value.trim();
-  var info = document.getElementById('biz-info').value.trim();
-  var color = document.getElementById('biz-color').value;
-  if (!name || !type) { alert('Please fill in business name and type.'); return; }
-  var systemPrompt = 'You are a helpful AI assistant for ' + name + ', a ' + type + '. ' + (info ? info + ' ' : '') + 'Answer questions professionally, keep responses concise and friendly.';
-  try {
-    var res = await fetch('/api/register', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ business_name: name, business_type: type, primary_color: color, system_prompt: systemPrompt, greeting: 'Hi! Welcome to ' + name + '. How can I help you today?' })
-    });
-    var data = await res.json();
-    document.getElementById('embed-code').textContent = data.embed_code;
-    document.getElementById('result').style.display = 'block';
-  } catch(e) {
-    alert('Error connecting to server.');
-  }
-}
-function copyCode() {
-  var code = document.getElementById('embed-code').textContent;
-  navigator.clipboard.writeText(code);
-  event.target.textContent = 'Copied! ✓';
-  setTimeout(function() { event.target.textContent = 'Copy Code'; }, 2000);
-}
-</script>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var config = params.get('config');
+    if (config) {
+      try {
+        var data = JSON.parse(atob(config));
+        if (data.n) document.getElementById('biz-title').textContent = data.n;
+      } catch(e) {}
+      var s = document.createElement('script');
+      s.src = 'https://aichat.obscuronlabs.com/widget.js';
+      s.setAttribute('data-config', config);
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
