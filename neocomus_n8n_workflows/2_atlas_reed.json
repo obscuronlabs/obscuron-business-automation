@@ -2,32 +2,55 @@
   "name": "Atlas Reed — Streaming Revenue",
   "nodes": [
     {
-      "parameters": {"rule": {"interval": [{"field": "cronExpression","expression": "0 10 * * */3"}]}},
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * */3"
+            }
+          ]
+        }
+      },
       "id": "node-schedule-2",
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [250, 300]
+      "position": [
+        250,
+        300
+      ]
     },
     {
       "parameters": {
         "promptType": "define",
         "text": "Research and generate a comprehensive streaming revenue optimization report for today.",
-        "options": {"systemMessage": "You are Atlas Reed, Streaming Revenue specialist at Neocomus Music. You analyze and optimize revenue streams across Spotify, Apple Music, YouTube and beyond. Cover: 1) Spotify streaming optimization strategies 2) Apple Music and YouTube revenue tips 3) Playlist pitching opportunities 4) Royalty collection best practices 5) Monetization opportunities for Olivia Oya Kaptan's catalog: I Rise, Ateşin Dili, Ride Through Fire, Hu Frekansi, Sensiz Kalan Yillar, Ege Atesi. Use web search for current data. Format professionally with clear sections. Sign as 'Atlas Reed — Streaming Revenue Specialist, Neocomus Music'"}
+        "options": {
+          "systemMessage": "You are Atlas Reed, Streaming Revenue specialist at Neocomus Music. You analyze and optimize revenue streams across Spotify, Apple Music, YouTube and beyond. Cover: 1) Spotify streaming optimization strategies 2) Apple Music and YouTube revenue tips 3) Playlist pitching opportunities 4) Royalty collection best practices 5) Monetization opportunities for Olivia Oya Kaptan's catalog: I Rise, Ateşin Dili, Ride Through Fire, Hu Frekansi, Sensiz Kalan Yillar, Ege Atesi. Use web search for current data. Format professionally with clear sections. Sign as 'Atlas Reed — Streaming Revenue Specialist, Neocomus Music'"
+        }
       },
       "id": "node-agent-2",
       "name": "AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
-      "position": [500, 300]
+      "position": [
+        500,
+        300
+      ]
     },
     {
-      "parameters": {"model": "claude-sonnet-4-6","options": {}},
+      "parameters": {
+        "model": "claude-sonnet-4-6",
+        "options": {}
+      },
       "id": "node-model-2",
       "name": "Anthropic Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
       "typeVersion": 1.3,
-      "position": [400, 500]
+      "position": [
+        400,
+        500
+      ]
     },
     {
       "parameters": {},
@@ -35,7 +58,10 @@
       "name": "SerpAPI",
       "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
       "typeVersion": 1,
-      "position": [600, 500]
+      "position": [
+        600,
+        500
+      ]
     },
     {
       "parameters": {
@@ -43,20 +69,66 @@
         "toEmail": "neocomusmusic@gmail.com",
         "subject": "💰 Atlas Reed — Streaming Revenue Report",
         "message": "={{ $json.output }}",
-        "options": {}
+        "options": {},
+        "emailFormat": "text"
       },
       "id": "node-email-2",
       "name": "Send Email",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
-      "position": [750, 300]
+      "position": [
+        750,
+        300
+      ]
     }
   ],
   "connections": {
-    "Schedule Trigger": {"main": [[{"node": "AI Agent","type": "main","index": 0}]]},
-    "AI Agent": {"main": [[{"node": "Send Email","type": "main","index": 0}]]},
-    "Anthropic Chat Model": {"ai_languageModel": [[{"node": "AI Agent","type": "ai_languageModel","index": 0}]]},
-    "SerpAPI": {"ai_tool": [[{"node": "AI Agent","type": "ai_tool","index": 0}]]}
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
-  "settings": {"executionOrder": "v1"}
+  "settings": {
+    "executionOrder": "v1"
+  }
 }
