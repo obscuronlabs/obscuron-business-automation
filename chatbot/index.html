@@ -305,27 +305,17 @@ function generateWidget() {
   var name = document.getElementById('biz-name').value.trim();
   var type = document.getElementById('biz-type').value.trim();
   var info = document.getElementById('biz-info').value.trim();
-  if (!name || !type) { alert('Please fill in your business name and type.'); return; }
+  if (!name || !type) { alert('Please enter business name and type.'); return; }
 
-  function safebtoa(str) {
-    return btoa(unescape(encodeURIComponent(str)));
-  }
-
-  var config = safebtoa(JSON.stringify({
-    n: name,
-    t: type,
-    i: info,
-    c: selectedColor,
-    g: 'Hi! Welcome to ' + name + '. How can I help you today?'
-  }));
-
-  var code = '<script src="https://aichat.obscuronlabs.com/widget.js" data-config="' + config + '"><\/script>';
+  var obj = { n: name, t: type, i: info, c: selectedColor, g: 'Hi! Welcome to ' + name + '. How can I help you today?' };
+  var config = btoa(JSON.stringify(obj));
   var demoUrl = 'https://aichat.obscuronlabs.com/demo?config=' + config;
-  document.getElementById('embed-code-display').textContent = code;
+
   document.getElementById('demo-link-btn').href = demoUrl;
-  document.getElementById('demo-link-btn').dataset.url = demoUrl;
+  document.getElementById('demo-link-btn').setAttribute('data-url', demoUrl);
+  document.getElementById('embed-code-display').textContent = 'https://aichat.obscuronlabs.com/widget.js  data-config="' + config + '"';
   document.getElementById('result-box').style.display = 'block';
-  document.getElementById('result-box').scrollIntoView({behavior:'smooth', block:'nearest'});
+  document.getElementById('result-box').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 var installGuides = {
