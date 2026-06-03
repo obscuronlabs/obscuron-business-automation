@@ -6,22 +6,27 @@
 <title>Chatbot Demo — Obscuron AI Chat</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0a0f; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; gap: 20px; text-align: center; padding: 40px 20px; }
+  body { background: #0a0a0f; color: #fff; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; flex-direction: column; gap: 16px; text-align: center; padding: 40px 20px; }
   .logo { font-size: 1.6rem; font-weight: 700; color: #6c5fff; letter-spacing: 0.05em; }
-  .msg { color: #aaa; font-size: 1rem; max-width: 420px; line-height: 1.7; }
-  .arrow { font-size: 2rem; animation: bounce 1.5s infinite; }
-  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
-  .cta { background: linear-gradient(135deg, #6c5fff, #ff6b9d); color: #fff; padding: 14px 36px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; margin-top: 10px; display: inline-block; }
-  .cta:hover { opacity: 0.9; }
-  .biz-name { color: #fff; font-size: 1.1rem; font-weight: 600; }
+  .biz-name { color: #fff; font-size: 1.2rem; font-weight: 700; }
+  .msg { color: #aaa; font-size: 0.95rem; max-width: 380px; line-height: 1.7; }
+  .pulse-hint { display: flex; align-items: center; gap: 10px; background: #1a1a2e; border: 1px solid #6c5fff55; border-radius: 50px; padding: 12px 24px; margin-top: 8px; }
+  .pulse { width: 12px; height: 12px; background: #6c5fff; border-radius: 50%; animation: pulse 1.5s infinite; flex-shrink: 0; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.4);opacity:0.6} }
+  .hint-text { font-size: 0.9rem; color: #a78bfa; font-weight: 600; }
+  .footer-link { margin-top: 32px; color: #333; font-size: 0.8rem; }
+  .footer-link a { color: #6c5fff; text-decoration: none; }
 </style>
 </head>
 <body>
   <div class="logo">Obscuron AI Chat</div>
   <p class="biz-name" id="biz-title"></p>
-  <p class="msg">Your AI chatbot is live and running in the bottom right corner.<br>Click the chat icon to try it out!</p>
-  <div class="arrow">↘</div>
-  <a href="https://aichat.obscuronlabs.com" class="cta">Get This For Your Website →</a>
+  <p class="msg">Your AI chatbot is live! The chat window has opened automatically — try it out.</p>
+  <div class="pulse-hint">
+    <div class="pulse"></div>
+    <span class="hint-text">AI Assistant is online and ready</span>
+  </div>
+  <p class="footer-link">Want this for your website? <a href="https://aichat.obscuronlabs.com">Get started free →</a></p>
 
   <script>
     var params = new URLSearchParams(window.location.search);
@@ -34,6 +39,13 @@
       window._ob_config = config;
       var s = document.createElement('script');
       s.src = 'https://aichat.obscuronlabs.com/widget.js';
+      s.onload = function() {
+        // Auto-open the chat window after widget loads
+        setTimeout(function() {
+          var btn = document.getElementById('_ob_btn');
+          if (btn) btn.click();
+        }, 600);
+      };
       document.body.appendChild(s);
     }
   </script>
