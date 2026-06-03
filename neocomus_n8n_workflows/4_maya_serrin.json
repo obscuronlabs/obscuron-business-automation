@@ -1,0 +1,62 @@
+{
+  "name": "Maya Serrin — Client Relations",
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "cronExpression","expression": "0 12 * * */3"}]}},
+      "id": "node-schedule-4",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Prepare a comprehensive client relations and communication report with templates for Neocomus Music.",
+        "options": {"systemMessage": "You are Maya Serrin, Artist & Client Relations manager at Neocomus Music. Every 3 days you prepare a client relations and communication report. Include: 1) Follow-up templates for potential clients interested in Starter ($99/mo), Professional ($299/mo), Elite ($499/mo) packages 2) Partnership outreach email templates for sync licensing opportunities 3) Collaboration pitch templates for other artists 4) Best practices for responding to booking inquiries 5) CRM tips for music label client management. Contact: neocomusmusic@gmail.com | WhatsApp: +19544456195 | Nashville, TN. Sign as 'Maya Serrin — Artist & Client Relations, Neocomus Music'"}
+      },
+      "id": "node-agent-4",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {"model": "claude-sonnet-4-6","options": {}},
+      "id": "node-model-4",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [400, 500]
+    },
+    {
+      "parameters": {},
+      "id": "node-serp-4",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500]
+    },
+    {
+      "parameters": {
+        "fromEmail": "neocomusmusic@gmail.com",
+        "toEmail": "neocomusmusic@gmail.com",
+        "subject": "🤝 Maya Serrin — Client Relations Report",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-email-4",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {"main": [[{"node": "AI Agent","type": "main","index": 0}]]},
+    "AI Agent": {"main": [[{"node": "Send Email","type": "main","index": 0}]]},
+    "Anthropic Chat Model": {"ai_languageModel": [[{"node": "AI Agent","type": "ai_languageModel","index": 0}]]},
+    "SerpAPI": {"ai_tool": [[{"node": "AI Agent","type": "ai_tool","index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"}
+}

@@ -1,0 +1,62 @@
+{
+  "name": "Selene Ward — Music Trends",
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "cronExpression","expression": "0 9 * * */3"}]}},
+      "id": "node-schedule-1",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Research and generate a comprehensive music trends report for today.",
+        "options": {"systemMessage": "You are Selene Ward, Music Trend Research specialist at Neocomus Music. Every 3 days you research and report current music trends. Research: 1) Top trending genres on Spotify and Apple Music 2) Viral songs on TikTok relevant to Neocomus artists 3) Emerging artists in jazz, blues, Latin, pop and soft rock 4) Playlist opportunities for Olivia Oya Kaptan 5) Key music industry news. Format your report professionally with sections and actionable recommendations. Sign as 'Selene Ward — Music Trends Analyst, Neocomus Music'"}
+      },
+      "id": "node-agent-1",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {"model": "claude-sonnet-4-6","options": {}},
+      "id": "node-model-1",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [400, 500]
+    },
+    {
+      "parameters": {},
+      "id": "node-serp-1",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500]
+    },
+    {
+      "parameters": {
+        "fromEmail": "neocomusmusic@gmail.com",
+        "toEmail": "neocomusmusic@gmail.com",
+        "subject": "🎵 Selene Ward — Daily Music Trend Report",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-email-1",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {"main": [[{"node": "AI Agent","type": "main","index": 0}]]},
+    "AI Agent": {"main": [[{"node": "Send Email","type": "main","index": 0}]]},
+    "Anthropic Chat Model": {"ai_languageModel": [[{"node": "AI Agent","type": "ai_languageModel","index": 0}]]},
+    "SerpAPI": {"ai_tool": [[{"node": "AI Agent","type": "ai_tool","index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"}
+}

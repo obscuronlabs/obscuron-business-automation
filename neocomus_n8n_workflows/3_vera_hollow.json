@@ -1,0 +1,62 @@
+{
+  "name": "Vera Hollow — Social Media Content",
+  "nodes": [
+    {
+      "parameters": {"rule": {"interval": [{"field": "cronExpression","expression": "0 11 * * */3"}]}},
+      "id": "node-schedule-3",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Create a comprehensive social media content plan for the next 7 days for Neocomus Music and Olivia Oya Kaptan.",
+        "options": {"systemMessage": "You are Vera Hollow, Visual & Brand Identity specialist at Neocomus Music. Every 3 days you create a social media content plan. Create: 1) 7-day content calendar for Instagram, TikTok, YouTube, Facebook 2) Caption ideas for each post 3) Hashtag strategies 4) Story/Reel concepts 5) Trending audio/visual formats to leverage. Olivia Oya Kaptan sings in 8 languages (jazz, blues, Latin, pop, soft rock), performing since 1995. Brand aesthetic: black and gold, elegant, international. Songs: I Rise, Ateşin Dili, Ride Through Fire, Hu Frekansi, Sensiz Kalan Yıllar, Ege Ateşi. Sign as 'Vera Hollow — Visual & Brand Specialist, Neocomus Music'"}
+      },
+      "id": "node-agent-3",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {"model": "claude-sonnet-4-6","options": {}},
+      "id": "node-model-3",
+      "name": "Anthropic Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [400, 500]
+    },
+    {
+      "parameters": {},
+      "id": "node-serp-3",
+      "name": "SerpAPI",
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [600, 500]
+    },
+    {
+      "parameters": {
+        "fromEmail": "neocomusmusic@gmail.com",
+        "toEmail": "neocomusmusic@gmail.com",
+        "subject": "✨ Vera Hollow — Social Media Content Plan",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "node-email-3",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {"main": [[{"node": "AI Agent","type": "main","index": 0}]]},
+    "AI Agent": {"main": [[{"node": "Send Email","type": "main","index": 0}]]},
+    "Anthropic Chat Model": {"ai_languageModel": [[{"node": "AI Agent","type": "ai_languageModel","index": 0}]]},
+    "SerpAPI": {"ai_tool": [[{"node": "AI Agent","type": "ai_tool","index": 0}]]}
+  },
+  "settings": {"executionOrder": "v1"}
+}
