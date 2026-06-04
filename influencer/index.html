@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Influencer AI Hub — Music & Lifestyle</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
+
+  .header {
+    background: linear-gradient(135deg, #1a0533 0%, #0d1a3a 100%);
+    padding: 24px 32px;
+    border-bottom: 1px solid #2a1a4a;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .header h1 { font-size: 1.5rem; background: linear-gradient(90deg, #c77dff, #7b2ff7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { font-size: 0.85rem; color: #888; margin-top: 2px; }
+
+  .tabs {
+    display: flex; gap: 4px; padding: 16px 24px;
+    background: #0f0f1a; border-bottom: 1px solid #1e1e2e; overflow-x: auto;
+  }
+  .tab {
+    padding: 8px 16px; border-radius: 8px; border: 1px solid #2a2a3a;
+    background: transparent; color: #888; cursor: pointer; font-size: 0.85rem;
+    white-space: nowrap; transition: all 0.2s;
+  }
+  .tab:hover { border-color: #7b2ff7; color: #c77dff; }
+  .tab.active { background: #7b2ff7; border-color: #7b2ff7; color: white; }
+
+  .content { padding: 24px; max-width: 900px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: #0f0f1a; border: 1px solid #1e1e2e; border-radius: 12px;
+    padding: 24px; margin-bottom: 20px;
+  }
+  .card h3 { color: #c77dff; margin-bottom: 16px; font-size: 1rem; }
+
+  .form-group { margin-bottom: 14px; }
+  label { display: block; font-size: 0.8rem; color: #888; margin-bottom: 6px; }
+  input, textarea, select {
+    width: 100%; background: #1a1a2e; border: 1px solid #2a2a3a; border-radius: 8px;
+    padding: 10px 14px; color: #e0e0e0; font-size: 0.9rem; font-family: inherit;
+  }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #7b2ff7; }
+  textarea { min-height: 80px; resize: vertical; }
+
+  .btn {
+    background: linear-gradient(135deg, #7b2ff7, #c77dff);
+    border: none; color: white; padding: 12px 28px; border-radius: 8px;
+    cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-outline {
+    background: transparent; border: 1px solid #7b2ff7; color: #c77dff;
+    padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 0.85rem;
+  }
+  .btn-outline:hover { background: #7b2ff71a; }
+
+  .result-box {
+    background: #0a0a14; border: 1px solid #2a2a3a; border-radius: 8px;
+    padding: 20px; margin-top: 16px; white-space: pre-wrap; font-size: 0.88rem;
+    line-height: 1.7; color: #d0d0d0; max-height: 600px; overflow-y: auto; display: none;
+  }
+  .result-box.show { display: block; }
+
+  .copy-btn {
+    margin-top: 10px; background: #1a1a2e; border: 1px solid #2a2a3a;
+    color: #888; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;
+  }
+  .copy-btn:hover { color: #c77dff; border-color: #7b2ff7; }
+
+  .loading { color: #7b2ff7; font-size: 0.85rem; margin-top: 12px; display: none; }
+  .loading.show { display: block; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .badge {
+    display: inline-block; background: #7b2ff720; border: 1px solid #7b2ff7;
+    color: #c77dff; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; margin: 2px;
+  }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: #1a1a2e; border-radius: 8px; padding: 14px; text-align: center; }
+  .stat-card .val { font-size: 1.4rem; font-weight: 700; color: #c77dff; }
+  .stat-card .lbl { font-size: 0.75rem; color: #666; margin-top: 4px; }
+
+  .music-note { font-size: 1.5rem; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="music-note">🎵</div>
+  <div>
+    <h1>Influencer AI Hub</h1>
+    <p>Music & Lifestyle — Monetization Toolkit</p>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('caption')">✍️ Caption</button>
+  <button class="tab" onclick="showTab('hashtag')">🏷️ Hashtag</button>
+  <button class="tab" onclick="showTab('outreach')">📧 Brand Outreach</button>
+  <button class="tab" onclick="showTab('mediakit')">📄 Media Kit</button>
+  <button class="tab" onclick="showTab('pricing')">💰 Pricing</button>
+  <button class="tab" onclick="showTab('brands')">🎯 Hedef Markalar</button>
+  <button class="tab" onclick="showTab('strategy')">🗓️ 4 Hafta Plan</button>
+  <button class="tab" onclick="showTab('music')">🎧 Telif Siz Müzik</button>
+</div>
+
+<div class="content">
+
+  <!-- CAPTION -->
+  <div class="panel active" id="panel-caption">
+    <div class="card">
+      <h3>✍️ Instagram Caption Generator</h3>
+      <div class="form-group">
+        <label>Post konusu / Ne paylaşıyorsun?</label>
+        <textarea id="cap-topic" placeholder="örn: yeni çıkan şarkımı stüdyoda kaydettim, sabah rutinimden..."></textarea>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Dil</label>
+          <select id="cap-lang">
+            <option value="turkish">Türkçe</option>
+            <option value="english">English</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mood</label>
+          <select id="cap-mood">
+            <option value="authentic">Authentic / Gerçek</option>
+            <option value="inspirational">İlham verici</option>
+            <option value="behind-the-scenes">Behind the scenes</option>
+            <option value="storytelling">Hikaye anlatımı</option>
+            <option value="playful">Eğlenceli</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateCaption()">Caption Üret</button>
+      <div class="loading" id="cap-loading">⏳ AI yazıyor...</div>
+      <div class="result-box" id="cap-result"></div>
+      <button class="copy-btn" id="cap-copy" style="display:none" onclick="copyResult('cap-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- HASHTAG -->
+  <div class="panel" id="panel-hashtag">
+    <div class="card">
+      <h3>🏷️ Hashtag Optimizer</h3>
+      <div class="form-group">
+        <label>Post konusu</label>
+        <input id="hash-topic" type="text" placeholder="örn: gitar kaydı, sabah rutini, konser...">
+      </div>
+      <div class="form-group">
+        <label>Strateji</label>
+        <select id="hash-reach">
+          <option value="mixed">Mixed (önerilen)</option>
+          <option value="small">Niche odaklı (daha az ama hedefli)</option>
+          <option value="viral">Viral odaklı (büyük kitleye ulaş)</option>
+        </select>
+      </div>
+      <button class="btn" onclick="generateHashtags()">Hashtag Üret</button>
+      <div class="loading" id="hash-loading">⏳ Analiz ediliyor...</div>
+      <div class="result-box" id="hash-result"></div>
+      <button class="copy-btn" id="hash-copy" style="display:none" onclick="copyResult('hash-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- OUTREACH -->
+  <div class="panel" id="panel-outreach">
+    <div class="card">
+      <h3>📧 Brand Outreach Yazıcı</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Marka adı</label>
+          <input id="out-brand" type="text" placeholder="örn: Fender, Zara, Spotify...">
+        </div>
+        <div class="form-group">
+          <label>Marka nişi</label>
+          <input id="out-niche" type="text" placeholder="örn: müzik aletleri, moda, streaming...">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Senin adın</label>
+          <input id="out-name" type="text" placeholder="İsim veya kullanıcı adı">
+        </div>
+        <div class="form-group">
+          <label>Platform</label>
+          <select id="out-platform">
+            <option value="email">Email</option>
+            <option value="dm">Instagram DM</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn" onclick="generateOutreach()">Mesaj Yaz</button>
+      <div class="loading" id="out-loading">⏳ Yazılıyor...</div>
+      <div class="result-box" id="out-result"></div>
+      <button class="copy-btn" id="out-copy" style="display:none" onclick="copyResult('out-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- MEDIA KIT -->
+  <div class="panel" id="panel-mediakit">
+    <div class="card">
+      <h3>📄 Media Kit Generator</h3>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:16px">Markalara göndereceğin profesyonel tanıtım dökümanı</p>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Adın / Instagram adı</label>
+          <input id="mk-name" type="text" placeholder="@username veya Adın">
+        </div>
+        <div class="form-group">
+          <label>Takipçi sayısı</label>
+          <input id="mk-followers" type="text" value="20K">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Ortalama like sayısı</label>
+          <input id="mk-likes" type="text" value="800">
+        </div>
+        <div class="form-group">
+          <label>Ortalama yorum sayısı</label>
+          <input id="mk-comments" type="text" value="60">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Engagement rate (%)</label>
+          <input id="mk-er" type="text" value="4.3">
+        </div>
+        <div class="form-group">
+          <label>Konum</label>
+          <input id="mk-location" type="text" value="Turkey">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Daha önce çalıştığın markalar (varsa)</label>
+        <input id="mk-brands" type="text" placeholder="örn: Rode Mics, local coffee brand...">
+      </div>
+      <button class="btn" onclick="generateMediaKit()">Media Kit Oluştur</button>
+      <div class="loading" id="mk-loading">⏳ Hazırlanıyor...</div>
+      <div class="result-box" id="mk-result"></div>
+      <button class="copy-btn" id="mk-copy" style="display:none" onclick="copyResult('mk-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="panel" id="panel-pricing">
+    <div class="card">
+      <h3>💰 Ücret Hesaplayıcı</h3>
+      <div class="grid-2">
+        <div class="form-group">
+          <label>Takipçi sayısı</label>
+          <input id="pr-followers" type="number" value="20000">
+        </div>
+        <div class="form-group">
+          <label>Engagement rate (%)</label>
+          <input id="pr-er" type="number" value="4.3" step="0.1">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>İçerik türü</label>
+        <select id="pr-type">
+          <option value="post">Feed Post</option>
+          <option value="story">Story</option>
+          <option value="reel">Reel</option>
+          <option value="package">Paket (post+story+reel)</option>
+        </select>
+      </div>
+      <button class="btn" onclick="calculatePricing()">Fiyat Hesapla</button>
+      <div class="loading" id="pr-loading">⏳ Hesaplanıyor...</div>
+      <div class="result-box" id="pr-result"></div>
+      <button class="copy-btn" id="pr-copy" style="display:none" onclick="copyResult('pr-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- BRANDS -->
+  <div class="panel" id="panel-brands">
+    <div class="card">
+      <h3>🎯 Seni Ödeyen Markalar</h3>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:16px">Müzik & lifestyle 20K hesaplara aktif deal yapan markalar</p>
+      <button class="btn" onclick="getBrands()">Markaları Getir</button>
+      <div class="loading" id="br-loading">⏳ Araştırılıyor...</div>
+      <div class="result-box" id="br-result"></div>
+      <button class="copy-btn" id="br-copy" style="display:none" onclick="copyResult('br-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- STRATEGY -->
+  <div class="panel" id="panel-strategy">
+    <div class="card">
+      <h3>🗓️ 4 Haftalık Monetizasyon Planı</h3>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:16px">Sıfırdan ilk brand deal'e kadar adım adım</p>
+      <button class="btn" onclick="getStrategy()">Planı Oluştur</button>
+      <div class="loading" id="st-loading">⏳ Plan hazırlanıyor...</div>
+      <div class="result-box" id="st-result"></div>
+      <button class="copy-btn" id="st-copy" style="display:none" onclick="copyResult('st-result')">📋 Kopyala</button>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <div class="panel" id="panel-music">
+    <div class="card">
+      <h3>🎧 Telif Hakkı Olmayan Müzik Kaynakları</h3>
+      <p style="font-size:0.85rem; color:#aaa; margin-bottom:20px">Instagram Reels, TikTok ve YouTube için güvenli müzik platformları</p>
+
+      <div style="display:grid; gap:14px;">
+
+        <div style="background:#1a1a2e; border-radius:8px; padding:16px; border-left:3px solid #7b2ff7;">
+          <div style="font-weight:600; color:#c77dff; margin-bottom:8px;">🆓 Tamamen Ücretsiz (CC0 / Public Domain)</div>
+          <div style="font-size:0.85rem; line-height:1.8; color:#ccc;">
+            <b>Free Music Archive (freemusicarchive.org)</b> — CC lisanslı, geniş koleksiyon<br>
+            <b>ccMixter (ccmixter.org)</b> — Creative Commons, remix dostu<br>
+            <b>Musopen (musopen.org)</b> — Klasik müzik, tamamen telif serbest<br>
+            <b>Incompetech (incompetech.filmmusic.io)</b> — Kevin MacLeod müzikleri (atıf gerekli)
+          </div>
+        </div>
+
+        <div style="background:#1a1a2e; border-radius:8px; padding:16px; border-left:3px solid #00b4d8;">
+          <div style="font-weight:600; color:#00b4d8; margin-bottom:8px;">✅ Instagram / TikTok Onaylı</div>
+          <div style="font-size:0.85rem; line-height:1.8; color:#ccc;">
+            <b>Epidemic Sound (epidemicsound.com)</b> — $15/ay, tüm platformlar, BEST option<br>
+            <b>Artlist (artlist.io)</b> — $200/yıl, sınırsız kullanım, sinema kalitesi<br>
+            <b>Musicbed (musicbed.com)</b> — Influencer planı mevcut<br>
+            <b>Soundstripe</b> — $15/ay, iyi koleksiyon
+          </div>
+        </div>
+
+        <div style="background:#1a1a2e; border-radius:8px; padding:16px; border-left:3px solid #f77f00;">
+          <div style="font-weight:600; color:#f77f00; margin-bottom:8px;">🎵 YouTube & Instagram'ın Kendi Kütüphanesi</div>
+          <div style="font-size:0.85rem; line-height:1.8; color:#ccc;">
+            <b>YouTube Audio Library</b> — YouTube Studio → Audio Library → ücretsiz, telif yok<br>
+            <b>Instagram Music Sticker</b> — Hikaye/Reels'te + Music butonu → milyonlarca şarkı, Instagram'da güvenli<br>
+            <b>TikTok Commercial Music Library</b> — Ticari hesaplar için özel lisanslı müzikler
+          </div>
+        </div>
+
+        <div style="background:#1a1a2e; border-radius:8px; padding:16px; border-left:3px solid #06d6a0;">
+          <div style="font-weight:600; color:#06d6a0; margin-bottom:8px;">🤖 AI ile Müzik Üret (Kendi Müziğin Olsun)</div>
+          <div style="font-size:0.85rem; line-height:1.8; color:#ccc;">
+            <b>Suno AI (suno.com)</b> — Yazıyla müzik oluştur, %100 senin, ücretsiz plan var<br>
+            <b>Udio (udio.com)</b> — Yüksek kaliteli AI müzik, telif serbest<br>
+            <b>Mubert (mubert.com)</b> — AI ambiyans/background müzik, influencer planı $14/ay<br>
+            <b>Soundraw (soundraw.io)</b> — Özelleştirilebilir AI müzik
+          </div>
+        </div>
+
+        <div style="background:#0d2a1a; border-radius:8px; padding:16px; border: 1px solid #06d6a0;">
+          <div style="font-weight:600; color:#06d6a0; margin-bottom:8px;">⚡ Öneri: Müzisyen İçin İdeal Setup</div>
+          <div style="font-size:0.85rem; line-height:1.8; color:#ccc;">
+            1. <b>Kendi müziğini çal</b> → Reels/TikTok'a yükle → %100 güvenli + kendini tanıtıyorsun<br>
+            2. <b>Suno AI</b> ile arka plan müziği üret → bedava, telif yok<br>
+            3. <b>Epidemic Sound</b> al ($15/ay) → lifestyle/vlog içeriklerin için<br>
+            4. <b>Instagram Music sticker</b> → hikayeler için kullan, story'de sorun yok<br>
+            <br>
+            <b style="color:#ffd166;">ÖNEMLİ:</b> Kendi çaldığın müziği içeriklere koyarsan hem telif sorunu olmaz hem müzisyen kimliğini öne çıkarırsın → brand deal'lerde çok güçlü!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API = '';
+
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function showResult(id, text) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.classList.add('show');
+  const copyId = id.replace('result', 'copy');
+  const copyBtn = document.getElementById(copyId);
+  if (copyBtn) copyBtn.style.display = 'inline-block';
+}
+
+function copyResult(id) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => alert('Kopyalandı!'));
+}
+
+async function post(endpoint, data) {
+  const resp = await fetch(API + endpoint, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  });
+  return resp.json();
+}
+
+async function generateCaption() {
+  const topic = document.getElementById('cap-topic').value;
+  if (!topic) return alert('Konu gir!');
+  document.getElementById('cap-loading').classList.add('show');
+  const data = await post('/api/caption', {
+    topic, mood: document.getElementById('cap-mood').value,
+    language: document.getElementById('cap-lang').value, include_cta: true
+  });
+  document.getElementById('cap-loading').classList.remove('show');
+  showResult('cap-result', data.captions || data.error);
+}
+
+async function generateHashtags() {
+  const topic = document.getElementById('hash-topic').value;
+  if (!topic) return alert('Konu gir!');
+  document.getElementById('hash-loading').classList.add('show');
+  const data = await post('/api/hashtags', { topic, reach: document.getElementById('hash-reach').value });
+  document.getElementById('hash-loading').classList.remove('show');
+  showResult('hash-result', data.hashtags || data.error);
+}
+
+async function generateOutreach() {
+  const brand_name = document.getElementById('out-brand').value;
+  if (!brand_name) return alert('Marka adı gir!');
+  document.getElementById('out-loading').classList.add('show');
+  const data = await post('/api/outreach', {
+    brand_name, brand_niche: document.getElementById('out-niche').value,
+    your_name: document.getElementById('out-name').value || 'Influencer',
+    platform: document.getElementById('out-platform').value
+  });
+  document.getElementById('out-loading').classList.remove('show');
+  showResult('out-result', data.outreach || data.error);
+}
+
+async function generateMediaKit() {
+  const name = document.getElementById('mk-name').value;
+  if (!name) return alert('İsim gir!');
+  document.getElementById('mk-loading').classList.add('show');
+  const data = await post('/api/mediakit', {
+    name, followers: document.getElementById('mk-followers').value,
+    avg_likes: document.getElementById('mk-likes').value,
+    avg_comments: document.getElementById('mk-comments').value,
+    engagement_rate: document.getElementById('mk-er').value,
+    location: document.getElementById('mk-location').value,
+    previous_brands: document.getElementById('mk-brands').value
+  });
+  document.getElementById('mk-loading').classList.remove('show');
+  showResult('mk-result', data.media_kit || data.error);
+}
+
+async function calculatePricing() {
+  document.getElementById('pr-loading').classList.add('show');
+  const data = await post('/api/pricing', {
+    followers: parseInt(document.getElementById('pr-followers').value),
+    engagement_rate: parseFloat(document.getElementById('pr-er').value),
+    content_type: document.getElementById('pr-type').value
+  });
+  document.getElementById('pr-loading').classList.remove('show');
+  showResult('pr-result', data.pricing || data.error);
+}
+
+async function getBrands() {
+  document.getElementById('br-loading').classList.add('show');
+  const data = await fetch(API + '/api/brands').then(r => r.json());
+  document.getElementById('br-loading').classList.remove('show');
+  showResult('br-result', data.brands || data.error);
+  document.getElementById('br-copy').style.display = 'inline-block';
+}
+
+async function getStrategy() {
+  document.getElementById('st-loading').classList.add('show');
+  const data = await fetch(API + '/api/strategy').then(r => r.json());
+  document.getElementById('st-loading').classList.remove('show');
+  showResult('st-result', data.strategy || data.error);
+  document.getElementById('st-copy').style.display = 'inline-block';
+}
+</script>
+</body>
+</html>
