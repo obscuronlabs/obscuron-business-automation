@@ -1,0 +1,241 @@
+sezon,ev_sahibi,deplasman,ev_gol,deplasman_gol
+25/26,West Ham United,Wolverhampton Wanderers,4,0
+25/26,Arsenal,Bournemouth,1,2
+25/26,Burnley,Brighton & Hove Albion,0,2
+25/26,Brentford,Everton,2,2
+25/26,Liverpool,Fulham,2,0
+25/26,Crystal Palace,Newcastle United,2,1
+25/26,Nottingham Forest,Aston Villa,1,1
+25/26,Sunderland,Tottenham Hotspur,1,0
+25/26,Chelsea FC,Manchester City,0,3
+25/26,Manchester United,Leeds United,1,2
+24/25,Manchester City FC,Crystal Palace FC,5,2
+24/25,Brighton & Hove Albion FC,Leicester City FC,2,2
+24/25,Nottingham Forest FC,Everton FC,0,1
+24/25,Southampton FC,Aston Villa FC,0,3
+24/25,Arsenal FC,Brentford FC,1,1
+24/25,Chelsea FC,Ipswich Town FC,2,2
+24/25,Liverpool FC,West Ham United FC,2,1
+24/25,Wolverhampton Wanderers FC,Tottenham Hotspur FC,4,2
+24/25,Newcastle United FC,Manchester United FC,4,1
+24/25,AFC Bournemouth,Fulham FC,1,0
+23/24,Crystal Palace FC,Manchester City FC,2,4
+23/24,Aston Villa FC,Brentford FC,3,3
+23/24,Everton FC,Burnley FC,1,0
+23/24,Fulham FC,Newcastle United FC,0,1
+23/24,Luton Town FC,AFC Bournemouth,2,1
+23/24,Wolverhampton Wanderers FC,West Ham United FC,1,2
+23/24,Brighton & Hove Albion FC,Arsenal FC,0,3
+23/24,Manchester United FC,Liverpool FC,2,2
+23/24,Sheffield United FC,Chelsea FC,2,2
+23/24,Tottenham Hotspur FC,Nottingham Forest FC,3,1
+22/23,Arsenal FC,Southampton FC,3,3
+22/23,Fulham FC,Leeds United FC,2,1
+22/23,Liverpool FC,Nottingham Forest FC,3,2
+22/23,Leicester City FC,Wolverhampton Wanderers FC,2,1
+22/23,Crystal Palace FC,Everton FC,0,0
+22/23,Brentford FC,Aston Villa FC,1,1
+22/23,Newcastle United FC,Tottenham Hotspur FC,6,1
+22/23,AFC Bournemouth,West Ham United FC,0,4
+22/23,Brighton & Hove Albion FC,Manchester City FC,1,1
+22/23,Manchester United FC,Chelsea FC,4,1
+21/22,Newcastle United FC,Wolverhampton Wanderers FC,1,0
+21/22,Everton FC,Manchester United FC,1,0
+21/22,Arsenal FC,Brighton & Hove Albion FC,1,2
+21/22,Southampton FC,Chelsea FC,0,6
+21/22,Watford FC,Leeds United FC,0,3
+21/22,Aston Villa FC,Tottenham Hotspur FC,0,4
+21/22,Brentford FC,West Ham United FC,2,0
+21/22,Leicester City FC,Crystal Palace FC,2,1
+21/22,Norwich City FC,Burnley FC,2,0
+21/22,Manchester City FC,Liverpool FC,2,2
+20/21,Everton FC,Tottenham Hotspur FC,2,2
+20/21,Newcastle United FC,West Ham United FC,3,2
+20/21,Wolverhampton Wanderers FC,Sheffield United FC,1,0
+20/21,Arsenal FC,Fulham FC,1,1
+20/21,Manchester United FC,Burnley FC,3,1
+20/21,Leeds United FC,Liverpool FC,1,1
+20/21,Chelsea FC,Brighton & Hove Albion FC,0,0
+20/21,Aston Villa FC,Manchester City FC,1,2
+20/21,Leicester City FC,West Bromwich Albion FC,3,0
+20/21,Southampton FC,Crystal Palace FC,3,1
+19/20,Aston Villa,Wolverhampton Wanderers,0,1
+19/20,Watford FC,Southampton FC,1,3
+19/20,Crystal Palace,Burnley FC,0,1
+19/20,Brighton & Hove Albion,Manchester United,0,3
+19/20,AFC Bournemouth,Newcastle United,1,4
+19/20,Arsenal FC,Norwich City,4,0
+19/20,Everton FC,Leicester City,2,1
+19/20,West Ham United,Chelsea FC,3,2
+19/20,Manchester City,Liverpool FC,4,0
+19/20,Sheffield United,Tottenham Hotspur,3,1
+18/19,Fulham FC,Manchester City,0,2
+18/19,West Ham United,Everton FC,0,2
+18/19,Burnley FC,Wolverhampton Wanderers,2,0
+18/19,Manchester United,Watford FC,2,1
+18/19,Brighton & Hove Albion,Southampton FC,0,1
+18/19,Crystal Palace,Huddersfield Town,2,0
+18/19,Leicester City,AFC Bournemouth,2,0
+18/19,Cardiff City,Chelsea FC,1,2
+18/19,Liverpool FC,Tottenham Hotspur,2,1
+18/19,Arsenal FC,Newcastle United,2,0
+17/18,Everton FC,Manchester City,1,3
+17/18,West Bromwich Albion,Burnley FC,1,2
+17/18,Watford FC,AFC Bournemouth,2,2
+17/18,West Ham United,Southampton FC,3,0
+17/18,Newcastle United,Huddersfield Town,1,0
+17/18,Manchester United,Swansea City,2,0
+17/18,Crystal Palace,Liverpool FC,1,2
+17/18,Brighton & Hove Albion,Leicester City,0,2
+17/18,Chelsea FC,Tottenham Hotspur,1,3
+17/18,Arsenal FC,Stoke City,3,0
+16/17,Tottenham Hotspur,Watford FC,4,0
+16/17,AFC Bournemouth,Chelsea FC,1,3
+16/17,West Ham United,Swansea City,1,0
+16/17,West Bromwich Albion,Southampton FC,0,1
+16/17,Stoke City,Liverpool FC,1,2
+16/17,Middlesbrough FC,Burnley FC,0,0
+16/17,Manchester City,Hull City,3,1
+16/17,Sunderland AFC,Manchester United,0,3
+16/17,Everton FC,Leicester City,4,2
+16/17,Crystal Palace,Arsenal FC,3,0
+15/16,Stoke City,Swansea City,2,2
+15/16,Sunderland AFC,West Bromwich Albion,0,0
+15/16,West Ham United,Crystal Palace,2,2
+15/16,Liverpool FC,Tottenham Hotspur,1,1
+15/16,Arsenal FC,Watford FC,4,0
+15/16,AFC Bournemouth,Manchester City,0,4
+15/16,Norwich City,Newcastle United,3,2
+15/16,Aston Villa,Chelsea FC,0,4
+15/16,Manchester United,Everton FC,1,0
+15/16,Leicester City,Southampton FC,1,0
+14/15,Southampton FC,Hull City,2,0
+14/15,Sunderland AFC,Crystal Palace,1,4
+14/15,Tottenham Hotspur,Aston Villa,0,1
+14/15,West Bromwich Albion,Leicester City,2,3
+14/15,West Ham United,Stoke City,1,1
+14/15,Burnley FC,Arsenal FC,0,1
+14/15,Swansea City,Everton FC,1,1
+14/15,Queens Park Rangers,Chelsea FC,0,1
+14/15,Manchester United,Manchester City,4,2
+14/15,Liverpool FC,Newcastle United,2,0
+13/14,Swansea City,Norwich City,3,0
+13/14,Arsenal FC,Manchester City,1,1
+13/14,Stoke City,Hull City,1,0
+13/14,Southampton FC,Newcastle United,4,0
+13/14,Manchester United,Aston Villa,4,1
+13/14,West Bromwich Albion,Cardiff City,3,3
+13/14,Crystal Palace,Chelsea FC,1,0
+13/14,Liverpool FC,Tottenham Hotspur,4,0
+13/14,Fulham FC,Everton FC,1,3
+13/14,Sunderland AFC,West Ham United,1,2
+12/13,West Bromwich Albion,Arsenal FC,1,2
+12/13,Stoke City,Aston Villa,1,3
+12/13,Reading FC,Southampton FC,0,2
+12/13,Norwich City,Swansea City,2,2
+12/13,Chelsea FC,Sunderland AFC,2,1
+12/13,Queens Park Rangers,Wigan Athletic,1,1
+12/13,Newcastle United,Fulham FC,1,0
+12/13,Tottenham Hotspur,Everton FC,2,2
+12/13,Liverpool FC,West Ham United,0,0
+12/13,Manchester United,Manchester City,1,2
+11/12,Swansea City,Newcastle United,0,2
+11/12,Stoke City,Wolverhampton Wanderers,2,1
+11/12,Sunderland AFC,Tottenham Hotspur,0,0
+11/12,Bolton Wanderers,Fulham FC,0,3
+11/12,Chelsea FC,Wigan Athletic,2,1
+11/12,Liverpool FC,Aston Villa,1,1
+11/12,Norwich City,Everton FC,2,2
+11/12,West Bromwich Albion,Blackburn Rovers,3,0
+11/12,Manchester United,Queens Park Rangers,2,0
+11/12,Arsenal FC,Manchester City,1,0
+10/11,Bolton Wanderers,West Ham United,3,0
+10/11,Tottenham Hotspur,Stoke City,3,2
+10/11,Wolverhampton Wanderers,Everton FC,0,3
+10/11,Sunderland AFC,West Bromwich Albion,2,3
+10/11,Manchester United,Fulham FC,2,0
+10/11,Chelsea FC,Wigan Athletic,1,0
+10/11,Blackburn Rovers,Birmingham City,1,1
+10/11,Aston Villa,Newcastle United,1,0
+10/11,Blackpool FC,Arsenal FC,1,3
+10/11,Liverpool FC,Manchester City,3,0
+09/10,Tottenham Hotspur,Portsmouth FC,2,0
+09/10,Wolverhampton Wanderers,Everton FC,0,0
+09/10,West Ham United,Stoke City,0,1
+09/10,Birmingham City,Arsenal FC,1,1
+09/10,Chelsea FC,Aston Villa,7,1
+09/10,Hull City,Fulham FC,2,0
+09/10,Bolton Wanderers,Manchester United,0,4
+09/10,Liverpool FC,Sunderland AFC,3,0
+09/10,Burnley FC,Blackburn Rovers,0,1
+09/10,Manchester City,Wigan Athletic,3,0
+08/09,Liverpool FC,Blackburn Rovers,4,0
+08/09,Chelsea FC,Bolton Wanderers,4,3
+08/09,Middlesbrough FC,Hull City,3,1
+08/09,Portsmouth FC,West Bromwich Albion,2,2
+08/09,Sunderland AFC,Manchester United,1,2
+08/09,Tottenham Hotspur,West Ham United,1,0
+08/09,Wigan Athletic,Arsenal FC,1,4
+08/09,Stoke City,Newcastle United,1,1
+08/09,Aston Villa,Everton FC,3,3
+08/09,Manchester City,Fulham FC,1,3
+07/08,Birmingham City,Manchester City,3,1
+07/08,Bolton Wanderers,Arsenal FC,2,3
+07/08,Derby County,Fulham FC,2,2
+07/08,Portsmouth FC,Wigan Athletic,2,0
+07/08,Reading FC,Blackburn Rovers,0,0
+07/08,Sunderland AFC,West Ham United,2,1
+07/08,Manchester United,Aston Villa,4,0
+07/08,Tottenham Hotspur,Newcastle United,1,4
+07/08,Liverpool FC,Everton FC,1,0
+07/08,Chelsea FC,Middlesbrough FC,1,0
+06/07,Manchester City,Charlton Athletic,0,0
+06/07,Everton FC,Fulham FC,4,1
+06/07,Sheffield United,Newcastle United,1,2
+06/07,Chelsea FC,Tottenham Hotspur,1,0
+06/07,Blackburn Rovers,Aston Villa,1,2
+06/07,Wigan Athletic,Bolton Wanderers,1,3
+06/07,Reading FC,Liverpool FC,1,2
+06/07,Arsenal FC,West Ham United,0,1
+06/07,Middlesbrough FC,Watford FC,4,1
+06/07,Portsmouth FC,Manchester United,2,1
+05/06,West Bromwich Albion,Liverpool FC,0,2
+05/06,Everton FC,Sunderland AFC,2,2
+05/06,Birmingham City,Chelsea FC,0,0
+05/06,Arsenal FC,Aston Villa,5,0
+05/06,Bolton Wanderers,Manchester United,1,2
+05/06,Newcastle United,Tottenham Hotspur,3,1
+05/06,Fulham FC,Portsmouth FC,1,3
+05/06,West Ham United,Charlton Athletic,0,0
+05/06,Manchester City,Middlesbrough FC,0,1
+05/06,Blackburn Rovers,Wigan Athletic,1,1
+04/05,Blackburn Rovers,Southampton FC,3,0
+04/05,Bolton Wanderers,Fulham FC,3,1
+04/05,Chelsea FC,Birmingham City,1,1
+04/05,Manchester City,Liverpool FC,1,0
+04/05,Norwich City,Manchester United,2,0
+04/05,Portsmouth FC,Charlton Athletic,4,2
+04/05,Middlesbrough FC,Arsenal FC,0,1
+04/05,Aston Villa,West Bromwich Albion,1,1
+04/05,Everton FC,Crystal Palace,4,0
+04/05,Tottenham Hotspur,Newcastle United,1,0
+03/04,Arsenal FC,Liverpool FC,4,2
+03/04,Everton FC,Tottenham Hotspur,3,1
+03/04,Chelsea FC,Middlesbrough FC,0,0
+03/04,Charlton Athletic,Portsmouth FC,1,1
+03/04,Bolton Wanderers,Aston Villa,2,2
+03/04,Manchester City,Wolverhampton Wanderers,3,3
+03/04,Leicester City,Fulham FC,0,2
+03/04,Blackburn Rovers,Leeds United,1,2
+03/04,Birmingham City,Manchester United,1,2
+03/04,Southampton FC,Newcastle United,3,3
+02/03,Bolton Wanderers,Manchester City,2,0
+02/03,Manchester United,Liverpool FC,4,0
+02/03,Tottenham Hotspur,Birmingham City,2,1
+02/03,Middlesbrough FC,West Bromwich Albion,3,0
+02/03,Southampton FC,West Ham United,1,1
+02/03,Sunderland AFC,Chelsea FC,1,2
+02/03,Aston Villa,Arsenal FC,1,1
+02/03,Charlton Athletic,Leeds United,1,6
+02/03,Everton FC,Newcastle United,2,1
+02/03,Fulham FC,Blackburn Rovers,0,4
