@@ -122,11 +122,16 @@ HEADER_RE = re.compile(
 # Tarih basligi satirlari: "Sat Aug 8", "Fri Aug 15 2025" vb. Sadece hafta
 # gunu kisaltmasiyla baslamak yeterli DEGIL - "Sunderland" de "Sun" ile
 # basliyor ve bir mac satirinin ev sahibi olabiliyor. Ay kisaltmasini da
-# zorunlu tutarak bu yanlis eslesmeyi onluyoruz.
-DAY_LINE_RE = re.compile(
+# zorunlu tutarak bu yanlis eslesmeyi onluyoruz. Gun sayisini da yakalayip
+# gercek mac tarihini (AL kolonu icin GG/AA) cikartiyoruz.
+DATE_LINE_RE = re.compile(
     r"^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+"
-    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b"
+    r"(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\b"
 )
+MONTH_NUM = {
+    "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6,
+    "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12,
+}
 # Format A (cogunlukla eski sezonlar): "Ev Takim   H-A (IY)  Deplasman"
 MATCH_LINE_RE_DASH = re.compile(
     r"^\s*(?:\d{1,2}[:.]\d{2}\s*)?"
@@ -204,6 +209,7 @@ def clean_team(name):
 def parse_season_text(text, season_label):
     matches = []
     current_week = None
+    current_date_dm = None
     for raw_line in text.splitlines():
         line = raw_line.rstrip("\n")
         stripped = line.strip()
@@ -215,7 +221,9 @@ def parse_season_text(text, season_label):
             current_week = int(m.group(1))
             continue
 
-        if DAY_LINE_RE.match(stripped):
+        dm = DATE_LINE_RE.match(stripped)
+        if dm:
+            current_date_dm = f"{int(dm.group(3)):02d}/{MONTH_NUM[dm.group(2)]:02d}"
             continue
 
         if stripped.startswith("(") or stripped.startswith(")"):
@@ -250,6 +258,7 @@ def parse_season_text(text, season_label):
                 "away_goals": int(mm.group("ag")),
                 "ht_home_goals": ht_home,
                 "ht_away_goals": ht_away,
+                "date_dm": current_date_dm,
             }
         )
     return matches
@@ -317,6 +326,21 @@ def compute_standings(matches):
             table[h]["P"] += 1
             table[a]["P"] += 1
     return table
+
+
+def compute_rank_table(season_matches, through_week):
+    """O sezonun 1..through_week arasindaki TUM maclarindan puan durumu
+    hesaplayip takim -> sira (1=lider) sozlugu doner. Mackolik'in
+    WeeklyStandingData.aspx yanitindaki "s" listesinin sirasi da ayni
+    (Puan azalan) mantikla siralanmis oldugu dogrulandi; buradaki
+    tie-break (Puan -> Averaj -> Atilan Gol) standart futbol kuralidir."""
+    relevant = [m for m in season_matches if m["week"] <= through_week]
+    table = compute_standings(relevant)
+    ranked = sorted(
+        table.items(),
+        key=lambda kv: (-kv[1]["P"], -(kv[1]["A"] - kv[1]["Y"]), -kv[1]["A"]),
+    )
+    return {team: i + 1 for i, (team, _) in enumerate(ranked)}
 
 
 def cross_check_known_champions(all_matches_by_season):
@@ -407,7 +431,7 @@ def fetch_validate_all():
     by_season_week = defaultdict(list)
     for m in all_matches:
         by_season_week[(m["season"], m["week"])].append(m)
-    return by_season_week
+    return by_season_week, all_matches_by_season
 
 
 # =============================================================================
@@ -418,22 +442,35 @@ FILENAME_RE = re.compile(r"(\d{1,2})\s*\.\s*HAFTA\.xlsx$", re.IGNORECASE)
 TITLE_RE = re.compile(r"^(\d{2}/\d{2})\b")
 
 # Sezon blogu icinde MAClAR icin kullanilan sabit hucreler (her blogun kendi
-# baslik satirina GORECELI). Bu satir/kolonlar yuklenen gercek Excel
-# dosyasi (Ingiltere Premier Lig 1. HAFTA.xlsx) programatik olarak
-# incelenerek tespit edildi - tahmin edilmedi:
-#   title_row      : "XX/YY Ingiltere Premier Lig N. HAFTA" basligi
+# baslik satirina GORECELI). Bu satir/kolonlar iki GERCEK Excel dosyasi
+# (Ingiltere Premier Lig 1. HAFTA.xlsx + doldurulmus SPANYA LA LIGA 1.
+# HAFTA.xlsx ornegi) programatik olarak incelenerek tespit edildi -
+# tahmin edilmedi:
+#   title_row      : "XX/YY ... N. HAFTA" basligi
 #   title_row+3..+22 (20 satir) : D kolonunda TAKIMLAR, E:AC PUAN DURUMU
 #   title_row+3..+12 (ilk 10 satir): o haftanin 10 maci
+#     AL = tarih, "GG/AA" metin (orn. "22/08")
+#     AM = sabit metin "MS" (her satirda ayni, dolu La Liga orneginde dogrulandi)
+#     AN = ev sahibinin o haftaya kadarki puan durumu sirasi (1=lider)
 #     AO = ev sahibi (raw, "MAClAR" panelindeki AG formulunun kaynagi)
+#     AP = BOS (dolu ornekte de hep bos)
+#     AQ = M/S skoru "H - A" (bosluklu!, raw, AK formulunun kaynagi)
+#     AR = BOS (dolu ornekte de hep bos)
 #     AS = deplasman (raw, AH formulunun kaynagi)
-#     AQ = M/S skoru "H-A"   (raw, AK formulunun kaynagi)
-#     AU = I/Y ilk yari "H-A" (raw, AJ formulunun kaynagi; kaynakta yoksa bos birakilir)
-# AL,AM,AN,AP,AR,AT,AV: kullanilmayan spacer kolonlar - DOKUNULMAZ.
+#     AT = deplasmanin o haftaya kadarki puan durumu sirasi
+#     AU = I/Y ilk yari "H - A" (raw, AJ formulunun kaynagi; kaynakta yoksa bos)
+# AV,AW,AX,AY,AZ,BA,BB,BC,BD: dolu La Liga orneginde bile anlamsiz/bozuk
+# (tarih tipine donusmus sayilar) ve hicbir formul onlara bakmiyor -
+# KESINLIKLE DOKUNULMAZ, sadece degismediklerini dogrulamak icin izleniyor.
+MATCH_COL_DATE = "AL"
+MATCH_COL_MS = "AM"
+MATCH_COL_HOME_RANK = "AN"
 MATCH_COL_HOME = "AO"
-MATCH_COL_AWAY = "AS"
 MATCH_COL_FT = "AQ"
+MATCH_COL_AWAY = "AS"
+MATCH_COL_AWAY_RANK = "AT"
 MATCH_COL_HT = "AU"
-UNTOUCHED_SPACER_COLS = ["AL", "AM", "AN", "AP", "AR", "AT", "AV"]
+UNTOUCHED_SPACER_COLS = ["AP", "AR", "AV", "AW", "AX", "AY", "AZ", "BA", "BB", "BC", "BD"]
 STANDINGS_COLS = ["D", "E", "F", "G", "H", "I", "J", "K", "M", "AD", "AE"]
 FORMULA_ZONE_COLS = ["AF", "AG", "AH", "AI", "AJ", "AK"]
 N_MATCH_ROWS = 10
@@ -497,7 +534,7 @@ def diff_snapshot(ws, snap):
     return diffs
 
 
-def process_excel_file(week_n, filepath, by_season_week, report):
+def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, report):
     try:
         import openpyxl
     except ImportError:
@@ -569,13 +606,20 @@ def process_excel_file(week_n, filepath, by_season_week, report):
 
         snapshots.append((title_row, snapshot_block(ws, title_row)))
 
+        rank_table = compute_rank_table(all_matches_by_season[season_code], target_matchday)
+
         for i, m in enumerate(matches):
             r = title_row + 3 + i
+            if m["date_dm"]:
+                plan.append((r, MATCH_COL_DATE, m["date_dm"]))
+            plan.append((r, MATCH_COL_MS, "MS"))
+            plan.append((r, MATCH_COL_HOME_RANK, rank_table.get(m["home"])))
             plan.append((r, MATCH_COL_HOME, normalize_team(m["home"])))
+            plan.append((r, MATCH_COL_FT, f"{m['home_goals']} - {m['away_goals']}"))
             plan.append((r, MATCH_COL_AWAY, normalize_team(m["away"])))
-            plan.append((r, MATCH_COL_FT, f"{m['home_goals']}-{m['away_goals']}"))
+            plan.append((r, MATCH_COL_AWAY_RANK, rank_table.get(m["away"])))
             if m["ht_home_goals"] is not None:
-                plan.append((r, MATCH_COL_HT, f"{m['ht_home_goals']}-{m['ht_away_goals']}"))
+                plan.append((r, MATCH_COL_HT, f"{m['ht_home_goals']} - {m['ht_away_goals']}"))
 
     if file_errors:
         report["file_errors"][fname] = file_errors
@@ -633,7 +677,7 @@ def process_excel_file(week_n, filepath, by_season_week, report):
     log(f"     {status} - {len(plan)} hucre yazildi, {len(snapshots)} blok korundu dogrulandi ({elapsed:.0f}sn)")
 
 
-def run_excel_writing(by_season_week):
+def run_excel_writing(by_season_week, all_matches_by_season):
     log("[2/3] EXCEL DOSYALARI TARANIYOR")
     log("-" * 70)
     log(f"  Klasor: {EXCEL_DIR}")
@@ -665,7 +709,7 @@ def run_excel_writing(by_season_week):
     for week_n in range(1, 38):
         if week_n not in files:
             continue
-        process_excel_file(week_n, files[week_n], by_season_week, report)
+        process_excel_file(week_n, files[week_n], by_season_week, all_matches_by_season, report)
         if report["fatal"]:
             log(f"DURDURULDU: {report['fatal']}")
             return report
@@ -723,12 +767,13 @@ def print_final_audit(report, seasons_validated, total_matches_source):
 
 
 def main():
-    by_season_week = fetch_validate_all()
-    if by_season_week is None:
+    result = fetch_validate_all()
+    if result is None:
         sys.exit(1)
+    by_season_week, all_matches_by_season = result
 
     total_matches_source = sum(len(v) for v in by_season_week.values())
-    report = run_excel_writing(by_season_week)
+    report = run_excel_writing(by_season_week, all_matches_by_season)
     print_final_audit(report, len(SEASONS), total_matches_source)
 
     if report is None or report["fatal"]:
