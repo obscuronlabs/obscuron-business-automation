@@ -130,9 +130,22 @@ STANDING_URL = "https://arsiv.mackolik.com/Standings/Default.aspx?sId={seas_id}"
 
 def fetch_season(page, seas_id, season_label):
     url = STANDING_URL.format(seas_id=seas_id)
-    page.goto(url, wait_until="networkidle", timeout=30000)
+
+    goto_ok = False
+    for attempt in range(5):
+        try:
+            page.goto(url, wait_until="networkidle", timeout=45000)
+            goto_ok = True
+            break
+        except Exception as e:
+            print(f"    [!] Sayfa acilamadi (deneme {attempt + 1}/5): {e}")
+            time.sleep(3)
+    if not goto_ok:
+        print("    [!] Sayfa 5 denemede de acilamadi, sezon atlaniyor.")
+        return []
+
     try:
-        page.click("text=Haftalık", timeout=5000)
+        page.click("text=Haftalık", timeout=8000)
         page.wait_for_timeout(1500)
     except Exception as e:
         print(f"    [!] 'Haftalık' sekmesine tiklanamadi: {e}")
@@ -149,19 +162,19 @@ def fetch_season(page, seas_id, season_label):
     for wk in weeks:
         ok = False
         matches = []
-        for attempt in range(3):
+        for attempt in range(5):
             try:
                 page.select_option("#weekOpt", str(wk))
-                page.wait_for_load_state("networkidle", timeout=15000)
-                page.wait_for_timeout(500)
+                page.wait_for_load_state("networkidle", timeout=20000)
+                page.wait_for_timeout(700)
                 html = page.content()
                 matches, parsed_week = parse_match_table(html)
                 if parsed_week == wk:
                     ok = True
                     break
-                time.sleep(1)
+                time.sleep(2)
             except Exception:
-                time.sleep(1)
+                time.sleep(2)
         if not ok:
             print(f"    [!] Hafta {wk}: dogrulanamadi, atlaniyor (son deneme: {len(matches)} mac bulundu)")
             continue
@@ -219,12 +232,31 @@ def main():
         page = browser.new_page()
 
         for league_key, season_label, seas_id in JOBS:
-            print(f"[{league_key} {season_label}] sId={seas_id}")
-            matches = fetch_season(page, seas_id, season_label)
-            errors = validate(season_label, matches)
-
             safe_label = season_label.replace("/", "-")
             out_path = os.path.join(OUT_DIR, f"{league_key}__{safe_label}.json")
+
+            if os.path.exists(out_path):
+                with open(out_path, encoding="utf-8") as f:
+                    cached = json.load(f)
+                if not validate(season_label, cached):
+                    print(f"[{league_key} {season_label}] zaten var ve OK, atlaniyor.\n")
+                    summary.append((league_key, season_label, len(cached), "OK (onceki calisma)"))
+                    continue
+                print(f"[{league_key} {season_label}] daha once SORUNLU kaydedilmis, yeniden deneniyor.")
+
+            print(f"[{league_key} {season_label}] sId={seas_id}")
+            try:
+                matches = fetch_season(page, seas_id, season_label)
+                errors = validate(season_label, matches)
+            except Exception as e:
+                print(f"    [!!] SEZON COKTU, atlaniyor: {e}")
+                matches = []
+                errors = [f"beklenmeyen hata: {e}"]
+                try:
+                    page = browser.new_page()
+                except Exception:
+                    pass
+
             with open(out_path, "w", encoding="utf-8") as f:
                 json.dump(matches, f, ensure_ascii=False, indent=2)
 
