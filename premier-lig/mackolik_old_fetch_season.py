@@ -128,25 +128,42 @@ JOBS = [
 STANDING_URL = "https://arsiv.mackolik.com/Standings/Default.aspx?sId={seas_id}"
 
 
+def wait_for_week_content(page, wk, max_wait_s=15):
+    """networkidle yerine: reklam/takip istekleri sayfayi hic 'sessiz'
+    hale getirmeyebilir, o yuzden dogrudan aradigimiz hafta numarasinin
+    tabloya gelip gelmedigini kontrol ediyoruz - daha guvenilir."""
+    start = time.time()
+    last_matches = []
+    while time.time() - start < max_wait_s:
+        html = page.content()
+        matches, parsed_week = parse_match_table(html)
+        last_matches = matches
+        if parsed_week == wk:
+            return matches
+        page.wait_for_timeout(500)
+    return None if not last_matches else last_matches
+
+
 def fetch_season(page, seas_id, season_label):
     url = STANDING_URL.format(seas_id=seas_id)
 
     goto_ok = False
-    for attempt in range(5):
+    for attempt in range(4):
         try:
-            page.goto(url, wait_until="networkidle", timeout=45000)
+            page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            page.wait_for_selector("text=Haftalık", timeout=15000)
             goto_ok = True
             break
         except Exception as e:
-            print(f"    [!] Sayfa acilamadi (deneme {attempt + 1}/5): {e}")
+            print(f"    [!] Sayfa acilamadi (deneme {attempt + 1}/4): {e}")
             time.sleep(3)
     if not goto_ok:
-        print("    [!] Sayfa 5 denemede de acilamadi, sezon atlaniyor.")
+        print("    [!] Sayfa 4 denemede de acilamadi, sezon atlaniyor.")
         return []
 
     try:
         page.click("text=Haftalık", timeout=8000)
-        page.wait_for_timeout(1500)
+        page.wait_for_selector("#weekOpt", timeout=15000)
     except Exception as e:
         print(f"    [!] 'Haftalık' sekmesine tiklanamadi: {e}")
         return []
@@ -160,23 +177,18 @@ def fetch_season(page, seas_id, season_label):
 
     all_matches = []
     for wk in weeks:
-        ok = False
-        matches = []
-        for attempt in range(5):
+        matches = None
+        for attempt in range(4):
             try:
                 page.select_option("#weekOpt", str(wk))
-                page.wait_for_load_state("networkidle", timeout=20000)
-                page.wait_for_timeout(700)
-                html = page.content()
-                matches, parsed_week = parse_match_table(html)
-                if parsed_week == wk:
-                    ok = True
+                matches = wait_for_week_content(page, wk, max_wait_s=15)
+                if matches is not None:
                     break
-                time.sleep(2)
             except Exception:
-                time.sleep(2)
-        if not ok:
-            print(f"    [!] Hafta {wk}: dogrulanamadi, atlaniyor (son deneme: {len(matches)} mac bulundu)")
+                matches = None
+            time.sleep(1.5)
+        if not matches:
+            print(f"    [!] Hafta {wk}: dogrulanamadi, atlaniyor")
             continue
         for m in matches:
             m["season"] = season_label
@@ -229,7 +241,12 @@ def main():
     summary = []
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.new_page()
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            locale="tr-TR",
+            viewport={"width": 1366, "height": 900},
+        )
 
         for league_key, season_label, seas_id in JOBS:
             safe_label = season_label.replace("/", "-")
@@ -245,6 +262,9 @@ def main():
                 print(f"[{league_key} {season_label}] daha once SORUNLU kaydedilmis, yeniden deneniyor.")
 
             print(f"[{league_key} {season_label}] sId={seas_id}")
+            # her sezon icin TAZE bir sekme - eski sekmede biriken
+            # reklam/takip script yukunu birlikte tasimamak icin.
+            page = context.new_page()
             try:
                 matches = fetch_season(page, seas_id, season_label)
                 errors = validate(season_label, matches)
@@ -252,8 +272,9 @@ def main():
                 print(f"    [!!] SEZON COKTU, atlaniyor: {e}")
                 matches = []
                 errors = [f"beklenmeyen hata: {e}"]
+            finally:
                 try:
-                    page = browser.new_page()
+                    page.close()
                 except Exception:
                     pass
 
@@ -267,6 +288,7 @@ def main():
                     print(f"       ! {e}")
             summary.append((league_key, season_label, len(matches), status))
             print()
+            time.sleep(2)
 
         browser.close()
 
