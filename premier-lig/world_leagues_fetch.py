@@ -58,8 +58,13 @@ CACHE_DIR = os.path.join(BASE_DIR, "cache_world")
 DATA_DIR = os.path.join(BASE_DIR, "data_world")
 
 HTTP_TIMEOUT = 20
-MAX_ATTEMPTS = 2
-RETRY_DELAY = 2.0
+# 502 Bad Gateway'ler genelde GECICI (Mackolik sunucu yuku) - komsu sezonlar
+# calisirken bir sezonun 502 vermesi bunu dogruluyor. Bu yuzden 502/503/504
+# icin daha fazla deneme + uzun bekleme yapiyoruz. 403/404 ise KALICI
+# hatalardir (sayfa yok/erisim yok), onlarda hemen vazgeciyoruz.
+MAX_ATTEMPTS = 5
+RETRY_DELAY = 3.0
+RETRYABLE_HTTP_CODES = {502, 503, 504}
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
@@ -141,12 +146,12 @@ def fetch_page(league_key, url_season, url):
             return text
         except urllib.error.HTTPError as e:
             last_err = e
-            if e.code in (403, 404):
-                break
+            if e.code not in RETRYABLE_HTTP_CODES and e.code not in (500,):
+                break  # 403/404 gibi kalici hatalar - tekrar denemekle duzelmez
         except (urllib.error.URLError, TimeoutError, OSError) as e:
             last_err = e
         if attempt < MAX_ATTEMPTS:
-            time.sleep(RETRY_DELAY * attempt)
+            time.sleep(RETRY_DELAY * attempt)  # 3s, 6s, 9s, 12s
     raise RuntimeError(f"{url}: cekilemedi ({last_err})")
 
 
