@@ -542,6 +542,15 @@ def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, 
         return
 
     from openpyxl.utils import get_column_letter  # noqa: F401 (tanilama icin faydali olabilir)
+    from openpyxl.styles import PatternFill, Font
+
+    # Mackolik'in arsiv.mackolik.com/Standings sayfasindaki "HAFTA MAC
+    # SONUCLARI" tablosuyla dogrulanan kazanan-vurgusu: kazanan takimin
+    # adi mavi zeminde beyaz/kalin yazi ile gosteriliyor.
+    WINNER_FILL = PatternFill(start_color="FF0070C0", end_color="FF0070C0", fill_type="solid")
+    WINNER_FONT = Font(color="FFFFFFFF", bold=True)
+    NO_FILL = PatternFill(fill_type=None)
+    DEFAULT_FONT = Font()
 
     target_matchday = week_n + 1
     fname = os.path.basename(filepath)
@@ -563,6 +572,7 @@ def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, 
 
     # --- ON-KONTROL: hicbir hucreye yazmadan ONCE her seyi dogrula ---
     plan = []          # (row, col, value) yazilacaklar
+    style_plan = []     # (row, col, kazandi_mi) - kazanan takim mavi/beyaz vurgu
     snapshots = []      # her blok icin korunmasi gereken hucrelerin onceki hali
     file_errors = []
     touched_2627 = False
@@ -606,7 +616,12 @@ def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, 
 
         snapshots.append((title_row, snapshot_block(ws, title_row)))
 
-        rank_table = compute_rank_table(all_matches_by_season[season_code], target_matchday)
+        # Sira, MACA GIRERKENKI durumu yansitir: dosyanin kendi puan durumu
+        # haftasi (week_n), Matchday+1 DEGIL. Gercek Mackolik verisiyle
+        # dogrulandi: West Ham 2. hafta macina girerken (1. hafta sonu)
+        # sira=18 idi - target_matchday'e (2. hafta sonu) gore hesaplanan
+        # sira=20 YANLIS cikiyordu.
+        rank_table = compute_rank_table(all_matches_by_season[season_code], week_n)
 
         for i, m in enumerate(matches):
             r = title_row + 3 + i
@@ -620,6 +635,19 @@ def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, 
             plan.append((r, MATCH_COL_AWAY_RANK, rank_table.get(m["away"])))
             if m["ht_home_goals"] is not None:
                 plan.append((r, MATCH_COL_HT, f"{m['ht_home_goals']} - {m['ht_away_goals']}"))
+
+            # Mackolik'te kazanan takimin adi mavi zeminde/beyaz yazi ile
+            # vurgulanir (arsiv.mackolik.com'daki "HAFTA MAC SONUCLARI"
+            # tablosuyla dogrulandi). Beraberlikte hicbiri vurgulanmaz.
+            if m["home_goals"] > m["away_goals"]:
+                style_plan.append((r, MATCH_COL_HOME, True))
+                style_plan.append((r, MATCH_COL_AWAY, False))
+            elif m["away_goals"] > m["home_goals"]:
+                style_plan.append((r, MATCH_COL_HOME, False))
+                style_plan.append((r, MATCH_COL_AWAY, True))
+            else:
+                style_plan.append((r, MATCH_COL_HOME, False))
+                style_plan.append((r, MATCH_COL_AWAY, False))
 
     if file_errors:
         report["file_errors"][fname] = file_errors
@@ -638,6 +666,14 @@ def process_excel_file(week_n, filepath, by_season_week, all_matches_by_season, 
     # --- YAZMA (sadece plan'daki hucreler) ---
     for r, col, val in plan:
         ws[f"{col}{r}"] = val
+    for r, col, is_winner in style_plan:
+        cell = ws[f"{col}{r}"]
+        if is_winner:
+            cell.fill = WINNER_FILL
+            cell.font = WINNER_FONT
+        else:
+            cell.fill = NO_FILL
+            cell.font = DEFAULT_FONT
     wb.save(filepath)
 
     # --- DOGRULAMA: dosyayi tekrar diskten oku, karsilastir ---
