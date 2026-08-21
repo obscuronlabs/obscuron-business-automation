@@ -35,12 +35,95 @@ from mackolik_old_parse import parse_match_table, parse_week_options
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR = os.path.join(BASE_DIR, "data_world_eski")
 
-# --- BURAYA KENDI seas_id LISTENI EKLE -----------------------------------
+# --- seas_id LISTESI -------------------------------------------------------
+# league_key degerleri world_leagues_fetch.py'deki LEAGUES ile birebir ayni.
 JOBS = [
-    # (league_key,   season_label,  seas_id)
-    ("bundesliga",   "02/03",       6),
+    # --- Almanya Bundesliga ---
+    ("bundesliga", "02/03", 6),
+    ("bundesliga", "03/04", 111),
+    ("bundesliga", "04/05", 493),
+    ("bundesliga", "05/06", 800),
+    ("bundesliga", "06/07", 1244),
+    ("bundesliga", "07/08", 1827),
+    ("bundesliga", "08/09", 2411),
+    ("bundesliga", "09/10", 3060),
+
+    # --- Italya Serie A ---
+    ("seriea_it", "02/03", 4),
+    ("seriea_it", "03/04", 151),
+    ("seriea_it", "04/05", 557),
+    ("seriea_it", "05/06", 908),
+    ("seriea_it", "06/07", 1383),
+    ("seriea_it", "07/08", 1948),
+    ("seriea_it", "08/09", 2450),
+    ("seriea_it", "09/10", 3064),
+
+    # --- Italya Serie B ---
+    ("serieb_it", "02/03", 26),
+    ("serieb_it", "03/04", 152),
+    ("serieb_it", "04/05", 558),
+    ("serieb_it", "05/06", 931),
+    ("serieb_it", "06/07", 1384),
+    ("serieb_it", "07/08", 1949),
+    ("serieb_it", "08/09", 2451),
+    ("serieb_it", "09/10", 3122),
+
+    # --- Hollanda Eredivisie ---
+    ("eredivisie", "02/03", 8),
+    ("eredivisie", "03/04", 148),
+    ("eredivisie", "04/05", 515),
+    ("eredivisie", "05/06", 844),
+    ("eredivisie", "06/07", 1293),
+    ("eredivisie", "07/08", 1842),
+    ("eredivisie", "08/09", 2448),
+    ("eredivisie", "09/10", 3094),
+
+    # --- Fransa Ligue 1 ---
+    ("ligue1", "02/03", 5),
+    ("ligue1", "03/04", 109),
+    ("ligue1", "04/05", 495),
+    ("ligue1", "05/06", 837),
+    ("ligue1", "06/07", 1262),
+    ("ligue1", "07/08", 1761),
+    ("ligue1", "08/09", 2381),
+    ("ligue1", "09/10", 3057),
+
+    # --- Fransa Ligue 2 ---
+    ("ligue2", "02/03", 7),
+    ("ligue2", "03/04", 110),
+    ("ligue2", "04/05", 496),
+    ("ligue2", "05/06", 838),
+    ("ligue2", "06/07", 1263),
+    ("ligue2", "07/08", 1762),
+    ("ligue2", "08/09", 2382),
+    ("ligue2", "09/10", 3058),
+
+    # --- Brezilya Serie A (season_kind = "year", 2002 icin id yok) ---
+    ("brasileirao_a", "2003", 77),
+    ("brasileirao_a", "2004", 307),
+    ("brasileirao_a", "2005", 723),
+    ("brasileirao_a", "2006", 1130),
+    ("brasileirao_a", "2007", 1564),
+    ("brasileirao_a", "2008", 2259),
+    ("brasileirao_a", "2009", 2937),
+
+    # --- Brezilya Serie B (2002-2005 icin id yok) ---
+    ("brasileirao_b", "2006", 1182),
+    ("brasileirao_b", "2007", 1633),
+    ("brasileirao_b", "2008", 2289),
+    ("brasileirao_b", "2009", 2938),
 ]
 # --------------------------------------------------------------------------
+# NOT: Bu ID'ler "5 ai calisti bunlar cikti" listesinden geliyor - yani
+# baska bir yapay zekanin cikarim/arama sonucu, benim veya senin tek tek
+# tarayicidan dogruladigin bir liste DEGIL. Tek dogrulanan deger sId=6
+# (Bundesliga 02/03) idi ve listeyle birebir uyustu, bu iyi bir isaret.
+# Yine de her sezon asagidaki validate() fonksiyonundan otomatik gecer:
+# yanlis ID bir baska ligin/sezonun sayfasina denk gelirse (takim sayisi
+# tuhaf, mac sayisi tutmuyor, hafta araligi bozuk) o sezon "SORUNLU"
+# olarak isaretlenir ve JSON'a yine de yazilir ama ozet tabloda gorunur -
+# hicbir sey sessizce Excel'e karismaz, cunku bu script Excel'e hic
+# dokunmuyor.
 
 STANDING_URL = "https://arsiv.mackolik.com/Standings/Default.aspx?sId={seas_id}"
 
