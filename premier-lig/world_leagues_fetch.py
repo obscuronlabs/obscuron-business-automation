@@ -173,16 +173,42 @@ def extract_competition_json(html_doc):
     return None
 
 
+# Playoff/baraj/kupa gruplarinin ISIMLERI (gameset["name"]) genelde bu
+# kelimelerden birini icerir - bunlari ATLIYORUZ. Eski sezonlarda (orn.
+# 2002-2003) TUM normal sezon TEK bir "Grup Asamasi" grubunda gelebiliyor
+# (sayisal olmayan ama GERCEK lig verisi) - o yuzden "sadece sayisal isim
+# kabul et" yerine "bilinen playoff kelimelerini disla" mantigina gectik.
+PLAYOFF_KEYWORDS = [
+    "play-off", "playoff", "play off", "play-out", "playout",
+    "yükselme", "yukselme", "küme düşme", "kume dusme",
+    "avrupa ligi", "konferans ligi", "şampiyonluk", "sampiyonluk",
+    "baraj",
+]
+
+
+def is_playoff_gameset(name):
+    low = str(name).strip().lower()
+    return any(kw in low for kw in PLAYOFF_KEYWORDS)
+
+
 def parse_matches(comp, season_label):
     matches = []
-    skipped_non_numeric = []
+    skipped_gamesets = []
     for gs in comp.get("gamesets", []):
         name = gs.get("name", "")
-        if not re.fullmatch(r"\d+", str(name).strip()):
-            skipped_non_numeric.append(name)
+        if is_playoff_gameset(name):
+            skipped_gamesets.append(name)
             continue
-        week = int(name)
+
         for m in gs.get("matches", {}).values():
+            # Hafta numarasi GAMESET ADINDAN degil, macin KENDI "week"
+            # alanindan alinir - eski format tek grup altinda butun
+            # sezonu tutuyor, sadece mac-bazli week alani guvenilir.
+            week_raw = m.get("week")
+            if week_raw is None:
+                continue
+            week = int(week_raw) + 1  # 0-indeksli -> 1-indeksli
+
             contestants = m.get("contestants") or {}
             home = away = None
             for c in contestants.values():
@@ -216,7 +242,7 @@ def parse_matches(comp, season_label):
                 "ht_away_goals": ht.get("away"),
                 "date_dm": date_dm,
             })
-    return matches, skipped_non_numeric
+    return matches, skipped_gamesets
 
 
 def validate_season(season_label, matches):
