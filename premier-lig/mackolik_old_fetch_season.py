@@ -38,16 +38,6 @@ OUT_DIR = os.path.join(BASE_DIR, "data_world_eski")
 # --- seas_id LISTESI -------------------------------------------------------
 # league_key degerleri world_leagues_fetch.py'deki LEAGUES ile birebir ayni.
 JOBS = [
-    # --- Almanya Bundesliga ---
-    ("bundesliga", "02/03", 6),
-    ("bundesliga", "03/04", 111),
-    ("bundesliga", "04/05", 493),
-    ("bundesliga", "05/06", 800),
-    ("bundesliga", "06/07", 1244),
-    ("bundesliga", "07/08", 1827),
-    ("bundesliga", "08/09", 2411),
-    ("bundesliga", "09/10", 3060),
-
     # --- Italya Serie A ---
     ("seriea_it", "02/03", 4),
     ("seriea_it", "03/04", 151),
