@@ -138,15 +138,20 @@ MATCH_LINE_RE_DASH = re.compile(
     r"(?P<home>.+?)\s{2,}"
     r"(?P<hg>\d+)\s*-\s*(?P<ag>\d+)"
     r"(?:\s*\((?P<ht>[^)]*)\))?"
-    r"\s+(?P<away>.+?)\s*$"
+    r"\s+(?P<away>.+?)"
+    r"(?:\s*\[[^\]]*\])?\s*$"
 )
 # Format B (bazi yeni sezonlar, orn. 2024-25): "Ev Takim  v  Deplasman   H-A (IY)"
+# Sondaki "[awarded]" gibi bir hakem/federasyon notu opsiyonel olarak
+# atlanir (orn. Almanya 2024-25, Fransa 2024-25 sezonlarinda gorulen
+# oynanmamis/hukmen verilen mac notasyonu).
 MATCH_LINE_RE_V = re.compile(
     r"^\s*(?:\d{1,2}[:.]\d{2}\s*)?"
     r"(?P<home>.+?)\s+v\s+"
     r"(?P<away>.+?)\s{2,}"
     r"(?P<hg>\d+)\s*-\s*(?P<ag>\d+)"
-    r"(?:\s*\((?P<ht>[^)]*)\))?\s*$"
+    r"(?:\s*\((?P<ht>[^)]*)\))?"
+    r"(?:\s*\[[^\]]*\])?\s*$"
 )
 HALFTIME_RE = re.compile(r"^(\d+)\s*-\s*(\d+)$")
 
