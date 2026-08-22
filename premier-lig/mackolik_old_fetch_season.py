@@ -220,7 +220,7 @@ def validate(season_label, matches):
             errors.append(f"{t}: {c} mac (beklenen {expected_per_team})")
 
     weeks_seen = sorted(set(m["week"] for m in matches))
-    n_expected_weeks = n_teams - 1
+    n_expected_weeks = 2 * (n_teams - 1)
     if weeks_seen != list(range(1, n_expected_weeks + 1)):
         errors.append(f"hafta araligi anormal: {weeks_seen[:3]}...{weeks_seen[-3:]} (beklenen 1..{n_expected_weeks})")
 
