@@ -121,17 +121,20 @@ STANDING_URL = "https://arsiv.mackolik.com/Standings/Default.aspx?sId={seas_id}"
 def wait_for_week_content(page, wk, max_wait_s=15):
     """networkidle yerine: reklam/takip istekleri sayfayi hic 'sessiz'
     hale getirmeyebilir, o yuzden dogrudan aradigimiz hafta numarasinin
-    tabloya gelip gelmedigini kontrol ediyoruz - daha guvenilir."""
+    tabloya gelip gelmedigini kontrol ediyoruz - daha guvenilir.
+
+    ONEMLI: eski hafta hala ekranda goruntuleniyorsa (AJAX henuz
+    guncellemediyse) o veriyi ASLA dogru hafta gibi geri dondurmuyoruz -
+    aksi halde bir onceki haftanin verisi yanlis hafta numarasiyla
+    tekrar tekrar eklenir (duplike + eksik hafta hatasina yol acar)."""
     start = time.time()
-    last_matches = []
     while time.time() - start < max_wait_s:
         html = page.content()
         matches, parsed_week = parse_match_table(html)
-        last_matches = matches
         if parsed_week == wk:
             return matches
         page.wait_for_timeout(500)
-    return None if not last_matches else last_matches
+    return None
 
 
 def fetch_season(page, seas_id, season_label):
