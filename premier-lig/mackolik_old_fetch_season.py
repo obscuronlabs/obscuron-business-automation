@@ -141,22 +141,23 @@ def fetch_season(page, seas_id, season_label):
     url = STANDING_URL.format(seas_id=seas_id)
 
     goto_ok = False
-    for attempt in range(4):
+    for attempt in range(6):
         try:
-            page.goto(url, wait_until="domcontentloaded", timeout=30000)
-            page.wait_for_selector("text=Haftalık", timeout=15000)
+            page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            page.wait_for_timeout(1500)
+            page.wait_for_selector("text=Haftalık", timeout=25000)
             goto_ok = True
             break
         except Exception as e:
-            print(f"    [!] Sayfa acilamadi (deneme {attempt + 1}/4): {e}")
-            time.sleep(3)
+            print(f"    [!] Sayfa acilamadi (deneme {attempt + 1}/6): {e}")
+            time.sleep(4)
     if not goto_ok:
-        print("    [!] Sayfa 4 denemede de acilamadi, sezon atlaniyor.")
+        print("    [!] Sayfa 6 denemede de acilamadi, sezon atlaniyor.")
         return []
 
     try:
-        page.click("text=Haftalık", timeout=8000)
-        page.wait_for_selector("#weekOpt", timeout=15000)
+        page.click("text=Haftalık", timeout=15000)
+        page.wait_for_selector("#weekOpt", timeout=25000)
     except Exception as e:
         print(f"    [!] 'Haftalık' sekmesine tiklanamadi: {e}")
         return []
@@ -171,15 +172,15 @@ def fetch_season(page, seas_id, season_label):
     all_matches = []
     for wk in weeks:
         matches = None
-        for attempt in range(4):
+        for attempt in range(6):
             try:
                 page.select_option("#weekOpt", str(wk))
-                matches = wait_for_week_content(page, wk, max_wait_s=15)
+                matches = wait_for_week_content(page, wk, max_wait_s=20)
                 if matches is not None:
                     break
             except Exception:
                 matches = None
-            time.sleep(1.5)
+            time.sleep(2)
         if not matches:
             print(f"    [!] Hafta {wk}: dogrulanamadi, atlaniyor")
             continue
