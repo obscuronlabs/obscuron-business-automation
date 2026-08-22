@@ -40,6 +40,7 @@ import os
 import re
 import shutil
 import sys
+import time
 from collections import defaultdict
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -305,7 +306,21 @@ def build_league(league, source_files, openpyxl_mod):
 
         dst_name = f"{league['name']} {week_n}. HAFTA.xlsx"
         dst_path = os.path.join(OUTPUT_DIR, dst_name)
-        shutil.copy2(src, dst_path)  # KAYNAK asla degistirilmez
+
+        copy_ok = False
+        for attempt in range(5):
+            try:
+                shutil.copy2(src, dst_path)  # KAYNAK asla degistirilmez
+                copy_ok = True
+                break
+            except PermissionError:
+                log(f"  UYARI ({dst_name}): dosya kilitli (Excel'de acik ya da OneDrive senkronize ediyor olabilir), "
+                    f"3 saniye sonra tekrar denenecek (deneme {attempt + 1}/5)...")
+                time.sleep(3)
+        if not copy_ok:
+            log(f"  HATA ({dst_name}): 5 denemede de dosya acilamadi (kilitli kaldi), atlaniyor. "
+                f"Excel'de acik degilse OneDrive'in senkronu bitirmesini bekleyip tekrar calistir.")
+            continue
 
         wb = openpyxl_mod.load_workbook(dst_path, data_only=False)
         sheet_name = "SAYFA 1" if "SAYFA 1" in wb.sheetnames else wb.sheetnames[0]
