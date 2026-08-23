@@ -63,13 +63,13 @@ BLOCK_SCAN_MAX_ROW = 700
 # olarak elenir (asagidaki valid_seasons kontrolu), 18 takimli sezonlar ise
 # ayni blokta sadece 18 satir kullanilarak sorunsuz calisir. ---
 LEAGUES = [
-    {"name": "İtalya Serie A", "data_file": "seriea_it_maclar_TUM.json", "season_kind": "range"},
-    {"name": "Brezilya Serie A", "data_file": "brasileirao_a_maclar_TUM.json", "season_kind": "year"},
-    {"name": "Brezilya Serie B", "data_file": "brasileirao_b_maclar_TUM.json", "season_kind": "year"},
-    {"name": "İtalya Serie B", "data_file": "serieb_it_maclar_TUM.json", "season_kind": "range"},
-    {"name": "Hollanda Eredivisie", "data_file": "eredivisie_maclar_TUM.json", "season_kind": "range"},
-    {"name": "Fransa Ligue 1", "data_file": "ligue1_maclar_TUM.json", "season_kind": "range"},
-    {"name": "Fransa Ligue 2", "data_file": "ligue2_maclar_TUM.json", "season_kind": "range"},
+    {"name": "İtalya Serie A", "code": "ITA", "data_file": "seriea_it_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Brezilya Serie A", "code": "BRA", "data_file": "brasileirao_a_maclar_TUM.json", "season_kind": "year"},
+    {"name": "Brezilya Serie B", "code": "BRB", "data_file": "brasileirao_b_maclar_TUM.json", "season_kind": "year"},
+    {"name": "İtalya Serie B", "code": "ITB", "data_file": "serieb_it_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Hollanda Eredivisie", "code": "HOL", "data_file": "eredivisie_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Fransa Ligue 1", "code": "FR1", "data_file": "ligue1_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Fransa Ligue 2", "code": "FR2", "data_file": "ligue2_maclar_TUM.json", "season_kind": "range"},
 ]
 
 STANDINGS_TOTAL_COLS = ["E", "F", "G", "H", "I", "J", "K", "M"]        # O G B M A Y P (L bos) AV
@@ -185,12 +185,21 @@ def discover_season_blocks(ws):
     return blocks
 
 
-def clear_block(ws, title_row, league_label_full):
+def write_league_code_column(ws, title_row, league_code):
+    """A sutunu - sablonda her satirda hazir gelen 'INP' (Ingiltere
+    Premier lig) kisaltmasinin yerine bu ligin 3 harfli kodunu yazar."""
+    for i in range(N_TEAM_ROWS):
+        r = title_row + 3 + i
+        ws.cell(row=r, column=1).value = league_code
+
+
+def clear_block(ws, title_row, league_label_full, league_code):
     """Eski Premier Lig verisini TAMAMEN temizler: takim adlari, TUM
     puan durumu (toplam+icerde+disarda), sezon/hafta etiketleri. Formul
     zonuna (AF:AK, BE:JZ) VE mac blogunun kendisine (AL:BD) DOKUNMAZ -
     mac blogu ayri asamada, sadece veri varsa yazilir/temizlenir."""
     ws.cell(row=title_row, column=2).value = league_label_full  # B kolonu
+    write_league_code_column(ws, title_row, league_code)
     for i in range(N_TEAM_ROWS):
         r = title_row + 3 + i
         ws.cell(row=r, column=4).value = None  # D = TAKIM
@@ -213,7 +222,9 @@ def write_standings_block(ws, title_row, season_label, week_n, teams_sorted, sea
         r = title_row + 3 + i
         ws.cell(row=r, column=4).value = team
         ws[f"AD{r}"] = season_label
-        ws[f"AE{r}"] = week_n
+        ae_cell = ws[f"AE{r}"]
+        ae_cell.value = week_n
+        ae_cell.number_format = "0"  # sablondan miras kalan "8.0" gibi ondalik gorunumu onler
 
         stats = compute_standings_row(relevant, team)
         for label, cols in (("total", STANDINGS_TOTAL_COLS), ("home", STANDINGS_HOME_COLS), ("away", STANDINGS_AWAY_COLS)):
@@ -347,12 +358,13 @@ def build_league(league, source_files, openpyxl_mod):
         # blok 0: HER ZAMAN bos/gelecek sezon - sadece basligi yeniden yazip dokunmuyoruz
         future_row = block_rows[0]
         ws.cell(row=future_row, column=2).value = f"{future_season_label} {league['name']} {week_n}. HAFTA"
+        write_league_code_column(ws, future_row, league["code"])
 
         match_written_total = 0
         for idx, season in enumerate(valid_seasons, start=1):
             title_row = block_rows[idx]
             season_matches = by_season[season]
-            clear_block(ws, title_row, f"{season} {league['name']} {week_n}. HAFTA")
+            clear_block(ws, title_row, f"{season} {league['name']} {week_n}. HAFTA", league["code"])
             write_standings_block(ws, title_row, season, week_n, team_order[season], season_matches)
 
             if week_n < WEEKS:  # 38. HAFTA'nin mac alanina KESINLIKLE dokunulmaz
@@ -366,7 +378,7 @@ def build_league(league, source_files, openpyxl_mod):
 
         # kullanilmayan tarihi bloklari (valid_seasons'dan fazla olanlari) da temizle
         for extra_row in block_rows[1 + len(valid_seasons):N_BLOCKS]:
-            clear_block(ws, extra_row, f"(veri yok) {league['name']} {week_n}. HAFTA")
+            clear_block(ws, extra_row, f"(veri yok) {league['name']} {week_n}. HAFTA", league["code"])
 
         wb.save(dst_path)
         files_written += 1
