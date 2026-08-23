@@ -6,10 +6,14 @@ sezonlari, data_world/ (www.mackolik.com yeni sistem) icindeki ana veri
 dosyalarina EKLER - boylece build_league_excel.py daha eski sezonlari da
 kullanabilir.
 
-SADECE su an Excel'e islenen 3 lig icin calisir (20 takimli, sabit sablon):
+Excel'e islenen tum ligler icin calisir:
   - seriea_it (Italya Serie A)
   - brasileirao_a (Brezilya Serie A)
   - brasileirao_b (Brezilya Serie B)
+  - serieb_it (Italya Serie B)
+  - eredivisie (Hollanda Eredivisie)
+  - ligue1 (Fransa Ligue 1)
+  - ligue2 (Fransa Ligue 2)
 
 Bir sezon HEM data_world HEM data_world_eski'de varsa, data_world'daki
 (yeni sistem) tercih edilir, data_world_eski'deki o sezon ATLANIR -
@@ -30,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_WORLD_DIR = os.path.join(BASE_DIR, "data_world")
 DATA_WORLD_ESKI_DIR = os.path.join(BASE_DIR, "data_world_eski")
 
-LEAGUE_KEYS = ["seriea_it", "brasileirao_a", "brasileirao_b"]
+LEAGUE_KEYS = ["seriea_it", "brasileirao_a", "brasileirao_b", "serieb_it", "eredivisie", "ligue1", "ligue2"]
 
 
 def log(msg):

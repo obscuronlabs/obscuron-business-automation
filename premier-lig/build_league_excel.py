@@ -58,11 +58,18 @@ N_BLOCKS = 25          # 26/27 (bos) + 24 tarihi sezon
 WEEKS = 38
 BLOCK_SCAN_MAX_ROW = 700
 
-# --- 20 takimli, sabit takim sayili ligler ---
+# --- Sablon en fazla 20 takim/blok destekliyor - 20'den fazla takimli
+# sezonlar (orn. Italya Serie B'nin 22/24 takimli eski sezonlari) otomatik
+# olarak elenir (asagidaki valid_seasons kontrolu), 18 takimli sezonlar ise
+# ayni blokta sadece 18 satir kullanilarak sorunsuz calisir. ---
 LEAGUES = [
     {"name": "İtalya Serie A", "data_file": "seriea_it_maclar_TUM.json", "season_kind": "range"},
     {"name": "Brezilya Serie A", "data_file": "brasileirao_a_maclar_TUM.json", "season_kind": "year"},
     {"name": "Brezilya Serie B", "data_file": "brasileirao_b_maclar_TUM.json", "season_kind": "year"},
+    {"name": "İtalya Serie B", "data_file": "serieb_it_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Hollanda Eredivisie", "data_file": "eredivisie_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Fransa Ligue 1", "data_file": "ligue1_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Fransa Ligue 2", "data_file": "ligue2_maclar_TUM.json", "season_kind": "range"},
 ]
 
 STANDINGS_TOTAL_COLS = ["E", "F", "G", "H", "I", "J", "K", "M"]        # O G B M A Y P (L bos) AV
@@ -216,9 +223,9 @@ def write_standings_block(ws, title_row, season_label, week_n, teams_sorted, sea
                 ws[f"{col}{r}"] = val
 
 
-def write_match_block(ws, title_row, target_matchday, season_matches, rank_table, wb_styles):
+def write_match_block(ws, title_row, target_matchday, season_matches, rank_table, wb_styles, expected_match_count):
     matches = [m for m in season_matches if m["week"] == target_matchday]
-    if len(matches) != N_MATCH_ROWS:
+    if len(matches) != expected_match_count:
         return False, len(matches)
     for i, m in enumerate(matches):
         r = title_row + 3 + i
@@ -271,12 +278,18 @@ def build_league(league, source_files, openpyxl_mod):
     for m in all_matches:
         by_season[m["season"]].append(m)
 
-    # sadece TAM (20 takim x 38 hafta x 380 mac) dogrulanan sezonlar
+    # sadece TAM (N takim x cift devre x N*(N-1) mac) dogrulanan sezonlar.
+    # N en fazla 20 olabilir (sablonun blok basina 20 satir siniri) - daha
+    # fazla takimli sezonlar (orn. Italya Serie B'nin 22/24 takimli eski
+    # sezonlari) burada otomatik elenir, tahmini/yanlis veri yazilmaz.
     valid_seasons = []
     for season, ms in by_season.items():
         teams = set(m["home"] for m in ms) | set(m["away"] for m in ms)
+        n_teams = len(teams)
         weeks = set(m["week"] for m in ms)
-        if len(teams) == 20 and len(ms) == 380 and weeks == set(range(1, 39)):
+        n_expected_weeks = 2 * (n_teams - 1)
+        expected_total = n_teams * (n_teams - 1)
+        if 2 <= n_teams <= N_TEAM_ROWS and len(ms) == expected_total and weeks == set(range(1, n_expected_weeks + 1)):
             valid_seasons.append(season)
     valid_seasons.sort(key=lambda s: season_sort_key(s, league["season_kind"]), reverse=True)
     valid_seasons = valid_seasons[:24]  # sablon 24 tarihi blok destekliyor
@@ -345,7 +358,9 @@ def build_league(league, source_files, openpyxl_mod):
             if week_n < WEEKS:  # 38. HAFTA'nin mac alanina KESINLIKLE dokunulmaz
                 target_matchday = week_n + 1
                 rank_table = compute_rank_table(season_matches, week_n)
-                ok, n = write_match_block(ws, title_row, target_matchday, season_matches, rank_table, wb_styles)
+                expected_match_count = len(team_order[season]) // 2
+                ok, n = write_match_block(ws, title_row, target_matchday, season_matches, rank_table,
+                                           wb_styles, expected_match_count)
                 if ok:
                     match_written_total += n
 
