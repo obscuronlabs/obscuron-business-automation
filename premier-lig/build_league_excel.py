@@ -193,6 +193,25 @@ def write_league_code_column(ws, title_row, league_code):
         ws.cell(row=r, column=1).value = league_code
 
 
+BORDER_REFERENCE_COLS = ["A", "D"] + STANDINGS_TOTAL_COLS + STANDINGS_HOME_COLS + STANDINGS_AWAY_COLS + ["AD", "AE"]
+
+
+def normalize_row_borders(ws, title_row):
+    """Sablonda 11-20. takim satirlarinin kenarlik (border) bilgisi
+    eksik geliyor (1-10. satirlarda var) - bu orijinal Ingiltere
+    Premier Lig dosyasinda da (dokunulmayan 26/27 blogunda bile) boyle,
+    yani sablonun kendi eksigi, hicbir script bunu bozmadi. Sadece
+    gorsel oldugu icin (formul degil) 1. siradaki (rank 1) satirin
+    kenarligini referans alip 2-20. siralara kopyalayarak duzeltiyoruz."""
+    from copy import copy
+    ref_row = title_row + 3
+    for col in BORDER_REFERENCE_COLS:
+        ref_border = ws[f"{col}{ref_row}"].border
+        for i in range(1, N_TEAM_ROWS):
+            r = title_row + 3 + i
+            ws[f"{col}{r}"].border = copy(ref_border)
+
+
 def clear_block(ws, title_row, league_label_full, league_code):
     """Eski Premier Lig verisini TAMAMEN temizler: takim adlari, TUM
     puan durumu (toplam+icerde+disarda), sezon/hafta etiketleri. Formul
@@ -207,6 +226,7 @@ def clear_block(ws, title_row, league_label_full, league_code):
             ws[f"{col}{r}"] = None
         ws[f"AD{r}"] = None  # SEZON
         ws[f"AE{r}"] = None  # HAFTA
+    normalize_row_borders(ws, title_row)
     for i in range(N_MATCH_ROWS):
         r = title_row + 3 + i
         for col in (MATCH_COL_DATE, MATCH_COL_MS, MATCH_COL_HOME_RANK, MATCH_COL_HOME,
@@ -359,6 +379,7 @@ def build_league(league, source_files, openpyxl_mod):
         future_row = block_rows[0]
         ws.cell(row=future_row, column=2).value = f"{future_season_label} {league['name']} {week_n}. HAFTA"
         write_league_code_column(ws, future_row, league["code"])
+        normalize_row_borders(ws, future_row)
 
         match_written_total = 0
         for idx, season in enumerate(valid_seasons, start=1):
