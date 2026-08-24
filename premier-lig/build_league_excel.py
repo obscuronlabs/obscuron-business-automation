@@ -344,8 +344,23 @@ def build_league(league, source_files, openpyxl_mod):
     else:
         future_season_label = f"{newest_year % 100:02d}/{(newest_year + 1) % 100:02d}"
 
+    # Bu lig KAC hafta suruyor - sabit 38 degil, ligin GUNCEL (en yeni
+    # gecerli sezonun) takim sayisina gore hesaplaniyor. Ornegin Hollanda
+    # Eredivisie 18 takimli oldugu icin sezon 34 haftada bitiyor - bu ligin
+    # "35-38. HAFTA.xlsx" diye dosyalari olmamali (karsiligi olmayan,
+    # hep bos MAClAR alanli, kafa karistirici dosyalar olurdu).
+    weeks_for_league = 2 * (len(team_order[valid_seasons[0]]) - 1)
+    if weeks_for_league != WEEKS:
+        log(f"  NOT: bu ligin guncel sezonu {len(team_order[valid_seasons[0]])} takimli, "
+            f"{weeks_for_league} hafta suruyor (38 degil) - sadece {weeks_for_league} dosya uretilecek.")
+        for stale_week in range(weeks_for_league + 1, WEEKS + 1):
+            stale_path = os.path.join(OUTPUT_DIR, f"{league['name']} {stale_week}. HAFTA.xlsx")
+            if os.path.exists(stale_path):
+                os.remove(stale_path)
+                log(f"  temizlendi (bu ligin gercek hafta araligi disinda kalan eski dosya): {os.path.basename(stale_path)}")
+
     files_written = 0
-    for week_n in range(1, WEEKS + 1):
+    for week_n in range(1, weeks_for_league + 1):
         src = source_files.get(week_n)
         if not src:
             log(f"  UYARI: kaynak {week_n}. HAFTA.xlsx bulunamadi, atlaniyor.")
@@ -391,7 +406,7 @@ def build_league(league, source_files, openpyxl_mod):
             clear_block(ws, title_row, f"{season} {league['name']} {week_n}. HAFTA", league["code"])
             write_standings_block(ws, title_row, season, week_n, team_order[season], season_matches)
 
-            if week_n < WEEKS:  # 38. HAFTA'nin mac alanina KESINLIKLE dokunulmaz
+            if week_n < weeks_for_league:  # bu ligin SON haftasinin mac alanina KESINLIKLE dokunulmaz
                 target_matchday = week_n + 1
                 rank_table = compute_rank_table(season_matches, week_n)
                 expected_match_count = len(team_order[season]) // 2
@@ -408,7 +423,7 @@ def build_league(league, source_files, openpyxl_mod):
         files_written += 1
         log(f"  -> {dst_name}: {len(valid_seasons)} sezon puan durumu, {match_written_total} mac yazildi")
 
-    log(f"  TOPLAM: {files_written} / {WEEKS} dosya uretildi.")
+    log(f"  TOPLAM: {files_written} / {weeks_for_league} dosya uretildi.")
 
 
 def main():
