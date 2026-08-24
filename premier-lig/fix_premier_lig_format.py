@@ -38,7 +38,10 @@ BLOCK_SCAN_MAX_ROW = 700
 STANDINGS_TOTAL_COLS = ["E", "F", "G", "H", "I", "J", "K", "M"]
 STANDINGS_HOME_COLS = ["N", "O", "P", "Q", "R", "S", "T", "U"]
 STANDINGS_AWAY_COLS = ["V", "W", "X", "Y", "Z", "AA", "AB", "AC"]
-BORDER_REFERENCE_COLS = ["A", "D"] + STANDINGS_TOTAL_COLS + STANDINGS_HOME_COLS + STANDINGS_AWAY_COLS + ["AD", "AE"]
+# Satirin TAMAMI (A'dan AE'ye kadar, C=sira numarasi dahil) - onceki
+# surumde sadece belirli sutunlar listelenmisti ve C (sira no) atlanmisti,
+# bu yuzden 11-20. satirlarda kenarlik hala eksik gorunuyordu.
+BORDER_REFERENCE_COLS = ["A", "B", "C", "D"] + STANDINGS_TOTAL_COLS + ["L"] + STANDINGS_HOME_COLS + STANDINGS_AWAY_COLS + ["AD", "AE"]
 
 
 def log(msg):
