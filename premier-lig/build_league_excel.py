@@ -344,14 +344,23 @@ def build_league(league, source_files, openpyxl_mod):
     else:
         future_season_label = f"{newest_year % 100:02d}/{(newest_year + 1) % 100:02d}"
 
-    # Bu lig KAC hafta suruyor - sabit 38 degil, ligin GUNCEL (en yeni
-    # gecerli sezonun) takim sayisina gore hesaplaniyor. Ornegin Hollanda
-    # Eredivisie 18 takimli oldugu icin sezon 34 haftada bitiyor - bu ligin
-    # "35-38. HAFTA.xlsx" diye dosyalari olmamali (karsiligi olmayan,
-    # hep bos MAClAR alanli, kafa karistirici dosyalar olurdu).
-    weeks_for_league = 2 * (len(team_order[valid_seasons[0]]) - 1)
+    # Bu lig icin KAC dosya ("N. HAFTA.xlsx") uretilecek - sabit 38 degil.
+    # ISLENEN TUM sezonlar arasindaki EN UZUN sezona gore hesaplanir (max
+    # takim sayisi), sabit 38 degil. Boylece:
+    #  - Hollanda Eredivisie gibi TUM sezonlari 18 takimli bir ligde
+    #    35-38. HAFTA.xlsx diye (karsiligi olmayan, hep bos) dosyalar
+    #    uretilmez.
+    #  - Fransa Ligue 1/2 gibi YAKIN ZAMANDA 20->18 takima dusen bir ligde,
+    #    eski 20 takimli (38 haftalik) sezonlarin 35-38. hafta arasi puan
+    #    gelisimi de hala gosterilebilsin diye 38 dosya uretilmeye devam
+    #    eder - sadece GUNCEL (18 takimli) sezonun kendi son haftasindan
+    #    (34) sonraki dosyalarda o sezonun MAClAR alani (dogal olarak,
+    #    o haftalar gercekte yoktur) bos kalir, standart "sezon bitti"
+    #    davranisiyla aynidir.
+    max_teams_any_season = max(len(team_order[s]) for s in valid_seasons)
+    weeks_for_league = 2 * (max_teams_any_season - 1)
     if weeks_for_league != WEEKS:
-        log(f"  NOT: bu ligin guncel sezonu {len(team_order[valid_seasons[0]])} takimli, "
+        log(f"  NOT: bu ligdeki en uzun sezon {max_teams_any_season} takimli, "
             f"{weeks_for_league} hafta suruyor (38 degil) - sadece {weeks_for_league} dosya uretilecek.")
         for stale_week in range(weeks_for_league + 1, WEEKS + 1):
             stale_path = os.path.join(OUTPUT_DIR, f"{league['name']} {stale_week}. HAFTA.xlsx")
