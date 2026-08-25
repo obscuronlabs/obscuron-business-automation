@@ -70,6 +70,7 @@ LEAGUES = [
     {"name": "Hollanda Eredivisie", "code": "HOL", "data_file": "eredivisie_maclar_TUM.json", "season_kind": "range"},
     {"name": "Fransa Ligue 1", "code": "FR1", "data_file": "ligue1_maclar_TUM.json", "season_kind": "range"},
     {"name": "Fransa Ligue 2", "code": "FR2", "data_file": "ligue2_maclar_TUM.json", "season_kind": "range"},
+    {"name": "Hollanda Eerste Divisie", "code": "HL2", "data_file": "eerste_divisie_maclar_TUM.json", "season_kind": "range"},
 ]
 
 STANDINGS_TOTAL_COLS = ["E", "F", "G", "H", "I", "J", "K", "M"]        # O G B M A Y P (L bos) AV

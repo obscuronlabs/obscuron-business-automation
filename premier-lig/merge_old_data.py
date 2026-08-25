@@ -14,6 +14,7 @@ Excel'e islenen tum ligler icin calisir:
   - eredivisie (Hollanda Eredivisie)
   - ligue1 (Fransa Ligue 1)
   - ligue2 (Fransa Ligue 2)
+  - eerste_divisie (Hollanda Eerste Divisie)
 
 Bir sezon HEM data_world HEM data_world_eski'de varsa, data_world'daki
 (yeni sistem) tercih edilir, data_world_eski'deki o sezon ATLANIR -
@@ -34,7 +35,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_WORLD_DIR = os.path.join(BASE_DIR, "data_world")
 DATA_WORLD_ESKI_DIR = os.path.join(BASE_DIR, "data_world_eski")
 
-LEAGUE_KEYS = ["seriea_it", "brasileirao_a", "brasileirao_b", "serieb_it", "eredivisie", "ligue1", "ligue2"]
+LEAGUE_KEYS = ["seriea_it", "brasileirao_a", "brasileirao_b", "serieb_it", "eredivisie", "ligue1", "ligue2", "eerste_divisie"]
 
 
 def log(msg):
