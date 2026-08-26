@@ -102,6 +102,18 @@ JOBS = [
     ("brasileirao_b", "2007", 1633),
     ("brasileirao_b", "2008", 2289),
     ("brasileirao_b", "2009", 2938),
+
+    # --- Hollanda Eerste Divisie (2. Lig) ---
+    # Bu ID'ler TAHMIN DEGIL - mackolik_old_discover_seasons.py ile
+    # arsiv.mackolik.com'un kendi sezon secicisinden dogrudan okundu.
+    ("eerste_divisie", "02/03", 31072),
+    ("eerste_divisie", "03/04", 150),
+    ("eerste_divisie", "04/05", 516),
+    ("eerste_divisie", "05/06", 845),
+    ("eerste_divisie", "06/07", 1294),
+    ("eerste_divisie", "07/08", 1843),
+    ("eerste_divisie", "08/09", 2449),
+    ("eerste_divisie", "09/10", 3186),
 ]
 # --------------------------------------------------------------------------
 # NOT: Bu ID'ler "5 ai calisti bunlar cikti" listesinden geliyor - yani
