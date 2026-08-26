@@ -19,6 +19,7 @@ Kullanim:
        - seas_id: arsiv.mackolik.com/Standings/Default.aspx?sId=XXXX
          adresindeki XXXX sayisi.
     2) python mackolik_old_fetch_season.py
+       (SADECE belirli ligleri islemek icin: python mackolik_old_fetch_season.py eerste_divisie)
 
 Her sezon icin: data_world_eski/{league_key}__{season_label}.json
 (dosya adindaki '/' karakteri '-' ile degistirilir)
@@ -26,6 +27,7 @@ Her sezon icin: data_world_eski/{league_key}__{season_label}.json
 import json
 import os
 import re
+import sys
 import time
 
 from playwright.sync_api import sync_playwright
@@ -242,7 +244,16 @@ def validate(season_label, matches):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    print(f"Toplam {len(JOBS)} sezon islenecek.\n")
+
+    # Opsiyonel filtre: "python mackolik_old_fetch_season.py eerste_divisie"
+    # gibi league_key argumanlari verilirse SADECE o liglerin JOBS'lari
+    # islenir - butun 59 sezonu tekrar taramaya gerek kalmaz.
+    filter_keys = set(sys.argv[1:])
+    jobs = [j for j in JOBS if not filter_keys or j[0] in filter_keys]
+    if filter_keys:
+        print(f"Filtre: {sorted(filter_keys)} -> {len(jobs)}/{len(JOBS)} sezon islenecek.\n")
+    else:
+        print(f"Toplam {len(jobs)} sezon islenecek.\n")
 
     summary = []
     with sync_playwright() as p:
@@ -254,7 +265,7 @@ def main():
             viewport={"width": 1366, "height": 900},
         )
 
-        for league_key, season_label, seas_id in JOBS:
+        for league_key, season_label, seas_id in jobs:
             safe_label = season_label.replace("/", "-")
             out_path = os.path.join(OUT_DIR, f"{league_key}__{safe_label}.json")
 
