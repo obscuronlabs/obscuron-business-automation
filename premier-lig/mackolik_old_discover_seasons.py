@@ -4,12 +4,14 @@
 arsiv.mackolik.com'daki bir ligin GUNCEL sayfasini acip, sayfadaki sezon
 secici / arsiv linklerini tarayarak eski sezonlarin GERCEK sId
 degerlerini bulur. Hicbir ID TAHMIN EDILMEZ - sadece sayfanin kendi
-icindeki linkler/dropdown okunur.
+icindeki linkler/dropdown okunur, ve SADECE etiketi acikca "YYYY/YYYY"
+sezon formatina uyanlar alinir (ulke listesi, hafta secici, alt
+turnuvalar gibi ALAKASIZ sId'ler otomatik elenir).
 
 Bu sadece bir KESIF aracidir - hicbir veri/JSON dosyasi yazmaz, hicbir
 mac cekmez. Ciktisi: bulunan (sezon etiketi, sId) eslesmeleri +
-mackolik_old_fetch_season.py'nin JOBS listesine eklenebilecek hazir
-satirlar.
+mackolik_old_fetch_season.py'nin JOBS listesine eklenebilecek HAZIR
+satirlar (etiket "02/03" formatina script tarafindan cevrilir).
 
 Kurulum (mackolik_old_fetch_season.py ile ayni):
     pip install playwright beautifulsoup4
@@ -23,11 +25,36 @@ Ornek:
 """
 import re
 import sys
+
+# Windows konsolu varsayilan olarak cp1252 kullanabilir - Turkce karakterler
+# (I, s, vs.) bu kod sayfasinda yok, bu yuzden print() cokebilir. UTF-8'e
+# zorla geciriyoruz (PYTHONIOENCODING=utf-8 unutulsa bile calissin diye).
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
 
 SID_RE = re.compile(r"sId=(\d+)", re.IGNORECASE)
-SEASON_LABEL_RE = re.compile(r"(20)?(\d{2})\s*[-/]\s*(20)?(\d{2,4})")
+# SADECE "2006/2007", "1996/97" gibi ACIKCA sezon-yili formatindaki
+# etiketleri kabul ediyoruz - ulke adi, "Tweede Divisie", "948" gibi
+# hafta-secici sizintilari, "U21 ..." gibi seyler bu kaliba UYMAZ.
+SEASON_LABEL_RE = re.compile(r"^(\d{4})\s*/\s*(\d{2,4})$")
+
+
+def normalize_label(raw_label):
+    """'2006/2007' -> '06/07', '1996/1997' -> '96/97'. Uymuyorsa None."""
+    m = SEASON_LABEL_RE.match(raw_label.strip())
+    if not m:
+        return None
+    y1 = int(m.group(1))
+    y2_raw = m.group(2)
+    y2 = int(y2_raw) if len(y2_raw) == 4 else (y1 // 100) * 100 + int(y2_raw)
+    if y2 != y1 + 1:
+        return None  # ardisik olmayan yil araligi - sezon degil, baska bir sey
+    return f"{y1 % 100:02d}/{y2 % 100:02d}", y1
 
 
 def find_season_links(html):
@@ -47,7 +74,6 @@ def find_season_links(html):
         if m:
             found.append((opt.get_text(strip=True), int(m.group(1)), val))
         elif val.isdigit():
-            # bazi dropdown'larda value dogrudan sId olabilir
             found.append((opt.get_text(strip=True), int(val), val))
 
     return found
@@ -73,8 +99,6 @@ def main():
         page.goto(start_url, wait_until="domcontentloaded", timeout=45000)
         page.wait_for_timeout(2000)
 
-        # Sayfada "Sezon"/"Season"/arsiv gecmisi acan bir eleman varsa
-        # tiklamayi dene (sessizce basarisiz olabilir, sorun degil).
         for label in ["Sezon", "Season", "Arşiv", "Geçmiş Sezonlar", "Diğer Sezonlar"]:
             try:
                 page.click(f"text={label}", timeout=3000)
@@ -91,32 +115,40 @@ def main():
 
         browser.close()
 
-    found = find_season_links(html)
-    if not found:
+    all_found = find_season_links(html)
+    if not all_found:
         print("\nHICBIR sId linki/degeri bulunamadi.")
         print("Sayfanin yapisi farkli olabilir - mackolik_discover_render.html dosyasini")
         print("acip 'sId=' gecen yerleri elle aramak gerekebilir.")
         return
 
-    # tekrarlananlari temizle, sId'ye gore sirala
-    seen = set()
-    unique = []
-    for label, sid, raw in found:
-        if sid in seen:
-            continue
-        seen.add(sid)
-        unique.append((label, sid, raw))
-    unique.sort(key=lambda x: x[1])
+    print(f"\n(toplam {len(all_found)} ham sId bulundu, sezon etiketine uymayanlar eleniyor)")
 
-    print(f"\n{len(unique)} benzersiz sId bulundu:\n")
-    for label, sid, raw in unique:
-        print(f"  sId={sid:6d}  etiket='{label}'  ({raw})")
+    # sadece "YYYY/YYYY" etiketli, ardisik yilli olanlari al; sId'ye gore
+    # tekillestir (ayni sId birden fazla yerde gecebilir).
+    by_sid = {}
+    for raw_label, sid, raw in all_found:
+        norm = normalize_label(raw_label)
+        if norm is None:
+            continue
+        short_label, y1 = norm
+        by_sid[sid] = (short_label, y1, raw_label)
+
+    if not by_sid:
+        print("\nHICBIR 'YYYY/YYYY' formatinda sezon etiketi bulunamadi.")
+        print("mackolik_discover_render.html dosyasini acip sezon secicisine elle bakmak gerekebilir.")
+        return
+
+    rows = sorted(by_sid.items(), key=lambda kv: kv[1][1])  # yila gore sirala
+
+    print(f"\n{len(rows)} sezon bulundu:\n")
+    for sid, (short_label, y1, raw_label) in rows:
+        print(f"  {short_label}  sId={sid:6d}  (sayfadaki etiket: {raw_label!r})")
 
     print("\n--- mackolik_old_fetch_season.py JOBS listesine eklenebilecek satirlar ---")
-    print("(ETIKETLERI KONTROL ET - hangi sId hangi sezona ait dogru mu bak,")
-    print(" sonra season_label'i '02/03' formatina kendin duzenle)")
-    for label, sid, raw in unique:
-        print(f'    ("{league_key}", "??/??",  {sid}),  # sayfadaki etiket: {label!r}')
+    print("(yine de goz gezdir - sId'lerin ardisik/mantikli arttigini dogrula)")
+    for sid, (short_label, y1, raw_label) in rows:
+        print(f'    ("{league_key}", "{short_label}", {sid}),')
 
 
 if __name__ == "__main__":
