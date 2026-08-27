@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Bir "N. HAFTA.xlsx" dosyasindaki formul bolgesini (AF:AK ve BE:JZ) OKUR,
+hicbir sey YAZMAZ/DEGISTIRMEZ. Amac: Poisson tahmin panelinin formul
+mantigini incelemek.
+
+Sadece TEK BIR bloktan (ilk gecerli sezon blogu) ornek alir - hepsi ayni
+formul kalibinin farkli satirlara kopyalanmis hali oldugundan bir blok
+yeterli.
+
+Calistirma:
+    python extract_formulas.py "İngiltere Premier Lig 10. HAFTA.xlsx"
+"""
+import sys
+import openpyxl
+from openpyxl.utils import get_column_letter, column_index_from_string
+
+N_TEAM_ROWS = 20
+BLOCK_SCAN_MAX_ROW = 700
+
+
+def discover_season_blocks(ws, limit=2):
+    blocks = []
+    for r in range(1, BLOCK_SCAN_MAX_ROW + 1):
+        v = ws.cell(row=r, column=2).value
+        if isinstance(v, str) and v.strip():
+            blocks.append(r)
+            if len(blocks) >= limit:
+                break
+    return blocks
+
+
+def dump_range(ws, title_row, col_start, col_end, label):
+    c1 = column_index_from_string(col_start)
+    c2 = column_index_from_string(col_end)
+    print(f"\n{'=' * 70}\n{label} ({col_start}:{col_end}) - blok basligi satiri {title_row}\n{'=' * 70}")
+    # baslik satirlarini da goster (formul sutun basliklarini anlamak icin)
+    for r in range(title_row, title_row + 3):
+        row_vals = []
+        for c in range(c1, c2 + 1):
+            v = ws.cell(row=r, column=c).value
+            if v is not None:
+                row_vals.append(f"{get_column_letter(c)}{r}={v!r}")
+        if row_vals:
+            print(f"  [baslik satiri {r}]: " + " | ".join(row_vals))
+
+    # ilk 3 takim satirinin (rank 1-3) formullerini goster - hepsi ayni
+    # kalip oldugundan 3 tanesi yeterli, tekrar tekrar 20 satir basmaya gerek yok
+    for i in range(3):
+        r = title_row + 3 + i
+        print(f"\n  --- satir {r} (rank {i + 1}) ---")
+        for c in range(c1, c2 + 1):
+            cell = ws.cell(row=r, column=c)
+            if cell.value is not None:
+                print(f"    {get_column_letter(c)}{r}: {cell.value!r}")
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Kullanim: python extract_formulas.py \"İngiltere Premier Lig N. HAFTA.xlsx\"")
+        sys.exit(1)
+    path = sys.argv[1]
+
+    # data_only=False -> formul METNINI okur (hesaplanmis DEGERI degil)
+    wb = openpyxl.load_workbook(path, data_only=False)
+    sheet_name = "SAYFA 1" if "SAYFA 1" in wb.sheetnames else wb.sheetnames[0]
+    ws = wb[sheet_name]
+
+    blocks = discover_season_blocks(ws, limit=2)
+    if not blocks:
+        print("HATA: blok bulunamadi.")
+        sys.exit(1)
+
+    # blok 0 = bos gelecek sezon (formul olsa da veri yok), blok 1 = dolu
+    # tarihi sezon - formulleri asil ANLAMLI degerlerle gormek icin blok 1'i kullan
+    title_row = blocks[1] if len(blocks) > 1 else blocks[0]
+
+    dump_range(ws, title_row, "AF", "AK", "FORMUL BOLGESI 1 (AF:AK)")
+    dump_range(ws, title_row, "BE", "BL", "FORMUL BOLGESI 2 (BE:BL - Poisson panelinin ILK kismi)")
+    dump_range(ws, title_row, "BM", "BU", "FORMUL BOLGESI 2 devam (BM:BU)")
+    dump_range(ws, title_row, "BV", "CD", "FORMUL BOLGESI 2 devam (BV:CD)")
+
+    print(f"\n\nNOT: Panel BE:JZ'ye kadar uzaniyor, yer kaplamasin diye once CD sutununa kadar cikti aldik.")
+    print("Daha ilerisi (CE:JZ) gerekirse ayni scripti col_start/col_end degistirip tekrar calistir,")
+    print("ya da bana hangi sutunlarda ne oldugunu soyle, o kismi hedefli cekelim.")
+
+
+if __name__ == "__main__":
+    main()
