@@ -105,6 +105,9 @@ LEAGUES = [
     {"key": "eerste_divisie", "name": "Hollanda Eerste Divisie", "slug": "hollanda-eerste-divisie",
      "id": "1gwajyt0pk2jm5fx5mu36v114", "season_kind": "range",
      "start_year": 2002, "end_year": 2025},
+    {"key": "ingiltere_premier", "name": "İngiltere Premier Lig", "slug": "ingiltere-premier-lig",
+     "id": "2kwbbcootiqqgmrzs6o5inle5", "season_kind": "range",
+     "start_year": 2002, "end_year": 2025},
 ]
 
 DATA_SETTINGS_RE = re.compile(r'data-settings="(.*?)"(?=\s|>)', re.DOTALL)
