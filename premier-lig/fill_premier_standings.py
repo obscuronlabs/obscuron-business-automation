@@ -101,7 +101,34 @@ def main():
     by_season = {}
     for m in all_matches:
         by_season.setdefault(m["season"], []).append(m)
-    log(f"data_world'den {len(all_matches)} mac, {len(by_season)} sezon yuklendi.\n")
+    log(f"data_world'den (Mackolik) {len(all_matches)} mac, {len(by_season)} sezon yuklendi.\n")
+
+    # Mackolik'te BULUNMAYAN sezonlar icin openfootball'a dus - bu ayni
+    # kaynak, premier_test.py'nin MAClAR'i doldurmak icin zaten kullandigi,
+    # 2002-2025 arasi TUM sezonlarda dogrulanmis veri kaynagi.
+    missing_seasons = [s for s in pt.SEASONS if s not in by_season]
+    if missing_seasons:
+        log(f"Mackolik'te olmayan {len(missing_seasons)} sezon icin openfootball deneniyor: {missing_seasons}")
+        for season_label in missing_seasons:
+            try:
+                season_folder = pt.SEASON_FOLDERS[season_label]
+                text = pt.fetch_season_text(season_folder)
+                raw = pt.parse_season_text(text, season_label)
+                errors, _ = pt.validate_season(season_label, raw)
+                if errors:
+                    log(f"  UYARI ({season_label}): openfootball verisi de dogrulanamadi, atlaniyor -> {errors[:2]}")
+                    continue
+                normed = []
+                for m in raw:
+                    m = dict(m)
+                    m["home"] = pt.normalize_team(m["home"])
+                    m["away"] = pt.normalize_team(m["away"])
+                    normed.append(m)
+                by_season[season_label] = normed
+                log(f"  OK ({season_label}): openfootball'dan {len(normed)} mac eklendi")
+            except Exception as e:
+                log(f"  UYARI ({season_label}): openfootball'dan da cekilemedi -> {e}")
+        log("")
 
     files = find_premier_files(BASE_DIR)
     if not files:
