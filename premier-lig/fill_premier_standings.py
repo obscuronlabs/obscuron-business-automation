@@ -20,6 +20,7 @@ Calistirma:
 """
 import json
 import os
+import re
 import shutil
 import sys
 import time
@@ -29,6 +30,23 @@ DATA_PATH = os.path.join(BASE_DIR, "data_world", "ingiltere_premier_maclar_TUM.j
 BACKUP_DIR = os.path.join(BASE_DIR, "_BACKUP_ICERDE_DISARDA")
 
 import premier_test as pt
+
+# premier_test.py'nin kendi find_excel_files'i "N. HAFTA.xlsx" ile biten
+# HER dosyayi eslestiriyor (klasordeki diger 8 ligin dosyalari dahil) -
+# burada SADECE Ingiltere Premier Lig dosyalarini istiyoruz.
+PREMIER_FILENAME_RE = re.compile(r"^İngiltere Premier Lig\s+(\d{1,2})\s*\.\s*HAFTA\.xlsx$", re.IGNORECASE)
+
+
+def find_premier_files(directory):
+    found = {}
+    for fn in os.listdir(directory):
+        if not fn.lower().endswith(".xlsx") or fn.startswith("~$"):
+            continue
+        m = PREMIER_FILENAME_RE.match(fn)
+        if m:
+            found[int(m.group(1))] = os.path.join(directory, fn)
+    return found
+
 
 STANDINGS_HOME_COLS = ["N", "O", "P", "Q", "R", "S", "T", "U"]
 STANDINGS_AWAY_COLS = ["V", "W", "X", "Y", "Z", "AA", "AB", "AC"]
@@ -85,7 +103,7 @@ def main():
         by_season.setdefault(m["season"], []).append(m)
     log(f"data_world'den {len(all_matches)} mac, {len(by_season)} sezon yuklendi.\n")
 
-    files = pt.find_excel_files(BASE_DIR)
+    files = find_premier_files(BASE_DIR)
     if not files:
         log("HATA: 'İngiltere Premier Lig N. HAFTA.xlsx' dosyalari bulunamadi.")
         sys.exit(1)
