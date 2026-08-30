@@ -413,15 +413,12 @@
     <!-- Two column: video + info -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
 
-      <!-- Video placeholder -->
+      <!-- Video -->
       <div>
         <div style="position:relative;padding-bottom:56.25%;background:#0a0a0a;border:1px solid rgba(200,0,26,0.3);overflow:hidden;">
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
-            <div style="width:56px;height:56px;border-radius:50%;border:2px solid #C8001A;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.open('https://www.youtube.com/@NeocomusMusic','_blank')">
-              <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid #C8001A;margin-left:4px;"></div>
-            </div>
-            <p style="font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:rgba(240,236,232,0.4);text-transform:uppercase;">Watch on YouTube</p>
-          </div>
+          <video style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" controls preload="metadata" poster="">
+            <source src="teaser.mp4" type="video/mp4">
+          </video>
         </div>
         <p style="font-size:0.75rem;color:rgba(240,236,232,0.3);margin-top:0.6rem;font-family:'Cinzel',serif;letter-spacing:0.1em;">TEASER — 15 LANGUAGES · ONE VOICE</p>
       </div>
