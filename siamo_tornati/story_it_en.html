@@ -1,0 +1,526 @@
+<title>Siamo Tornati — The Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400&display=swap">
+
+<style>
+:root {
+  --ground:   #0C0905;
+  --ground2:  #141009;
+  --ground3:  #1E160F;
+  --parch:    #E8DCC8;
+  --parch2:   #C8BAA0;
+  --parch3:   #8A7A64;
+  --terra:    #B85C2A;
+  --gold:     #C4922A;
+  --sage:     #5C7A4A;
+  --line:     rgba(200,186,160,0.12);
+  --line2:    rgba(200,186,160,0.25);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--ground);
+  color: var(--parch);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  min-height: 100vh;
+}
+.header {
+  position: relative;
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  border-bottom: 1px solid var(--line2);
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184,92,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--terra);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.title-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: var(--parch);
+  margin-bottom: 0.4rem;
+}
+.title-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--parch3);
+  letter-spacing: 0.04em;
+  margin-bottom: 2.5rem;
+}
+.slogan {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.lang-bar {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(12,9,5,0.95);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  gap: 0;
+}
+.lang-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--parch3);
+  background: none;
+  border: 1px solid var(--line2);
+  padding: 0.5rem 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0 -0.5px;
+}
+.lang-btn:first-child { border-radius: 2px 0 0 2px; }
+.lang-btn:last-child  { border-radius: 0 2px 2px 0; }
+.lang-btn:hover { color: var(--parch); border-color: var(--parch3); z-index:1; }
+.lang-btn.active { background: var(--terra); border-color: var(--terra); color: var(--parch); z-index: 2; }
+.story-panel { display: none; }
+.story-panel.active { display: block; }
+.story-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+.dateline {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.dateline::after { content: ''; flex: 1; height: 1px; background: var(--line2); }
+.drop-cap::first-letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5.5rem;
+  font-weight: 600;
+  line-height: 0.75;
+  float: left;
+  margin-right: 0.12em;
+  margin-top: 0.08em;
+  color: var(--terra);
+}
+p { margin-bottom: 1.4rem; color: var(--parch2); }
+p:last-child { margin-bottom: 0; }
+.name-highlight {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em;
+  font-style: italic;
+  color: var(--gold);
+}
+.pull-quote {
+  margin: 3rem -1rem;
+  padding: 2rem 2.5rem;
+  border-left: 3px solid var(--terra);
+  background: var(--ground3);
+  position: relative;
+}
+.pull-quote::before {
+  content: '"';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem;
+  line-height: 0;
+  color: var(--terra);
+  opacity: 0.3;
+  position: absolute;
+  top: 2.5rem;
+  left: 1.5rem;
+}
+.pull-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--parch);
+  margin: 0;
+  padding-left: 1.5rem;
+}
+.ports {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--parch3);
+  letter-spacing: 0.04em;
+  line-height: 2;
+  margin: 0.5rem 0 1.4rem;
+  padding-left: 1.2rem;
+  border-left: 1px solid var(--line2);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 3rem 0;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--line2); }
+.divider span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.declaration {
+  text-align: center;
+  margin: 3rem 0;
+  padding: 3rem 2rem;
+  background: var(--ground2);
+  border: 1px solid var(--line2);
+  position: relative;
+  overflow: hidden;
+}
+.declaration::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(184,92,42,0.06) 0%, transparent 70%);
+}
+.declaration-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--parch);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+.declaration-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--parch3);
+  position: relative;
+}
+.closing { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line2); }
+.closing p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.9;
+}
+.ornament {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--sage);
+  opacity: 0.6;
+  margin: 1rem 0;
+  letter-spacing: 0.5em;
+}
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid var(--line);
+}
+.footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--parch3);
+  margin-bottom: 0.5rem;
+}
+.footer-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--terra);
+  text-transform: uppercase;
+}
+.lyric-motif {
+  text-align: center;
+  margin: 3.5rem -1rem 2rem;
+  padding: 2rem 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  opacity: 0.7;
+  line-height: 1.3;
+}
+
+/* ── MAP BACKGROUND ── */
+.map-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 95vh;
+  width: auto;
+  max-width: 70vw;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* all content above map */
+.header, .lang-bar, .story-panel, .footer { position: relative; z-index: 1; }
+
+/* ── FLAG ── */
+.flag {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin: 0 auto 1.2rem;
+  width: 48px;
+  height: 32px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+}
+.flag-green  { flex:1; background: #009246; }
+.flag-white  { flex:1; background: #FFFFFF; }
+.flag-red    { flex:1; background: #CE2B37; }
+</style>
+
+<!-- ITALY BACKGROUND MAP -->
+<!-- Coordinates: lon 6.5-18.8 → x 0-540, lat 35.0-48.0 → y 0-760 (north=top) -->
+<!-- xScale=43.90 px/deg, yScale=58.46 px/deg -->
+<svg class="map-bg" viewBox="0 0 540 760" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <clipPath id="italy-clip">
+      <!-- Mainland Italy — clockwise from Ventimiglia (NW) around the boot -->
+      <path d="
+        M 50,246
+        L 107,210 L 130,222 L 146,228
+        L 155,240 L 167,258 L 172,275 L 177,295 L 192,302
+        L 206,324 L 215,333 L 232,344 L 246,355 L 254,366
+        L 260,374 L 268,382 L 280,389 L 295,392 L 310,397
+        L 325,408 L 339,419 L 344,431 L 350,432 L 362,430
+        L 370,443 L 384,468 L 404,471 L 411,482
+        L 419,520 L 423,544 L 411,547 L 406,560
+        L 400,580 L 400,589
+        L 418,591
+        L 427,578 L 440,557 L 440,543 L 443,532 L 465,520
+        L 460,505 L 443,427 L 436,408 L 452,385
+        L 470,375 L 487,379 L 503,400 L 518,415
+        L 524,393 L 510,380 L 500,363 L 480,347 L 453,335
+        L 428,323 L 412,303
+        L 423,291 L 423,287 L 411,284 L 387,287
+        L 372,280 L 361,273 L 348,259 L 340,252 L 318,233
+        L 310,181 L 297,175 L 283,163 L 269,153
+        L 253,133 L 252,115 L 257,84 L 259,70
+        L 322,57
+        L 311,87 L 290,80 L 220,58 L 192,67
+        L 150,80 L 100,100 L 50,108 L 16,127
+        L 10,179 L 30,220
+        Z
+      "/>
+      <!-- Sicily -->
+      <path d="
+        M 301,578 L 261,575 L 261,597 L 270,610
+        L 289,614 L 310,625 L 339,638 L 379,661
+        L 385,638 L 378,614 L 385,592 L 397,569
+        Z
+      "/>
+      <!-- Sardinia -->
+      <path d="
+        M 75,424 L 75,411 L 116,397 L 132,404
+        L 145,435 L 146,448 L 141,489 L 133,520
+        L 115,513 L 104,533 L 93,534 L 81,524
+        L 80,464 L 79,435
+        Z
+      "/>
+    </clipPath>
+    <!-- Italian flag: vertical hard-stop tricolor -->
+    <linearGradient id="flag-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"      stop-color="#009246"/>
+      <stop offset="33.33%"  stop-color="#009246"/>
+      <stop offset="33.33%"  stop-color="#FFFFFF"/>
+      <stop offset="66.66%"  stop-color="#FFFFFF"/>
+      <stop offset="66.66%"  stop-color="#CE2B37"/>
+      <stop offset="100%"    stop-color="#CE2B37"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="540" height="760" fill="url(#flag-gradient)" clip-path="url(#italy-clip)"/>
+</svg>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="eyebrow">NeoComusMusic.com · 2026</div>
+  <div class="title-main">SIAMO TORNATI</div>
+  <div class="title-sub">Una canzone sulle radici, il tempo e il ritorno.</div>
+  <div class="slogan">"Noi siamo tornati... ma voi, quando tornate?"</div>
+</div>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="switchLang('it')">Italiano</button>
+  <button class="lang-btn" onclick="switchLang('en')">English</button>
+</div>
+
+<!-- ══ ITALIANO ══ -->
+<div class="story-panel active" id="panel-it">
+  <div class="story-wrap">
+    <div class="dateline">Inizio degli anni '90 · Mediterraneo</div>
+
+    <p class="drop-cap">Un sommergibile turco scivola dall'Egeo verso il Mediterraneo e accosta le coste della Sicilia.</p>
+
+    <p>Il suo nome, forse, non è un caso: <span class="name-highlight">Barbaros</span>. Un nome che porta con sé un'antica eco del Mediterraneo.</p>
+
+    <p>Un giovane sottufficiale mette piede per la prima volta su quella terra.</p>
+
+    <div class="ports">
+      Le pietre laviche di Catania · La baia silenziosa di Augusta<br>
+      Il porto antico di Siracusa · I mercati rumorosi di Palermo<br>
+      Il vento dello Stretto di Messina<br>
+      Napoli, Taranto, Bari, Roma.
+    </div>
+
+    <p>Porto dopo porto. Città dopo città.</p>
+
+    <div class="divider"><span>anni dopo</span></div>
+
+    <p>Lo stesso uomo torna in Italia, questa volta da civile.</p>
+
+    <div class="ports">
+      Le cupole di Firenze · I vicoli di Genova<br>
+      Le acque di Venezia · La malinconia di Trieste · La luce morbida di Pisa
+    </div>
+
+    <p>Da nord a sud, dal mare alla terra, ancora e ancora.</p>
+
+    <p>Ha visto molti porti nel mondo, si è avvicinato a molte coste. Ma l'Italia ha lasciato qualcosa dentro di lui. Le pietre, le vigne, gli uliveti. Le piazze, le chiese, le case. Il profumo della terra e la luce del tramonto.</p>
+
+    <p>E soprattutto quella sensazione difficile da spiegare: che il passato qui non sia semplicemente passato. Continua a vivere nelle mani di chi coltiva, nelle famiglie, nei paesi, nelle cose tramandate da una generazione all'altra.</p>
+
+    <div class="divider"><span>ogni volta</span></div>
+
+    <p>Ogni ritorno mostrava qualcosa di diverso. Non soltanto ciò che era rimasto, ma ciò che <em>continuava</em>.</p>
+
+    <p>Una vigna curata oggi perché qualcuno la piantò molto tempo fa. Una bottiglia aperta a tavola. Una ricetta custodita in famiglia. Una casa, una strada, un mestiere, un nome. Piccole cose che attraversano il tempo.</p>
+
+    <p>E una domanda che, viaggio dopo viaggio, diventava sempre più difficile ignorare: che cosa lasciamo a chi verrà dopo di noi?</p>
+
+    <div class="divider"><span>infine</span></div>
+
+    <p>Per decenni ha portato con sé queste immagini.</p>
+
+    <p>Poi, un giorno, sono diventate una canzone. La vigna piantata dal nonno. Le mani di ieri e quelle di domani sulla stessa terra. Una generazione che lascia qualcosa alla successiva. Il passato che non chiede di essere imitato, ma semplicemente di non essere dimenticato.</p>
+
+    <p>Non è nata come una campagna. È nata come una canzone. Poi ci siamo accorti che raccontava qualcosa di molto più grande: le radici, il tempo, ciò che ereditiamo e ciò che scegliamo di lasciare.</p>
+
+    <p><span class="name-highlight">Olivia Oya Kaptan</span> ha dato voce a questa storia. Prima, nel silenzio. Poi arriva la musica. E alla fine rimane soltanto una domanda:</p>
+
+    <div class="declaration">
+      <div class="declaration-text">"Noi siamo tornati...<br>ma voi, quando tornate?"</div>
+      <div class="declaration-sub">Olivia Oya Kaptan · Voce</div>
+    </div>
+
+    <div class="ornament">· · ·</div>
+  </div>
+</div>
+
+<!-- ══ ENGLISH ══ -->
+<div class="story-panel" id="panel-en">
+  <div class="story-wrap">
+    <div class="dateline">Early 1990s · The Mediterranean</div>
+
+    <p class="drop-cap">A Turkish submarine glides from the Aegean into the Mediterranean and approaches the shores of Sicily.</p>
+
+    <p>His name, perhaps, is no coincidence: <span class="name-highlight">Barbaros</span>. A name that carries within it an ancient echo of the Mediterranean.</p>
+
+    <p>A young petty officer sets foot on that ground for the first time.</p>
+
+    <div class="ports">
+      The volcanic stones of Catania · The quiet bay of Augusta<br>
+      The ancient harbour of Siracusa · The noisy markets of Palermo<br>
+      The wind of the Strait of Messina<br>
+      Naples, Taranto, Bari, Rome.
+    </div>
+
+    <p>Port after port. City after city.</p>
+
+    <div class="divider"><span>years later</span></div>
+
+    <p>The same man returns to Italy, this time as a civilian.</p>
+
+    <div class="ports">
+      The domes of Florence · The alleys of Genoa<br>
+      The waters of Venice · The melancholy of Trieste · The soft light of Pisa
+    </div>
+
+    <p>From north to south, from sea to land, again and again.</p>
+
+    <p>He has seen many ports in this world, approached many shores. But Italy left something inside him. The stones, the vineyards, the olive groves. The squares, the churches, the houses. The scent of the earth and the light of the evening sun.</p>
+
+    <p>And above all, that feeling difficult to explain: that the past here has not simply passed. It lives on in the hands of those who tend the land, in families, in villages, in things handed down from one generation to the next.</p>
+
+    <div class="divider"><span>every time</span></div>
+
+    <p>Each return showed something different. Not only what had remained, but what <em>continued</em>.</p>
+
+    <p>A vineyard tended today because someone planted it long ago. A bottle opened at the table. A recipe kept in the family. A house, a street, a trade, a name. Small things that cross time.</p>
+
+    <p>And a question that, journey after journey, became harder to ignore: what do we leave for those who come after us?</p>
+
+    <div class="divider"><span>finally</span></div>
+
+    <p>For decades he carried these images with him.</p>
+
+    <p>Then, one day, they became a song. The vineyard planted by the grandfather. The hands of yesterday and those of tomorrow on the same earth. One generation leaving something to the next. The past that does not ask to be imitated — only not to be forgotten.</p>
+
+    <p>It was not born as a campaign. It was born as a song. Then we realised it was telling something much larger: roots, time, what we inherit and what we choose to leave behind.</p>
+
+    <p><span class="name-highlight">Olivia Oya Kaptan</span> gave voice to this story. First, in silence. Then the music arrives. And in the end only one question remains:</p>
+
+    <div class="declaration">
+      <div class="declaration-text">"Noi siamo tornati...<br>ma voi, quando tornate?"</div>
+      <div class="declaration-sub">Olivia Oya Kaptan · Voice</div>
+    </div>
+
+    <div class="ornament">· · ·</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="flag">
+    <span class="flag-green"></span>
+    <span class="flag-white"></span>
+    <span class="flag-red"></span>
+  </div>
+  <div class="footer-brand">NeoComusMusic.com</div>
+  <div class="footer-tag">Siamo Tornati · NeoComusMusic.com · 2026</div>
+</div>
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.story-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + lang).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>

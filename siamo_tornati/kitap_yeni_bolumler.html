@@ -1,0 +1,424 @@
+<title>Siamo Tornati — Yeni Bölümler</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root {
+    --ink:       #1C1610;
+    --parchment: #F6F1E8;
+    --parchment-mid: #EDE6D6;
+    --terra:     #8B5229;
+    --gold:      #9A7A3A;
+    --sage:      #5C6B52;
+    --body:      #2E2620;
+    --faint:     rgba(28,22,16,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink:       #EDE6D6;
+      --parchment: #16120E;
+      --parchment-mid: #1E1912;
+      --terra:     #C27840;
+      --gold:      #C4A050;
+      --sage:      #8AA082;
+      --body:      #D4CBBC;
+      --faint:     rgba(237,230,214,0.15);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink:       #EDE6D6;
+    --parchment: #16120E;
+    --parchment-mid: #1E1912;
+    --terra:     #C27840;
+    --gold:      #C4A050;
+    --sage:      #8AA082;
+    --body:      #D4CBBC;
+    --faint:     rgba(237,230,214,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--body);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(16px, 2.1vw, 19px);
+    line-height: 1.8;
+    padding: 0;
+  }
+
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+  }
+
+  /* ── Kitap başlığı ── */
+  .book-header {
+    text-align: center;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--faint);
+    margin-bottom: 4rem;
+  }
+
+  .book-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .book-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    text-wrap: balance;
+    margin-bottom: 0.5rem;
+  }
+
+  .book-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--sage);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Bölüm ayraç ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 4rem 0 3rem;
+    color: var(--faint);
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--faint);
+  }
+  .divider-glyph {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  /* ── Bölüm başlıkları ── */
+  .chapter-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 300;
+    color: var(--ink);
+    text-align: center;
+    text-wrap: balance;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .chapter-title-it {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 300;
+    color: var(--sage);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Ara bölüm etiketi ── */
+  .ara-bolum-label {
+    display: inline-block;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terra);
+    border: 1px solid var(--terra);
+    padding: 0.2em 0.8em;
+    margin-bottom: 1.4rem;
+    opacity: 0.75;
+  }
+
+  .ara-bolum-header {
+    text-align: center;
+  }
+
+  /* ── Gövde paragrafları ── */
+  p {
+    margin-bottom: 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  p.lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 1.8em;
+  }
+
+  /* İtalik blok — şarkı sözü veya özel vurgu */
+  .italic-block {
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05em;
+    color: var(--ink);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.4rem;
+    margin: 2rem 0;
+    line-height: 1.9;
+  }
+
+  /* Tek satır şiir / söz */
+  .lyric-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1em;
+    color: var(--terra);
+    text-align: center;
+    display: block;
+    margin: 1.6rem 0;
+    letter-spacing: 0.04em;
+  }
+
+  /* Yer adı / özel ad vurgusu */
+  em.place {
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--terra);
+  }
+
+  strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ── Bölüm sonu işareti ── */
+  .chapter-end {
+    text-align: center;
+    margin: 3rem 0 1rem;
+    color: var(--gold);
+    font-size: 1.1rem;
+    opacity: 0.5;
+    letter-spacing: 0.2em;
+  }
+
+  /* ── Yerleştirme notu (editör için) ── */
+  .placement-note {
+    background: var(--parchment-mid);
+    border-left: 3px solid var(--sage);
+    padding: 0.8rem 1.2rem;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--sage);
+    margin: 2.5rem 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 520px) {
+    .italic-block { padding-left: 1rem; }
+    p { text-align: left; }
+  }
+</style>
+
+<div class="page-wrap">
+
+  <header class="book-header">
+    <div class="book-eyebrow">NeoComusMusic.com · 2026</div>
+    <h1 class="book-title">Siamo Tornati</h1>
+    <div class="book-subtitle">Yeni Bölümler — Genişletilmiş Metin</div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       YENİ ARA BÖLÜM 1
+       Floransa'da Bir Öğle Vakti
+       Yerleştirme: Bölüm III'ten hemen sonra
+  ═══════════════════════════════════════════ -->
+
+  <div class="placement-note">
+    ✦ Editör notu — Yerleştirme: Bu ara bölüm, Bölüm III (Sivil Dönüş) bittikten hemen sonra, Bölüm IV başlamadan önce gelir.
+  </div>
+
+  <div class="ara-bolum-header">
+    <div class="ara-bolum-label">Ara Bölüm</div>
+    <h2 class="chapter-title">Floransa'da Bir Öğle Vakti</h2>
+    <div class="chapter-title-it">Un pomeriggio a Firenze</div>
+  </div>
+
+  <p class="lead">Mayıs ayının ortasıydı. Arno üzerindeki güneş öğleden sonra kırıktı — ne tam sıcak, ne gölge aratan türden. İnsanı yavaşlatan cins bir ışık.</p>
+
+  <p>Görevdeyim ama şehirdeyim. <em class="place">Floransa</em>'ya uğramak zorunlu değildi, ama uğradım. Ponte Vecchio'yu geçtim, karşı yakaya, Oltrarno'ya. Turist haritalarının bitmekte olduğu yer — dar sokaklar, kapalı kepenklerin altından sızan sarımsak kokusu, duvara yaslanmış bir bisiklet. Bir piazzette oturdum. Küçücük bir yer. Adını bilmiyordum, sormadım. Taşlar yüzyıl eskisiydi ama sandalye plastikti.</p>
+
+  <p>Kahve içtim. Baktım. Başka bir şey yapmadım.</p>
+
+  <p>Öğle sıcağı herkesi içeriye çekmiş. Piazzette birkaç güvercin, uzakta birinin kapısını çarpması, bir motosikletin geçmesi. Bir kedi çıktı bir kapıdan, baktı bana, ilgilenmedi, gitti. <em class="place">Floransa</em> böyle bir şehir — büyük heykeller, müzeler, kalabalık — ama Oltrarno'da, öğle vakti, şehir kendi haline bırakır sizi.</p>
+
+  <div class="italic-block">
+    Denizde çok zaman geçirenler bunu bilir: bir yeri tanımak için o yerde sıkılmak lazım. Turist sıkılmaz, çünkü programı var. Ben o gün piazzette sıkıldım. Ve sıkılırken bir şey fark ettim — burayı tanıdığımı.
+  </div>
+
+  <p>Tanımak demiyorum sevmek anlamında. Tanımak demiyorum "burası benim" anlamında. Ama o piazzette, o plastik sandalyede, o sessizlikte — yabancı hissetmedim. Bu kadar.</p>
+
+  <p>Yıllar sonra <em class="place">Maremma</em>'ya taşındığımızda o his geri geldi. Aynı şey. Yabancı hissetmemek. Basit ama yeterli.</p>
+
+  <div class="chapter-end">· · ·</div>
+
+
+  <!-- ═══════════════════════════════════════════
+       YENİ ARA BÖLÜM 2
+       Trieste Sabahı: Gemi Yokken Liman
+       Yerleştirme: Bölüm II (Liman Liman) içine
+       veya hemen ardına
+  ═══════════════════════════════════════════ -->
+
+  <div class="section-divider"><span class="divider-glyph">✦</span></div>
+
+  <div class="placement-note">
+    ✦ Editör notu — Yerleştirme: Bu ara bölüm, Bölüm II (Liman Liman) içinde, soyut liman anlatısının ortasına ya da hemen sonuna yerleştirilecek. Somut liman anısı olarak bölümü çıpalar.
+  </div>
+
+  <div class="ara-bolum-header">
+    <div class="ara-bolum-label">Ara Bölüm</div>
+    <h2 class="chapter-title">Trieste Sabahı</h2>
+    <div class="chapter-title-it">La mattina di Trieste</div>
+  </div>
+
+  <p class="lead"><em class="place">Trieste</em> sabah altısında farklı bir şehirdir. Bura bilinmez. Bura görülmez. Bura limandaki adamların zamanıdır.</p>
+
+  <p>Rüzgâr doğudan geliyordu. <em>Bora</em> değildi — Bora'yı bilirsiniz, körfezi deler geçer, insanı ayakta tutmak için kazık çakmak gerekir. Bu daha uslu bir rüzgârdı. Ama yine de soğuktu. Ekim sonuydu, galiba. Ya da Kasım başı. Yıllar birbirine karışıyor.</p>
+
+  <p>Molo IV'teydim — büyük liman rıhtımı. Sabah vardiyası için ineceğim geminin manevrasını izliyordum. Kılavuz kaptan teknesi henüz körfezin ucundan görünmüştü. Elimde fincan, sırtımda ceket. Ayaklarımın altında ıslak granit taşlar.</p>
+
+  <p>Hemen arkamda <em class="place">Trieste</em>'nin eski şehri başlıyordu. Piazza dell'Unità d'Italia oradan görünüyor — büyük meydan, Adriyatik'e açık tek büyük Avrupa meydanı. Arkası kara, önü deniz. Ben ikisi arasında, rıhtımda duruyordum. Ne tamamen karada, ne tamamen denizde.</p>
+
+  <div class="italic-block">
+    Bu benim hayatımın metaforuydu farkında olmadan. Ne tamamen kara adamı, ne tamamen denizci. İki dünya arasında, rıhtımda, elimde kahve.
+  </div>
+
+  <p>Kılavuz tekne yaklaştı. Kaptanlar selam verirler sabah bu saatte — başla, elle, bazen sadece bakışla. Triesteli kılavuz baktı bana. Ben baktım. Anlaştık. Sözcük gerekmedi.</p>
+
+  <p>Bu limanlarda yaşanır: dil değil, anlık. Kim olduğun değil, nerede durduğun. <em class="place">Trieste</em> beni yargılamadı. Türk müsün, Yunan mı, Arnavut mu — bilmek istemedi. Rıhtımdasın, zamanında geldinsin, işini biliyorsun. Yeterli.</p>
+
+  <p>Ama o sabah bir şey fark ettim: o meydanı, o granit taşları, o Bora olmayan soğuk rüzgârı seviyordum. İş için değil. <em class="place">Trieste</em>'yi seviyordum. Ve sevmek — bir şehri limanda, altıda, kahveyle sevmek — farklı bir şey. Turistin sevgisine benzemiyor. İşçinin sevgisi bu. Saygı karışık, yıpranma karışık, sessizlik karışık.</p>
+
+  <p>Şimdi, yıllar sonra, o rıhtımı düşündüğümde şunu anlıyorum: <em class="place">Trieste</em> beni daha İtalya'nın geri kalanından önce kabul etti. Bir şehrin sizi kabulü böyle olur — sorgulamadan, belgesiz. Sadece sabah altıda rıhtımda duruyorsunuz ve şehir sizi görüyor.</p>
+
+  <div class="chapter-end">· · ·</div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BÖLÜM VI GENİŞLETMESİ
+       Şarkının Doğduğu An — Kristalleşme Sahnesi
+       Yerleştirme: Bölüm VI (Şarkı Nasıl Doğdu) içine,
+       teknik anlatının hemen ardından
+  ═══════════════════════════════════════════ -->
+
+  <div class="section-divider"><span class="divider-glyph">✦</span></div>
+
+  <div class="placement-note">
+    ✦ Editör notu — Yerleştirme: Bu metin, Bölüm VI'nın mevcut teknik anlatısının (<em>besteci ve melodinin nasıl şekillendiği</em>) hemen ardından gelir. Şarkının "gerçek doğum anını" verir.
+  </div>
+
+  <div class="chapter-eyebrow">Bölüm VI · Ek</div>
+  <h2 class="chapter-title">Sarà, sarà, quel che sarà</h2>
+  <div class="chapter-title-it">Il momento in cui la canzone è nata davvero</div>
+
+  <p class="lead">Melodi vardı. Söz kırıkları vardı. Ama şarkı yoktu henüz. Şarkı o gece geldi.</p>
+
+  <p>Bir akşamüstüydü. Pencere açıktı, rüzgâr yoktu. Bahçede bir şey yanıyordu — yaprak mı, dal mı, bilemedim. O yanık koku içeri doldu. Gitar elimdeydi ama çalmıyordum. Öyle oturuyordum. Oturmak bazen en iyi şey olur.</p>
+
+  <p>Kafamda bir cümle dönüyordu günlerdir: <em>ne olacaksa olsun.</em> Türkçe düşünüyordum ama cümle İtalyanca çıkıyordu içimden. Neden? Bilmiyorum. Belki İtalya'ya ait bir duygu İtalyanca gelmeli. Belki bazı şeyler ancak o dilde söylenebilir.</p>
+
+  <span class="lyric-line">Sarà, sarà, quel che sarà…</span>
+
+  <p>Ne olacaksa olsun. Hem teslimiyet, hem irade. Hem sana bırakıyorum, hem ben buradayım. Bu ikilik bende vardı zaten — denizde yıllarca yaşadım, rüzgârın ne yapacağını bilmeden. Ama geminle gidiyorsun. Yönünü biliyor, fırtınayı bilmiyor. İşte bu.</p>
+
+  <div class="italic-block">
+    Sarà, sarà — gelecek zaman. Ne olacaksa. Ama "sarà" bir çaresizlik değil. İtalyancada gelecek zaman hem belirsizliği hem de kararlılığı taşır. <em>Verrò</em> dersen geliyorum. <em>Sarà</em> dersen olacak. Olacak — ve ben oraya gidiyorum.
+  </div>
+
+  <p>Gitar o gece kendiliğinden çalındı. Bunu bilirsiniz — bazen notalar sizden önce gider. Akordlar otururken bir şey kilitlendi. Bir döngü vardı, dört akord, ama dördüncü beklediğiniz yerde değildi. Biraz yanlış, biraz beklenmedik. Ve tam o yüzden doğruydu.</p>
+
+  <p>Olivia o sırada başka odadaydı. Sesi duydu. Geldi. Bir şey demedi. Sadece kapıya yaslandı, dinledi. Bu benim için her şeydi. Bir ses bir odadan sizi çekiyorsa, bir şey var demektir.</p>
+
+  <p>Söyledim ona: <em>"Bunu söyler misin? Bir kere."</em></p>
+
+  <p>Söyledi. Tek kere. Ve o ses — o ses — melodiyi tamamladı. Ben besteciydim ama şarkıyı o bitirdi. Kontralto sesi zaten içimdeydi, hissediyordum ne aradığını. Ama duyunca anladım. Şarkı bu.</p>
+
+  <div class="italic-block">
+    Şarkı bazen bir bestecinin kağıda yazdığı şey değildir. Bir eşin kapıya yaslanması, bir odadan gelen ses, tek bir deneme — ve o anda bir şeyin yerine oturması. Bu da öyle oldu.
+  </div>
+
+  <p>Sarà, sarà, quel che sarà. Ne olacaksa olsun. Biz döndük. Şarkı doğdu. Gerisi zaten olmaktaydı.</p>
+
+  <div class="chapter-end">· · ·</div>
+
+
+  <!-- ═══════════════════════════════════════════
+       BÖLÜM II GÜÇLENDİRME
+       Liman Liman — Bir Liman Anısı (ek paragraflar)
+       Yerleştirme: Bölüm II'nin ilk bölümüne eklenecek
+  ═══════════════════════════════════════════ -->
+
+  <div class="section-divider"><span class="divider-glyph">✦</span></div>
+
+  <div class="placement-note">
+    ✦ Editör notu — Yerleştirme: Bölüm II (Liman Liman) açılışına veya ortasına eklenecek paragraflar. Bölümü somutlaştırır, soyut liman anlatısına çapa atar.
+  </div>
+
+  <div class="chapter-eyebrow">Bölüm II · Güçlendirme</div>
+  <h2 class="chapter-title">Palermo Limanı, Gece Yarısı</h2>
+  <div class="chapter-title-it">Porto di Palermo, mezzanotte</div>
+
+  <p class="lead">Her liman başka kokar. Bunu denizciler bilir. Turist gemi kokusunu severmiş — ama o koku mazot ve boya. Liman başka. Liman balık, tuz, pas ve zaman kokar.</p>
+
+  <p><em class="place">Palermo</em>'ya ilk girişim geceydi. Gemi yavaşlamıştı, manevra başlamıştı. Rıhtım ışıkları yansıyordu suda — turuncu, yeşil, bir kırmızı fener uzakta. Şehir karanlıktı ama ışıklar vardı, sarp tepelerde birer birer.</p>
+
+  <p>Monte Pellegrino görünüyordu. Kütlesi karanlıkta bile hissedilir. Denizden bakarken o dağ şehri tutar — hem korur, hem basar üstüne. Sicilya böyle bir yer: sizi hem kucaklayan, hem ağırlayan bir coğrafya.</p>
+
+  <p>Rıhtımda birkaç adam bekliyordu. Hamallar, kılavuz adamları, gümrük görevlisi. Hepsi yorgundu ama kimse gitmemişti. Bu limanlarda böyledir: bir gemi bekleniyor, kimse uyumaz.</p>
+
+  <div class="italic-block">
+    O adamlara baktım. Bunlar benim gibiydi — denizin değil, kıyının adamları. Ama benim için hazır bekliyorlardı. Bu bir şey. Kimliğim yoktu burada, sicilim yoktu. Vardım, o kadardı.
+  </div>
+
+  <p>Ertesi sabah, işler bittikten sonra, limandan şehre çıktım. Balık pazarının yanından geçtim — La Vucciria henüz uyanmıştı. Bir tezgâhta biri bağırıyordu, ama neşeyle bağırıyordu. Sicilya'da bağırmak bir iletişim tarzı değil, bir müzik türü.</p>
+
+  <p>Bir esnaf bana baktı. Türk müsün diye sormadı. <em>"Dai, vieni!"</em> dedi sadece. Gel. Aldım bir şey, ne aldığımı bile hatırlamıyorum. Mesele alış veriş değildi. Mesele davet edilmekti. <em class="place">Palermo</em>'da, gece yarısı geldiğim şehirde, sabah beni çağırıyorlardı.</p>
+
+  <p>İşte liman bu: varış noktası değil. Geçiş noktası da değil. Liman bir eşik. İki dünyanın sınırı. Ben o eşikte yıllarca durdum, hangi tarafa geçeceğimi bilmeden. Sonunda geçtim.</p>
+
+  <div class="chapter-end">· · ·</div>
+
+
+  <!-- Son not -->
+  <div style="text-align:center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--faint);">
+    <div class="book-eyebrow" style="margin-bottom:0.5rem;">Siamo Tornati · Barbaros Kaptan</div>
+    <div class="book-subtitle">NeoComusMusic.com · 2026</div>
+  </div>
+
+</div>
