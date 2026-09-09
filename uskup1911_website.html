@@ -3,253 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Üsküp 1911 Spor Kulübü — Zeki. Çevik. Ahlaklı.</title>
-<meta name="description" content="Üsküp 1911 Spor Kulübü — Kuzey Makedonya'da gençlik, spor ve dayanışma. Kurumsal tanıtım ve sponsorluk sayfası.">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Üsküp 1911 Spor Kulübü — Sponsorluk Dosyası</title>
+<meta name="description" content="Üsküp 1911 Spor Kulübü — Kuzey Makedonya'da gençlik, spor ve dayanışma. Kurumsal tanıtım ve sponsorluk dosyası.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red: #E30A17;
-    --red-dark: #9E0812;
-    --red-light: #FF3B44;
-    --navy: #0A0D14;
-    --navy-2: #10141F;
-    --navy-3: #171C2B;
-    --navy-4: #212840;
-    --gold: #D4AF37;
-    --gold-light: #E8CC6E;
-    --white: #F5F5F2;
-    --white-dim: rgba(245,245,242,0.65);
-    --white-faint: rgba(245,245,242,0.14);
+    --paper: #F1EADA;
+    --paper-2: #E7DCC4;
+    --paper-3: #DED0AF;
+    --ink: #1C2430;
+    --ink-dim: rgba(28,36,48,0.66);
+    --ink-faint: rgba(28,36,48,0.16);
+    --maroon: #7C2029;
+    --maroon-deep: #591620;
+    --maroon-ink: #ffffff;
+    --brass: #8C6A2E;
+    --brass-line: rgba(140,106,46,0.55);
+    --rule: rgba(28,36,48,0.20);
+    --shadow: rgba(28,36,48,0.10);
   }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181F;
+      --paper-2: #1B2029;
+      --paper-3: #242B37;
+      --ink: #ECE5D3;
+      --ink-dim: rgba(236,229,211,0.66);
+      --ink-faint: rgba(236,229,211,0.14);
+      --maroon: #C24853;
+      --maroon-deep: #8C2C35;
+      --maroon-ink: #14181F;
+      --brass: #C7A45A;
+      --brass-line: rgba(199,164,90,0.45);
+      --rule: rgba(236,229,211,0.18);
+      --shadow: rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181F;
+    --paper-2: #1B2029;
+    --paper-3: #242B37;
+    --ink: #ECE5D3;
+    --ink-dim: rgba(236,229,211,0.66);
+    --ink-faint: rgba(236,229,211,0.14);
+    --maroon: #C24853;
+    --maroon-deep: #8C2C35;
+    --maroon-ink: #14181F;
+    --brass: #C7A45A;
+    --brass-line: rgba(199,164,90,0.45);
+    --rule: rgba(236,229,211,0.18);
+    --shadow: rgba(0,0,0,0.35);
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
     overflow-x: hidden;
-    line-height: 1.6;
   }
-  h1, h2, h3, h4, .headline { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  h1, h2, h3, .display { font-family: 'Fraunces', serif; color: var(--ink); text-wrap: balance; }
+  .mono { font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
   a { color: inherit; }
-  img { max-width: 100%; }
+  img, svg { max-width: 100%; }
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--navy); }
-  ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
-  .eyebrow {
-    font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.35em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: inline-block;
-  }
-  section { position: relative; padding: 6rem 0; }
-  @media (max-width: 640px) { section { padding: 4rem 0; } }
+  ::-webkit-scrollbar-track { background: var(--paper); }
+  ::-webkit-scrollbar-thumb { background: var(--brass-line); border-radius: 3px; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+  :focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
 
-  /* NAV */
+  .kicker {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--maroon); display: inline-flex; align-items: center; gap: 0.6rem;
+  }
+  .kicker::before { content: ''; width: 22px; height: 1px; background: var(--maroon); display: inline-block; }
+  section { position: relative; padding: 5.5rem 0; }
+  @media (max-width: 640px) { section { padding: 3.6rem 0; } }
+  .rule-top { border-top: 1px solid var(--rule); }
+
+  /* NAV — programme masthead bar */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 200;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 2rem;
-    background: linear-gradient(to bottom, rgba(10,13,20,0.95), transparent);
-    transition: background 0.35s, border-color 0.35s;
-    border-bottom: 1px solid transparent;
+    padding: 0.9rem 1.6rem; background: var(--paper);
+    border-bottom: 1px solid var(--ink-faint);
+    transition: box-shadow 0.3s;
   }
-  nav.scrolled { background: rgba(10,13,20,0.96); border-bottom-color: rgba(212,175,55,0.18); backdrop-filter: blur(6px); }
+  nav.scrolled { box-shadow: 0 2px 18px var(--shadow); }
   .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
   .crest {
-    width: 40px; height: 44px; flex-shrink: 0;
-    background: linear-gradient(155deg, var(--red) 0%, var(--red-dark) 100%);
-    clip-path: polygon(50% 0%, 100% 20%, 100% 65%, 50% 100%, 0% 65%, 0% 20%);
+    width: 34px; height: 38px; flex-shrink: 0;
+    background: var(--maroon);
+    clip-path: polygon(50% 0%, 100% 22%, 100% 68%, 50% 100%, 0% 68%, 0% 22%);
     display: flex; align-items: center; justify-content: center;
-    border: 1px solid rgba(212,175,55,0.6);
+    border: 1px solid var(--brass-line);
   }
-  .crest span { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--white); letter-spacing: -0.02em; }
-  .nav-brand-text { font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.12em; line-height: 1.1; }
-  .nav-brand-text b { color: var(--gold-light); display: block; font-size: 1.05rem; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-  .nav-links a { text-decoration: none; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--white-dim); transition: color 0.25s; font-family: 'Oswald', sans-serif; }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-cta { background: var(--red); color: var(--white) !important; padding: 0.55rem 1.3rem !important; border-radius: 2px; }
-  .nav-cta:hover { background: var(--red-light) !important; color: var(--white) !important; }
+  .crest span { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 0.62rem; color: var(--maroon-ink); letter-spacing: -0.02em; }
+  .nav-brand-text { font-family: 'Fraunces', serif; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.05; }
+  .nav-brand-text b { display: block; font-weight: 600; font-size: 1.05rem; }
+  .nav-links { display: flex; gap: 1.9rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-dim); transition: color 0.2s; font-family: 'IBM Plex Mono', monospace;
+  }
+  .nav-links a:hover { color: var(--maroon); }
+  .nav-cta { border: 1px solid var(--maroon); color: var(--maroon) !important; padding: 0.5rem 1.1rem !important; border-radius: 2px; }
+  .nav-cta:hover { background: var(--maroon); color: var(--maroon-ink) !important; }
   .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-  .nav-toggle span { width: 24px; height: 2px; background: var(--white); }
+  .nav-toggle span { width: 22px; height: 2px; background: var(--ink); }
   @media (max-width: 880px) {
-    .nav-links { position: fixed; top: 0; right: -100%; height: 100vh; width: 260px; background: var(--navy-2);
-      flex-direction: column; justify-content: center; align-items: flex-start; padding: 2rem; gap: 1.6rem;
-      transition: right 0.35s; border-left: 1px solid var(--white-faint); }
+    .nav-links {
+      position: fixed; top: 0; right: -100%; height: 100vh; width: 250px; background: var(--paper-2);
+      flex-direction: column; justify-content: center; align-items: flex-start; padding: 2rem; gap: 1.5rem;
+      transition: right 0.3s; border-left: 1px solid var(--ink-faint);
+    }
     .nav-links.open { right: 0; }
     .nav-toggle { display: flex; }
   }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;
-    padding-top: 6rem;
+  /* HERO — programme cover */
+  .hero { padding: 8.5rem 0 4rem; }
+  .cover-frame {
+    border: 1px solid var(--ink-faint); border-radius: 2px; padding: 3.4rem 2.6rem;
+    position: relative; overflow: hidden; background: var(--paper-2);
   }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 60% at 75% 20%, rgba(227,10,23,0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 15% 85%, rgba(212,175,55,0.08) 0%, transparent 60%);
+  .cover-frame::before, .cover-frame::after {
+    content: ''; position: absolute; border: 1px solid var(--brass-line); pointer-events: none;
   }
-  .hero::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background-image: linear-gradient(rgba(245,245,242,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(245,245,242,0.025) 1px, transparent 1px);
-    background-size: 44px 44px;
-    mask-image: radial-gradient(ellipse 60% 70% at 60% 40%, black 0%, transparent 75%);
-  }
-  .hero-inner { position: relative; z-index: 2; text-align: center; margin: 0 auto; max-width: 880px; animation: fadeUp 1s ease both; }
-  .hero-crest {
-    width: 108px; height: 118px; margin: 0 auto 2rem; position: relative;
-    background: linear-gradient(155deg, var(--red) 0%, var(--red-dark) 100%);
-    clip-path: polygon(50% 0%, 100% 20%, 100% 65%, 50% 100%, 0% 65%, 0% 20%);
+  .cover-frame::before { top: 10px; left: 10px; right: 10px; bottom: 10px; border-width: 1px; }
+  .pitch-lines { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
+  .cover-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.6rem; position: relative; z-index: 1; }
+  .issue-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-dim); text-transform: uppercase; }
+  .cover-crest {
+    width: 92px; height: 100px; margin: 0 auto 1.8rem; position: relative;
+    background: var(--maroon); clip-path: polygon(50% 0%, 100% 22%, 100% 68%, 50% 100%, 0% 68%, 0% 22%);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 60px rgba(227,10,23,0.35);
+    border: 1px solid var(--brass-line);
   }
-  .hero-crest strong { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.6rem; color: var(--white); }
-  .hero-crest em { font-style: normal; font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold-light); margin-top: 2px; }
-  .hero h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.05; font-weight: 600; letter-spacing: 0.01em; }
-  .hero h1 .accent { color: var(--red-light); }
-  .hero-tagline { font-family: 'Oswald', sans-serif; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-light); font-size: 0.95rem; margin-top: 1.4rem; }
-  .hero-sub { color: var(--white-dim); font-size: 1.05rem; max-width: 620px; margin: 1.6rem auto 0; font-weight: 300; }
-  .hero-quote {
-    margin: 2.6rem auto 0; max-width: 640px; font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 1.15rem; font-style: italic; color: var(--white); border-top: 1px solid var(--white-faint);
-    border-bottom: 1px solid var(--white-faint); padding: 1.4rem 0;
+  .cover-crest strong { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 1.3rem; color: var(--maroon-ink); }
+  .cover-crest em { font-style: normal; font-size: 0.5rem; letter-spacing: 0.14em; color: var(--maroon-ink); opacity: 0.8; margin-top: 2px; }
+  .hero-center { text-align: center; position: relative; z-index: 1; }
+  .hero h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 600; line-height: 1.03; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: normal; color: var(--maroon); }
+  .hero-motto {
+    font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--brass); font-size: 0.82rem; margin-top: 1.2rem;
   }
-  .hero-quote cite { display: block; font-style: normal; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-top: 0.8rem; }
-  .hero-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 2.6rem; flex-wrap: wrap; }
+  .hero-sub { color: var(--ink-dim); font-size: 1.02rem; max-width: 600px; margin: 1.5rem auto 0; font-weight: 300; }
+  .programme-note {
+    margin: 2.6rem auto 0; max-width: 620px; text-align: left; position: relative;
+    padding: 1.6rem 1.8rem 1.6rem 3rem; border-left: 3px solid var(--maroon); background: var(--paper);
+  }
+  .programme-note .qmark { position: absolute; left: 0.7rem; top: 0.5rem; font-family: 'Fraunces', serif; font-size: 2.6rem; color: var(--brass-line); line-height: 1; }
+  .programme-note p { font-family: 'Fraunces', serif; font-size: 1.12rem; font-style: italic; color: var(--ink); }
+  .programme-note cite { display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); margin-top: 0.9rem; }
+  .hero-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 2.4rem; flex-wrap: wrap; }
   .btn {
-    font-family: 'Oswald', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.78rem;
-    padding: 0.95rem 2.1rem; text-decoration: none; border-radius: 2px; transition: all 0.25s; display: inline-block;
+    font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.76rem;
+    padding: 0.85rem 1.9rem; text-decoration: none; border-radius: 2px; transition: all 0.2s; display: inline-block; border: 1px solid transparent;
   }
-  .btn-primary { background: var(--red); color: var(--white); }
-  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
-  .btn-ghost { border: 1px solid var(--white-faint); color: var(--white); }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
-  .scroll-cue { position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--white-dim); font-family: 'Oswald', sans-serif; }
-  .scroll-cue::after { content: ''; display: block; width: 1px; height: 30px; background: var(--white-faint); margin: 0.6rem auto 0; animation: pulse 2s ease infinite; }
+  .btn-primary { background: var(--maroon); color: var(--maroon-ink); border-color: var(--maroon); }
+  .btn-primary:hover { background: var(--maroon-deep); border-color: var(--maroon-deep); }
+  .btn-ghost { border-color: var(--ink-faint); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes pulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-center { animation: fadeUp 0.9s ease both; }
+  .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+  .js .reveal { opacity: 0; transform: translateY(24px); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* SECTION HEADS */
-  .section-head { text-align: center; max-width: 720px; margin: 0 auto 3.4rem; }
-  .section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 600; }
-  .section-head p { color: var(--white-dim); margin-top: 1rem; font-size: 1rem; }
-  .rule { width: 56px; height: 2px; background: var(--gold); margin: 1.1rem auto 0; }
+  .section-head { max-width: 640px; margin-bottom: 3rem; }
+  .section-head h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 600; margin-top: 0.8rem; }
+  .section-head p { color: var(--ink-dim); margin-top: 0.9rem; font-size: 0.98rem; }
 
   /* ABOUT */
-  .about-alt { background: var(--navy-2); }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
-  @media (max-width: 880px) { .about-grid { grid-template-columns: 1fr; gap: 2.4rem; } }
-  .about-copy p { color: var(--white-dim); margin-bottom: 1.1rem; }
-  .about-copy strong { color: var(--white); font-weight: 500; }
-  .pull-quote { font-family: 'Oswald', sans-serif; font-size: 1.25rem; color: var(--gold-light); font-weight: 400; line-height: 1.4; border-left: 3px solid var(--red); padding-left: 1.2rem; margin-top: 1.6rem; }
-  .stat-card { background: var(--navy-3); border: 1px solid var(--white-faint); border-radius: 6px; padding: 2.2rem; }
-  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
-  .stat-row + .stat-row { margin-top: 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--white-faint); }
-  .stat-num { font-family: 'Oswald', sans-serif; font-size: 2.1rem; font-weight: 600; color: var(--red-light); }
-  .stat-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-dim); margin-top: 0.3rem; }
-
-  /* VALUES */
-  .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
-  @media (max-width: 980px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; } }
-  .value-card {
-    background: var(--navy-3); border: 1px solid var(--white-faint); border-radius: 8px;
-    padding: 2.2rem 1.7rem; transition: border-color 0.3s, transform 0.3s;
+  .about-alt { background: var(--paper-2); }
+  .about-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3.2rem; align-items: start; }
+  @media (max-width: 880px) { .about-grid { grid-template-columns: 1fr; gap: 2.2rem; } }
+  .about-copy p { color: var(--ink-dim); margin-bottom: 1.05rem; }
+  .about-copy strong { color: var(--ink); font-weight: 500; }
+  .pull-quote {
+    font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--maroon);
+    line-height: 1.4; border-top: 1px solid var(--rule); padding-top: 1.3rem; margin-top: 1.6rem;
   }
-  .value-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-  .value-icon { width: 44px; height: 44px; margin-bottom: 1.3rem; }
-  .value-card h3 { font-size: 1rem; letter-spacing: 0.04em; margin-bottom: 0.7rem; color: var(--gold-light); }
-  .value-card p { color: var(--white-dim); font-size: 0.9rem; }
-
-  /* LEADERSHIP */
-  .leaders-alt { background: var(--navy-2); }
-  .leaders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  @media (max-width: 780px) { .leaders-grid { grid-template-columns: 1fr; } }
-  .leader-card { background: var(--navy-3); border: 1px solid var(--white-faint); border-radius: 8px; padding: 2.4rem; }
-  .leader-avatar {
-    width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(155deg, var(--red), var(--red-dark));
-    display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 1.3rem; margin-bottom: 1.4rem; border: 2px solid var(--gold);
+  .stat-sheet { border: 1px solid var(--ink-faint); background: var(--paper); }
+  .stat-sheet-head {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-dim); padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--ink-faint);
   }
-  .leader-card h3 { font-size: 1.15rem; color: var(--white); }
-  .leader-role { color: var(--gold-light); font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; margin: 0.4rem 0 1.1rem; }
-  .leader-card p { color: var(--white-dim); font-size: 0.92rem; }
-  .leader-card p + p { margin-top: 0.8rem; }
-  .leader-card .accent-line { color: var(--white); font-style: italic; font-size: 0.92rem; margin-top: 1rem; display: block; border-top: 1px solid var(--white-faint); padding-top: 1rem; }
+  .stat-item { display: flex; justify-content: space-between; align-items: baseline; padding: 1.05rem 1.4rem; border-bottom: 1px solid var(--rule); gap: 1rem; }
+  .stat-item:last-child { border-bottom: none; }
+  .stat-item .label { font-size: 0.88rem; color: var(--ink-dim); }
+  .stat-item .val { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--maroon); font-size: 0.95rem; text-align: right; }
 
-  /* SPIRIT / WARRIORS */
-  .spirit { background: linear-gradient(155deg, var(--navy-4) 0%, var(--navy) 70%); text-align: center; }
-  .spirit-eyebrow { color: var(--red-light); }
-  .spirit h2 { font-size: clamp(2rem, 5vw, 3.2rem); }
-  .verb-chain { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem 1.4rem; margin: 2.6rem 0; font-family: 'Oswald', sans-serif; }
-  .verb-chain span { font-size: 1.05rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white-dim); }
-  .verb-chain span.win { color: var(--gold-light); }
-  .verb-chain .sep { color: var(--red); }
-  .spirit-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin-bottom: 2.2rem; }
+  /* VALUES — squad-number strip */
+  .values-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--ink-faint); border: 1px solid var(--ink-faint); }
+  @media (max-width: 780px) { .values-strip { grid-template-columns: repeat(2, 1fr); } }
+  .value-cell { background: var(--paper); padding: 2.1rem 1.6rem; }
+  .value-num {
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--maroon); color: var(--maroon);
+    display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600; font-size: 1.05rem; margin-bottom: 1.2rem;
+  }
+  .value-cell h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .value-cell .role-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); display: block; margin-bottom: 0.7rem; }
+  .value-cell p { color: var(--ink-dim); font-size: 0.88rem; }
+
+  /* LEADERSHIP — roster */
+  .leaders-alt { background: var(--paper-2); }
+  .roster-row { display: grid; grid-template-columns: 64px 1fr; gap: 1.6rem; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
+  .roster-row:first-of-type { border-top: 1px solid var(--rule); }
+  .roster-num { font-family: 'IBM Plex Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--ink-faint); line-height: 1; }
+  .roster-row h3 { font-size: 1.15rem; font-weight: 600; }
+  .roster-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--maroon); margin: 0.4rem 0 0.9rem; }
+  .roster-row p { color: var(--ink-dim); font-size: 0.94rem; max-width: 640px; }
+  .roster-row p + p { margin-top: 0.7rem; }
+  .roster-row .accent-line { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink); font-size: 0.98rem; margin-top: 0.9rem; }
+  @media (max-width: 560px) { .roster-row { grid-template-columns: 1fr; } .roster-num { font-size: 1.4rem; } }
+
+  /* SPIRIT */
+  .spirit { background: var(--maroon); color: var(--maroon-ink); }
+  .spirit .kicker, .spirit .kicker::before { color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.75); }
+  .spirit h2 { color: var(--maroon-ink); font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 600; margin-top: 0.8rem; max-width: 640px; }
+  .verb-chain { display: flex; flex-wrap: wrap; gap: 0.7rem 1.2rem; margin: 2.2rem 0; font-family: 'IBM Plex Mono', monospace; }
+  .verb-chain span { font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+  .verb-chain span.win { color: var(--maroon-ink); font-weight: 600; }
+  .verb-chain .sep { color: rgba(255,255,255,0.4); }
+  .spirit-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.6rem 0 2rem; }
   .spirit-tags span {
-    border: 1px solid var(--white-faint); border-radius: 30px; padding: 0.5rem 1.2rem; font-size: 0.72rem;
-    letter-spacing: 0.14em; text-transform: uppercase; font-family: 'Oswald', sans-serif; color: var(--gold-light);
+    border: 1px solid rgba(255,255,255,0.35); border-radius: 30px; padding: 0.45rem 1.1rem; font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase; font-family: 'IBM Plex Mono', monospace; color: var(--maroon-ink);
   }
-  .spirit p.lead { max-width: 680px; margin: 0 auto; color: var(--white-dim); }
-  .spirit .closer { font-family: 'Oswald', sans-serif; color: var(--white); font-size: 1.2rem; margin-top: 2rem; letter-spacing: 0.03em; }
+  .spirit p.lead { max-width: 660px; color: rgba(255,255,255,0.88); font-size: 1rem; }
+  .spirit .closer { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.25rem; margin-top: 1.8rem; color: var(--maroon-ink); }
 
-  /* SPONSORSHIP */
-  .sponsor-alt { background: var(--navy-2); }
-  .tier-table { display: flex; flex-direction: column; border: 1px solid var(--white-faint); border-radius: 8px; overflow: hidden; }
-  .tier-row { display: grid; grid-template-columns: 220px 1fr; }
-  .tier-row:nth-child(odd) { background: var(--navy-3); }
-  .tier-row + .tier-row { border-top: 1px solid var(--white-faint); }
-  .tier-name { padding: 1.5rem 1.6rem; font-family: 'Oswald', sans-serif; color: var(--gold-light); letter-spacing: 0.08em; font-size: 0.92rem; display: flex; align-items: center; border-right: 1px solid var(--white-faint); }
-  .tier-desc { padding: 1.5rem 1.8rem; color: var(--white-dim); font-size: 0.92rem; display: flex; align-items: center; }
-  @media (max-width: 700px) {
-    .tier-row { grid-template-columns: 1fr; }
-    .tier-name { border-right: none; border-bottom: 1px solid var(--white-faint); padding-bottom: 0.8rem; }
+  /* SPONSORSHIP — team sheet */
+  .teamsheet { border: 1px solid var(--ink-faint); }
+  .teamsheet-head {
+    display: grid; grid-template-columns: 64px 200px 1fr; font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim);
+    padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--ink-faint); background: var(--paper-2);
+  }
+  .tier-row { display: grid; grid-template-columns: 64px 200px 1fr; border-bottom: 1px solid var(--rule); align-items: center; }
+  .tier-row:last-child { border-bottom: none; }
+  .tier-row:nth-child(even) { background: var(--paper-2); }
+  .tier-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--maroon); padding: 1.3rem 1.4rem; font-size: 1rem; }
+  .tier-name { padding: 1.3rem 0.8rem 1.3rem 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.98rem; }
+  .tier-desc { padding: 1.3rem 1.4rem 1.3rem 0; color: var(--ink-dim); font-size: 0.9rem; }
+  @media (max-width: 720px) {
+    .teamsheet-head { display: none; }
+    .tier-row { grid-template-columns: 44px 1fr; grid-template-areas: "num name" "desc desc"; padding: 1.2rem 1.4rem; }
+    .tier-num { grid-area: num; padding: 0; }
+    .tier-name { grid-area: name; padding: 0; }
+    .tier-desc { grid-area: desc; padding: 0.7rem 0 0; }
   }
   .honorary-note {
-    margin-top: 2.4rem; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.35);
-    border-radius: 8px; padding: 1.6rem 1.8rem; color: var(--white); font-size: 0.94rem; text-align: center;
+    margin-top: 2.2rem; border: 1px solid var(--brass-line); background: var(--paper-2);
+    padding: 1.5rem 1.7rem; color: var(--ink); font-size: 0.92rem;
   }
-  .honorary-note b { color: var(--gold-light); }
+  .honorary-note b { color: var(--maroon); }
 
   /* CLOSING BANNER */
-  .banner { text-align: center; background: linear-gradient(120deg, var(--red-dark), var(--red)); padding: 5rem 0; }
-  .banner .container { max-width: 760px; }
-  .banner p { font-size: 1.15rem; color: rgba(255,255,255,0.92); margin-bottom: 0.6rem; }
-  .banner .final { font-family: 'Oswald', sans-serif; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1.6rem; color: var(--white); }
+  .banner { text-align: center; background: var(--ink); color: var(--paper); }
+  .banner .container { max-width: 720px; }
+  .banner .kicker { color: var(--brass); }
+  .banner .kicker::before { background: var(--brass); }
+  .banner p { font-size: 1.08rem; color: rgba(241,234,218,0.82); margin-bottom: 0.5rem; }
+  .banner .final { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.4rem; margin-top: 1.6rem; color: var(--paper); }
 
   /* CONTACT */
-  .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.8rem; }
   @media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr; } }
-  .contact-card { background: var(--navy-3); border: 1px solid var(--white-faint); border-radius: 8px; padding: 2.4rem; }
-  .contact-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+  .contact-card { border: 1px solid var(--ink-faint); background: var(--paper-2); padding: 2.2rem; }
+  .contact-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.4rem; }
   .contact-row:last-child { margin-bottom: 0; }
-  .contact-ico { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; color: var(--gold); }
-  .contact-row h4 { font-size: 0.9rem; color: var(--white); font-family: 'Oswald', sans-serif; letter-spacing: 0.04em; }
-  .contact-row p, .contact-row a { color: var(--white-dim); font-size: 0.9rem; text-decoration: none; }
-  .contact-row a:hover { color: var(--gold-light); }
-  .form-field { margin-bottom: 1.2rem; }
-  .form-field label { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white-dim); margin-bottom: 0.5rem; font-family: 'Oswald', sans-serif; }
+  .contact-ico { width: 19px; height: 19px; flex-shrink: 0; margin-top: 3px; color: var(--maroon); }
+  .contact-row h4 { font-size: 0.85rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.06em; }
+  .contact-row p, .contact-row a { color: var(--ink-dim); font-size: 0.9rem; text-decoration: none; }
+  .contact-row a:hover { color: var(--maroon); }
+  .form-field { margin-bottom: 1.1rem; }
+  .form-field label { display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 0.5rem; font-family: 'IBM Plex Mono', monospace; }
   .form-field input, .form-field textarea {
-    width: 100%; background: var(--navy-2); border: 1px solid var(--white-faint); border-radius: 4px;
-    padding: 0.8rem 1rem; color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.92rem;
+    width: 100%; background: var(--paper); border: 1px solid var(--ink-faint); border-radius: 2px;
+    padding: 0.75rem 0.9rem; color: var(--ink); font-family: 'Work Sans', sans-serif; font-size: 0.92rem;
   }
-  .form-field textarea { resize: vertical; min-height: 100px; }
-  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--gold); }
-  .form-note { font-size: 0.78rem; color: var(--white-dim); margin-top: 1rem; }
+  .form-field textarea { resize: vertical; min-height: 96px; }
+  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--maroon); }
+  .form-note { font-size: 0.78rem; color: var(--ink-dim); margin-top: 1rem; }
 
-  footer { border-top: 1px solid var(--white-faint); padding: 2.6rem 0; text-align: center; }
-  footer p { color: var(--white-dim); font-size: 0.82rem; }
-  footer .foot-brand { font-family: 'Oswald', sans-serif; letter-spacing: 0.1em; color: var(--gold-light); margin-bottom: 0.5rem; }
+  footer { border-top: 1px solid var(--ink-faint); padding: 2.4rem 0; text-align: center; }
+  footer .foot-brand { font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+  footer p { color: var(--ink-dim); font-size: 0.8rem; }
 </style>
 </head>
-<body>
+<body class="js">
 
 <nav id="nav">
   <a href="#top" class="nav-brand">
@@ -259,7 +316,7 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#kulup">Kulüp</a></li>
     <li><a href="#degerler">Değerlerimiz</a></li>
-    <li><a href="#yonetim">Yönetim</a></li>
+    <li><a href="#yonetim">Kadro</a></li>
     <li><a href="#sponsorluk">Sponsorluk</a></li>
     <li><a href="#iletisim" class="nav-cta">İletişim</a></li>
   </ul>
@@ -267,45 +324,58 @@
 </nav>
 
 <header class="hero" id="top">
-  <div class="container hero-inner">
-    <div class="hero-crest"><strong>Ü1911</strong><em>KUZEY MAKEDONYA</em></div>
-    <span class="eyebrow">Üsküp · Kuzey Makedonya</span>
-    <h1>ÜSKÜP <span class="accent">1911</span><br>SPOR KULÜBÜ</h1>
-    <div class="hero-tagline">Zeki · Çevik · Ahlaklı</div>
-    <p class="hero-sub">Bir futbol kulübünden daha fazlası. Balkanlarda Türk gençlerini aynı forma altında buluşturan; gençlik, spor ve dayanışma için sahada bir hareket.</p>
-    <blockquote class="hero-quote">
-      “Ben sporcunun zeki, çevik ve aynı zamanda ahlaklısını severim.”
-      <cite>Mustafa Kemal Atatürk</cite>
-    </blockquote>
-    <div class="hero-cta">
-      <a href="#sponsorluk" class="btn btn-primary">Sponsorluk Fırsatları</a>
-      <a href="#iletisim" class="btn btn-ghost">Bize Ulaşın</a>
+  <div class="container">
+    <div class="cover-frame">
+      <svg class="pitch-lines" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="2" y="2" width="96" height="56" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
+        <line x1="50" y1="2" x2="50" y2="58" stroke="var(--brass-line)" stroke-width="0.15"/>
+        <circle cx="50" cy="30" r="8" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
+        <rect x="2" y="18" width="10" height="24" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
+        <rect x="88" y="18" width="10" height="24" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
+      </svg>
+      <div class="cover-top">
+        <span class="issue-tag">Kurumsal Tanıtım &amp; Sponsorluk Dosyası</span>
+        <span class="issue-tag mono">SAYI 01 — 2026</span>
+      </div>
+      <div class="hero-center">
+        <div class="cover-crest"><strong>Ü1911</strong><em>KUZEY MAKEDONYA</em></div>
+        <span class="kicker" style="justify-content:center;">Üsküp · Kuzey Makedonya</span>
+        <h1>ÜSKÜP <em>1911</em><br>SPOR KULÜBÜ</h1>
+        <div class="hero-motto">Zeki · Çevik · Ahlaklı</div>
+        <p class="hero-sub">Bir futbol kulübünden daha fazlası. Balkanlarda Türk gençlerini aynı forma altında buluşturan; gençlik, spor ve dayanışma için sahada bir hareket.</p>
+        <blockquote class="programme-note">
+          <span class="qmark">&ldquo;</span>
+          <p>Ben sporcunun zeki, çevik ve aynı zamanda ahlaklısını severim.</p>
+          <cite>Mustafa Kemal Atatürk</cite>
+        </blockquote>
+        <div class="hero-cta">
+          <a href="#sponsorluk" class="btn btn-primary">Sponsorluk Fırsatları</a>
+          <a href="#iletisim" class="btn btn-ghost">Bize Ulaşın</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="scroll-cue">Keşfedin</div>
 </header>
 
-<section id="kulup" class="about-alt">
+<section id="kulup" class="about-alt rule-top">
   <div class="container">
     <div class="about-grid">
       <div class="about-copy reveal">
-        <span class="eyebrow">Bir İsim, Bir Arma, Bir Gelecek</span>
-        <h2 style="font-size:2rem;font-weight:600;margin-bottom:1.2rem;">Üsküp'ün futbol mirasını yeni nesillere taşıyoruz</h2>
+        <span class="kicker">Bir İsim, Bir Arma, Bir Gelecek</span>
+        <h2 style="font-size:1.9rem;font-weight:600;margin:0.9rem 0 1.3rem;">Üsküp'ün futbol mirasını yeni nesillere taşıyoruz</h2>
         <p>Üsküp 1911, adını Üsküp'ün geçmişindeki futbol mirasından alan ve bugün bu mirası yeni nesillerle geleceğe taşımaya çalışan bir spor kulübüdür. Kulübün bugünkü yapılanması, Üsküplü Türk gençlerinin yeniden aynı arma altında buluşması düşüncesiyle başladı.</p>
         <p>Ancak Üsküp 1911'in hikâyesi yalnızca futbol değildir. Bu kulüp; gençlerin spor yapabileceği, takım ruhunu öğrenebileceği, birbirine sahip çıkabileceği ve kendisini bir topluluğun parçası hissedebileceği bir alan oluşturma çabasının sonucudur.</p>
         <p>Üsküp, yüzyıllardır farklı kültürlerin yan yana yaşadığı özel bir Balkan şehridir. Mustafa Kemal Atatürk'ün gençlik yıllarının önemli bir bölümünü geçirdiği bu coğrafyada gençleri sporun etrafında bir araya getirmek bizim için ayrıca anlamlıdır. <strong>Kendi kimliğimizi yaşatırken başkasının kimliğine dokunmadan, futbolun ortak diliyle aynı sahada buluşuyoruz.</strong></p>
-        <p class="pull-quote">"Başarı yalnızca skor tabelasında yazan rakam değildir. Başarı, yarının karakterli gençlerini bugünden yetiştirebilmektir."</p>
+        <p class="pull-quote">Başarı yalnızca skor tabelasında yazan rakam değildir. Başarı, yarının karakterli gençlerini bugünden yetiştirebilmektir.</p>
       </div>
       <div class="reveal">
-        <div class="stat-card">
-          <div class="stat-row">
-            <div><div class="stat-num">1911</div><div class="stat-label">Kuruluş Mirası</div></div>
-            <div><div class="stat-num">Üsküp</div><div class="stat-label">Kuzey Makedonya</div></div>
-          </div>
-          <div class="stat-row">
-            <div><div class="stat-num">100%</div><div class="stat-label">Gönüllü Yönetim</div></div>
-            <div><div class="stat-num">Siyaset Üstü</div><div class="stat-label">Birleştirici Anlayış</div></div>
-          </div>
+        <div class="stat-sheet">
+          <div class="stat-sheet-head">Kulüp Bilgi Kartı</div>
+          <div class="stat-item"><span class="label">Miras</span><span class="val">1911</span></div>
+          <div class="stat-item"><span class="label">Şehir</span><span class="val">Üsküp, K. Makedonya</span></div>
+          <div class="stat-item"><span class="label">Yönetim</span><span class="val">Gönüllü</span></div>
+          <div class="stat-item"><span class="label">Duruş</span><span class="val">Siyaset Üstü</span></div>
+          <div class="stat-item"><span class="label">Motto</span><span class="val">Zeki · Çevik · Ahlaklı</span></div>
         </div>
       </div>
     </div>
@@ -315,58 +385,64 @@
 <section id="degerler">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Neden Üsküp 1911?</span>
-      <h2>Gençlik · Spor · Dayanışma · Aidiyet</h2>
-      <p>Dört değer üzerine kurulu bir kulüp kültürü — sahanın içinde ve dışında.</p>
-      <div class="rule"></div>
+      <span class="kicker">Kulüp Felsefesi</span>
+      <h2>Dört değer, formadaki dört numara</h2>
+      <p>Futbolda her forma numarasının bir görevi vardır. Bizim için de her değerin sahadaki karşılığı bu dört numarada somutlaşıyor.</p>
     </div>
-    <div class="values-grid">
-      <div class="value-card reveal">
-        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg>
+    <div class="values-strip reveal">
+      <div class="value-cell">
+        <div class="value-num">9</div>
+        <span class="role-tag">Forvet — Belirleyici Vuruş</span>
         <h3>Spor</h3>
         <p>Gençleri futbolun disiplini, sorumluluk bilinci ve takım ruhuyla yetiştirmek.</p>
       </div>
-      <div class="value-card reveal">
-        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <h3>Dayanışma</h3>
-        <p>Türk camiası arasındaki birliği spor etrafında güçlendirmek; farklı görüşleri siyaset üstü bir anlayışla aynı tribünde buluşturmak.</p>
-      </div>
-      <div class="value-card reveal">
-        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 4 9 9 9s9-4 9-9V7l-9-5Z"/></svg>
-        <h3>Kültür ve Aidiyet</h3>
-        <p>Gençlerin kendi kültürünü, örf ve adetlerini bilmesini; yaşadığı şehre ve farklı kültürlere saygılı bireyler olarak yetişmesini desteklemek.</p>
-      </div>
-      <div class="value-card reveal">
-        <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="#E30A17" stroke-width="1.6"><path d="M12 20V10M18 20V4M6 20v-6"/></svg>
+      <div class="value-cell">
+        <div class="value-num">7</div>
+        <span class="role-tag">Kanat — Hız ve Gelecek</span>
         <h3>Gençlik</h3>
-        <p>Kazanmayı bilen ama kaybettiğinde ayağa kalkabilen; rakibine, takım arkadaşına ve formasına saygı gösteren sporcular yetiştirmek.</p>
+        <p>Kazanmayı bilen ama kaybettiğinde ayağa kalkabilen; rakibine ve formasına saygı gösteren sporcular yetiştirmek.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">6</div>
+        <span class="role-tag">Orta Saha — Bağlayıcı</span>
+        <h3>Dayanışma</h3>
+        <p>Türk camiası arasındaki birliği spor etrafında güçlendirmek; farklı görüşleri aynı tribünde buluşturmak.</p>
+      </div>
+      <div class="value-cell">
+        <div class="value-num">4</div>
+        <span class="role-tag">Defans — Temel</span>
+        <h3>Kültür ve Aidiyet</h3>
+        <p>Gençlerin kendi kültürünü bilmesini; yaşadığı şehre ve farklı kültürlere saygılı bireyler olarak yetişmesini desteklemek.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="yonetim" class="leaders-alt">
+<section id="yonetim" class="leaders-alt rule-top">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Bu Armanın Arkasındaki İnsanlar</span>
-      <h2>Genç yaşlarına rağmen bu kulübe inanan isimler</h2>
+      <span class="kicker">Bu Armanın Arkasındaki İnsanlar</span>
+      <h2>Kulüp Kadrosu — Yönetim</h2>
       <p>Büyük imkânlardan önce, hayatlarının önemli bir bölümünü bu forma için ayıran insanlar var.</p>
-      <div class="rule"></div>
     </div>
-    <div class="leaders-grid">
-      <div class="leader-card reveal">
-        <div class="leader-avatar">ŞA</div>
-        <h3>Şahin Amit</h3>
-        <div class="leader-role">Kulüp Başkanı</div>
-        <p>Henüz yirmili yaşlarındayken arkadaşlarıyla birlikte Üsküp 1911'i yeniden ayağa kaldırmak için yola çıktı. Kulübün organizasyonundan günlük ihtiyaçlarına, gençlerin bir araya getirilmesinden kulübün geleceğini kurma mücadelesine kadar sorumluluğun içinde bizzat yer aldı.</p>
-        <span class="accent-line">Bir kulübün başkanı olmaktan öte, o kulübün yaşaması için mücadele eden genç bir spor insanı.</span>
+    <div class="reveal">
+      <div class="roster-row">
+        <div class="roster-num">01</div>
+        <div>
+          <h3>Şahin Amit</h3>
+          <div class="roster-role">Kulüp Başkanı</div>
+          <p>Henüz yirmili yaşlarındayken arkadaşlarıyla birlikte Üsküp 1911'i yeniden ayağa kaldırmak için yola çıktı. Kulübün organizasyonundan günlük ihtiyaçlarına, gençlerin bir araya getirilmesinden kulübün geleceğini kurma mücadelesine kadar sorumluluğun içinde bizzat yer aldı.</p>
+          <p class="accent-line">"Bir kulübün başkanı olmaktan öte, o kulübün yaşaması için mücadele eden genç bir spor insanı."</p>
+        </div>
       </div>
-      <div class="leader-card reveal">
-        <div class="leader-avatar">BT</div>
-        <h3>Batuhan Taşdüzen</h3>
-        <div class="leader-role">Teknik Sorumlu</div>
-        <p>Sahadaki mücadelenin başında Batuhan Taşdüzen bulunuyor. Genç futbolcuları bir arada tutmak, onlara disiplin ve takım ruhu kazandırmak, gelişimlerine katkı sağlamak ve şartlar zorlaştığında dahi mücadeleden vazgeçmemelerini öğretmek bu görevin gerçek ağırlığını oluşturuyor.</p>
-        <span class="accent-line">Bazen teknik adamlık yalnızca futbol öğretmek değildir. Bir gencin kendisine inanmasını sağlamak da bu görevin parçasıdır.</span>
+      <div class="roster-row">
+        <div class="roster-num">02</div>
+        <div>
+          <h3>Batuhan Taşdüzen</h3>
+          <div class="roster-role">Teknik Sorumlu</div>
+          <p>Sahadaki mücadelenin başında Batuhan Taşdüzen bulunuyor. Genç futbolcuları bir arada tutmak, onlara disiplin ve takım ruhu kazandırmak, gelişimlerine katkı sağlamak ve şartlar zorlaştığında dahi mücadeleden vazgeçmemelerini öğretmek bu görevin gerçek ağırlığını oluşturuyor.</p>
+          <p class="accent-line">"Bazen teknik adamlık yalnızca futbol öğretmek değildir. Bir gencin kendisine inanmasını sağlamak da bu görevin parçasıdır."</p>
+        </div>
       </div>
     </div>
   </div>
@@ -374,8 +450,8 @@
 
 <section class="spirit">
   <div class="container">
-    <span class="eyebrow spirit-eyebrow">Balkanların Yılmaz Savaşçıları</span>
-    <h2 style="font-weight:600;margin-top:0.6rem;">Büyük imkânları olmayabilir. Ama vazgeçmezler.</h2>
+    <span class="kicker">Balkanların Yılmaz Savaşçıları</span>
+    <h2>Büyük imkânları olmayabilir. Ama vazgeçmezler.</h2>
     <div class="spirit-tags">
       <span>Cesaret</span><span>Disiplin</span><span>Emek</span><span>Takım Ruhu</span>
     </div>
@@ -387,47 +463,26 @@
       <span>Kaybederler</span>
     </div>
     <p class="lead">Amaç yalnızca maç kazanan bir takım yaratmak değil; karakterli, disiplinli, birbirine sahip çıkan ve geleceğe güvenle bakabilen gençler yetiştirmek. Kendi kültürünü bilen, yaşadığı ülkeye ve şehrine bağlı, farklı kültürlere saygı gösteren ve futbolun ortak dili altında omuz omuza mücadele eden bir gençlik.</p>
-    <p class="closer">Düşerler. Ayağa Kalkarlar. Ve Yollarına Devam Ederler.</p>
+    <p class="closer">Düşerler. Ayağa kalkarlar. Ve yollarına devam ederler.</p>
   </div>
 </section>
 
-<section id="sponsorluk" class="sponsor-alt">
+<section id="sponsorluk" class="rule-top">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">Birlikte Daha Güçlü</span>
-      <h2>Sponsorluk ve İş Birliği Alanları</h2>
+      <span class="kicker">Birlikte Daha Güçlü</span>
+      <h2>Sponsorluk ve İş Birliği — Takım Sayfası</h2>
       <p>Bunu yalnızca bir reklam alanı olarak görmüyoruz. Kulübümüzün yanında yer alan kişi ve kurumların isimlerini, Üsküp 1911'in büyüyen hikâyesinde taşımak istiyoruz.</p>
-      <div class="rule"></div>
     </div>
-    <div class="tier-table reveal">
-      <div class="tier-row">
-        <div class="tier-name">Forma</div>
-        <div class="tier-desc">Ana sponsor, göğüs, sırt, kol ve uygun forma alanlarında marka görünürlüğü.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Saha</div>
-        <div class="tier-desc">Saha çevresi, pankartlar, maç günü ve kulüp organizasyonlarında görünürlük.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Yazılı ve Görsel Basın</div>
-        <div class="tier-desc">Kulübümüzün basın çalışmalarında iş birliklerimizin ve destekçilerimizin kamuoyuna duyurulması.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Dijital</div>
-        <div class="tier-desc">Sosyal medya, maç görselleri, kulüp duyuruları ve özel içeriklerde görünürlük.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Gençlik ve Altyapı</div>
-        <div class="tier-desc">Genç futbolcuların gelişimine yönelik özel projelerde iş birliği.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Özel Projeler</div>
-        <div class="tier-desc">Forma, ekipman, ulaşım, altyapı ve kulübün gelişimine yönelik projelerde isim ortaklığı.</div>
-      </div>
-      <div class="tier-row">
-        <div class="tier-name">Kulüple Kalıcı Bağ</div>
-        <div class="tier-desc">Yönetimimizin uygun görmesi halinde, kulübümüze önemli ve kalıcı katkı sunan kişi ve kurumlara özel veya onursal unvanlar.</div>
-      </div>
+    <div class="teamsheet reveal">
+      <div class="teamsheet-head"><span>No.</span><span>Alan</span><span>Kapsam</span></div>
+      <div class="tier-row"><div class="tier-num">01</div><div class="tier-name">Forma</div><div class="tier-desc">Ana sponsor, göğüs, sırt, kol ve uygun forma alanlarında marka görünürlüğü.</div></div>
+      <div class="tier-row"><div class="tier-num">02</div><div class="tier-name">Saha</div><div class="tier-desc">Saha çevresi, pankartlar, maç günü ve kulüp organizasyonlarında görünürlük.</div></div>
+      <div class="tier-row"><div class="tier-num">03</div><div class="tier-name">Yazılı ve Görsel Basın</div><div class="tier-desc">Kulübümüzün basın çalışmalarında iş birliklerimizin ve destekçilerimizin kamuoyuna duyurulması.</div></div>
+      <div class="tier-row"><div class="tier-num">04</div><div class="tier-name">Dijital</div><div class="tier-desc">Sosyal medya, maç görselleri, kulüp duyuruları ve özel içeriklerde görünürlük.</div></div>
+      <div class="tier-row"><div class="tier-num">05</div><div class="tier-name">Gençlik ve Altyapı</div><div class="tier-desc">Genç futbolcuların gelişimine yönelik özel projelerde iş birliği.</div></div>
+      <div class="tier-row"><div class="tier-num">06</div><div class="tier-name">Özel Projeler</div><div class="tier-desc">Forma, ekipman, ulaşım, altyapı ve kulübün gelişimine yönelik projelerde isim ortaklığı.</div></div>
+      <div class="tier-row"><div class="tier-num">07</div><div class="tier-name">Kulüple Kalıcı Bağ</div><div class="tier-desc">Yönetimimizin uygun görmesi halinde, önemli ve kalıcı katkı sunan kişi ve kurumlara özel veya onursal unvanlar.</div></div>
     </div>
     <div class="honorary-note reveal">
       Aradığımız yalnızca sponsor değil — <b>Üsküp 1911'in yarınına inanan yol arkadaşları.</b> Yönetimimizin uygun görmesi halinde, desteğinizi ifade etmek üzere size özel bir onursal unvan verilmesini de arzu ediyoruz.
@@ -437,20 +492,19 @@
 
 <section class="banner">
   <div class="container">
-    <span class="eyebrow" style="color:rgba(255,255,255,0.85);">Bir Formadan Daha Fazla</span>
+    <span class="kicker">Bir Formadan Daha Fazla</span>
     <p>Bir forma bugün giyilir, yarın değişir. Bir maç kazanılır, kaybedilir. Bir sezon başlar ve biter.</p>
     <p>Ama bir gencin hayatına zamanında dokunulduğunda, bunun etkisi yıllarca devam edebilir.</p>
-    <div class="final">Bazıları bir nesil yetiştirmek için yaşar.<br>Üsküp 1911, ikincisini başarmak istiyor.</div>
+    <div class="final">Bazıları bir nesil yetiştirmek için yaşar. Üsküp 1911, ikincisini başarmak istiyor.</div>
   </div>
 </section>
 
-<section id="iletisim">
+<section id="iletisim" class="rule-top">
   <div class="container">
     <div class="section-head reveal">
-      <span class="eyebrow">İletişim</span>
-      <h2>Bu Hikâyenin İçinde Yer Alın</h2>
+      <span class="kicker">İletişim</span>
+      <h2>Bu hikâyenin içinde yer alın</h2>
       <p>Sponsorluk, iş birliği veya kulübü yerinde tanımak için bize ulaşın.</p>
-      <div class="rule"></div>
     </div>
     <div class="contact-grid">
       <div class="contact-card reveal">
@@ -472,12 +526,12 @@
         </div>
       </div>
       <div class="reveal">
-        <form class="contact-card" onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='Teşekkürler, mesajınız alındı. En kısa sürede dönüş yapılacaktır.';">
-          <div class="form-field"><label>Ad Soyad</label><input type="text" required></div>
-          <div class="form-field"><label>E-posta</label><input type="email" required></div>
-          <div class="form-field"><label>Mesajınız</label><textarea required placeholder="Sponsorluk, iş birliği veya kulüple ilgili notunuz..."></textarea></div>
+        <form class="contact-card" id="contactForm">
+          <div class="form-field"><label for="cf-name">Ad Soyad</label><input id="cf-name" type="text" required></div>
+          <div class="form-field"><label for="cf-email">E-posta</label><input id="cf-email" type="email" required></div>
+          <div class="form-field"><label for="cf-msg">Mesajınız</label><textarea id="cf-msg" required placeholder="Sponsorluk, iş birliği veya kulüple ilgili notunuz..."></textarea></div>
           <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;width:100%;">Gönder</button>
-          <p class="form-note">Formu tamamlayıp gönderin, size dönüş yapalım.</p>
+          <p class="form-note" id="formNote">Formu tamamlayıp gönderin, size dönüş yapalım.</p>
         </form>
       </div>
     </div>
@@ -488,14 +542,14 @@
   <div class="container">
     <div class="foot-brand">ÜSKÜP 1911 SPOR KULÜBÜ</div>
     <p>Zeki. Çevik. Ahlaklı. — Kuzey Makedonya</p>
-    <p style="margin-top:0.6rem;">© 2026 Üsküp 1911 Spor Kulübü. Tüm hakları saklıdır.</p>
+    <p style="margin-top:0.5rem;">© 2026 Üsküp 1911 Spor Kulübü. Tüm hakları saklıdır.</p>
   </div>
 </footer>
 
 <script>
   var nav = document.getElementById('nav');
   window.addEventListener('scroll', function () {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+    nav.classList.toggle('scrolled', window.scrollY > 30);
   });
 
   var navToggle = document.getElementById('navToggle');
@@ -506,12 +560,21 @@
   });
 
   var revealEls = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach(function (el) { io.observe(el); });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('formNote').textContent = 'Teşekkürler, mesajınız alındı. En kısa sürede dönüş yapılacaktır.';
+  });
 </script>
 
 </body>
