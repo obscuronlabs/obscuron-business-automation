@@ -22,6 +22,8 @@ img { max-width: 100%; display: block; }
 nav { margin-left: auto; display: flex; gap: 22px; }
 nav a { font-family: 'Barlow Condensed'; font-weight: 700; text-transform: uppercase; }
 nav a:hover { color: var(--r); }
+.navStore { background: var(--r); color: #fff !important; padding: 8px 16px; border-radius: 3px; }
+.navStore:hover { background: #ff2d3d; color: #fff !important; }
 .social { display: flex; gap: 8px; }
 .social a { border: 1px solid #444; border-radius: 50%; width: 34px; height: 34px; display: grid; place-items: center; font-weight: 700; }
 #menu { display: none; }
