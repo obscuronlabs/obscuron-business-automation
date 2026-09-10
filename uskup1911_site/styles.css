@@ -87,6 +87,7 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .contact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .news article, .contact article { background: #fff; padding: 28px; border-top: 4px solid var(--r); box-shadow: 0 6px 20px #0001; }
+.contact .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: top; margin-bottom: 14px; border: 3px solid var(--r); }
 .contact h3 { font-size: 28px; margin-top: 0; }
 .contact a, .contact span { display: block; margin-top: 10px; }
 .tweetEmbeds { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 28px; }
@@ -97,8 +98,8 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .gallery img { height: 440px; width: 100%; object-fit: cover; filter: grayscale(100%); }
 
 /* SKYLINE */
-.skyline { position: relative; height: 180px; overflow: hidden; background: #d7d9d8; }
-.skyline svg { width: 100%; height: 100%; display: block; }
+.skyline { position: relative; height: 260px; overflow: hidden; background: #0d0d0d; }
+.skyline img { width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; }
 .skyline::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 55%, #090909 100%); }
 
 /* FOOTER */
@@ -133,7 +134,7 @@ footer p { margin-left: auto; color: #bbb; font-size: 10px; letter-spacing: 2px;
   .section h2 { font-size: 40px; }
   .cards, .sponsorGrid, .news, .gallery, .contact { grid-template-columns: 1fr; }
   .gallery img { height: 320px; }
-  .skyline { height: 110px; }
+  .skyline { height: 150px; }
   footer { flex-direction: column; align-items: flex-start; }
   footer p { margin-left: 0; }
 }
