@@ -6,7 +6,7 @@
 <title>Üsküp 1911 Spor Kulübü — Sponsorluk Dosyası</title>
 <meta name="description" content="Üsküp 1911 Spor Kulübü — Kuzey Makedonya'da gençlik, spor ve dayanışma. Kurumsal tanıtım ve sponsorluk dosyası.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F4F2EC;
@@ -64,7 +64,8 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
-  h1, h2, h3, .display { font-family: 'Fraunces', serif; color: var(--ink); text-wrap: balance; }
+  h1, h2, h3, .display { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; color: var(--ink); text-wrap: balance; }
+  .accent-line, .qmark, .programme-note p, .kit-note em, .final, .closer { font-family: 'Fraunces', serif; }
   .mono { font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
   a { color: inherit; }
   img, svg { max-width: 100%; }
@@ -94,8 +95,8 @@
   nav.scrolled { box-shadow: 0 2px 18px var(--shadow); }
   .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
   .crest { width: 34px; height: 38px; flex-shrink: 0; }
-  .nav-brand-text { font-family: 'Fraunces', serif; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.05; }
-  .nav-brand-text b { display: block; font-weight: 600; font-size: 1.05rem; }
+  .nav-brand-text { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 0.06em; line-height: 1.05; text-transform: uppercase; }
+  .nav-brand-text b { display: block; font-weight: 800; font-size: 1.2rem; letter-spacing: 0.01em; }
   .nav-links { display: flex; gap: 1.9rem; list-style: none; align-items: center; }
   .nav-links a {
     text-decoration: none; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -116,35 +117,46 @@
     .nav-toggle { display: flex; }
   }
 
-  /* HERO — programme cover */
-  .hero { padding: 8.5rem 0 4rem; }
+  /* HERO — programme cover (fixed dark section, independent of light/dark toggle) */
+  .hero { padding: 8.5rem 0 4rem; background: var(--ink); }
+  :root:not([data-theme="dark"]) .hero { --hero-fg: #F4F2EC; --hero-fg-dim: rgba(244,242,236,0.66); --hero-line: rgba(244,242,236,0.16); --hero-panel: rgba(244,242,236,0.04); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero { --hero-fg: var(--ink); } }
+  :root[data-theme="dark"] .hero { --hero-fg: var(--ink); --hero-fg-dim: var(--ink-dim); --hero-line: var(--ink-faint); --hero-panel: var(--paper-2); }
+  .hero { color: var(--hero-fg, #F4F2EC); }
   .cover-frame {
-    border: 1px solid var(--ink-faint); border-radius: 2px; padding: 3.4rem 2.6rem;
-    position: relative; overflow: hidden; background: var(--paper-2);
+    border: 1px solid var(--hero-line, rgba(244,242,236,0.16)); border-radius: 2px; padding: 3.4rem 2.6rem;
+    position: relative; overflow: hidden; background: var(--hero-panel, rgba(244,242,236,0.04));
   }
-  .cover-frame::before, .cover-frame::after {
-    content: ''; position: absolute; border: 1px solid var(--ink-faint); pointer-events: none;
+  .cover-frame::before {
+    content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid var(--hero-line, rgba(244,242,236,0.16)); pointer-events: none;
   }
-  .cover-frame::before { top: 10px; left: 10px; right: 10px; bottom: 10px; border-width: 1px; }
   .pitch-lines { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
   .cover-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.6rem; position: relative; z-index: 1; }
-  .issue-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-dim); text-transform: uppercase; }
+  .issue-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--hero-fg-dim, rgba(244,242,236,0.66)); text-transform: uppercase; }
   .cover-crest { width: 104px; height: 114px; margin: 0 auto 1.8rem; display: block; }
   .hero-center { text-align: center; position: relative; z-index: 1; }
-  .hero h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 600; line-height: 1.03; letter-spacing: -0.01em; }
+  .hero h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 700; line-height: 1.03; letter-spacing: 0; color: var(--hero-fg, #F4F2EC); }
   .hero h1 em { font-style: normal; color: var(--red); }
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase;
+    font-size: clamp(1.15rem, 2.6vw, 1.6rem); letter-spacing: 0.01em; margin-top: 1rem; color: var(--hero-fg, #F4F2EC);
+  }
+  .hero-tagline em { font-style: normal; color: var(--red); }
   .hero-motto {
     font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--ink); font-size: 0.82rem; margin-top: 1.2rem;
+    color: var(--hero-fg, #F4F2EC); font-size: 0.82rem; margin-top: 1.2rem;
   }
-  .hero-sub { color: var(--ink-dim); font-size: 1.02rem; max-width: 600px; margin: 1.5rem auto 0; font-weight: 300; }
+  .hero-sub { color: var(--hero-fg-dim, rgba(244,242,236,0.66)); font-size: 1.02rem; max-width: 600px; margin: 1.5rem auto 0; font-weight: 300; }
+  .hero-quote2 { font-family: 'Fraunces', serif; font-style: italic; color: var(--hero-fg-dim, rgba(244,242,236,0.8)); font-size: 1rem; margin-top: 0.9rem; }
+  .hero-quote2 cite { font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-left: 0.5rem; }
   .programme-note {
-    margin: 2.6rem auto 0; max-width: 620px; text-align: left; position: relative;
-    padding: 1.6rem 1.8rem 1.6rem 3rem; border-left: 3px solid var(--red); background: var(--paper);
+    margin: 2.2rem auto 0; max-width: 620px; text-align: left; position: relative;
+    padding: 1.6rem 1.8rem 1.6rem 3rem; border-left: 3px solid var(--red); background: var(--hero-panel, rgba(244,242,236,0.05));
   }
-  .programme-note .qmark { position: absolute; left: 0.7rem; top: 0.5rem; font-family: 'Fraunces', serif; font-size: 2.6rem; color: var(--ink-faint); line-height: 1; }
-  .programme-note p { font-family: 'Fraunces', serif; font-size: 1.12rem; font-style: italic; color: var(--ink); }
-  .programme-note cite { display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); margin-top: 0.9rem; }
+  .programme-note .qmark { position: absolute; left: 0.7rem; top: 0.5rem; font-family: 'Fraunces', serif; font-size: 2.6rem; color: var(--hero-line, rgba(244,242,236,0.2)); line-height: 1; }
+  .programme-note p { font-family: 'Fraunces', serif; font-size: 1.12rem; font-style: italic; color: var(--hero-fg, #F4F2EC); }
+  .programme-note cite { display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hero-fg-dim, rgba(244,242,236,0.66)); margin-top: 0.9rem; }
   .hero-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 2.4rem; flex-wrap: wrap; }
   .btn {
     font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.76rem;
@@ -152,8 +164,8 @@
   }
   .btn-primary { background: var(--red); color: var(--red-ink); border-color: var(--red); }
   .btn-primary:hover { background: var(--red-deep); border-color: var(--red-deep); }
-  .btn-ghost { border-color: var(--ink-faint); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--ink); }
+  .btn-ghost { border-color: var(--hero-line, rgba(244,242,236,0.3)); color: var(--hero-fg, #F4F2EC); }
+  .btn-ghost:hover { border-color: var(--hero-fg, #F4F2EC); }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .hero-center { animation: fadeUp 0.9s ease both; }
@@ -253,7 +265,7 @@
   .tier-row:last-child { border-bottom: none; }
   .tier-row:nth-child(even) { background: var(--paper-2); }
   .tier-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--red); padding: 1.3rem 1.4rem; font-size: 1rem; }
-  .tier-name { padding: 1.3rem 0.8rem 1.3rem 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.98rem; }
+  .tier-name { padding: 1.3rem 0.8rem 1.3rem 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.08rem; }
   .tier-desc { padding: 1.3rem 1.4rem 1.3rem 0; color: var(--ink-dim); font-size: 0.9rem; }
   @media (max-width: 720px) {
     .teamsheet-head { display: none; }
@@ -297,7 +309,7 @@
   .form-note { font-size: 0.78rem; color: var(--ink-dim); margin-top: 1rem; }
 
   footer { border-top: 1px solid var(--ink-faint); padding: 2.4rem 0; text-align: center; }
-  footer .foot-brand { font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.4rem; }
+  footer .foot-brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; letter-spacing: 0.06em; margin-bottom: 0.4rem; font-size: 1.2rem; text-transform: uppercase; }
   footer p { color: var(--ink-dim); font-size: 0.8rem; }
   .social-row { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.7rem !important; }
   .social-row a { color: var(--red) !important; text-decoration: none; }
@@ -313,28 +325,27 @@
     </clipPath>
     <mask id="crescentMask" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="220">
       <rect x="0" y="0" width="200" height="220" fill="#000"/>
-      <circle cx="82" cy="80" r="25" fill="#fff"/>
-      <circle cx="93" cy="74" r="20" fill="#000"/>
+      <circle cx="100" cy="52" r="22" fill="#fff"/>
+      <circle cx="110" cy="46" r="17.5" fill="#000"/>
     </mask>
   </defs>
   <symbol id="crest-mini" viewBox="0 0 200 220">
     <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="#fff" stroke="#15161A" stroke-width="9"/>
-    <polygon points="20,12 180,12 20,190" fill="#C81E1E" clip-path="url(#shieldClip)"/>
-    <circle cx="82" cy="80" r="25" fill="#fff" mask="url(#crescentMask)"/>
-    <polygon points="101,70 104.3,79.1 114,79.4 106.2,85.2 109.1,94.4 101,88.9 92.9,94.4 95.8,85.2 88,79.4 97.7,79.1" fill="#fff"/>
+    <rect x="18" y="10" width="164" height="82" fill="#C81E1E" clip-path="url(#shieldClip)"/>
+    <line x1="20" y1="92" x2="180" y2="92" stroke="#15161A" stroke-width="4" clip-path="url(#shieldClip)"/>
+    <circle cx="100" cy="52" r="22" fill="#fff" mask="url(#crescentMask)"/>
+    <polygon points="118,42 121,50.5 130,50.8 122.8,56.2 125.5,64.8 118,59.8 110.5,64.8 113.2,56.2 106,50.8 115,50.5" fill="#fff"/>
     <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="none" stroke="#15161A" stroke-width="9"/>
   </symbol>
   <symbol id="crest-full" viewBox="0 0 200 220">
     <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="#fff" stroke="#15161A" stroke-width="9"/>
-    <polygon points="20,12 180,12 20,190" fill="#C81E1E" clip-path="url(#shieldClip)"/>
-    <circle cx="82" cy="80" r="25" fill="#fff" mask="url(#crescentMask)"/>
-    <polygon points="101,70 104.3,79.1 114,79.4 106.2,85.2 109.1,94.4 101,88.9 92.9,94.4 95.8,85.2 88,79.4 97.7,79.1" fill="#fff"/>
-    <g transform="rotate(-42 100 138)">
-      <text x="10" y="132" font-family="Arial, sans-serif" font-weight="900" font-size="27" fill="#15161A" letter-spacing="-0.5">ÜSKÜP</text>
-      <text x="10" y="160" font-family="Arial, sans-serif" font-weight="900" font-size="27" fill="#15161A" letter-spacing="-0.5">1911</text>
-    </g>
-    <circle cx="151" cy="181" r="17" fill="#fff" stroke="#15161A" stroke-width="4"/>
-    <polygon points="151,171 159,177 156,187 146,187 143,177" fill="#15161A"/>
+    <rect x="18" y="10" width="164" height="82" fill="#C81E1E" clip-path="url(#shieldClip)"/>
+    <line x1="20" y1="92" x2="180" y2="92" stroke="#15161A" stroke-width="4" clip-path="url(#shieldClip)"/>
+    <circle cx="100" cy="52" r="22" fill="#fff" mask="url(#crescentMask)"/>
+    <polygon points="118,42 121,50.5 130,50.8 122.8,56.2 125.5,64.8 118,59.8 110.5,64.8 113.2,56.2 106,50.8 115,50.5" fill="#fff"/>
+    <text x="100" y="122" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="26" fill="#15161A" letter-spacing="-0.5">ÜSKÜP 1911</text>
+    <circle cx="100" cy="168" r="20" fill="#fff" stroke="#15161A" stroke-width="4"/>
+    <polygon points="100,155 109,162 105.5,174 94.5,174 91,162" fill="#15161A"/>
     <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="none" stroke="#15161A" stroke-width="9"/>
   </symbol>
 </svg>
@@ -359,11 +370,11 @@
   <div class="container">
     <div class="cover-frame">
       <svg class="pitch-lines" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="2" y="2" width="96" height="56" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
-        <line x1="50" y1="2" x2="50" y2="58" stroke="var(--ink-faint)" stroke-width="0.15"/>
-        <circle cx="50" cy="30" r="8" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
-        <rect x="2" y="18" width="10" height="24" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
-        <rect x="88" y="18" width="10" height="24" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
+        <rect x="2" y="2" width="96" height="56" fill="none" stroke="var(--hero-line, rgba(244,242,236,0.16))" stroke-width="0.15"/>
+        <line x1="50" y1="2" x2="50" y2="58" stroke="var(--hero-line, rgba(244,242,236,0.16))" stroke-width="0.15"/>
+        <circle cx="50" cy="30" r="8" fill="none" stroke="var(--hero-line, rgba(244,242,236,0.16))" stroke-width="0.15"/>
+        <rect x="2" y="18" width="10" height="24" fill="none" stroke="var(--hero-line, rgba(244,242,236,0.16))" stroke-width="0.15"/>
+        <rect x="88" y="18" width="10" height="24" fill="none" stroke="var(--hero-line, rgba(244,242,236,0.16))" stroke-width="0.15"/>
       </svg>
       <div class="cover-top">
         <span class="issue-tag">Kurumsal Tanıtım &amp; Sponsorluk Dosyası</span>
@@ -373,8 +384,10 @@
         <svg class="cover-crest" viewBox="0 0 200 220" aria-label="Üsküp 1911 arması"><use href="#crest-full"/></svg>
         <span class="kicker" style="justify-content:center;">Üsküp · Kuzey Makedonya</span>
         <h1>ÜSKÜP <em>1911</em><br>SPOR KULÜBÜ</h1>
+        <div class="hero-tagline">Geçmişten Günümüze Aynı Ruh, <em>Daha Güçlü Yarınlara</em></div>
         <div class="hero-motto">Zeki · Çevik · Ahlaklı</div>
         <p class="hero-sub">Bir futbol kulübünden daha fazlası. Balkanlarda Türk gençlerini aynı forma altında buluşturan; gençlik, spor ve dayanışma için sahada bir hareket.</p>
+        <p class="hero-quote2">"Spor, bir milletin gençliğini güçlü kılar." <cite>— K. Atatürk</cite></p>
         <blockquote class="programme-note">
           <span class="qmark">&ldquo;</span>
           <p>Ben sporcunun zeki, çevik ve aynı zamanda ahlaklısını severim.</p>
