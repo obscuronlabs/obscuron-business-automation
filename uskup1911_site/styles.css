@@ -99,7 +99,7 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 
 /* SKYLINE */
 .skyline { position: relative; height: 260px; overflow: hidden; background: #0d0d0d; }
-.skyline img { width: 100%; height: 100%; object-fit: cover; object-position: center 65%; display: block; }
+.skyline img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; display: block; }
 .skyline::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 55%, #090909 100%); }
 
 /* FOOTER */
