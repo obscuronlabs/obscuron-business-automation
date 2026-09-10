@@ -9,50 +9,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F1EADA;
-    --paper-2: #E7DCC4;
-    --paper-3: #DED0AF;
-    --ink: #1C2430;
-    --ink-dim: rgba(28,36,48,0.66);
-    --ink-faint: rgba(28,36,48,0.16);
-    --maroon: #7C2029;
-    --maroon-deep: #591620;
-    --maroon-ink: #ffffff;
-    --brass: #8C6A2E;
-    --brass-line: rgba(140,106,46,0.55);
-    --rule: rgba(28,36,48,0.20);
-    --shadow: rgba(28,36,48,0.10);
+    --paper: #F4F2EC;
+    --paper-2: #EAE6DB;
+    --paper-3: #DCD6C6;
+    --ink: #16181C;
+    --ink-dim: rgba(22,24,28,0.66);
+    --ink-faint: rgba(22,24,28,0.16);
+    --red: #C81E1E;
+    --red-deep: #931414;
+    --red-ink: #ffffff;
+    --rule: rgba(22,24,28,0.18);
+    --shadow: rgba(22,24,28,0.10);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #14181F;
-      --paper-2: #1B2029;
-      --paper-3: #242B37;
-      --ink: #ECE5D3;
-      --ink-dim: rgba(236,229,211,0.66);
-      --ink-faint: rgba(236,229,211,0.14);
-      --maroon: #C24853;
-      --maroon-deep: #8C2C35;
-      --maroon-ink: #14181F;
-      --brass: #C7A45A;
-      --brass-line: rgba(199,164,90,0.45);
-      --rule: rgba(236,229,211,0.18);
+      --paper: #131417;
+      --paper-2: #1B1D22;
+      --paper-3: #26292F;
+      --ink: #EDEBE4;
+      --ink-dim: rgba(237,235,228,0.66);
+      --ink-faint: rgba(237,235,228,0.14);
+      --red: #E4453F;
+      --red-deep: #A82E2A;
+      --red-ink: #131417;
+      --rule: rgba(237,235,228,0.18);
       --shadow: rgba(0,0,0,0.35);
     }
   }
   :root[data-theme="dark"] {
-    --paper: #14181F;
-    --paper-2: #1B2029;
-    --paper-3: #242B37;
-    --ink: #ECE5D3;
-    --ink-dim: rgba(236,229,211,0.66);
-    --ink-faint: rgba(236,229,211,0.14);
-    --maroon: #C24853;
-    --maroon-deep: #8C2C35;
-    --maroon-ink: #14181F;
-    --brass: #C7A45A;
-    --brass-line: rgba(199,164,90,0.45);
-    --rule: rgba(236,229,211,0.18);
+    --paper: #131417;
+    --paper-2: #1B1D22;
+    --paper-3: #26292F;
+    --ink: #EDEBE4;
+    --ink-dim: rgba(237,235,228,0.66);
+    --ink-faint: rgba(237,235,228,0.14);
+    --red: #E4453F;
+    --red-deep: #A82E2A;
+    --red-ink: #131417;
+    --rule: rgba(237,235,228,0.18);
     --shadow: rgba(0,0,0,0.35);
   }
 
@@ -76,15 +70,15 @@
   img, svg { max-width: 100%; }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: var(--paper); }
-  ::-webkit-scrollbar-thumb { background: var(--brass-line); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 3px; }
   .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
-  :focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
   .kicker {
     font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.22em;
-    text-transform: uppercase; color: var(--maroon); display: inline-flex; align-items: center; gap: 0.6rem;
+    text-transform: uppercase; color: var(--red); display: inline-flex; align-items: center; gap: 0.6rem;
   }
-  .kicker::before { content: ''; width: 22px; height: 1px; background: var(--maroon); display: inline-block; }
+  .kicker::before { content: ''; width: 22px; height: 1px; background: var(--red); display: inline-block; }
   section { position: relative; padding: 5.5rem 0; }
   @media (max-width: 640px) { section { padding: 3.6rem 0; } }
   .rule-top { border-top: 1px solid var(--rule); }
@@ -99,14 +93,7 @@
   }
   nav.scrolled { box-shadow: 0 2px 18px var(--shadow); }
   .nav-brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
-  .crest {
-    width: 34px; height: 38px; flex-shrink: 0;
-    background: var(--maroon);
-    clip-path: polygon(50% 0%, 100% 22%, 100% 68%, 50% 100%, 0% 68%, 0% 22%);
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--brass-line);
-  }
-  .crest span { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 0.62rem; color: var(--maroon-ink); letter-spacing: -0.02em; }
+  .crest { width: 34px; height: 38px; flex-shrink: 0; }
   .nav-brand-text { font-family: 'Fraunces', serif; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.05; }
   .nav-brand-text b { display: block; font-weight: 600; font-size: 1.05rem; }
   .nav-links { display: flex; gap: 1.9rem; list-style: none; align-items: center; }
@@ -114,9 +101,9 @@
     text-decoration: none; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--ink-dim); transition: color 0.2s; font-family: 'IBM Plex Mono', monospace;
   }
-  .nav-links a:hover { color: var(--maroon); }
-  .nav-cta { border: 1px solid var(--maroon); color: var(--maroon) !important; padding: 0.5rem 1.1rem !important; border-radius: 2px; }
-  .nav-cta:hover { background: var(--maroon); color: var(--maroon-ink) !important; }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta { border: 1px solid var(--red); color: var(--red) !important; padding: 0.5rem 1.1rem !important; border-radius: 2px; }
+  .nav-cta:hover { background: var(--red); color: var(--red-ink) !important; }
   .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
   .nav-toggle span { width: 22px; height: 2px; background: var(--ink); }
   @media (max-width: 880px) {
@@ -136,33 +123,26 @@
     position: relative; overflow: hidden; background: var(--paper-2);
   }
   .cover-frame::before, .cover-frame::after {
-    content: ''; position: absolute; border: 1px solid var(--brass-line); pointer-events: none;
+    content: ''; position: absolute; border: 1px solid var(--ink-faint); pointer-events: none;
   }
   .cover-frame::before { top: 10px; left: 10px; right: 10px; bottom: 10px; border-width: 1px; }
   .pitch-lines { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
   .cover-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.6rem; position: relative; z-index: 1; }
   .issue-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; color: var(--ink-dim); text-transform: uppercase; }
-  .cover-crest {
-    width: 92px; height: 100px; margin: 0 auto 1.8rem; position: relative;
-    background: var(--maroon); clip-path: polygon(50% 0%, 100% 22%, 100% 68%, 50% 100%, 0% 68%, 0% 22%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border: 1px solid var(--brass-line);
-  }
-  .cover-crest strong { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 1.3rem; color: var(--maroon-ink); }
-  .cover-crest em { font-style: normal; font-size: 0.5rem; letter-spacing: 0.14em; color: var(--maroon-ink); opacity: 0.8; margin-top: 2px; }
+  .cover-crest { width: 104px; height: 114px; margin: 0 auto 1.8rem; display: block; }
   .hero-center { text-align: center; position: relative; z-index: 1; }
   .hero h1 { font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 600; line-height: 1.03; letter-spacing: -0.01em; }
-  .hero h1 em { font-style: normal; color: var(--maroon); }
+  .hero h1 em { font-style: normal; color: var(--red); }
   .hero-motto {
     font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--brass); font-size: 0.82rem; margin-top: 1.2rem;
+    color: var(--ink); font-size: 0.82rem; margin-top: 1.2rem;
   }
   .hero-sub { color: var(--ink-dim); font-size: 1.02rem; max-width: 600px; margin: 1.5rem auto 0; font-weight: 300; }
   .programme-note {
     margin: 2.6rem auto 0; max-width: 620px; text-align: left; position: relative;
-    padding: 1.6rem 1.8rem 1.6rem 3rem; border-left: 3px solid var(--maroon); background: var(--paper);
+    padding: 1.6rem 1.8rem 1.6rem 3rem; border-left: 3px solid var(--red); background: var(--paper);
   }
-  .programme-note .qmark { position: absolute; left: 0.7rem; top: 0.5rem; font-family: 'Fraunces', serif; font-size: 2.6rem; color: var(--brass-line); line-height: 1; }
+  .programme-note .qmark { position: absolute; left: 0.7rem; top: 0.5rem; font-family: 'Fraunces', serif; font-size: 2.6rem; color: var(--ink-faint); line-height: 1; }
   .programme-note p { font-family: 'Fraunces', serif; font-size: 1.12rem; font-style: italic; color: var(--ink); }
   .programme-note cite { display: block; font-style: normal; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-dim); margin-top: 0.9rem; }
   .hero-cta { display: flex; gap: 1rem; justify-content: center; margin-top: 2.4rem; flex-wrap: wrap; }
@@ -170,8 +150,8 @@
     font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.76rem;
     padding: 0.85rem 1.9rem; text-decoration: none; border-radius: 2px; transition: all 0.2s; display: inline-block; border: 1px solid transparent;
   }
-  .btn-primary { background: var(--maroon); color: var(--maroon-ink); border-color: var(--maroon); }
-  .btn-primary:hover { background: var(--maroon-deep); border-color: var(--maroon-deep); }
+  .btn-primary { background: var(--red); color: var(--red-ink); border-color: var(--red); }
+  .btn-primary:hover { background: var(--red-deep); border-color: var(--red-deep); }
   .btn-ghost { border-color: var(--ink-faint); color: var(--ink); }
   .btn-ghost:hover { border-color: var(--ink); }
 
@@ -193,7 +173,7 @@
   .about-copy p { color: var(--ink-dim); margin-bottom: 1.05rem; }
   .about-copy strong { color: var(--ink); font-weight: 500; }
   .pull-quote {
-    font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--maroon);
+    font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--red);
     line-height: 1.4; border-top: 1px solid var(--rule); padding-top: 1.3rem; margin-top: 1.6rem;
   }
   .stat-sheet { border: 1px solid var(--ink-faint); background: var(--paper); }
@@ -204,19 +184,31 @@
   .stat-item { display: flex; justify-content: space-between; align-items: baseline; padding: 1.05rem 1.4rem; border-bottom: 1px solid var(--rule); gap: 1rem; }
   .stat-item:last-child { border-bottom: none; }
   .stat-item .label { font-size: 0.88rem; color: var(--ink-dim); }
-  .stat-item .val { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--maroon); font-size: 0.95rem; text-align: right; }
+  .stat-item .val { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--red); font-size: 0.95rem; text-align: right; }
+  .kit-note { display: flex; gap: 1.1rem; align-items: flex-start; margin-top: 1.6rem; padding: 1.5rem 1.4rem; border: 1px solid var(--ink-faint); background: var(--paper); }
+  .kit-swatch {
+    width: 52px; height: 52px; flex-shrink: 0; position: relative; border: 1px solid var(--ink-faint);
+    background: repeating-linear-gradient(135deg, var(--ink) 0 6px, var(--paper) 6px 13px);
+  }
+  .kit-swatch::after {
+    content: ''; position: absolute; right: -5px; bottom: -5px; width: 15px; height: 15px; border-radius: 50%;
+    background: var(--red); border: 2px solid var(--paper);
+  }
+  .kit-note h4 { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .kit-note p { color: var(--ink-dim); font-size: 0.88rem; }
+  .kit-note em { font-style: italic; color: var(--ink); font-family: 'Fraunces', serif; font-weight: 500; }
 
   /* VALUES — squad-number strip */
   .values-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--ink-faint); border: 1px solid var(--ink-faint); }
   @media (max-width: 780px) { .values-strip { grid-template-columns: repeat(2, 1fr); } }
   .value-cell { background: var(--paper); padding: 2.1rem 1.6rem; }
   .value-num {
-    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--maroon); color: var(--maroon);
+    width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--red); color: var(--red);
     display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace;
     font-weight: 600; font-size: 1.05rem; margin-bottom: 1.2rem;
   }
   .value-cell h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.6rem; }
-  .value-cell .role-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); display: block; margin-bottom: 0.7rem; }
+  .value-cell .role-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); display: block; margin-bottom: 0.7rem; }
   .value-cell p { color: var(--ink-dim); font-size: 0.88rem; }
 
   /* LEADERSHIP — roster */
@@ -225,27 +217,30 @@
   .roster-row:first-of-type { border-top: 1px solid var(--rule); }
   .roster-num { font-family: 'IBM Plex Mono', monospace; font-size: 2rem; font-weight: 600; color: var(--ink-faint); line-height: 1; }
   .roster-row h3 { font-size: 1.15rem; font-weight: 600; }
-  .roster-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--maroon); margin: 0.4rem 0 0.9rem; }
+  .roster-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin: 0.4rem 0 0.9rem; }
   .roster-row p { color: var(--ink-dim); font-size: 0.94rem; max-width: 640px; }
   .roster-row p + p { margin-top: 0.7rem; }
   .roster-row .accent-line { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink); font-size: 0.98rem; margin-top: 0.9rem; }
   @media (max-width: 560px) { .roster-row { grid-template-columns: 1fr; } .roster-num { font-size: 1.4rem; } }
+  .roster-row.history { grid-template-columns: 96px 1fr; }
+  .roster-row.history .roster-num { font-size: 1.3rem; }
+  @media (max-width: 560px) { .roster-row.history { grid-template-columns: 1fr; } }
 
   /* SPIRIT */
-  .spirit { background: var(--maroon); color: var(--maroon-ink); }
+  .spirit { background: var(--red); color: var(--red-ink); }
   .spirit .kicker, .spirit .kicker::before { color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.75); }
-  .spirit h2 { color: var(--maroon-ink); font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 600; margin-top: 0.8rem; max-width: 640px; }
+  .spirit h2 { color: var(--red-ink); font-size: clamp(1.9rem, 4.6vw, 2.9rem); font-weight: 600; margin-top: 0.8rem; max-width: 640px; }
   .verb-chain { display: flex; flex-wrap: wrap; gap: 0.7rem 1.2rem; margin: 2.2rem 0; font-family: 'IBM Plex Mono', monospace; }
   .verb-chain span { font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
-  .verb-chain span.win { color: var(--maroon-ink); font-weight: 600; }
+  .verb-chain span.win { color: var(--red-ink); font-weight: 600; }
   .verb-chain .sep { color: rgba(255,255,255,0.4); }
   .spirit-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.6rem 0 2rem; }
   .spirit-tags span {
     border: 1px solid rgba(255,255,255,0.35); border-radius: 30px; padding: 0.45rem 1.1rem; font-size: 0.7rem;
-    letter-spacing: 0.1em; text-transform: uppercase; font-family: 'IBM Plex Mono', monospace; color: var(--maroon-ink);
+    letter-spacing: 0.1em; text-transform: uppercase; font-family: 'IBM Plex Mono', monospace; color: var(--red-ink);
   }
   .spirit p.lead { max-width: 660px; color: rgba(255,255,255,0.88); font-size: 1rem; }
-  .spirit .closer { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.25rem; margin-top: 1.8rem; color: var(--maroon-ink); }
+  .spirit .closer { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.25rem; margin-top: 1.8rem; color: var(--red-ink); }
 
   /* SPONSORSHIP — team sheet */
   .teamsheet { border: 1px solid var(--ink-faint); }
@@ -257,7 +252,7 @@
   .tier-row { display: grid; grid-template-columns: 64px 200px 1fr; border-bottom: 1px solid var(--rule); align-items: center; }
   .tier-row:last-child { border-bottom: none; }
   .tier-row:nth-child(even) { background: var(--paper-2); }
-  .tier-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--maroon); padding: 1.3rem 1.4rem; font-size: 1rem; }
+  .tier-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--red); padding: 1.3rem 1.4rem; font-size: 1rem; }
   .tier-name { padding: 1.3rem 0.8rem 1.3rem 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: 0.98rem; }
   .tier-desc { padding: 1.3rem 1.4rem 1.3rem 0; color: var(--ink-dim); font-size: 0.9rem; }
   @media (max-width: 720px) {
@@ -268,16 +263,16 @@
     .tier-desc { grid-area: desc; padding: 0.7rem 0 0; }
   }
   .honorary-note {
-    margin-top: 2.2rem; border: 1px solid var(--brass-line); background: var(--paper-2);
+    margin-top: 2.2rem; border-left: 3px solid var(--red); background: var(--paper-2);
     padding: 1.5rem 1.7rem; color: var(--ink); font-size: 0.92rem;
   }
-  .honorary-note b { color: var(--maroon); }
+  .honorary-note b { color: var(--red); }
 
   /* CLOSING BANNER */
   .banner { text-align: center; background: var(--ink); color: var(--paper); }
   .banner .container { max-width: 720px; }
-  .banner .kicker { color: var(--brass); }
-  .banner .kicker::before { background: var(--brass); }
+  .banner .kicker { color: var(--red); }
+  .banner .kicker::before { background: var(--red); }
   .banner p { font-size: 1.08rem; color: rgba(241,234,218,0.82); margin-bottom: 0.5rem; }
   .banner .final { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.4rem; margin-top: 1.6rem; color: var(--paper); }
 
@@ -287,10 +282,10 @@
   .contact-card { border: 1px solid var(--ink-faint); background: var(--paper-2); padding: 2.2rem; }
   .contact-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.4rem; }
   .contact-row:last-child { margin-bottom: 0; }
-  .contact-ico { width: 19px; height: 19px; flex-shrink: 0; margin-top: 3px; color: var(--maroon); }
+  .contact-ico { width: 19px; height: 19px; flex-shrink: 0; margin-top: 3px; color: var(--red); }
   .contact-row h4 { font-size: 0.85rem; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.06em; }
   .contact-row p, .contact-row a { color: var(--ink-dim); font-size: 0.9rem; text-decoration: none; }
-  .contact-row a:hover { color: var(--maroon); }
+  .contact-row a:hover { color: var(--red); }
   .form-field { margin-bottom: 1.1rem; }
   .form-field label { display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 0.5rem; font-family: 'IBM Plex Mono', monospace; }
   .form-field input, .form-field textarea {
@@ -298,23 +293,60 @@
     padding: 0.75rem 0.9rem; color: var(--ink); font-family: 'Work Sans', sans-serif; font-size: 0.92rem;
   }
   .form-field textarea { resize: vertical; min-height: 96px; }
-  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--maroon); }
+  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--red); }
   .form-note { font-size: 0.78rem; color: var(--ink-dim); margin-top: 1rem; }
 
   footer { border-top: 1px solid var(--ink-faint); padding: 2.4rem 0; text-align: center; }
   footer .foot-brand { font-family: 'Fraunces', serif; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.4rem; }
   footer p { color: var(--ink-dim); font-size: 0.8rem; }
+  .social-row { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.7rem !important; }
+  .social-row a { color: var(--red) !important; text-decoration: none; }
+  .social-row a:hover { text-decoration: underline; }
 </style>
 </head>
 <body class="js">
 
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs>
+    <clipPath id="shieldClip" clipPathUnits="userSpaceOnUse">
+      <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z"/>
+    </clipPath>
+    <mask id="crescentMask" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="220">
+      <rect x="0" y="0" width="200" height="220" fill="#000"/>
+      <circle cx="82" cy="80" r="25" fill="#fff"/>
+      <circle cx="93" cy="74" r="20" fill="#000"/>
+    </mask>
+  </defs>
+  <symbol id="crest-mini" viewBox="0 0 200 220">
+    <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="#fff" stroke="#15161A" stroke-width="9"/>
+    <polygon points="20,12 180,12 20,190" fill="#C81E1E" clip-path="url(#shieldClip)"/>
+    <circle cx="82" cy="80" r="25" fill="#fff" mask="url(#crescentMask)"/>
+    <polygon points="101,70 104.3,79.1 114,79.4 106.2,85.2 109.1,94.4 101,88.9 92.9,94.4 95.8,85.2 88,79.4 97.7,79.1" fill="#fff"/>
+    <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="none" stroke="#15161A" stroke-width="9"/>
+  </symbol>
+  <symbol id="crest-full" viewBox="0 0 200 220">
+    <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="#fff" stroke="#15161A" stroke-width="9"/>
+    <polygon points="20,12 180,12 20,190" fill="#C81E1E" clip-path="url(#shieldClip)"/>
+    <circle cx="82" cy="80" r="25" fill="#fff" mask="url(#crescentMask)"/>
+    <polygon points="101,70 104.3,79.1 114,79.4 106.2,85.2 109.1,94.4 101,88.9 92.9,94.4 95.8,85.2 88,79.4 97.7,79.1" fill="#fff"/>
+    <g transform="rotate(-42 100 138)">
+      <text x="10" y="132" font-family="Arial, sans-serif" font-weight="900" font-size="27" fill="#15161A" letter-spacing="-0.5">ÜSKÜP</text>
+      <text x="10" y="160" font-family="Arial, sans-serif" font-weight="900" font-size="27" fill="#15161A" letter-spacing="-0.5">1911</text>
+    </g>
+    <circle cx="151" cy="181" r="17" fill="#fff" stroke="#15161A" stroke-width="4"/>
+    <polygon points="151,171 159,177 156,187 146,187 143,177" fill="#15161A"/>
+    <path d="M20,12 Q100,-4 180,12 L180,118 Q180,182 100,216 Q20,182 20,118 Z" fill="none" stroke="#15161A" stroke-width="9"/>
+  </symbol>
+</svg>
+
 <nav id="nav">
   <a href="#top" class="nav-brand">
-    <div class="crest"><span>Ü1911</span></div>
+    <svg class="crest" viewBox="0 0 200 220" aria-label="Üsküp 1911 arması"><use href="#crest-mini"/></svg>
     <div class="nav-brand-text"><b>ÜSKÜP 1911</b>SPOR KULÜBÜ</div>
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#kulup">Kulüp</a></li>
+    <li><a href="#tarih">Tarih</a></li>
     <li><a href="#degerler">Değerlerimiz</a></li>
     <li><a href="#yonetim">Kadro</a></li>
     <li><a href="#sponsorluk">Sponsorluk</a></li>
@@ -327,18 +359,18 @@
   <div class="container">
     <div class="cover-frame">
       <svg class="pitch-lines" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="2" y="2" width="96" height="56" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
-        <line x1="50" y1="2" x2="50" y2="58" stroke="var(--brass-line)" stroke-width="0.15"/>
-        <circle cx="50" cy="30" r="8" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
-        <rect x="2" y="18" width="10" height="24" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
-        <rect x="88" y="18" width="10" height="24" fill="none" stroke="var(--brass-line)" stroke-width="0.15"/>
+        <rect x="2" y="2" width="96" height="56" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
+        <line x1="50" y1="2" x2="50" y2="58" stroke="var(--ink-faint)" stroke-width="0.15"/>
+        <circle cx="50" cy="30" r="8" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
+        <rect x="2" y="18" width="10" height="24" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
+        <rect x="88" y="18" width="10" height="24" fill="none" stroke="var(--ink-faint)" stroke-width="0.15"/>
       </svg>
       <div class="cover-top">
         <span class="issue-tag">Kurumsal Tanıtım &amp; Sponsorluk Dosyası</span>
         <span class="issue-tag mono">SAYI 01 — 2026</span>
       </div>
       <div class="hero-center">
-        <div class="cover-crest"><strong>Ü1911</strong><em>KUZEY MAKEDONYA</em></div>
+        <svg class="cover-crest" viewBox="0 0 200 220" aria-label="Üsküp 1911 arması"><use href="#crest-full"/></svg>
         <span class="kicker" style="justify-content:center;">Üsküp · Kuzey Makedonya</span>
         <h1>ÜSKÜP <em>1911</em><br>SPOR KULÜBÜ</h1>
         <div class="hero-motto">Zeki · Çevik · Ahlaklı</div>
@@ -377,12 +409,59 @@
           <div class="stat-item"><span class="label">Duruş</span><span class="val">Siyaset Üstü</span></div>
           <div class="stat-item"><span class="label">Motto</span><span class="val">Zeki · Çevik · Ahlaklı</span></div>
         </div>
+        <div class="kit-note">
+          <div class="kit-swatch" aria-hidden="true"></div>
+          <div>
+            <h4>Forma: Atatürk'ten İlhamla</h4>
+            <p>Formamızın siyah-beyaz çizgili deseni, Atatürk'ün ikonik kareli süveterinden ilham alıyor. Yakasında tek bir cümle yazıyor: <em>"Zafer inananlarındır."</em></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="degerler">
+<section id="tarih" class="rule-top">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Tarih</span>
+      <h2>1909'dan Bugüne</h2>
+      <p>Kulübün kendi aktardığı tarihçeye göre, Üsküp'teki Türk futbolunun kökleri bir asrı aşkın geriye gidiyor.</p>
+    </div>
+    <div class="reveal">
+      <div class="roster-row history">
+        <div class="roster-num">1909</div>
+        <div>
+          <div class="roster-role">İlk Maç</div>
+          <p>Makedonya'daki ilk futbol maçı, Üsküp'te Osmanlı subayları tarafından oynanır.</p>
+        </div>
+      </div>
+      <div class="roster-row history">
+        <div class="roster-num">1911</div>
+        <div>
+          <div class="roster-role">Kuruluş</div>
+          <p>Üsküplü Türkler tarafından Üsküp Futbol Kulübü kurulur — bugünkü kulübün adını ve armasını taşıdığı miras.</p>
+        </div>
+      </div>
+      <div class="roster-row history">
+        <div class="roster-num">1912</div>
+        <div>
+          <div class="roster-role">Kapanış</div>
+          <p>Balkan Savaşları'nın getirdiği büyük çalkantı, kulübün kapanmasına neden olur.</p>
+        </div>
+      </div>
+      <div class="roster-row history">
+        <div class="roster-num">Bugün</div>
+        <div>
+          <div class="roster-role">Yeniden Doğuş</div>
+          <p>Yeni bir nesil, aynı ismi ve aynı armayı yeniden sahaya taşıyor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="degerler" class="rule-top">
   <div class="container">
     <div class="section-head reveal">
       <span class="kicker">Kulüp Felsefesi</span>
@@ -476,13 +555,14 @@
     </div>
     <div class="teamsheet reveal">
       <div class="teamsheet-head"><span>No.</span><span>Alan</span><span>Kapsam</span></div>
-      <div class="tier-row"><div class="tier-num">01</div><div class="tier-name">Forma</div><div class="tier-desc">Ana sponsor, göğüs, sırt, kol ve uygun forma alanlarında marka görünürlüğü.</div></div>
-      <div class="tier-row"><div class="tier-num">02</div><div class="tier-name">Saha</div><div class="tier-desc">Saha çevresi, pankartlar, maç günü ve kulüp organizasyonlarında görünürlük.</div></div>
-      <div class="tier-row"><div class="tier-num">03</div><div class="tier-name">Yazılı ve Görsel Basın</div><div class="tier-desc">Kulübümüzün basın çalışmalarında iş birliklerimizin ve destekçilerimizin kamuoyuna duyurulması.</div></div>
-      <div class="tier-row"><div class="tier-num">04</div><div class="tier-name">Dijital</div><div class="tier-desc">Sosyal medya, maç görselleri, kulüp duyuruları ve özel içeriklerde görünürlük.</div></div>
-      <div class="tier-row"><div class="tier-num">05</div><div class="tier-name">Gençlik ve Altyapı</div><div class="tier-desc">Genç futbolcuların gelişimine yönelik özel projelerde iş birliği.</div></div>
-      <div class="tier-row"><div class="tier-num">06</div><div class="tier-name">Özel Projeler</div><div class="tier-desc">Forma, ekipman, ulaşım, altyapı ve kulübün gelişimine yönelik projelerde isim ortaklığı.</div></div>
-      <div class="tier-row"><div class="tier-num">07</div><div class="tier-name">Kulüple Kalıcı Bağ</div><div class="tier-desc">Yönetimimizin uygun görmesi halinde, önemli ve kalıcı katkı sunan kişi ve kurumlara özel veya onursal unvanlar.</div></div>
+      <div class="tier-row"><div class="tier-num">01</div><div class="tier-name">Forma</div><div class="tier-desc">Ana sponsor, göğüs, sırt, kol ve uygun forma alanlarında marka görünürlüğü. Formamız Atatürk'ün ikonik çizgili süveterinden ilhamla tasarlandı; yakasında "Zafer inananlarındır" yazıyor.</div></div>
+      <div class="tier-row"><div class="tier-num">02</div><div class="tier-name">Oyuncu Sponsorluğu</div><div class="tier-desc">İngiltere'de alt lig kulüplerinde uzun yıllardır uygulanan modelin uyarlaması: forma sponsorluğu yerine tek bir genç oyuncunun gelişimine doğrudan katkı sağlayan, sezon boyunca markanıza görünürlük sunan bir program.</div></div>
+      <div class="tier-row"><div class="tier-num">03</div><div class="tier-name">Saha</div><div class="tier-desc">Saha çevresi, pankartlar, maç günü ve kulüp organizasyonlarında görünürlük.</div></div>
+      <div class="tier-row"><div class="tier-num">04</div><div class="tier-name">Yazılı ve Görsel Basın</div><div class="tier-desc">Kulübümüzün basın çalışmalarında iş birliklerimizin ve destekçilerimizin kamuoyuna duyurulması.</div></div>
+      <div class="tier-row"><div class="tier-num">05</div><div class="tier-name">Dijital</div><div class="tier-desc">Sosyal medya, maç görselleri, kulüp duyuruları ve özel içeriklerde görünürlük.</div></div>
+      <div class="tier-row"><div class="tier-num">06</div><div class="tier-name">Gençlik ve Altyapı</div><div class="tier-desc">Genç futbolcuların gelişimine yönelik özel projelerde iş birliği.</div></div>
+      <div class="tier-row"><div class="tier-num">07</div><div class="tier-name">Özel Projeler</div><div class="tier-desc">Forma, ekipman, ulaşım, altyapı ve kulübün gelişimine yönelik projelerde isim ortaklığı.</div></div>
+      <div class="tier-row"><div class="tier-num">08</div><div class="tier-name">Kulüple Kalıcı Bağ</div><div class="tier-desc">Yönetimimizin uygun görmesi halinde, önemli ve kalıcı katkı sunan kişi ve kurumlara özel veya onursal unvanlar.</div></div>
     </div>
     <div class="honorary-note reveal">
       Aradığımız yalnızca sponsor değil — <b>Üsküp 1911'in yarınına inanan yol arkadaşları.</b> Yönetimimizin uygun görmesi halinde, desteğinizi ifade etmek üzere size özel bir onursal unvan verilmesini de arzu ediyoruz.
@@ -521,6 +601,10 @@
           <div><h4>Konum</h4><p>Üsküp, Kuzey Makedonya</p></div>
         </div>
         <div class="contact-row">
+          <svg class="contact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" stroke="none"/></svg>
+          <div><h4>Sosyal Medya</h4><p><a href="https://www.instagram.com/uskupfk/" target="_blank" rel="noopener">Instagram</a> · <a href="https://x.com/uskupfk" target="_blank" rel="noopener">X (Twitter)</a></p></div>
+        </div>
+        <div class="contact-row">
           <svg class="contact-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <div><h4>Not</h4><p>Forma, kulüp broşürü ve sponsorluk dosyası talep üzerine gönderilir.</p></div>
         </div>
@@ -540,8 +624,10 @@
 
 <footer>
   <div class="container">
+    <svg class="crest" style="display:block;margin:0 auto 0.8rem;" viewBox="0 0 200 220" aria-label="Üsküp 1911 arması"><use href="#crest-mini"/></svg>
     <div class="foot-brand">ÜSKÜP 1911 SPOR KULÜBÜ</div>
     <p>Zeki. Çevik. Ahlaklı. — Kuzey Makedonya</p>
+    <p class="social-row"><a href="https://www.instagram.com/uskupfk/" target="_blank" rel="noopener">Instagram</a> · <a href="https://x.com/uskupfk" target="_blank" rel="noopener">X</a></p>
     <p style="margin-top:0.5rem;">© 2026 Üsküp 1911 Spor Kulübü. Tüm hakları saklıdır.</p>
   </div>
 </footer>
