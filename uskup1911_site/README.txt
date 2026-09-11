@@ -13,6 +13,9 @@ Dosyalar:
 - assets/hero-kale.jpg (hero + kapanış görseli — Üsküp Kalesi)
 - assets/skyline-koprus.jpg (galeri — Taş Köprü)
 - assets/sahin-amit.jpg (Şahin Amit portresi)
+- assets/album-kapak.jpg (müzik albüm kapağı)
+- assets/audio/track01.mp3 ... track10.mp3 (10 kulüp marşı — "Müzik" bölümü)
+- music.js (müzik çalar: otomatik oynatma, çalma listesi, beğen/beğenme oylaması)
 
 Kurulum:
 Klasörün İÇİNDEKİLERİNİ (klasörün kendisini değil) Netlify, Vercel, GitHub Pages, cPanel veya

@@ -1,17 +1,16 @@
-// Üsküp 1911 anthem playlist.
-// Placeholder entries — swap `src` for the real files under assets/audio/
-// once they're available, and update `title` to the real song names.
+// Üsküp 1911 anthem playlist. Real tracks, in the order the club provided them.
+const COVER_IMAGE = 'assets/album-kapak.jpg';
 const TRACKS = [
-  { id: 'track01', title: 'Şarkı 1', src: 'assets/audio/track01.mp3' },
-  { id: 'track02', title: 'Şarkı 2', src: 'assets/audio/track02.mp3' },
-  { id: 'track03', title: 'Şarkı 3', src: 'assets/audio/track03.mp3' },
-  { id: 'track04', title: 'Şarkı 4', src: 'assets/audio/track04.mp3' },
-  { id: 'track05', title: 'Şarkı 5', src: 'assets/audio/track05.mp3' },
-  { id: 'track06', title: 'Şarkı 6', src: 'assets/audio/track06.mp3' },
-  { id: 'track07', title: 'Şarkı 7', src: 'assets/audio/track07.mp3' },
-  { id: 'track08', title: 'Şarkı 8', src: 'assets/audio/track08.mp3' },
-  { id: 'track09', title: 'Şarkı 9', src: 'assets/audio/track09.mp3' },
-  { id: 'track10', title: 'Şarkı 10', src: 'assets/audio/track10.mp3' }
+  { id: 'track01', title: 'Zafer İnananlarındır #1', src: 'assets/audio/track01.mp3' },
+  { id: 'track02', title: 'Zafer İnananlarındır #2', src: 'assets/audio/track02.mp3' },
+  { id: 'track03', title: 'Zafer İnananlarındır #3', src: 'assets/audio/track03.mp3' },
+  { id: 'track04', title: 'Zafer İnananlarındır #4', src: 'assets/audio/track04.mp3' },
+  { id: 'track05', title: 'Zafer İnananlarındır #5', src: 'assets/audio/track05.mp3' },
+  { id: 'track06', title: 'Zafer İnananlarındır #6', src: 'assets/audio/track06.mp3' },
+  { id: 'track07', title: 'Zafer İnananlarındır #7', src: 'assets/audio/track07.mp3' },
+  { id: 'track08', title: 'Zafer İnananlarındır #8', src: 'assets/audio/track08.mp3' },
+  { id: 'track09', title: 'Zafer İnananlarındır #9', src: 'assets/audio/track09.mp3' },
+  { id: 'track10', title: 'Zafer İnananlarındır #10', src: 'assets/audio/track10.mp3' }
 ];
 
 (function () {
@@ -26,8 +25,22 @@ const TRACKS = [
   var seekBar = document.getElementById('seekBar');
   var nowTitle = document.getElementById('nowTitle');
   var timeDisplay = document.getElementById('timeDisplay');
+  var coverEl = document.getElementById('playerCover');
 
   if (!audio || !playlistEl) return;
+
+  if (coverEl) {
+    coverEl.innerHTML = '';
+    coverEl.textContent = '';
+    var coverImg = document.createElement('img');
+    coverImg.src = COVER_IMAGE;
+    coverImg.alt = 'Üsküp 1911 albüm kapağı';
+    coverImg.style.width = '100%';
+    coverImg.style.height = '100%';
+    coverImg.style.objectFit = 'cover';
+    coverImg.style.borderRadius = '6px';
+    coverEl.appendChild(coverImg);
+  }
 
   var currentIndex = 0;
 
