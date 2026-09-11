@@ -38,7 +38,7 @@ nav a:hover { color: var(--r); }
 
 /* HERO */
 .hero { min-height: 640px; display: grid; grid-template-columns: 43% 57%; background: #111; position: relative; overflow: hidden; }
-.heroText { padding: 95px 6vw; z-index: 2; min-width: 0; }
+.heroText { padding: 95px 6vw; position: relative; z-index: 2; min-width: 0; }
 .eyebrow { font-family: 'Barlow Condensed'; font-weight: 700; letter-spacing: 4px; }
 .red { color: var(--r); }
 h1, h2, h3 { font-family: 'Barlow Condensed'; }
