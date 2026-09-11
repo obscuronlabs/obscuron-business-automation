@@ -118,6 +118,12 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .muzikSlogan { font-family: 'Barlow Condensed'; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--r); margin: 8px 0 18px; font-size: clamp(16px, 3vw, 22px); }
 .muzikCredit { margin-top: 8px; font-size: 13px; color: #9c9c9c; }
 .muzikCredit a { color: var(--r); text-decoration: underline; }
+.lyrics { max-width: 640px; margin: 32px auto 36px; background: #141414; border: 1px solid #2c2c2c; border-radius: 10px; padding: 32px 36px; }
+.lyricsTitle { font-family: 'Barlow Condensed'; letter-spacing: 4px; color: var(--r); font-size: 22px; margin: 0 0 22px; text-align: center; }
+.lyricsVerse { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.85; color: #e8e8e8; margin: 0 0 24px; text-align: center; }
+.lyricsChorus { font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-style: italic; font-weight: 700; line-height: 1.85; color: #fff; margin: 0 0 24px; text-align: center; }
+.lyricsChant { font-family: 'Barlow Condensed'; font-size: 17px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; line-height: 1.9; color: var(--r); margin: 0 0 24px; text-align: center; }
+.lyricsOutro { font-family: 'Barlow Condensed'; font-size: 28px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--r); line-height: 1.4; text-align: center; margin: 0; }
 .player { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px 24px; margin: 32px 0 20px; position: sticky; top: 90px; z-index: 10; box-shadow: 0 12px 24px -12px rgba(0,0,0,.6); }
 .playerNow { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
 .playerCover { width: 52px; height: 52px; flex-shrink: 0; border-radius: 6px; background: var(--r); display: grid; place-items: center; font-size: 24px; }
@@ -177,6 +183,8 @@ footer p { margin-left: auto; color: #bbb; font-size: 10px; letter-spacing: 2px;
 @media (max-width: 650px) {
   .header { height: 68px; padding: 0 14px; gap: 10px; }
   .player { top: 78px; padding: 14px 16px; }
+  .lyrics { padding: 22px 18px; }
+  .lyricsOutro { font-size: 22px; }
   .brand img { width: 55px; height: 55px; }
   .brand b { font-size: 25px; }
   .brand span { display: none; }
