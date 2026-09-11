@@ -175,7 +175,7 @@ footer p { margin-left: auto; color: #bbb; font-size: 10px; letter-spacing: 2px;
   .langSwitch button { font-size: 11px; padding: 3px 6px; }
   .social { display: none; }
   .hero { grid-template-columns: 1fr; }
-  .heroImage { position: absolute; inset: 0; opacity: .3; object-fit: cover; }
+  .heroImage { position: static; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; opacity: 1; order: -1; }
   .quick { grid-template-columns: repeat(3, 1fr); }
   .cols, .teamGrid, .playerSponsor, .contact { grid-template-columns: 1fr; }
   .sponsorGrid { grid-template-columns: 1fr 1fr; }
