@@ -51,7 +51,7 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .cta { display: inline-block; margin-top: 20px; background: var(--r); padding: 14px 22px; font-weight: 700; }
 
 /* QUICK NAV */
-.quick { display: grid; grid-template-columns: repeat(6, 1fr); background: #111; border-top: 1px solid #333; border-bottom: 1px solid #333; }
+.quick { display: grid; grid-template-columns: repeat(7, 1fr); background: #111; border-top: 1px solid #333; border-bottom: 1px solid #333; }
 .quick a { text-align: center; padding: 20px; font-family: 'Barlow Condensed'; font-size: 22px; font-weight: 700; border-right: 1px solid #2b2b2b; }
 .quick small { display: block; font: 12px Inter; color: #aaa; margin-top: 4px; }
 .quick a:hover { background: var(--r); }
