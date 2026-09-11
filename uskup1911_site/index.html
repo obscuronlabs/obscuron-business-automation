@@ -37,6 +37,7 @@
     <a href="#sponsorluk" data-i18n="nav.sponsorluk">Sponsorluk</a>
     <a href="#haberler" data-i18n="nav.haberler">Haberler</a>
     <a href="#galeri" data-i18n="nav.galeri">Galeri</a>
+    <a href="#muzik" data-i18n="nav.muzik">Müzik</a>
     <a href="#iletisim" data-i18n="nav.iletisim">İletişim</a>
     <a href="https://www.shopier.com/uskupfk" target="_blank" rel="noopener" class="navStore" data-i18n="nav.store">MAĞAZA</a>
   </nav>
@@ -170,6 +171,32 @@
   </div>
 </section>
 
+<section class="section dark" id="muzik">
+  <p class="eyebrow red" data-i18n="muzik.eyebrow">MARŞLARIMIZ</p>
+  <h2 data-i18n="muzik.h2">Üsküp 1911 Şarkıları</h2>
+  <p class="lead" data-i18n="muzik.lead">Kulübümüz için özel olarak hazırlanan 10 şarkı. Dinleyin, en sevdiklerinizi oylayın.</p>
+  <p class="muzikCredit" data-i18n="muzik.credit">Müzik Yapımı: <a href="https://neocomusmusic.com" target="_blank" rel="noopener">Neocomus Music</a></p>
+
+  <div class="player" id="musicPlayer">
+    <audio id="audioEl" preload="metadata"></audio>
+    <div class="playerNow">
+      <div class="playerCover" aria-hidden="true">♫</div>
+      <div class="playerInfo">
+        <div class="playerTrackTitle" id="nowTitle">—</div>
+        <div class="playerTime" id="timeDisplay">0:00 / 0:00</div>
+      </div>
+    </div>
+    <input type="range" id="seekBar" min="0" max="100" value="0" aria-label="İlerleme">
+    <div class="playerControls">
+      <button id="prevBtn" aria-label="Önceki şarkı">⏮</button>
+      <button id="playBtn" aria-label="Oynat/Duraklat">▶</button>
+      <button id="nextBtn" aria-label="Sonraki şarkı">⏭</button>
+    </div>
+  </div>
+
+  <ul class="playlist" id="playlist"></ul>
+</section>
+
 <section class="section light" id="iletisim">
   <p class="eyebrow red" data-i18n="iletisim.eyebrow">İLETİŞİM</p>
   <h2 data-i18n="iletisim.h2">Birlikte Daha Güçlü</h2>
@@ -214,5 +241,6 @@
 
 <script src="i18n.js"></script>
 <script src="script.js"></script>
+<script src="music.js"></script>
 </body>
 </html>
