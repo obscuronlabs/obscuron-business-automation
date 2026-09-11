@@ -86,9 +86,11 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 /* SPONSORLUK */
 .sponsor { background: #0e0f10; }
 .sponsorGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.sponsorGrid article { background: #fff; color: #111; padding: 25px; border-top: 5px solid var(--r); }
+.sponsorCard { display: flex; flex-direction: column; background: #fff; color: #111; padding: 25px; border-top: 5px solid var(--r); text-decoration: none; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+.sponsorCard:hover, .sponsorCard:focus-visible { transform: translateY(-4px); box-shadow: 0 14px 28px -14px rgba(0,0,0,.45); }
 .sponsorGrid b { font-family: 'Barlow Condensed'; font-size: 25px; }
-.sponsorGrid p { color: #555; line-height: 1.5; }
+.sponsorGrid p { color: #555; line-height: 1.5; flex-grow: 1; }
+.sponsorCardCta { display: inline-block; margin-top: 16px; padding: 10px 16px; background: var(--r); color: #fff; font-weight: 700; font-size: 13px; border-radius: 4px; text-align: center; }
 .playerSponsor { margin-top: 45px; display: grid; grid-template-columns: 1.4fr .6fr; background: #fff; color: #111; }
 .playerSponsor > div:first-child { padding: 40px; }
 .playerSponsor h3 { font-size: 38px; margin: 5px 0 15px; }
