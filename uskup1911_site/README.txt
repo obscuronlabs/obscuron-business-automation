@@ -26,10 +26,9 @@ management > Add a domain'den uskup1911.com'u ekleyip verilen DNS/nameserver bil
 İletişim:
 Şahin Amit — Kulüp Başkanı
 WhatsApp: +389 75 330 819
-Planlanan kulüp e-postası: sahinamit@uskup1911.com
+E-posta: sahinamit@uskup1911.com
 
-Batuhan Taşdüzen — Teknik Direktör
-(İletişim bilgisi henüz eklenmedi)
+Genel İletişim: iletisim@uskup1911.com
 
 Barbaros Kaptan — Emekli Dz. Kad.Kd.Bçvş. — Gönüllü Basın Koordinatörü
 WhatsApp: +1 954 445 6197
@@ -38,5 +37,5 @@ E-posta: barbaroscaptain70@gmail.com
 Instagram: https://www.instagram.com/uskupfk/
 X: https://x.com/uskupfk
 
-NOT: sahinamit@uskup1911.com adresi gerçekten oluşturulup aktive edilmeden, ona gelen postalar
-kimseye ulaşmaz — siteye "planlanan" ibaresiyle konuldu, bilerek tıklanabilir link yapılmadı.
+NOT: Batuhan Taşdüzen (eski Teknik Direktör) kulüpten ayrıldığı için sitedeki tüm
+bilgileri kaldırıldı, yerine genel iletisim@uskup1911.com e-postası kondu.
