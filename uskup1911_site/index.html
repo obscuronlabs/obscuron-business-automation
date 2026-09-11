@@ -32,6 +32,7 @@
   <button id="menu" aria-label="Menüyü aç/kapat" data-i18n-aria="menu.aria" aria-expanded="false" aria-controls="mainNav">☰</button>
   <nav id="mainNav">
     <a href="#sponsorluk" data-i18n="nav.sponsorluk">Sponsorluk</a>
+    <a href="#brosur" data-i18n="nav.brosur">Broşür</a>
     <a href="#muzik" data-i18n="nav.muzik">Müzik</a>
     <a href="#kulup" data-i18n="nav.kulup">Kulüp</a>
     <a href="#takim" data-i18n="nav.takim">Takım</a>
@@ -126,6 +127,37 @@
     </div>
   </div>
 </section>
+<section class="section light" id="brosur">
+  <p class="eyebrow red" data-i18n="brosur.eyebrow">TANITIM MATERYALİ</p>
+  <h2 data-i18n="brosur.h2">Sponsorluk Broşürümüz</h2>
+  <p class="lead" data-i18n="brosur.lead">8 sayfalık broşürümüzü inceleyin, indirin veya doğrudan WhatsApp ya da e-posta ile paylaşın.</p>
+
+  <div class="brosurActions">
+    <a class="brosurBtn brosurBtn--primary" href="assets/brosur/uskup1911-brosur.pdf" download data-i18n="brosur.download">PDF İNDİR</a>
+    <a class="brosurBtn" id="brosurWhatsapp" href="#" target="_blank" rel="noopener" data-i18n="brosur.whatsapp">WhatsApp'ta Paylaş</a>
+    <a class="brosurBtn" id="brosurEmail" href="#" data-i18n="brosur.email">E-posta ile Gönder</a>
+    <button type="button" class="brosurBtn" id="brosurShare" hidden data-i18n="brosur.share">Paylaş</button>
+  </div>
+
+  <div class="brosurGallery" id="brosurGallery">
+    <img src="assets/brosur/page01.jpg" data-full="assets/brosur/page01.jpg" alt="Broşür sayfa 1" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page02.jpg" data-full="assets/brosur/page02.jpg" alt="Broşür sayfa 2" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page03.jpg" data-full="assets/brosur/page03.jpg" alt="Broşür sayfa 3" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page04.jpg" data-full="assets/brosur/page04.jpg" alt="Broşür sayfa 4" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page05.jpg" data-full="assets/brosur/page05.jpg" alt="Broşür sayfa 5" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page06.jpg" data-full="assets/brosur/page06.jpg" alt="Broşür sayfa 6" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page07.jpg" data-full="assets/brosur/page07.jpg" alt="Broşür sayfa 7" data-i18n-alt="brosur.page.alt">
+    <img src="assets/brosur/page08.jpg" data-full="assets/brosur/page08.jpg" alt="Broşür sayfa 8" data-i18n-alt="brosur.page.alt">
+  </div>
+</section>
+
+<div class="brosurLightbox" id="brosurLightbox" hidden>
+  <button type="button" class="brosurLightboxClose" id="brosurLightboxClose" aria-label="Kapat">✕</button>
+  <button type="button" class="brosurLightboxNav brosurLightboxPrev" id="brosurLightboxPrev" aria-label="Önceki sayfa">⟨</button>
+  <img id="brosurLightboxImg" src="" alt="">
+  <button type="button" class="brosurLightboxNav brosurLightboxNext" id="brosurLightboxNext" aria-label="Sonraki sayfa">⟩</button>
+</div>
+
 <section class="section dark" id="muzik">
   <p class="eyebrow red" data-i18n="muzik.eyebrow">MARŞLARIMIZ</p>
   <h2 data-i18n="muzik.h2">Üsküp 1911 Şarkıları</h2>
@@ -273,5 +305,6 @@
 <script src="i18n.js"></script>
 <script src="script.js"></script>
 <script src="music.js"></script>
+<script src="brosur.js"></script>
 </body>
 </html>
