@@ -112,6 +112,7 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .gallery img { height: 440px; width: 100%; min-width: 0; object-fit: cover; filter: grayscale(100%); }
 
 /* MÜZİK */
+.muzikSlogan { font-family: 'Barlow Condensed'; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--r); margin: 8px 0 18px; font-size: clamp(16px, 3vw, 22px); }
 .muzikCredit { margin-top: 8px; font-size: 13px; color: #9c9c9c; }
 .muzikCredit a { color: var(--r); text-decoration: underline; }
 .player { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px 24px; margin: 32px 0 20px; }
