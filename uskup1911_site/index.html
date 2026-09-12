@@ -21,6 +21,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=3">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  // Sends people who click a Netlify Identity invite/reset link (which lands
+  // on the site root with a token) straight into the /admin/ login flow.
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function (user) {
+      if (!user) {
+        window.netlifyIdentity.on('login', function () {
+          document.location.href = '/admin/';
+        });
+      }
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -245,6 +259,7 @@
     <article data-i18n="haberler.item2">Kulüp Haberleri</article>
     <article data-i18n="haberler.item3">Altyapı Haberleri</article>
   </div>
+  <div class="newsPosts" id="newsPosts"></div>
   <div class="tweetEmbeds">
     <blockquote class="twitter-tweet"><a href="https://twitter.com/uskupfk/status/2067996853598122103"></a></blockquote>
     <blockquote class="twitter-tweet"><a href="https://twitter.com/Haber/status/1855141370907811948"></a></blockquote>
@@ -305,5 +320,6 @@
 <script src="script.js?v=2"></script>
 <script src="music.js?v=2"></script>
 <script src="brosur.js?v=2"></script>
+<script src="news.js?v=1"></script>
 </body>
 </html>

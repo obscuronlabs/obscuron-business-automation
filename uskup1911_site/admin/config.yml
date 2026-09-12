@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# This repo hosts more than the club site, so every path below is written
+# relative to the repository root, not the Netlify site root.
+media_folder: "uskup1911_site/assets/haberler"
+public_folder: "/assets/haberler"
+
+locale: "tr"
+
+collections:
+  - name: "haberler"
+    label: "Haberler"
+    label_singular: "Haber"
+    folder: "uskup1911_site/content/haberler"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    summary: "{{title}}"
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Tarih", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Görsel", name: "image", widget: "image", required: false, choose_url: false }
+      - { label: "Metin", name: "body", widget: "text" }

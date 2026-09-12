@@ -1,0 +1,43 @@
+ÜSKÜP 1911 — BAŞKAN İÇİN SİTE YÖNETİM PANELİ (/admin)
+=======================================================
+
+Bu site artık kendi içinde küçük bir yönetim paneli barındırıyor:
+https://uskup1911.com/admin/
+
+Başkan bu adresten GİRİŞ YAPARAK (GitHub hesabı ya da kod bilgisi
+GEREKMEDEN):
+  - Haberler ekleyip silebilir (başlık, tarih, görsel, metin)
+  - Görsel yükleyip kaldırabilir
+Yaptığı her değişiklik otomatik olarak siteye yayınlanır (birkaç dakika
+içinde canlıya çıkar).
+
+BİR KEZLİK KURULUM (Netlify hesabına sahip olan kişi yapacak):
+---------------------------------------------------------------
+1. app.netlify.com üzerinden bu sitenin paneline girin.
+2. Site settings > Identity > "Enable Identity" tıklayın.
+3. Aynı sayfada Identity > Registration: "Invite only" seçin
+   (herkes değil, sadece davet ettiğiniz kişiler kayıt olabilsin).
+4. Identity > Services > Git Gateway bölümünden "Enable Git Gateway"
+   tıklayın (bu, panelin GitHub'a sizin adınıza yazmasını sağlar —
+   başkanın kendi GitHub hesabına ihtiyacı olmaz).
+5. Identity > Invite users'dan başkanın e-posta adresini davet edin.
+   Kendisine bir davet e-postası gidecek; oradaki linke tıklayıp
+   şifresini belirleyecek.
+6. Başkan artık https://uskup1911.com/admin/ adresinden bu şifreyle
+   giriş yapabilir.
+
+NOT: Bu adımlar sadece Netlify hesap sahibinin bir kereye mahsus
+yapması gereken ayarlardır. Sonrasında başkanın GitHub'a ya da
+Namecheap'e (domain) erişmesine hiç gerek kalmıyor — sadece Netlify'da
+Identity/Git Gateway açık olması ve kendisinin davet edilmiş olması
+yeterli.
+
+TEKNİK NOTLAR:
+---------------
+- Panel: Decap CMS (eski adıyla Netlify CMS), admin/index.html ve
+  admin/config.yml içinde yapılandırılı.
+- Haberler content/haberler/ altında birer JSON dosyası olarak
+  saklanıyor; site derlenirken (netlify.toml > build command)
+  scripts/build-haberler.js bunları assets/haberler.json'da
+  topluyor, news.js de bunu okuyup #haberler bölümünde gösteriyor.
+- Görseller assets/haberler/ altına yükleniyor.

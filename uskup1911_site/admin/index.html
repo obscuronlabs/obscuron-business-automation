@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Üsküp 1911 — Site Yönetimi</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Netlify Identity sends invited users to /admin/ with a token in the URL;
+    // bounce them into the login modal instead of leaving them on a blank page.
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function (user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function () {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>

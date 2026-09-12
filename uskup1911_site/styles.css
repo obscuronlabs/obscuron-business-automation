@@ -103,6 +103,13 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .contact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .news article, .contact article { background: #fff; padding: 28px; border-top: 4px solid var(--r); box-shadow: 0 6px 20px #0001; }
+.newsPosts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 24px; }
+.newsPost { background: #fff; overflow: hidden; box-shadow: 0 6px 20px #0001; border-radius: 8px; }
+.newsPost img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.newsPostBody { padding: 20px; }
+.newsPostBody h3 { margin: 0 0 6px; font-size: 22px; }
+.newsPostBody time { display: block; font-size: 13px; color: var(--g); margin-bottom: 10px; }
+.newsPostBody p { margin: 0; line-height: 1.5; }
 .contact .avatar { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: top; margin-bottom: 14px; border: 3px solid var(--r); }
 .contact h3 { font-size: 28px; margin-top: 0; }
 .contact a, .contact span { display: block; margin-top: 10px; }
@@ -220,7 +227,7 @@ footer p { margin-left: auto; color: #bbb; font-size: 10px; letter-spacing: 2px;
   .quick { grid-template-columns: 1fr 1fr; }
   .section { padding: 60px 22px; }
   .section h2 { font-size: 40px; }
-  .cards, .sponsorGrid, .news, .gallery, .contact { grid-template-columns: 1fr; }
+  .cards, .sponsorGrid, .news, .newsPosts, .gallery, .contact { grid-template-columns: 1fr; }
   .gallery img { height: 320px; }
   .skyline { height: 150px; }
   footer { flex-direction: column; align-items: flex-start; }
