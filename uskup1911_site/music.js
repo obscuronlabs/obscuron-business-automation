@@ -81,7 +81,11 @@ const TRACKS = [
 
   function vote(trackId, kind, likeEl, dislikeEl, likeBtn, dislikeBtn, summaryEl) {
     var voted = getVoted();
-    if (voted[trackId]) return; // one vote per track per browser
+    if (voted[trackId] || likeBtn.disabled || dislikeBtn.disabled) return; // one vote per track per browser
+    // disable immediately (before the network round-trip) so rapid repeat
+    // clicks can't sneak in extra votes while the first request is in flight
+    likeBtn.disabled = true;
+    dislikeBtn.disabled = true;
     fetch(countApiUrl('hit', trackId + '_' + kind)).then(function (r) { return r.json(); }).then(function (d) {
       if (kind === 'like') likeEl.textContent = d.value; else dislikeEl.textContent = d.value;
       updateSummary(summaryEl, likeEl, dislikeEl);
@@ -89,9 +93,11 @@ const TRACKS = [
       setVoted(voted);
       likeBtn.classList.toggle('active', kind === 'like');
       dislikeBtn.classList.toggle('active', kind === 'dislike');
-      likeBtn.disabled = true;
-      dislikeBtn.disabled = true;
-    }).catch(function () {});
+    }).catch(function () {
+      // request failed - re-enable so the visitor can try again
+      likeBtn.disabled = false;
+      dislikeBtn.disabled = false;
+    });
   }
 
   function loadTrack(index, autoplay) {
