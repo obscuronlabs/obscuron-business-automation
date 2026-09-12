@@ -163,10 +163,13 @@ blockquote strong { display: block; font: 600 12px Inter; margin-top: 10px; }
 .voteBtn.active { border-color: var(--r); color: var(--r); }
 .voteBtn:disabled { cursor: default; opacity: 0.85; }
 .voteCount { font-variant-numeric: tabular-nums; }
+.trackVoteSummary { font-size: 12px; color: #9c9c9c; margin-left: 4px; align-self: center; }
 
 @media (max-width: 650px) {
   .track { flex-wrap: wrap; }
   .trackTitle { flex-basis: 100%; order: -1; margin-bottom: 4px; }
+  .trackVotes { flex-wrap: wrap; row-gap: 4px; }
+  .trackVoteSummary { flex-basis: 100%; margin-left: 0; }
 }
 
 /* SKYLINE */

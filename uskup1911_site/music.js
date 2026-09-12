@@ -62,20 +62,29 @@ const TRACKS = [
     return 'https://api.countapi.xyz/' + action + '/' + NAMESPACE + '/' + key;
   }
 
-  function refreshCounts(trackId, likeEl, dislikeEl) {
+  function updateSummary(summaryEl, likeEl, dislikeEl) {
+    var likes = parseInt(likeEl.textContent, 10) || 0;
+    var dislikes = parseInt(dislikeEl.textContent, 10) || 0;
+    summaryEl.textContent = likes + ' beğenildi, ' + dislikes + ' beğenilmedi';
+  }
+
+  function refreshCounts(trackId, likeEl, dislikeEl, summaryEl) {
     fetch(countApiUrl('get', trackId + '_like')).then(function (r) { return r.json(); }).then(function (d) {
       likeEl.textContent = d && typeof d.value === 'number' ? d.value : 0;
+      updateSummary(summaryEl, likeEl, dislikeEl);
     }).catch(function () {});
     fetch(countApiUrl('get', trackId + '_dislike')).then(function (r) { return r.json(); }).then(function (d) {
       dislikeEl.textContent = d && typeof d.value === 'number' ? d.value : 0;
+      updateSummary(summaryEl, likeEl, dislikeEl);
     }).catch(function () {});
   }
 
-  function vote(trackId, kind, likeEl, dislikeEl, likeBtn, dislikeBtn) {
+  function vote(trackId, kind, likeEl, dislikeEl, likeBtn, dislikeBtn, summaryEl) {
     var voted = getVoted();
     if (voted[trackId]) return; // one vote per track per browser
     fetch(countApiUrl('hit', trackId + '_' + kind)).then(function (r) { return r.json(); }).then(function (d) {
       if (kind === 'like') likeEl.textContent = d.value; else dislikeEl.textContent = d.value;
+      updateSummary(summaryEl, likeEl, dislikeEl);
       voted[trackId] = kind;
       setVoted(voted);
       likeBtn.classList.toggle('active', kind === 'like');
@@ -141,18 +150,23 @@ const TRACKS = [
         dislikeBtn.classList.toggle('active', voted[track.id] === 'dislike');
       }
 
-      likeBtn.addEventListener('click', function () { vote(track.id, 'like', likeCount, dislikeCount, likeBtn, dislikeBtn); });
-      dislikeBtn.addEventListener('click', function () { vote(track.id, 'dislike', likeCount, dislikeCount, likeBtn, dislikeBtn); });
+      var summaryEl = document.createElement('span');
+      summaryEl.className = 'trackVoteSummary';
+      summaryEl.textContent = '0 beğenildi, 0 beğenilmedi';
+
+      likeBtn.addEventListener('click', function () { vote(track.id, 'like', likeCount, dislikeCount, likeBtn, dislikeBtn, summaryEl); });
+      dislikeBtn.addEventListener('click', function () { vote(track.id, 'dislike', likeCount, dislikeCount, likeBtn, dislikeBtn, summaryEl); });
 
       votesEl.appendChild(likeBtn);
       votesEl.appendChild(dislikeBtn);
+      votesEl.appendChild(summaryEl);
 
       li.appendChild(playBtnEl);
       li.appendChild(titleEl);
       li.appendChild(votesEl);
       playlistEl.appendChild(li);
 
-      refreshCounts(track.id, likeCount, dislikeCount);
+      refreshCounts(track.id, likeCount, dislikeCount, summaryEl);
     });
   }
 
