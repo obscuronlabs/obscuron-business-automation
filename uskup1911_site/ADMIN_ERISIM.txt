@@ -7,7 +7,12 @@ https://uskup1911.com/admin/
 Başkan bu adresten GİRİŞ YAPARAK (GitHub hesabı ya da kod bilgisi
 GEREKMEDEN):
   - Haberler ekleyip silebilir (başlık, tarih, görsel, metin)
-  - Görsel yükleyip kaldırabilir
+  - İletişim kartlarını (kendi bilgileri, telefon, e-posta, sosyal medya
+    linkleri) ekleyip, düzenleyip, silebilir
+  - Galeriye yeni fotoğraf ekleyip kaldırabilir
+  - Panelin sağ üstündeki "Media" (Ortam) düğmesinden sitede kullanılan
+    HERHANGİ bir görseli (logo, forma, kale fotoğrafı vb.) değiştirebilir —
+    aynı isimle yeni bir dosya yükleyerek eskisinin yerine geçirebilir
 Yaptığı her değişiklik otomatik olarak siteye yayınlanır (birkaç dakika
 içinde canlıya çıkar).
 
@@ -36,8 +41,14 @@ TEKNİK NOTLAR:
 ---------------
 - Panel: Decap CMS (eski adıyla Netlify CMS), admin/index.html ve
   admin/config.yml içinde yapılandırılı.
-- Haberler content/haberler/ altında birer JSON dosyası olarak
-  saklanıyor; site derlenirken (netlify.toml > build command)
-  scripts/build-haberler.js bunları assets/haberler.json'da
-  topluyor, news.js de bunu okuyup #haberler bölümünde gösteriyor.
-- Görseller assets/haberler/ altına yükleniyor.
+- Haberler content/haberler/, iletişim kartları content/iletisim/,
+  ek galeri fotoğrafları content/galeri/ altında birer JSON dosyası
+  olarak saklanıyor; site derlenirken (netlify.toml > build command)
+  scripts/build-*.js dosyaları bunları assets/haberler.json,
+  assets/iletisim.json, assets/galeri.json içinde topluyor; news.js,
+  contact.js ve gallery.js de bunları okuyup ilgili bölümlerde
+  gösteriyor.
+- İletişim bölümü için sitedeki statik metin bir "ilk görünüm" olarak
+  kalıyor; assets/iletisim.json doluysa JS onu anında CMS'teki
+  içerikle değiştiriyor. Yani başkan bir kart eklemeden/düzenlemeden
+  önce site eskisi gibi çalışmaya devam eder.

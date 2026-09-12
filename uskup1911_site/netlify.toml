@@ -1,5 +1,5 @@
 [build]
-  command = "node scripts/build-haberler.js"
+  command = "node scripts/build-haberler.js && node scripts/build-iletisim.js && node scripts/build-galeri.js"
   publish = "."
 
 [functions]

@@ -1,0 +1,9 @@
+{
+  "order": 4,
+  "name": "Sosyal Medya",
+  "email": "uskup1911@gmail.com",
+  "extra_links": [
+    { "label": "Instagram: @uskupfk", "url": "https://www.instagram.com/uskupfk/" },
+    { "label": "X: @uskupfk", "url": "https://x.com/uskupfk" }
+  ]
+}

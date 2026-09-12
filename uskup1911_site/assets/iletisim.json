@@ -1,0 +1,40 @@
+[
+  {
+    "order": 1,
+    "name": "Şahin Amit",
+    "avatar": "assets/sahin-amit.jpg",
+    "role": "Kulüp Başkanı\nÜsküp 1911 Spor Kulübü",
+    "whatsapp": "38975330819",
+    "email": "sahinamit@uskup1911.com"
+  },
+  {
+    "order": 2,
+    "name": "Genel İletişim",
+    "email": "iletisim@uskup1911.com"
+  },
+  {
+    "order": 3,
+    "name": "Barbaros Kaptan",
+    "role": "Emekli Dz. Kad.Kd.Bçvş.\nÜsküp 1911 Spor Kulübü\nGönüllü Basın Koordinatörü",
+    "whatsapp": "19544456197",
+    "email": "barbaroscaptain70@gmail.com",
+    "note_prefix": "Teknoloji Desteği:",
+    "note_link_label": "Obscuron Labs",
+    "note_url": "https://obscuronlabs.com"
+  },
+  {
+    "order": 4,
+    "name": "Sosyal Medya",
+    "email": "uskup1911@gmail.com",
+    "extra_links": [
+      {
+        "label": "Instagram: @uskupfk",
+        "url": "https://www.instagram.com/uskupfk/"
+      },
+      {
+        "label": "X: @uskupfk",
+        "url": "https://x.com/uskupfk"
+      }
+    ]
+  }
+]

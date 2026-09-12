@@ -4,8 +4,11 @@ backend:
 
 # This repo hosts more than the club site, so every path below is written
 # relative to the repository root, not the Netlify site root.
-media_folder: "uskup1911_site/assets/haberler"
-public_folder: "/assets/haberler"
+# The global media library covers the whole assets folder — this also lets
+# a re-uploaded file with the same name (hero-kale.jpg, forma.jpg, logo.png, …)
+# replace any existing site photo, not just ones added through a collection.
+media_folder: "uskup1911_site/assets"
+public_folder: "/assets"
 
 locale: "tr"
 
@@ -24,5 +27,48 @@ collections:
     fields:
       - { label: "Başlık", name: "title", widget: "string" }
       - { label: "Tarih", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Görsel", name: "image", widget: "image", required: false, choose_url: false }
+      - { label: "Görsel", name: "image", widget: "image", required: false, choose_url: false, media_folder: "/uskup1911_site/assets/haberler", public_folder: "/assets/haberler" }
       - { label: "Metin", name: "body", widget: "text" }
+
+  - name: "iletisim"
+    label: "İletişim Kartları"
+    label_singular: "İletişim Kartı"
+    folder: "uskup1911_site/content/iletisim"
+    create: true
+    delete: true
+    slug: "{{fields.order}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    summary: "{{name}}"
+    sortable_fields: ["order", "name"]
+    fields:
+      - { label: "Sıra (kartların soldan sağa dizilişi, 1,2,3...)", name: "order", widget: "number", default: 1 }
+      - { label: "İsim / Başlık", name: "name", widget: "string" }
+      - { label: "Fotoğraf", name: "avatar", widget: "image", required: false, media_folder: "/uskup1911_site/assets/iletisim", public_folder: "/assets/iletisim" }
+      - { label: "Unvan / Açıklama", name: "role", widget: "text", required: false, hint: "Her satır ayrı bir satırda gösterilir" }
+      - { label: "WhatsApp (ülke koduyla, sadece rakam, örn: 38975330819)", name: "whatsapp", widget: "string", required: false }
+      - { label: "E-posta", name: "email", widget: "string", required: false }
+      - { label: "Ek not (ör. Teknoloji Desteği:)", name: "note_prefix", widget: "string", required: false }
+      - { label: "Ek not link metni", name: "note_link_label", widget: "string", required: false }
+      - { label: "Ek not link adresi", name: "note_url", widget: "string", required: false }
+      - label: "Ek linkler (sosyal medya vb.)"
+        name: "extra_links"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Metin", name: "label", widget: "string" }
+          - { label: "Adres (URL)", name: "url", widget: "string" }
+
+  - name: "galeri"
+    label: "Galeri (ek fotoğraflar)"
+    label_singular: "Fotoğraf"
+    folder: "uskup1911_site/content/galeri"
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    summary: "{{alt}}"
+    fields:
+      - { label: "Fotoğraf", name: "image", widget: "image", media_folder: "/uskup1911_site/assets/galeri", public_folder: "/assets/galeri" }
+      - { label: "Açıklama (alt metin)", name: "alt", widget: "string", required: false }
