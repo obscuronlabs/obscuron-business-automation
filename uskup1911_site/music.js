@@ -14,7 +14,6 @@ const TRACKS = [
 ];
 
 (function () {
-  var NAMESPACE = 'uskup1911-anthems';
   var VOTED_KEY = 'uskup1911_voted';
 
   var audio = document.getElementById('audioEl');
@@ -58,9 +57,7 @@ const TRACKS = [
     try { localStorage.setItem(VOTED_KEY, JSON.stringify(map)); } catch (e) {}
   }
 
-  function countApiUrl(action, key) {
-    return 'https://api.countapi.xyz/' + action + '/' + NAMESPACE + '/' + key;
-  }
+  var VOTE_ENDPOINT = '/.netlify/functions/vote';
 
   function updateSummary(summaryEl, likeEl, dislikeEl) {
     var likes = parseInt(likeEl.textContent, 10) || 0;
@@ -69,14 +66,13 @@ const TRACKS = [
   }
 
   function refreshCounts(trackId, likeEl, dislikeEl, summaryEl) {
-    fetch(countApiUrl('get', trackId + '_like')).then(function (r) { return r.json(); }).then(function (d) {
-      likeEl.textContent = d && typeof d.value === 'number' ? d.value : 0;
-      updateSummary(summaryEl, likeEl, dislikeEl);
-    }).catch(function () {});
-    fetch(countApiUrl('get', trackId + '_dislike')).then(function (r) { return r.json(); }).then(function (d) {
-      dislikeEl.textContent = d && typeof d.value === 'number' ? d.value : 0;
-      updateSummary(summaryEl, likeEl, dislikeEl);
-    }).catch(function () {});
+    fetch(VOTE_ENDPOINT + '?track=' + encodeURIComponent(trackId))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        likeEl.textContent = (d && d.like) || 0;
+        dislikeEl.textContent = (d && d.dislike) || 0;
+        updateSummary(summaryEl, likeEl, dislikeEl);
+      }).catch(function () {});
   }
 
   function vote(trackId, kind, likeEl, dislikeEl, likeBtn, dislikeBtn, summaryEl) {
@@ -86,8 +82,13 @@ const TRACKS = [
     // clicks can't sneak in extra votes while the first request is in flight
     likeBtn.disabled = true;
     dislikeBtn.disabled = true;
-    fetch(countApiUrl('hit', trackId + '_' + kind)).then(function (r) { return r.json(); }).then(function (d) {
-      if (kind === 'like') likeEl.textContent = d.value; else dislikeEl.textContent = d.value;
+    fetch(VOTE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ track: trackId, kind: kind })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      likeEl.textContent = d.like || 0;
+      dislikeEl.textContent = d.dislike || 0;
       updateSummary(summaryEl, likeEl, dislikeEl);
       voted[trackId] = kind;
       setVoted(voted);
@@ -98,6 +99,16 @@ const TRACKS = [
       likeBtn.disabled = false;
       dislikeBtn.disabled = false;
     });
+  }
+
+  function shareTrack(track) {
+    var url = 'https://uskup1911.com/#muzik';
+    var text = 'Üsküp 1911 - ' + track.title + ' şarkısını dinle: ' + url;
+    if (navigator.share) {
+      navigator.share({ title: track.title, text: 'Üsküp 1911 - ' + track.title, url: url }).catch(function () {});
+    } else {
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    }
   }
 
   function loadTrack(index, autoplay) {
@@ -163,9 +174,16 @@ const TRACKS = [
       likeBtn.addEventListener('click', function () { vote(track.id, 'like', likeCount, dislikeCount, likeBtn, dislikeBtn, summaryEl); });
       dislikeBtn.addEventListener('click', function () { vote(track.id, 'dislike', likeCount, dislikeCount, likeBtn, dislikeBtn, summaryEl); });
 
+      var shareBtn = document.createElement('button');
+      shareBtn.className = 'trackShare';
+      shareBtn.setAttribute('aria-label', 'Paylaş');
+      shareBtn.textContent = '↗ Paylaş';
+      shareBtn.addEventListener('click', function () { shareTrack(track); });
+
       votesEl.appendChild(likeBtn);
       votesEl.appendChild(dislikeBtn);
       votesEl.appendChild(summaryEl);
+      votesEl.appendChild(shareBtn);
 
       li.appendChild(playBtnEl);
       li.appendChild(titleEl);
