@@ -221,6 +221,9 @@ section{position:relative;z-index:1;padding:clamp(60px,10vh,120px) clamp(16px,5v
 
 /* ── AGENTS ── */
 #agents{background:var(--bg2)}
+.team-photo-wrap{margin-top:48px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);position:relative}
+.team-photo{width:100%;max-height:520px;object-fit:cover;object-position:center top;display:block}
+.team-photo-caption{background:linear-gradient(to top,rgba(0,0,0,.8),transparent);color:var(--gold-b);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:20px 24px 16px;position:absolute;bottom:0;left:0;right:0}
 .agents-scroll{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
@@ -603,6 +606,10 @@ footer{
     <span class="eyebrow" data-i="agents_eyebrow">The Workforce™</span>
     <h2 class="section-title" data-i="agents_title">Thirteen Agents.<br><span class="gold-text" data-i="agents_title2">Always Operational.</span></h2>
     <p class="section-sub" data-i="agents_sub">Each agent is purpose-built for a specific intelligence domain. Deployed individually or as a coordinated multi-agent pipeline.</p>
+    <div class="team-photo-wrap">
+      <img src="obscuronlabs team members.png" alt="ObscuronLabs Team — 13 Agents & Barbaros Kaptan" class="team-photo" loading="lazy">
+      <div class="team-photo-caption">ObscuronLabs™ Team — All 13 Agents & Barbaros Kaptan, Founder & CEO</div>
+    </div>
     <div class="agents-scroll">
       <div class="agent-card">
         <div class="agent-id">AGT-001</div>
