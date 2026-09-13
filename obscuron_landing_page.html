@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obscuron Labs — AI & Digital Technology Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&family=Inter:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #060A12;
+  --bg2:   #0A1628;
+  --bg3:   #0D1E35;
+  --bg4:   #111F33;
+  --border:  rgba(0,180,216,0.15);
+  --border2: rgba(0,180,216,0.25);
+  --text:    #C8E8EF;
+  --text-hi: #E8F6FA;
+  --muted:   #7EAAB8;
+  --muted2:  #2A4255;
+  --cyan:    #00B4D8;
+  --cyan-lt: #22D3EE;
+  --cyan-dim:rgba(0,180,216,0.12);
+  --green:   #22d3a0;
+  --amber:   #f59e0b;
+  --font-h: 'Exo 2', sans-serif;
+  --font-b: 'Inter', sans-serif;
+  --font-m: 'DM Mono', monospace;
+  --r: 6px;
+  --r-lg: 10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:15px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--muted2)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:58px;background:rgba(6,10,18,0.88);backdrop-filter:blur(16px);border-bottom:0.5px solid rgba(0,180,216,0.1)}
+.nav-logo{font-family:var(--font-h);font-weight:800;font-size:17px;letter-spacing:0.06em;color:var(--text-hi);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-logo .dot{color:var(--cyan)}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-family:var(--font-h);font-size:13px;letter-spacing:0.05em;transition:color 0.2s}
+.nav-links a:hover{color:var(--text-hi)}
+.nav-lang{display:flex;gap:4px}
+.lb{background:none;border:0.5px solid var(--muted2);color:var(--muted);font-size:11px;letter-spacing:0.08em;padding:3px 8px;cursor:pointer;transition:all 0.2s;font-family:var(--font-h);font-weight:500}
+.lb.active,.lb:hover{border-color:var(--cyan);color:var(--cyan)}
+.nav-cta{background:var(--cyan);color:var(--bg);border:none;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-h);letter-spacing:0.06em;transition:background 0.2s}
+.nav-cta:hover{background:var(--cyan-lt)}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:20px;height:1.5px;background:var(--text-hi)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 2rem 5rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-150px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(0,180,216,0.1) 0%,transparent 65%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,216,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,216,0.04) 1px,transparent 1px);background-size:70px 70px;pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cyan-dim);border:0.5px solid rgba(0,180,216,0.3);padding:6px 18px;margin-bottom:2rem;font-size:11px;font-family:var(--font-m);color:var(--cyan);letter-spacing:0.08em;border-radius:2px}
+.badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1{font-family:var(--font-h);font-size:clamp(38px,7vw,78px);font-weight:800;line-height:1.02;letter-spacing:-1.5px;margin-bottom:1.5rem;max-width:860px;color:var(--text-hi)}
+h1 em{font-style:normal;color:var(--cyan)}
+.hero-sub{color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:540px;line-height:1.75;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--cyan);color:var(--bg);border:none;padding:13px 30px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-h);letter-spacing:0.07em;transition:background 0.2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--cyan-lt)}
+.btn-outline{background:transparent;color:var(--text-hi);border:0.5px solid var(--muted2);padding:13px 30px;font-size:14px;cursor:pointer;font-family:var(--font-h);letter-spacing:0.05em;transition:all 0.2s;text-decoration:none;display:inline-block}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* ── STATS BAR ── */
+.stats-bar{display:flex;justify-content:center;flex-wrap:wrap;margin:4rem auto 0;max-width:1000px;background:var(--bg2);border:0.5px solid var(--border)}
+.stat-item{flex:1;min-width:150px;padding:1.8rem 1.5rem;text-align:center;border-right:0.5px solid var(--border)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:var(--font-h);font-size:34px;font-weight:800;color:var(--text-hi)}
+.stat-num span{color:var(--cyan)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:0.05em}
+
+/* ── SECTIONS ── */
+.section-wrap{max-width:1100px;margin:0 auto;padding:80px 2rem}
+.section-tag{font-family:var(--font-m);font-size:11px;letter-spacing:0.12em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:var(--font-h);font-size:clamp(26px,4vw,42px);font-weight:800;letter-spacing:-0.5px;line-height:1.08;margin-bottom:1rem;color:var(--text-hi)}
+.section-sub{color:var(--muted);max-width:520px;line-height:1.75;margin-bottom:3rem}
+
+/* ── SERVICES ── */
+.services-bg{background:var(--bg2)}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.feature-card{background:var(--bg2);padding:1.8rem;transition:background 0.2s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--cyan);transition:height 0.35s}
+.feature-card:hover{background:var(--bg3)}
+.feature-card:hover::before{height:100%}
+.feature-icon{width:40px;height:40px;background:var(--cyan-dim);border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.feature-icon svg{width:20px;height:20px;color:var(--cyan)}
+.feature-card h3{font-family:var(--font-h);font-size:16px;font-weight:700;margin-bottom:0.5rem;color:var(--text-hi)}
+.feature-card p{font-size:13.5px;color:var(--muted);line-height:1.65}
+.feat-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:1rem}
+.ftag{font-family:var(--font-h);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan);border:0.5px solid rgba(0,180,216,0.2);padding:2px 7px}
+
+/* ── AI WORKFORCE ── */
+.workforce-bg{background:var(--bg)}
+.agents-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.agent-card{background:var(--bg2);padding:1.6rem 1.4rem;position:relative;overflow:hidden;transition:background 0.2s}
+.agent-card:hover{background:var(--bg3)}
+.agent-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.3s}
+.agent-card:hover::after{opacity:1}
+.agent-id{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;color:var(--cyan);margin-bottom:8px;opacity:0.65}
+.agent-name{font-family:var(--font-h);font-weight:700;font-size:15px;color:var(--text-hi);margin-bottom:3px}
+.agent-role{font-family:var(--font-h);font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.agent-spec{font-size:12.5px;color:var(--muted);line-height:1.6}
+.agent-status{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:var(--font-h);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cyan)}
+.agent-status::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+
+/* ── PIPELINE ── */
+.pipeline-bg{background:var(--bg2)}
+.pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.pipe-node{background:var(--bg2);padding:2rem;position:relative}
+.pipe-node:not(:last-child)::after{content:'→';position:absolute;top:50%;right:-14px;transform:translateY(-50%);font-size:18px;color:var(--cyan);opacity:0.35;z-index:1}
+.pipe-stage{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;color:var(--cyan);margin-bottom:10px}
+.pipe-name{font-family:var(--font-h);font-size:17px;font-weight:700;color:var(--text-hi);margin-bottom:6px}
+.pipe-desc{font-size:13px;color:var(--muted);line-height:1.65}
+.pipe-model{display:inline-block;margin-top:12px;font-family:var(--font-m);font-size:10px;background:var(--bg4);border:0.5px solid var(--border);padding:2px 9px;color:var(--muted)}
+
+/* ── TERMINAL ── */
+.terminal{background:#050A0F;border:0.5px solid var(--border);overflow:hidden;margin:2rem 0}
+.terminal-bar{background:var(--bg3);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:0.5px solid var(--border)}
+.dot{width:9px;height:9px;border-radius:50%}
+.dot-r{background:#ff5f56}.dot-y{background:#ffbd2e}.dot-g{background:#27c93f}
+.t-title{font-family:var(--font-m);font-size:11px;color:var(--muted);margin-left:6px}
+.terminal-body{padding:1.4rem;font-family:var(--font-m);font-size:12.5px;line-height:2;overflow-x:auto}
+.t-prompt{color:var(--cyan)}.t-cmd{color:var(--text-hi)}.t-out{color:var(--muted)}.t-ok{color:var(--green)}.t-sec{color:var(--amber)}
+
+/* ── HOW WE WORK ── */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.process-step{background:var(--bg2);padding:2rem}
+.step-num{font-family:var(--font-m);font-size:11px;letter-spacing:0.15em;color:var(--cyan);margin-bottom:1rem}
+.step-name{font-family:var(--font-h);font-size:16px;font-weight:700;color:var(--text-hi);margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* ── PRODUCTS ── */
+.products-bg{background:var(--bg3)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.pricing-card{background:var(--bg2);padding:2rem;position:relative;transition:background 0.2s}
+.pricing-card:hover{background:var(--bg3)}
+.pricing-card.featured{border:0.5px solid var(--cyan)}
+.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--bg);font-size:10px;font-weight:700;padding:3px 14px;font-family:var(--font-h);letter-spacing:0.08em}
+.plan-name{font-family:var(--font-h);font-size:17px;font-weight:700;color:var(--text-hi);margin-bottom:6px}
+.plan-price{font-family:var(--font-h);font-size:40px;font-weight:800;color:var(--text-hi);margin:1rem 0 4px}
+.plan-price span{font-size:14px;font-weight:300;color:var(--muted)}
+.plan-desc{font-size:13px;color:var(--muted);margin-bottom:1.5rem;line-height:1.6}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:2rem}
+.plan-features li{font-size:13.5px;display:flex;align-items:center;gap:9px}
+.plan-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.plan-btn{width:100%;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-h);letter-spacing:0.06em;border:0.5px solid var(--muted2);background:transparent;color:var(--text-hi);transition:all 0.2s}
+.plan-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.pricing-card.featured .plan-btn{background:var(--cyan);border-color:var(--cyan);color:var(--bg)}
+.pricing-card.featured .plan-btn:hover{background:var(--cyan-lt)}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-info p{color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:2rem}
+.contact-detail{display:flex;flex-direction:column;gap:1rem}
+.cd-item{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px;font-family:var(--font-h)}
+.cd-icon{width:32px;height:32px;background:var(--cyan-dim);border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cd-icon svg{width:14px;height:14px;color:var(--cyan)}
+.quote-box{margin-top:1.5rem;padding:1.2rem;background:var(--bg2);border:0.5px solid var(--border)}
+.quote-label{font-family:var(--font-m);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.quote-text{font-size:13px;color:var(--muted);line-height:1.65}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-family:var(--font-h);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.form-input,.form-select,.form-textarea{background:var(--bg2);border:0.5px solid var(--muted2);color:var(--text-hi);padding:10px 14px;font-family:var(--font-b);font-size:14px;width:100%;transition:border-color 0.2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--cyan)}
+.form-select{appearance:none}
+.form-textarea{min-height:110px;resize:vertical}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted2)}
+.form-note{font-size:12px;color:var(--muted);font-style:italic}
+
+/* ── FAQ ── */
+.faq-bg{background:var(--bg2)}
+.faq-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.faq-item{background:var(--bg2)}
+.faq-q{width:100%;background:none;border:none;color:var(--text-hi);font-family:var(--font-h);font-size:15px;font-weight:600;padding:1.2rem 1.5rem;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background 0.15s}
+.faq-q:hover{background:var(--bg3)}
+.faq-q .arrow{color:var(--muted);font-size:16px;transition:transform 0.2s}
+.faq-a{display:none;padding:0 1.5rem 1.2rem;color:var(--muted);font-size:13.5px;line-height:1.75}
+.faq-item.open .faq-a{display:block}
+.faq-item.open .arrow{transform:rotate(180deg)}
+
+/* ── FOOTER ── */
+footer{border-top:0.5px solid var(--border);padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1100px;margin:0 auto}
+.footer-logo{font-family:var(--font-h);font-weight:800;font-size:15px;letter-spacing:0.06em;color:var(--text-hi)}
+.footer-logo .dot{color:var(--cyan)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;font-family:var(--font-h);letter-spacing:0.05em;transition:color 0.2s}
+.footer-links a:hover{color:var(--cyan)}
+footer p{font-size:12px;color:var(--muted)}
+
+/* ── MOBILE MENU ── */
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(6,10,18,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--font-h);font-weight:700;font-size:1.3rem;letter-spacing:0.08em;color:var(--text-hi);text-decoration:none;text-transform:uppercase}
+.mob-menu a:hover{color:var(--cyan)}
+.mob-close{position:absolute;top:1.5rem;right:2rem;font-size:1.3rem;color:var(--muted);cursor:pointer;background:none;border:none;font-family:var(--font-h)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .feature-grid{grid-template-columns:1fr 1fr}
+  .agents-grid{grid-template-columns:repeat(2,1fr)}
+  .pipeline{grid-template-columns:1fr}
+  .pipe-node::after{display:none}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+}
+@media(max-width:600px){
+  .feature-grid,.agents-grid,.process-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()" data-i="nav_services">Services</a>
+  <a href="#workforce" onclick="toggleMenu()">AI Workforce</a>
+  <a href="#process" onclick="toggleMenu()" data-i="nav_process">Process</a>
+  <a href="#products" onclick="toggleMenu()" data-i="nav_products">Products</a>
+  <a href="#contact" onclick="toggleMenu()" data-i="nav_contact">Contact</a>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">OBSCURON<span class="dot">LABS</span></a>
+  <div class="nav-links">
+    <a href="#services" data-i="nav_services">Services</a>
+    <a href="#workforce">AI Workforce</a>
+    <a href="#process" data-i="nav_process">Process</a>
+    <a href="#products" data-i="nav_products">Products</a>
+    <div class="nav-lang">
+      <button class="lb active" onclick="setLang('en')">EN</button>
+      <button class="lb" onclick="setLang('tr')">TR</button>
+      <button class="lb" onclick="setLang('de')">DE</button>
+      <button class="lb" onclick="setLang('it')">IT</button>
+      <button class="lb" onclick="setLang('ar')">AR</button>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="nav_cta">Get Started</button>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    <span data-i="hero_badge">AI-POWERED · 13 SPECIALIZED AGENTS · LIVE DEPLOYMENT</span>
+  </div>
+  <h1 data-i="hero_title">Your Business,<br>Run by <em>Intelligence</em></h1>
+  <p class="hero-sub" data-i="hero_sub">We build intelligent systems that automate operations, decode data, and drive digital growth — deployed by 13 specialized AI agents working around the clock.</p>
+  <div class="hero-actions">
+    <a href="#services" class="btn-primary" data-i="hero_btn1">Explore Services</a>
+    <a href="#contact" class="btn-outline" data-i="hero_btn2">Talk to Us</a>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">13<span>+</span></div>
+      <div class="stat-label" data-i="stat1">AI Agents</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9<span>+</span></div>
+      <div class="stat-label" data-i="stat2">Service Areas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">48<span>h</span></div>
+      <div class="stat-label" data-i="stat3">First Deliverable</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label" data-i="stat4">Languages</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services-bg" id="services">
+<div class="section-wrap">
+  <div class="section-tag">// <span data-i="serv_tag">what we do</span></div>
+  <h2 class="section-title" data-i="serv_title">End-to-End Digital Intelligence</h2>
+  <p class="section-sub" data-i="serv_sub">From a single automated workflow to a full AI transformation — every engagement is custom-scoped and priced to your market.</p>
+  <div class="feature-grid">
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><circle cx="15.5" cy="10" r="1.5"/></svg></div>
+      <h3 data-i="s1_name">AI Consulting &amp; Implementation</h3>
+      <p data-i="s1_desc">Strategy, vendor selection, custom LLM integration and multi-agent system deployment. From first conversation to live production system.</p>
+      <div class="feat-tags"><span class="ftag">LLM</span><span class="ftag">Multi-Agent</span><span class="ftag">Claude / GPT</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></div>
+      <h3 data-i="s2_name">Business Process Automation</h3>
+      <p data-i="s2_desc">End-to-end workflow automation with n8n, Make, Zapier. CRM sync, lead routing, email sequences, invoice processing and internal reporting.</p>
+      <div class="feat-tags"><span class="ftag">n8n</span><span class="ftag">API</span><span class="ftag">CRM</span><span class="ftag">Zapier</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <h3 data-i="s3_name">Data Intelligence &amp; BI</h3>
+      <p data-i="s3_desc">Data pipelines, KPI dashboards, automated reporting and business intelligence systems that turn raw data into board-level decisions.</p>
+      <div class="feat-tags"><span class="ftag">BI</span><span class="ftag">Dashboards</span><span class="ftag">Pipelines</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+      <h3 data-i="s4_name">Lead Generation &amp; Sales AI</h3>
+      <p data-i="s4_desc">Automated prospecting, enrichment, outreach sequencing and AI qualification agents that keep your pipeline filled without manual effort.</p>
+      <div class="feat-tags"><span class="ftag">Lead Gen</span><span class="ftag">Enrichment</span><span class="ftag">Outreach</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <h3 data-i="s5_name">Web &amp; Digital Solutions</h3>
+      <p data-i="s5_desc">High-performance websites, landing pages, SaaS products and digital infrastructure — built to scale and optimized to convert.</p>
+      <div class="feat-tags"><span class="ftag">Web Dev</span><span class="ftag">SaaS</span><span class="ftag">Landing Pages</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3 data-i="s6_name">Creative AI &amp; Content</h3>
+      <p data-i="s6_desc">AI-generated visuals, video, copy and campaign assets. Social media automation, brand storytelling and generative content pipelines.</p>
+      <div class="feat-tags"><span class="ftag">AI Visual</span><span class="ftag">Video</span><span class="ftag">Social</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+      <h3 data-i="s7_name">Customer Service AI</h3>
+      <p data-i="s7_desc">Intelligent chatbots, support automation, AI-powered FAQ systems and customer interaction agents trained on your brand voice.</p>
+      <div class="feat-tags"><span class="ftag">Chatbot</span><span class="ftag">Support</span><span class="ftag">RAG</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3 data-i="s8_name">Digital Marketing &amp; SEO AI</h3>
+      <p data-i="s8_desc">AI-driven SEO strategies, content calendars, performance advertising, email marketing automation and conversion optimization.</p>
+      <div class="feat-tags"><span class="ftag">SEO</span><span class="ftag">Ads</span><span class="ftag">Email</span></div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3 data-i="s9_name">AI Training &amp; Consulting</h3>
+      <p data-i="s9_desc">Corporate workshops, AI literacy programs and strategic consulting for leadership teams navigating the shift to AI-powered operations.</p>
+      <div class="feat-tags"><span class="ftag">Training</span><span class="ftag">Workshops</span><span class="ftag">Strategy</span></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- AI WORKFORCE -->
+<div class="workforce-bg" id="workforce">
+<div class="section-wrap">
+  <div class="section-tag">// <span data-i="wf_tag">ai workforce</span></div>
+  <h2 class="section-title" data-i="wf_title">Meet the 13 Agents</h2>
+  <p class="section-sub" data-i="wf_sub">Each agent is specialized for a distinct function — running autonomously or in coordinated multi-agent pipelines across every active engagement.</p>
+  <div class="agents-grid">
+    <div class="agent-card"><div class="agent-id">AGT-001</div><div class="agent-name">Nox Vale</div><div class="agent-role">AI Strategist</div><div class="agent-spec">Maps business context and defines AI roadmaps. First contact on every engagement — opportunities identified before a line of code is written.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-002</div><div class="agent-name">Pery Ashcroft</div><div class="agent-role">Automation Architect</div><div class="agent-spec">Designs and deploys n8n workflows, API bridges and system integrations. Specializes in zero-touch business process automation.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-003</div><div class="agent-name">Atlas Mercer</div><div class="agent-role">Data Intelligence</div><div class="agent-spec">Builds BI dashboards, data pipelines and automated reporting systems. Turns scattered data into board-ready intelligence.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-004</div><div class="agent-name">Vanta Noire</div><div class="agent-role">Lead Generation</div><div class="agent-spec">Autonomous prospecting, enrichment and qualification. Runs outreach sequences and keeps CRM data clean without manual input.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-005</div><div class="agent-name">Veil Corvin</div><div class="agent-role">Research Agent</div><div class="agent-spec">Deep-web research, competitive intelligence, market analysis and structured intelligence reports delivered on demand.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-006</div><div class="agent-name">Shade Holloway</div><div class="agent-role">Content Strategist</div><div class="agent-spec">Long-form content, brand voice calibration, editorial calendars and content pipeline management across channels.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-007</div><div class="agent-name">Echo Virel</div><div class="agent-role">Social Media AI</div><div class="agent-spec">Platform-native content generation, scheduling, trend monitoring and engagement response across LinkedIn, Instagram, X and TikTok.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-008</div><div class="agent-name">Oracle Voss</div><div class="agent-role">Customer Service AI</div><div class="agent-spec">Trained on your brand voice and knowledge base. Handles Tier-1 support, FAQ resolution and escalation routing 24/7.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-009</div><div class="agent-name">Helix Arden</div><div class="agent-role">SEO &amp; Performance</div><div class="agent-spec">Technical SEO audits, keyword clustering, on-page optimization and ad performance analysis — continuous, not one-off.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-010</div><div class="agent-name">Cipher Blackwell</div><div class="agent-role">Systems Integration</div><div class="agent-spec">Connects disparate tools, handles API authentication and builds the data plumbing that makes everything else work seamlessly.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-011</div><div class="agent-name">Mirror Vale</div><div class="agent-role">Creative AI</div><div class="agent-spec">AI image generation, visual concept production and brand-consistent asset creation at scale. Works alongside Shade Holloway on campaigns.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-012</div><div class="agent-name">Aether Crowe</div><div class="agent-role">Training Coordinator</div><div class="agent-spec">Structures AI training programs, builds interactive learning materials and tracks team AI adoption for corporate clients.</div><div class="agent-status">Active</div></div>
+    <div class="agent-card"><div class="agent-id">AGT-013</div><div class="agent-name">Ghost Mercer</div><div class="agent-role">Ops &amp; QA</div><div class="agent-spec">Monitors all running systems, flags anomalies, runs quality checks and ensures every deployed workflow performs to spec around the clock.</div><div class="agent-status">Active</div></div>
+  </div>
+</div>
+</div>
+
+<!-- PIPELINE DEMO -->
+<div class="pipeline-bg" id="pipeline">
+<div class="section-wrap">
+  <div class="section-tag">// <span data-i="pipe_tag">agent pipeline</span></div>
+  <h2 class="section-title" data-i="pipe_title">Three Agents. One Pipeline.</h2>
+  <p class="section-sub" data-i="pipe_sub">Each agent is specialized. No one agent does everything — they hand off, check each other, and produce better output than any single model call.</p>
+  <div class="pipeline">
+    <div class="pipe-node">
+      <div class="pipe-stage">STAGE 1</div>
+      <div class="pipe-name">Maya Serrin</div>
+      <div class="pipe-desc">Triage &amp; intent extraction. Pulls budget signals, urgency, and technical requirements from any client message.</div>
+      <span class="pipe-model">claude-3-haiku / gpt-4o-mini</span>
+    </div>
+    <div class="pipe-node">
+      <div class="pipe-stage">STAGE 2</div>
+      <div class="pipe-name">Leo Mercer</div>
+      <div class="pipe-desc">Delivery strategy. Converts triage into a real project plan with timeline, tech stack, and pricing recommendation.</div>
+      <span class="pipe-model">claude-3.5-sonnet / gpt-4o</span>
+    </div>
+    <div class="pipe-node">
+      <div class="pipe-stage">STAGE 3</div>
+      <div class="pipe-name">Sophia Everdain</div>
+      <div class="pipe-desc">Writes the final client email. Polished, personalized, under 250 words. Ready to send immediately.</div>
+      <span class="pipe-model">claude-3.5-sonnet / gpt-4o</span>
+    </div>
+  </div>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      <span class="t-title">obscuron — pipeline execution</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">$ </span><span class="t-cmd">python main.py pipeline --email ceo@apexlogistics.de --message "We need help automating our weekly pricing reports"</span></div>
+      <div class="t-out">2026-09-13 09:12:01 [INFO] Obscuron Pipeline initialized ✓</div>
+      <div class="t-out">2026-09-13 09:12:01 [INFO] Processing inbound from: ceo@apexlogistics.de</div>
+      <div class="t-out">2026-09-13 09:12:02 [INFO] Agent.Maya Serrin: Starting task...</div>
+      <div class="t-ok">2026-09-13 09:12:04 [INFO] Agent.Maya Serrin: Completed in 2.31s</div>
+      <div class="t-out">2026-09-13 09:12:04 [INFO] Agent.Leo Mercer: Starting task...</div>
+      <div class="t-ok">2026-09-13 09:12:09 [INFO] Agent.Leo Mercer: Completed in 5.12s</div>
+      <div class="t-out">2026-09-13 09:12:09 [INFO] Agent.Sophia Everdain: Starting task...</div>
+      <div class="t-ok">2026-09-13 09:12:14 [INFO] Agent.Sophia Everdain: Completed in 4.88s</div>
+      <div>&nbsp;</div>
+      <div class="t-sec">════════════════════ CLIENT EMAIL ════════════════════</div>
+      <div class="t-out">Subject: Automating Your Weekly Pricing Reports — Our Approach</div>
+      <div>&nbsp;</div>
+      <div class="t-out">Hi [Name], Your pricing report process is exactly the kind of</div>
+      <div class="t-out">workflow we've helped logistics teams cut from 15 hours to under</div>
+      <div class="t-out">30 minutes. Here's how we'd approach it for Apex...</div>
+      <div>&nbsp;</div>
+      <div class="t-ok">✅ Saved to outputs/20260913_091214_ceo_at_apexlogistics_de.json</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- HOW WE WORK -->
+<div id="process" style="background:var(--bg)">
+<div class="section-wrap">
+  <div class="section-tag">// <span data-i="how_tag">our process</span></div>
+  <h2 class="section-title" data-i="how_title">From Brief to Live System</h2>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">STEP 01 — Discovery</div>
+      <div class="step-name" data-i="how1_t">Understand</div>
+      <div class="step-desc" data-i="how1_d">We map your operations, bottlenecks and goals in a structured discovery session. Nox Vale produces an AI opportunity brief within 48 hours.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">STEP 02 — Design</div>
+      <div class="step-name" data-i="how2_t">Architect</div>
+      <div class="step-desc" data-i="how2_d">We design the full system — which agents run, how workflows connect, what data flows where — and present a concrete implementation plan and quote.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">STEP 03 — Build</div>
+      <div class="step-name" data-i="how3_t">Build &amp; Test</div>
+      <div class="step-desc" data-i="how3_d">We develop with your real data and processes. Iterative delivery means you see working components — not a big-bang launch at the end.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">STEP 04 — Deploy</div>
+      <div class="step-name" data-i="how4_t">Deploy &amp; Support</div>
+      <div class="step-desc" data-i="how4_d">Live handover with documentation, team training and Ghost Mercer monitoring. Ongoing support tiers available for every budget.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products-bg" id="products">
+<div class="section-wrap">
+  <div class="section-tag">// <span data-i="prod_tag">ready-made products</span></div>
+  <h2 class="section-title" data-i="prod_title">Deploy Instantly, Customise Freely</h2>
+  <p class="section-sub" data-i="prod_sub">Pre-built workflows, AI agents and digital tools available as standalone licenses — or as the starting point for a fully custom engagement.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name" data-i="p1_name">Business Automation Suite</div>
+      <div class="plan-price">$59<span>/one-time</span></div>
+      <div class="plan-desc" data-i="p1_desc">15-agent n8n workflow system covering lead gen, email sequences, CRM sync, reporting and social scheduling.</div>
+      <ul class="plan-features">
+        <li>Multi-agent email pipeline</li>
+        <li>Lead scraper + enrichment</li>
+        <li>n8n workflow (15 nodes)</li>
+        <li>Discord reporting integration</li>
+        <li>JSON audit trail</li>
+      </ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="prod_get">Get License</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="plan-name" data-i="p2_name">Multi-Agent Research System</div>
+      <div class="plan-price">$149<span>/one-time</span></div>
+      <div class="plan-desc" data-i="p2_desc">Autonomous agents that research markets, qualify leads and deliver structured intelligence reports without human involvement.</div>
+      <ul class="plan-features">
+        <li>Everything in Automation Suite</li>
+        <li>SerpAPI search-based lead gen</li>
+        <li>OpenRouter multi-model support</li>
+        <li>White-label license</li>
+        <li>1:1 setup call (30 min)</li>
+      </ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="prod_get">Get License</button>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name" data-i="p3_name">Analytics Dashboard Template</div>
+      <div class="plan-price">$89<span>/one-time</span></div>
+      <div class="plan-desc" data-i="p3_desc">Ready-to-deploy BI dashboard with KPI tracking, pipeline views, automated weekly reports and executive summary emails.</div>
+      <ul class="plan-features">
+        <li>KPI tracking dashboard</li>
+        <li>Sales pipeline visualization</li>
+        <li>Automated weekly reports</li>
+        <li>Executive email summaries</li>
+        <li>Email support</li>
+      </ul>
+      <button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="prod_get">Get License</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="background:var(--bg);border-top:0.5px solid var(--border)">
+<div class="section-wrap">
+  <div class="contact-grid">
+    <div>
+      <div class="section-tag">// <span data-i="contact_tag">get in touch</span></div>
+      <h2 class="section-title" data-i="contact_title">Let's Build Something Intelligent</h2>
+      <p class="contact-info" style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:2rem" data-i="contact_desc">Whether you need a full AI transformation or a single automated workflow — tell us what you're trying to solve. We respond with a concrete scope and proposal, not a sales pitch.</p>
+      <div class="contact-detail">
+        <div class="cd-item">
+          <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <span>barbaroscaptain70@gmail.com</span>
+        </div>
+        <div class="cd-item">
+          <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <span>obscuronlabs.com</span>
+        </div>
+      </div>
+      <div class="quote-box">
+        <div class="quote-label">Custom Pricing</div>
+        <div class="quote-text" data-i="contact_quote">All service engagements are custom-quoted. We price to your scale, your market and your objectives — a US enterprise pays differently from a Balkan SME. Same quality, fair value for both.</div>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="return false">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="cf-name" data-i="cf_name">Name</label>
+          <input id="cf-name" class="form-input" type="text" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cf-company" data-i="cf_company">Company</label>
+          <input id="cf-company" class="form-input" type="text" placeholder="Your company">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cf-email">Email</label>
+        <input id="cf-email" class="form-input" type="email" placeholder="you@company.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cf-country" data-i="cf_country">Country / Market</label>
+        <input id="cf-country" class="form-input" type="text" placeholder="e.g. Germany, Kosovo, USA">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cf-service" data-i="cf_service">Service Area</label>
+        <select id="cf-service" class="form-select form-input">
+          <option value="" data-i="cf_sel">— Select a service —</option>
+          <option>AI Consulting &amp; Implementation</option>
+          <option>Business Process Automation</option>
+          <option>Data Intelligence &amp; BI</option>
+          <option>Lead Generation &amp; Sales AI</option>
+          <option>Web &amp; Digital Solutions</option>
+          <option>Creative AI &amp; Content</option>
+          <option>Customer Service AI</option>
+          <option>Digital Marketing &amp; SEO AI</option>
+          <option>AI Training &amp; Consulting</option>
+          <option>Ready-Made Product License</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cf-msg" data-i="cf_msg">Message</label>
+        <textarea id="cf-msg" class="form-textarea" placeholder="Tell us about your project, current tools and what you're trying to achieve…"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center" data-i="cf_send">Send Message</button>
+      <div class="form-note" data-i="contact_reply">We respond to every inquiry within 24 hours.</div>
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-bg" id="faq">
+<div class="section-wrap" style="max-width:720px">
+  <div class="section-tag">// <span data-i="faq_tag">common questions</span></div>
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq1_q">Do I need technical experience to use your services? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq1_a">No. We handle the full technical implementation. You describe what you want to achieve — we design, build and deploy the system. For product licenses, basic familiarity with n8n or Python is helpful but not required; full setup guides are included.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq2_q">How is pricing determined for custom services? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq2_a">Every engagement is custom-scoped based on complexity, your market, and your objectives. A US Fortune 500 company and a Balkan SME both get the same quality — but fair pricing for their respective contexts. Contact us and we'll come back with a concrete proposal.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq3_q">What API keys and tools do I need? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq3_a">For product licenses: minimum an OpenAI or OpenRouter API key. For search-based lead gen, a SerpAPI key (free tier available). For Discord notifications, a Discord bot token. For custom service engagements, we assess your existing stack and integrate accordingly.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq4_q">Which languages do you work in? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq4_a">We operate in English, Turkish, German, Italian and Arabic — documentation, support, delivery and client communication in all five languages. We serve clients across Europe, MENA and North America.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq5_q">Can product licenses be used with n8n Cloud or self-hosted? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq5_a">Yes — workflow JSON files import into both n8n Cloud and self-hosted instances. Update the API keys and channel IDs in node settings and you're live.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)" data-i="faq6_q">Do you offer refunds on product licenses? <span class="arrow">∨</span></button>
+      <div class="faq-a" data-i="faq6_a">Yes. If the product doesn't work as described, contact us within 7 days for a full refund. No questions asked.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="footer-logo">OBSCURON<span class="dot">LABS</span></div>
+  <div class="footer-links">
+    <a href="#services" data-i="nav_services">Services</a>
+    <a href="#workforce">AI Workforce</a>
+    <a href="#products" data-i="nav_products">Products</a>
+    <a href="#contact" data-i="nav_contact">Contact</a>
+  </div>
+  <p>© 2026 Obscuron Labs. All rights reserved.</p>
+</footer>
+
+<script>
+// ── i18n ──
+const T = {
+  en:{
+    nav_services:'Services',nav_process:'Process',nav_products:'Products',nav_contact:'Contact',nav_cta:'Get Started',
+    hero_badge:'AI-POWERED · 13 SPECIALIZED AGENTS · LIVE DEPLOYMENT',
+    hero_title:'Your Business,<br>Run by <em>Intelligence</em>',
+    hero_sub:'We build intelligent systems that automate operations, decode data, and drive digital growth — deployed by 13 specialized AI agents working around the clock.',
+    hero_btn1:'Explore Services',hero_btn2:'Talk to Us',
+    stat1:'AI Agents',stat2:'Service Areas',stat3:'First Deliverable',stat4:'Languages',
+    serv_tag:'what we do',serv_title:'End-to-End Digital Intelligence',serv_sub:'From a single automated workflow to a full AI transformation — every engagement is custom-scoped and priced to your market.',
+    s1_name:'AI Consulting & Implementation',s1_desc:'Strategy, vendor selection, custom LLM integration and multi-agent system deployment. From first conversation to live production system.',
+    s2_name:'Business Process Automation',s2_desc:'End-to-end workflow automation with n8n, Make, Zapier. CRM sync, lead routing, email sequences, invoice processing and internal reporting.',
+    s3_name:'Data Intelligence & BI',s3_desc:'Data pipelines, KPI dashboards, automated reporting and business intelligence systems that turn raw data into board-level decisions.',
+    s4_name:'Lead Generation & Sales AI',s4_desc:'Automated prospecting, enrichment, outreach sequencing and AI qualification agents that keep your pipeline filled without manual effort.',
+    s5_name:'Web & Digital Solutions',s5_desc:'High-performance websites, landing pages, SaaS products and digital infrastructure — built to scale and optimized to convert.',
+    s6_name:'Creative AI & Content',s6_desc:'AI-generated visuals, video, copy and campaign assets. Social media automation, brand storytelling and generative content pipelines.',
+    s7_name:'Customer Service AI',s7_desc:'Intelligent chatbots, support automation, AI-powered FAQ systems and customer interaction agents trained on your brand voice.',
+    s8_name:'Digital Marketing & SEO AI',s8_desc:'AI-driven SEO strategies, content calendars, performance advertising, email marketing automation and conversion optimization.',
+    s9_name:'AI Training & Consulting',s9_desc:'Corporate workshops, AI literacy programs and strategic consulting for leadership teams navigating the shift to AI-powered operations.',
+    wf_tag:'ai workforce',wf_title:'Meet the 13 Agents',wf_sub:'Each agent is specialized for a distinct function — running autonomously or in coordinated multi-agent pipelines across every active engagement.',
+    pipe_tag:'agent pipeline',pipe_title:'Three Agents. One Pipeline.',pipe_sub:'Each agent is specialized. No one agent does everything — they hand off, check each other, and produce better output than any single model call.',
+    how_tag:'our process',how_title:'From Brief to Live System',
+    how1_t:'Understand',how1_d:'We map your operations, bottlenecks and goals in a structured discovery session. Nox Vale produces an AI opportunity brief within 48 hours.',
+    how2_t:'Architect',how2_d:'We design the full system and present a concrete implementation plan and quote.',
+    how3_t:'Build & Test',how3_d:'We develop with your real data and processes. Iterative delivery — you see working components, not a big-bang launch.',
+    how4_t:'Deploy & Support',how4_d:'Live handover with documentation, team training and Ghost Mercer monitoring. Ongoing support for every budget.',
+    prod_tag:'ready-made products',prod_title:'Deploy Instantly, Customise Freely',prod_sub:'Pre-built workflows, AI agents and digital tools as standalone licenses — or the starting point for a custom engagement.',
+    p1_name:'Business Automation Suite',p1_desc:'15-agent n8n workflow system covering lead gen, email sequences, CRM sync, reporting and social scheduling.',
+    p2_name:'Multi-Agent Research System',p2_desc:'Autonomous agents that research markets, qualify leads and deliver structured intelligence reports without human involvement.',
+    p3_name:'Analytics Dashboard Template',p3_desc:'Ready-to-deploy BI dashboard with KPI tracking, pipeline views, automated weekly reports and executive summary emails.',
+    prod_get:'Get License',
+    contact_tag:'get in touch',contact_title:"Let's Build Something Intelligent",
+    contact_desc:"Whether you need a full AI transformation or a single automated workflow — tell us what you're trying to solve. We respond with a concrete scope and proposal, not a sales pitch.",
+    contact_quote:'All service engagements are custom-quoted. We price to your scale, your market and your objectives — a US enterprise pays differently from a Balkan SME. Same quality, fair value for both.',
+    contact_reply:'We respond to every inquiry within 24 hours.',
+    cf_name:'Name',cf_company:'Company',cf_country:'Country / Market',cf_service:'Service Area',cf_sel:'— Select a service —',cf_msg:'Message',cf_send:'Send Message',
+    faq_tag:'common questions',
+    faq1_q:'Do I need technical experience to use your services?',faq1_a:'No. We handle the full technical implementation. You describe what you want to achieve — we design, build and deploy the system.',
+    faq2_q:'How is pricing determined for custom services?',faq2_a:'Every engagement is custom-scoped based on complexity, your market, and your objectives. Contact us and we\'ll come back with a concrete proposal.',
+    faq3_q:'What API keys and tools do I need?',faq3_a:'For product licenses: minimum an OpenAI or OpenRouter API key. For search-based lead gen, a SerpAPI key. For Discord notifications, a Discord bot token.',
+    faq4_q:'Which languages do you work in?',faq4_a:'We operate in English, Turkish, German, Italian and Arabic — documentation, support and delivery in all five languages.',
+    faq5_q:'Can product licenses be used with n8n Cloud or self-hosted?',faq5_a:'Yes — workflow JSON files import into both n8n Cloud and self-hosted instances.',
+    faq6_q:'Do you offer refunds on product licenses?',faq6_a:'Yes. If the product doesn\'t work as described, contact us within 7 days for a full refund. No questions asked.'
+  },
+  tr:{
+    nav_services:'Hizmetler',nav_process:'Süreç',nav_products:'Ürünler',nav_contact:'İletişim',nav_cta:'Başlayalım',
+    hero_badge:'AI DESTEKLİ · 13 UZMAN AJAN · CANLI DAĞITIM',
+    hero_title:'İşiniz,<br><em>Zeka</em> Tarafından Yönetiliyor',
+    hero_sub:'İşlemleri otomatikleştiren, veriyi çözümleyen ve dijital büyümeyi hızlandıran akıllı sistemler inşa ediyoruz — 13 özel AI ajanımızla 7/24.',
+    hero_btn1:'Hizmetleri Keşfet',hero_btn2:'Bizimle Konuş',
+    stat1:'AI Ajan',stat2:'Hizmet Alanı',stat3:'İlk Teslimat',stat4:'Dil',
+    serv_tag:'ne yapıyoruz',serv_title:'Uçtan Uca Dijital Zeka',serv_sub:'Tek bir otomatik iş akışından tam AI dönüşümüne — her proje piyasanıza ve ölçeğinize göre özel fiyatlandırılır.',
+    s1_name:'AI Danışmanlık ve Uygulama',s1_desc:'Strateji, model seçimi, özel LLM entegrasyonu ve çok-ajanlı sistem kurulumu — ilk görüşmeden canlı sisteme.',
+    s2_name:'İş Süreci Otomasyonu',s2_desc:'n8n, Make, Zapier ile uçtan uca iş akışı otomasyonu. CRM senkronizasyonu, lead yönlendirme, e-posta dizileri ve fatura işleme.',
+    s3_name:'Veri Zekası ve BI',s3_desc:'Veri hatları, KPI dashboardları, otomatik raporlama — ham veriyi yönetim kararlarına dönüştüren sistemler.',
+    s4_name:'Lead Üretimi ve Satış AI',s4_desc:'Otomatik prospecting, zenginleştirme, outreach dizileri ve manuel efor olmadan pipeline\'ı dolu tutan AI ajanlar.',
+    s5_name:'Web ve Dijital Çözümler',s5_desc:'Yüksek performanslı web siteleri, açılış sayfaları, SaaS ürünleri ve ölçeklenebilir dijital altyapı.',
+    s6_name:'Yaratıcı AI ve İçerik',s6_desc:'AI görseller, video, metin ve kampanya varlıkları. Sosyal medya otomasyonu, marka hikayeciliği ve içerik üretim hatları.',
+    s7_name:'Müşteri Hizmetleri AI',s7_desc:'Marka sesinizle eğitilmiş akıllı chatbotlar, destek otomasyonu ve 7/24 AI müşteri etkileşim ajanları.',
+    s8_name:'Dijital Pazarlama ve SEO AI',s8_desc:'AI destekli SEO stratejileri, içerik takvimleri, performans reklamcılığı ve e-posta pazarlama otomasyonu.',
+    s9_name:'AI Eğitim ve Danışmanlık',s9_desc:'Kurumsal atölyeler, AI okuryazarlık programları ve liderlik ekiplerine stratejik danışmanlık.',
+    wf_tag:'ai workforce',wf_title:'13 Ajanla Tanışın',wf_sub:'Her ajan belirli bir işlev için uzmanlaşmış — her aktif projede otonom veya koordineli çok-ajanlı hatlar halinde çalışıyor.',
+    pipe_tag:'ajan pipeline',pipe_title:'Üç Ajan. Bir Pipeline.',pipe_sub:'Her ajan uzmanlaşmış. Hiçbir ajan her şeyi yapmaz — birbirlerine aktarırlar, kontrol ederler ve tek model çağrısından daha iyi çıktı üretirler.',
+    how_tag:'sürecimiz',how_title:'Briften Canlı Sisteme',
+    how1_t:'Anlama',how1_d:'Operasyonlarınızı, darboğazlarınızı ve hedeflerinizi yapılandırılmış bir keşif oturumunda haritalandırıyoruz.',
+    how2_t:'Mimarlık',how2_d:'Tam sistemi tasarlayıp somut bir uygulama planı ve teklif sunuyoruz.',
+    how3_t:'Geliştirme ve Test',how3_d:'Gerçek verinizle geliştiriyoruz. Yinelemeli teslimat — büyük bir lansmanı değil, çalışan bileşenleri görüyorsunuz.',
+    how4_t:'Kurulum ve Destek',how4_d:'Dokümantasyon, ekip eğitimi ve Ghost Mercer izlemesiyle canlı teslim.',
+    prod_tag:'hazır ürünler',prod_title:'Anında Kur, İstediğin Gibi Özelleştir',prod_sub:'Hazır iş akışları, AI ajanlar ve dijital araçlar — bağımsız lisans veya özel projenin başlangıç noktası.',
+    p1_name:'İş Otomasyonu Paketi',p1_desc:'Lead gen, e-posta dizileri, CRM senkronizasyonu, raporlama ve sosyal medya planlamasını kapsayan 15 ajanlı n8n sistemi.',
+    p2_name:'Çok-Ajanlı Araştırma Sistemi',p2_desc:'Pazarları araştıran, leadleri niteleyen ve yapılandırılmış zeka raporları sunan otonom ajanlar.',
+    p3_name:'Analitik Dashboard Şablonu',p3_desc:'KPI takibi, pipeline görünümleri, otomatik haftalık raporlar içeren kullanıma hazır BI dashboard\'u.',
+    prod_get:'Lisans Al',
+    contact_tag:'iletişime geçin',contact_title:'Birlikte Akıllı Bir Şey İnşa Edelim',
+    contact_desc:'Tam bir AI dönüşümüne ya da tek bir otomatik iş akışına ihtiyaç duyuyor olun — çözmeye çalıştığınızı anlatın. Satış konuşması değil, somut kapsam ve teklifle döneceğiz.',
+    contact_quote:'Tüm hizmet projeleri özel fiyatlandırılır. Ölçeğinize, pazarınıza ve hedeflerinize göre fiyat belirliyoruz.',
+    contact_reply:'Her soruya 24 saat içinde yanıt veriyoruz.',
+    cf_name:'Ad Soyad',cf_company:'Şirket',cf_country:'Ülke / Pazar',cf_service:'Hizmet Alanı',cf_sel:'— Hizmet seçin —',cf_msg:'Mesaj',cf_send:'Mesaj Gönder',
+    faq_tag:'sık sorulan sorular',
+    faq1_q:'Hizmetlerinizi kullanmak için teknik deneyim gerekiyor mu?',faq1_a:'Hayır. Tam teknik uygulamayı biz yapıyoruz. Siz ne elde etmek istediğinizi anlatın — biz tasarlayıp inşa edelim.',
+    faq2_q:'Özel hizmetler nasıl fiyatlandırılıyor?',faq2_a:'Her proje karmaşıklığa, pazarınıza ve hedeflerinize göre özel olarak kapsamlandırılır. İletişime geçin, somut bir teklif sunalım.',
+    faq3_q:'Hangi API anahtarlarına ihtiyacım var?',faq3_a:'Ürün lisansları için minimum OpenAI veya OpenRouter API anahtarı. Arama tabanlı lead gen için SerpAPI anahtarı.',
+    faq4_q:'Hangi dillerde çalışıyorsunuz?',faq4_a:'İngilizce, Türkçe, Almanca, İtalyanca ve Arapça — dokümantasyon, destek ve teslimat beş dilde.',
+    faq5_q:'Ürün lisansları n8n Cloud veya self-hosted ile kullanılabilir mi?',faq5_a:'Evet — workflow JSON dosyaları hem n8n Cloud hem de self-hosted kurulumlarına import edilir.',
+    faq6_q:'Ürün lisansları için iade var mı?',faq6_a:'Evet. Ürün belirtildiği gibi çalışmazsa 7 gün içinde tam iade. Soru sorulmaz.'
+  },
+  de:{nav_services:'Leistungen',nav_process:'Prozess',nav_products:'Produkte',nav_contact:'Kontakt',nav_cta:'Loslegen',hero_badge:'KI-GESTÜTZT · 13 SPEZIALISIERTE AGENTEN · LIVE',hero_title:'Ihr Unternehmen,<br>gesteuert durch <em>Intelligenz</em>',hero_sub:'Wir entwickeln intelligente Systeme, die Abläufe automatisieren, Daten entschlüsseln und digitales Wachstum antreiben — mit 13 spezialisierten KI-Agenten rund um die Uhr.',hero_btn1:'Leistungen entdecken',hero_btn2:'Kontakt aufnehmen',stat1:'KI-Agenten',stat2:'Servicebereiche',stat3:'Erste Lieferung',stat4:'Sprachen',serv_tag:'was wir tun',serv_title:'Umfassende digitale Intelligenz',serv_sub:'Von einem einzelnen automatisierten Workflow bis zur vollständigen KI-Transformation — jedes Engagement wird individuell konzipiert und marktgerecht bepreist.',s1_name:'KI-Beratung & Implementierung',s1_desc:'Strategie, Anbieterauswahl, individuelle LLM-Integration und Multi-Agenten-Systemimplementierung.',s2_name:'Geschäftsprozessautomatisierung',s2_desc:'Ende-zu-Ende Workflow-Automatisierung mit n8n, Make, Zapier. CRM-Synchronisierung, Lead-Routing und E-Mail-Sequenzen.',s3_name:'Datenintelligenz & BI',s3_desc:'Datenpipelines, KPI-Dashboards, automatisiertes Reporting und Business-Intelligence-Systeme.',s4_name:'Lead-Generierung & Sales AI',s4_desc:'Automatisiertes Prospecting, Anreicherung und KI-Qualifizierungsagenten die Ihre Pipeline befüllen.',s5_name:'Web & Digitale Lösungen',s5_desc:'Hochleistungswebsites, Landing Pages, SaaS-Produkte und skalierbare digitale Infrastruktur.',s6_name:'Kreative KI & Content',s6_desc:'KI-generierte Visuals, Video, Texte und Kampagneninhalte. Social-Media-Automatisierung.',s7_name:'Kundenservice-KI',s7_desc:'Intelligente Chatbots, Support-Automatisierung und auf Ihre Markenstimme trainierte Agenten.',s8_name:'Digitales Marketing & SEO-KI',s8_desc:'KI-gestützte SEO-Strategien, Inhaltskalender, Performance-Werbung und E-Mail-Marketing-Automatisierung.',s9_name:'KI-Schulung & Beratung',s9_desc:'Unternehmensworkshops, KI-Kompetenzprogramme und strategische Beratung für Führungsteams.',wf_tag:'ki-workforce',wf_title:'Die 13 Agenten',wf_sub:'Jeder Agent ist auf eine bestimmte Funktion spezialisiert — autonom oder in koordinierten Multi-Agenten-Pipelines.',pipe_tag:'agenten-pipeline',pipe_title:'Drei Agenten. Eine Pipeline.',pipe_sub:'Jeder Agent ist spezialisiert. Kein Agent macht alles — sie übergeben, prüfen sich gegenseitig und produzieren bessere Ergebnisse.',how_tag:'unser prozess',how_title:'Vom Briefing zum Live-System',how1_t:'Verstehen',how1_d:'Wir kartieren Ihre Abläufe und Ziele. Nox Vale liefert innerhalb von 48 Stunden ein KI-Opportunity-Briefing.',how2_t:'Architektur',how2_d:'Wir entwerfen das Gesamtsystem und präsentieren einen konkreten Implementierungsplan mit Angebot.',how3_t:'Entwicklung & Test',how3_d:'Wir entwickeln mit Ihren echten Daten. Iterative Lieferung — Sie sehen funktionierende Komponenten.',how4_t:'Deployment & Support',how4_d:'Live-Übergabe mit Dokumentation, Teamschulung und Ghost Mercer-Monitoring.',prod_tag:'fertige produkte',prod_title:'Sofort deployen, frei anpassen',prod_sub:'Vorgefertigte Workflows, KI-Agenten und digitale Tools als Standalone-Lizenzen oder Ausgangspunkt für individuelle Projekte.',p1_name:'Business Automation Suite',p1_desc:'15-Agenten-n8n-System für Lead-Gen, E-Mail, CRM-Sync, Reporting und Social-Scheduling.',p2_name:'Multi-Agenten-Forschungssystem',p2_desc:'Autonome Agenten für Marktrecherche, Lead-Qualifizierung und strukturierte Intelligence-Reports.',p3_name:'Analytics Dashboard Template',p3_desc:'Sofort einsatzbereites BI-Dashboard mit KPI-Tracking und automatischen Wochenberichten.',prod_get:'Lizenz erwerben',contact_tag:'kontakt',contact_title:'Lassen Sie uns gemeinsam etwas Intelligentes bauen',contact_desc:'Ob vollständige KI-Transformation oder einzelner Workflow — schildern Sie Ihr Problem. Wir antworten mit einem konkreten Vorschlag.',contact_quote:'Alle Projekte werden individuell kalkuliert. Wir bepreisen nach Ihrem Markt, Ihrer Größe und Ihren Zielen.',contact_reply:'Wir antworten auf jede Anfrage innerhalb von 24 Stunden.',cf_name:'Name',cf_company:'Unternehmen',cf_country:'Land / Markt',cf_service:'Leistungsbereich',cf_sel:'— Leistung wählen —',cf_msg:'Nachricht',cf_send:'Nachricht senden',faq_tag:'häufige fragen',faq1_q:'Benötige ich technische Erfahrung?',faq1_a:'Nein. Wir übernehmen die vollständige technische Implementierung.',faq2_q:'Wie wird der Preis für individuelle Services ermittelt?',faq2_a:'Jedes Engagement wird individuell kalkuliert. Kontaktieren Sie uns für ein konkretes Angebot.',faq3_q:'Welche API-Schlüssel benötige ich?',faq3_a:'Mindestens ein OpenAI- oder OpenRouter-API-Schlüssel. Für die Discord-Integration ein Bot-Token.',faq4_q:'In welchen Sprachen arbeiten Sie?',faq4_a:'Wir arbeiten auf Englisch, Türkisch, Deutsch, Italienisch und Arabisch.',faq5_q:'Funktioniert es mit n8n Cloud und Self-Hosted?',faq5_a:'Ja — die Workflow-JSON-Dateien importieren in beide Varianten.',faq6_q:'Gibt es Rückerstattungen?',faq6_a:'Ja. Innerhalb von 7 Tagen, ohne Fragen.'},
+  it:{nav_services:'Servizi',nav_process:'Processo',nav_products:'Prodotti',nav_contact:'Contatti',nav_cta:'Inizia',hero_badge:'AI-POWERED · 13 AGENTI SPECIALIZZATI · LIVE',hero_title:'Il Tuo Business,<br>Gestito dall\'<em>Intelligenza</em>',hero_sub:'Costruiamo sistemi intelligenti che automatizzano le operazioni, decodificano i dati e accelerano la crescita digitale — con 13 agenti AI specializzati attivi 24/7.',hero_btn1:'Esplora i Servizi',hero_btn2:'Parlaci',stat1:'Agenti AI',stat2:'Aree di Servizio',stat3:'Prima Consegna',stat4:'Lingue',serv_tag:'cosa facciamo',serv_title:'Intelligenza digitale end-to-end',serv_sub:'Da un singolo workflow automatizzato a una trasformazione AI completa — ogni progetto è definito e quotato su misura.',s1_name:'Consulenza AI e Implementazione',s1_desc:'Strategia, selezione vendor, integrazione LLM personalizzata e deploy di sistemi multi-agente.',s2_name:'Automazione dei Processi',s2_desc:'Automazione end-to-end con n8n, Make, Zapier. CRM sync, routing lead, sequenze email.',s3_name:'Intelligenza dei Dati e BI',s3_desc:'Pipeline dati, dashboard KPI, reporting automatico e sistemi di business intelligence.',s4_name:'Lead Generation e Sales AI',s4_desc:'Prospecting automatizzato, arricchimento e agenti AI di qualificazione che mantengono la pipeline piena.',s5_name:'Web e Soluzioni Digitali',s5_desc:'Siti web ad alte prestazioni, landing page, prodotti SaaS e infrastruttura digitale scalabile.',s6_name:'AI Creativa e Contenuti',s6_desc:'Visual AI, video, testi e asset per campagne. Automazione social media e brand storytelling.',s7_name:'Customer Service AI',s7_desc:'Chatbot intelligenti, automazione del supporto e agenti addestrati sulla tua brand voice.',s8_name:'Marketing Digitale e SEO AI',s8_desc:'Strategie SEO AI-driven, calendari editoriali, advertising performance e automazione email.',s9_name:'Formazione e Consulenza AI',s9_desc:'Workshop aziendali, programmi di AI literacy e consulenza strategica per team di leadership.',wf_tag:'ai workforce',wf_title:'I 13 Agenti',wf_sub:'Ogni agente è specializzato per una funzione distinta — in autonomia o in pipeline multi-agente coordinate.',pipe_tag:'pipeline agenti',pipe_title:'Tre Agenti. Una Pipeline.',pipe_sub:'Ogni agente è specializzato. Nessuno fa tutto — si passano il lavoro, si controllano e producono output migliori.',how_tag:'il nostro processo',how_title:'Dal Brief al Sistema Live',how1_t:'Capire',how1_d:'Mappiamo le tue operazioni e obiettivi. Nox Vale consegna un AI opportunity brief entro 48 ore.',how2_t:'Architettura',how2_d:'Progettiamo il sistema completo e presentiamo un piano di implementazione concreto con preventivo.',how3_t:'Sviluppo e Test',how3_d:'Sviluppiamo con i tuoi dati reali. Consegna iterativa — vedi componenti funzionanti, non un lancio big-bang.',how4_t:'Deploy e Supporto',how4_d:'Handover live con documentazione, formazione del team e monitoraggio Ghost Mercer.',prod_tag:'prodotti pronti',prod_title:'Deploy immediato, personalizzazione libera',prod_sub:'Workflow preconfigurati, agenti AI e strumenti digitali come licenze standalone o punto di partenza.',p1_name:'Business Automation Suite',p1_desc:'Sistema n8n a 15 agenti per lead gen, sequenze email, CRM sync, reporting e pianificazione social.',p2_name:'Sistema Multi-Agente di Ricerca',p2_desc:'Agenti autonomi che ricercano mercati, qualificano lead e consegnano report di intelligence.',p3_name:'Template Dashboard Analytics',p3_desc:'Dashboard BI pronta al deploy con KPI tracking e report settimanali automatici.',prod_get:'Ottieni Licenza',contact_tag:'contattaci',contact_title:'Costruiamo qualcosa di intelligente insieme',contact_desc:'Che tu abbia bisogno di una trasformazione AI completa o di un singolo workflow — dicci cosa vuoi risolvere.',contact_quote:'Tutti i progetti sono quotati su misura. Prezziamo in base al tuo mercato e ai tuoi obiettivi.',contact_reply:'Rispondiamo a ogni richiesta entro 24 ore.',cf_name:'Nome',cf_company:'Azienda',cf_country:'Paese / Mercato',cf_service:'Area di Servizio',cf_sel:'— Seleziona un servizio —',cf_msg:'Messaggio',cf_send:'Invia Messaggio',faq_tag:'domande frequenti',faq1_q:'Ho bisogno di esperienza tecnica?',faq1_a:'No. Gestiamo noi l\'intera implementazione tecnica.',faq2_q:'Come viene determinato il prezzo?',faq2_a:'Ogni progetto è quotato su misura. Contattaci per una proposta concreta.',faq3_q:'Quali API key servono?',faq3_a:'Minimo una chiave OpenAI o OpenRouter. Per le notifiche Discord, un bot token.',faq4_q:'In quali lingue lavorate?',faq4_a:'Inglese, Turco, Tedesco, Italiano e Arabo — documentazione e supporto in tutte e cinque.',faq5_q:'Funziona con n8n Cloud e self-hosted?',faq5_a:'Sì — i file JSON dei workflow si importano in entrambe le varianti.',faq6_q:'Offrite rimborsi?',faq6_a:'Sì. Entro 7 giorni, nessuna domanda.'},
+  ar:{nav_services:'الخدمات',nav_process:'العملية',nav_products:'المنتجات',nav_contact:'تواصل',nav_cta:'ابدأ الآن',hero_badge:'مدعوم بالذكاء الاصطناعي · 13 وكيلاً متخصصاً · نشر مباشر',hero_title:'عملك،<br>مُدار بـ<em>الذكاء</em>',hero_sub:'نبني أنظمة ذكية تُؤتمت العمليات وتحلل البيانات وتدفع النمو الرقمي — مع 13 وكيل ذكاء اصطناعي متخصص يعمل على مدار الساعة.',hero_btn1:'استكشف الخدمات',hero_btn2:'تحدث معنا',stat1:'وكلاء AI',stat2:'مجالات الخدمة',stat3:'أول تسليم',stat4:'لغات',serv_tag:'ما نفعله',serv_title:'ذكاء رقمي شامل',serv_sub:'من سير عمل آلي واحد إلى تحول ذكاء اصطناعي كامل — كل مشروع مُصمَّم ومُسعَّر خصيصاً.',s1_name:'استشارات وتنفيذ الذكاء الاصطناعي',s1_desc:'الاستراتيجية وتكامل LLM المخصص ونشر الأنظمة متعددة الوكلاء.',s2_name:'أتمتة العمليات التجارية',s2_desc:'أتمتة شاملة مع n8n وZapier. مزامنة CRM وتوجيه العملاء المحتملين.',s3_name:'ذكاء البيانات وBI',s3_desc:'خطوط أنابيب البيانات ولوحات KPI والتقارير الآلية.',s4_name:'توليد العملاء المحتملين وSales AI',s4_desc:'بحث تلقائي وإثراء ووكلاء تأهيل AI.',s5_name:'الحلول الرقمية والويب',s5_desc:'مواقع ويب عالية الأداء وصفحات هبوط ومنتجات SaaS.',s6_name:'الذكاء الاصطناعي الإبداعي والمحتوى',s6_desc:'مرئيات ومقاطع فيديو ونصوص وأتمتة وسائل التواصل.',s7_name:'خدمة العملاء بالذكاء الاصطناعي',s7_desc:'روبوتات دردشة ذكية وأتمتة الدعم والأسئلة الشائعة.',s8_name:'التسويق الرقمي وSEO AI',s8_desc:'استراتيجيات SEO وإعلانات الأداء وأتمتة البريد الإلكتروني.',s9_name:'التدريب والاستشارات',s9_desc:'ورش عمل مؤسسية واستشارات استراتيجية لفرق القيادة.',wf_tag:'فريق ai',wf_title:'تعرف على الـ 13 وكيلاً',wf_sub:'كل وكيل متخصص في وظيفة محددة — يعمل باستقلالية أو في خطوط متعددة الوكلاء.',pipe_tag:'خط أنابيب الوكلاء',pipe_title:'ثلاثة وكلاء. خط أنابيب واحد.',pipe_sub:'كل وكيل متخصص. لا أحد يفعل كل شيء — يتعاونون ويتحققون من بعضهم.',how_tag:'عمليتنا',how_title:'من الموجز إلى النظام الحي',how1_t:'الفهم',how1_d:'نرسم خريطة لعملياتك وأهدافك. يُسلّم Nox Vale موجزاً خلال 48 ساعة.',how2_t:'الهندسة',how2_d:'نصمم النظام الكامل ونقدم خطة تنفيذ ملموسة مع عرض أسعار.',how3_t:'البناء والاختبار',how3_d:'نطور ببياناتك الفعلية. تسليم تكراري — ترى مكونات عاملة.',how4_t:'النشر والدعم',how4_d:'تسليم حي مع توثيق وتدريب ومراقبة Ghost Mercer.',prod_tag:'منتجات جاهزة',prod_title:'نشر فوري وتخصيص حر',prod_sub:'سير عمل جاهزة ووكلاء ذكاء اصطناعي كتراخيص مستقلة أو نقطة بداية.',p1_name:'حزمة أتمتة الأعمال',p1_desc:'نظام n8n بـ 15 وكيلاً يشمل توليد العملاء المحتملين والبريد الإلكتروني.',p2_name:'نظام البحث متعدد الوكلاء',p2_desc:'وكلاء مستقلون يبحثون في الأسواق ويقدمون تقارير استخباراتية.',p3_name:'قالب لوحة التحليلات',p3_desc:'لوحة ذكاء أعمال جاهزة مع KPI وتقارير أسبوعية تلقائية.',prod_get:'احصل على الترخيص',contact_tag:'تواصل معنا',contact_title:'لنبني شيئاً ذكياً معاً',contact_desc:'أخبرنا بما تحاول حله. سنرد بنطاق ملموس ومقترح.',contact_quote:'يتم تسعير جميع المشاريع بشكل مخصص وفق سوقك وأهدافك.',contact_reply:'نرد على كل استفسار في غضون 24 ساعة.',cf_name:'الاسم',cf_company:'الشركة',cf_country:'البلد / السوق',cf_service:'مجال الخدمة',cf_sel:'— اختر خدمة —',cf_msg:'الرسالة',cf_send:'إرسال الرسالة',faq_tag:'الأسئلة الشائعة',faq1_q:'هل أحتاج خبرة تقنية؟',faq1_a:'لا. نتولى التنفيذ التقني الكامل.',faq2_q:'كيف يتم تحديد الأسعار؟',faq2_a:'كل مشروع مُسعَّر خصيصاً. تواصل معنا للحصول على مقترح.',faq3_q:'ما مفاتيح API المطلوبة؟',faq3_a:'مفتاح OpenAI أو OpenRouter كحد أدنى.',faq4_q:'ما اللغات التي تعملون بها؟',faq4_a:'الإنجليزية والتركية والألمانية والإيطالية والعربية.',faq5_q:'هل يعمل مع n8n Cloud وself-hosted؟',faq5_a:'نعم — ملفات JSON تُستورد في كلا الإصدارين.',faq6_q:'هل تقدمون استردادات؟',faq6_a:'نعم. خلال 7 أيام بدون أسئلة.'}
+};
+
+function setLang(lang) {
+  var t = T[lang]; if(!t) return;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i]').forEach(function(el){
+    var k=el.getAttribute('data-i');
+    if(t[k]!==undefined) el.innerHTML=t[k];
+  });
+  document.querySelectorAll('.lb').forEach(function(b){
+    b.classList.toggle('active',b.textContent===lang.toUpperCase());
+  });
+}
+
+function toggleFaq(btn){
+  var item=btn.closest('.faq-item');
+  var open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open')});
+  if(!open) item.classList.add('open');
+}
+
+function toggleMenu(){
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+</script>
+</body>
+</html>
