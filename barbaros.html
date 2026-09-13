@@ -30,10 +30,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
   padding:0 clamp(16px,5vw,64px);border-bottom:1px solid var(--border);
   background:rgba(5,9,15,.85);backdrop-filter:blur(16px);}
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-logo-icon{font-size:22px;color:var(--gold)}
-.nav-logo-text{font-size:1.1rem;font-weight:800;letter-spacing:.04em;
-  background:var(--gold-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.nav-logo-text sup{font-size:.55em;vertical-align:super;-webkit-text-fill-color:var(--gold)}
+.nav-logo-icon{height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(212,168,64,.5))}
+.nav-logo-text{display:none}
 .btn-ghost{padding:9px 22px;border:1px solid var(--border2);border-radius:4px;
   color:var(--gold);font-family:var(--font-h);font-size:.82rem;font-weight:600;
   letter-spacing:.06em;text-transform:uppercase;background:none;text-decoration:none;display:inline-block}
@@ -88,37 +86,11 @@ section{position:relative;z-index:1;padding:clamp(60px,8vh,100px) clamp(16px,5vw
 
 /* CREDENTIALS */
 #credentials{background:var(--bg2)}
-.creds-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:40px}
-.cred-card{border:1px solid var(--border);border-radius:4px;padding:28px 24px;background:var(--bg3);
-  display:flex;flex-direction:column;gap:10px;transition:border-color .2s,box-shadow .2s}
-.cred-card:hover{border-color:var(--border2);box-shadow:0 0 30px rgba(201,164,110,.1)}
-.cred-icon{font-size:1.4rem}
-.cred-institution{font-family:var(--font-m);font-size:.7rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
-.cred-name{font-size:1rem;font-weight:700;color:var(--text);line-height:1.4}
-.cred-year{font-size:.78rem;color:var(--muted)}
-.cred-view{margin-top:8px}
-.cred-view a{font-family:var(--font-m);font-size:.72rem;color:var(--gold);
-  text-decoration:none;letter-spacing:.08em;border-bottom:1px solid var(--border2);padding-bottom:2px}
-.cred-view a:hover{color:var(--gold-b)}
-
-/* DIPLOMAS */
-#diplomas{background:var(--bg2)}
-.diploma-upload-note{
-  border:1px dashed var(--border2);border-radius:4px;padding:40px;
-  text-align:center;margin-top:40px;color:var(--muted);
-  font-family:var(--font-m);font-size:.82rem;line-height:1.8;
-}
-.diploma-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:40px}
-.diploma-card{border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--bg3)}
-.diploma-preview{height:180px;background:var(--bg4);display:flex;align-items:center;
-  justify-content:center;color:var(--muted);font-size:2rem}
-.diploma-info{padding:16px 20px}
-.diploma-title{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:4px}
-.diploma-institution{font-family:var(--font-m);font-size:.68rem;color:var(--gold);letter-spacing:.1em}
-.diploma-view-btn{display:inline-block;margin-top:12px;font-family:var(--font-m);
-  font-size:.7rem;color:var(--gold);text-decoration:none;letter-spacing:.08em;
-  border:1px solid var(--border2);padding:6px 14px;border-radius:4px;transition:background .2s}
-.diploma-view-btn:hover{background:var(--gold-d)}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-top:48px}
+.cert-img-wrap{border-radius:8px;overflow:hidden;border:1px solid var(--border2);
+  box-shadow:0 0 40px rgba(201,164,110,.1);transition:box-shadow .3s}
+.cert-img-wrap:hover{box-shadow:0 0 60px rgba(201,164,110,.2)}
+.cert-img-wrap img{width:100%;display:block;height:auto}
 
 /* EXPERTISE */
 .expertise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
@@ -177,8 +149,7 @@ footer a:hover{color:var(--gold)}
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <div class="nav-logo-icon">⚙</div>
-    <span class="nav-logo-text">ObscuronLabs<sup>™</sup></span>
+    <img src="logo.png" alt="ObscuronLabs™" class="nav-logo-icon">
   </a>
   <div style="display:flex;gap:12px;align-items:center">
     <a href="index.html#services" class="btn-ghost">Services</a>
@@ -263,140 +234,19 @@ footer a:hover{color:var(--gold)}
   <div class="container">
     <span class="eyebrow">Certifications & Education</span>
     <h2 class="section-title">Credentials That<br><span class="gold-text">Back the Work.</span></h2>
-    <!-- CREDENTIAL FILTER -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;margin-top:40px">
-      <button onclick="filterCreds('all')" id="f-all" class="cred-filter active" style="padding:6px 16px;border:1px solid var(--border2);border-radius:100px;background:var(--gold-d);color:var(--gold);font-family:var(--font-m);font-size:.7rem;cursor:pointer;letter-spacing:.08em">ALL</button>
-      <button onclick="filterCreds('ai')" id="f-ai" class="cred-filter" style="padding:6px 16px;border:1px solid var(--border);border-radius:100px;background:none;color:var(--muted);font-family:var(--font-m);font-size:.7rem;cursor:pointer;letter-spacing:.08em">AI & TECH</button>
-      <button onclick="filterCreds('business')" id="f-business" class="cred-filter" style="padding:6px 16px;border:1px solid var(--border);border-radius:100px;background:none;color:var(--muted);font-family:var(--font-m);font-size:.7rem;cursor:pointer;letter-spacing:.08em">BUSINESS</button>
-      <button onclick="filterCreds('music')" id="f-music" class="cred-filter" style="padding:6px 16px;border:1px solid var(--border);border-radius:100px;background:none;color:var(--muted);font-family:var(--font-m);font-size:.7rem;cursor:pointer;letter-spacing:.08em">MUSIC</button>
-    </div>
-    <div class="creds-grid" id="creds-grid">
-      <!-- IBM -->
-      <div class="cred-card" data-cat="ai">
-        <div class="cred-icon">🔵</div>
-        <div class="cred-institution">IBM — Coursera</div>
-        <div class="cred-name">IBM AI Engineering — Professional Certificate (13 courses)</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Deep Learning · Neural Networks · GenAI · LLMs · Python · PyTorch · TensorFlow · LangChain</div>
-        <div class="cred-year">May 23, 2026</div>
-        <div class="cred-view"><a href="https://coursera.org/verify/professional-cert/J3F8HYRBRCGT" target="_blank">Verify on Coursera →</a></div>
+    <div class="cert-grid">
+      <div class="cert-img-wrap">
+        <img src="assets/cert_ibm.jpg" alt="IBM AI Engineering Professional Certificate">
       </div>
-      <!-- Google -->
-      <div class="cred-card" data-cat="ai">
-        <div class="cred-icon">🔴</div>
-        <div class="cred-institution">Google — Coursera</div>
-        <div class="cred-name">Google AI Essentials — Specialization (5 courses)</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">AI Tools · Prompting · Responsible AI · Productivity · AI Curve</div>
-        <div class="cred-year">May 17, 2026</div>
-        <div class="cred-view"><a href="assets/harvard_ai.pdf" target="_blank">View Certificate →</a></div>
+      <div class="cert-img-wrap">
+        <img src="assets/cert_google.jpg" alt="Google AI Essentials · Anthropic Claude 101">
       </div>
-      <!-- Anthropic -->
-      <div class="cred-card" data-cat="ai">
-        <div class="cred-icon">🟠</div>
-        <div class="cred-institution">Anthropic</div>
-        <div class="cred-name">Claude 101 — Certificate of Completion</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Foundational knowledge and practical skills in working with Claude AI systems</div>
-        <div class="cred-year">May 15, 2026</div>
-        <div class="cred-view"><span style="font-family:var(--font-m);font-size:.7rem;color:var(--muted)">Issued by Anthropic</span></div>
+      <div class="cert-img-wrap">
+        <img src="assets/cert_harvard.jpg" alt="Harvard Business Review Strategic Business Management">
       </div>
-      <!-- IBM courses -->
-      <div class="cred-card" data-cat="ai">
-        <div class="cred-icon">🔵</div>
-        <div class="cred-institution">IBM — Course Certificates</div>
-        <div class="cred-name">8 IBM AI Courses Completed</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.6">
-          Data Analysis with Python · Generative AI: Intro & Applications · Prompt Engineering Basics · Python for Data Science · Deep Learning & Neural Networks (Keras) · Machine Learning with Python · Building GenAI Apps with Python · GenAI & LLMs: Architecture
-        </div>
-        <div class="cred-year">May 21–22, 2026</div>
+      <div class="cert-img-wrap">
+        <img src="assets/cert_berklee.jpg" alt="Berklee College of Music — Songwriting">
       </div>
-      <!-- Harvard Business Review -->
-      <div class="cred-card" data-cat="business">
-        <div class="cred-icon">🏛️</div>
-        <div class="cred-institution">Harvard Business Review</div>
-        <div class="cred-name">Strategic Business Management — Professional Certificate</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Business Strategy · Leadership · Analytics · Organizational Performance · 6 courses</div>
-        <div class="cred-year">May 18, 2026 · ID: HBR-82631-2026</div>
-        <div class="cred-view"><a href="assets/harvard_ai.pdf" target="_blank">View Certificate →</a></div>
-      </div>
-      <!-- Harvard courses -->
-      <div class="cred-card" data-cat="business">
-        <div class="cred-icon">🏛️</div>
-        <div class="cred-institution">Harvard Business Review — 6 Courses</div>
-        <div class="cred-name">HBR Leadership & Management Track</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.6">
-          Think Like a Leader · Developing Your Leadership Style · Business Analytics · Sustaining Organizational Performance · Leading Change · Building High-Performing Teams
-        </div>
-        <div class="cred-year">May 21–22, 2026</div>
-        <div class="cred-view"><a href="assets/harvard_2.pdf" target="_blank">View Certificates →</a></div>
-      </div>
-      <!-- Berklee Songwriting -->
-      <div class="cred-card" data-cat="music">
-        <div class="cred-icon">🎵</div>
-        <div class="cred-institution">Berklee College of Music</div>
-        <div class="cred-name">Songwriting: Writing, Arranging, and Producing Music — Specialization</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">4-course specialization · Songwriting · Arrangement · Production</div>
-        <div class="cred-year">May 21, 2026</div>
-        <div class="cred-view"><a href="assets/berklee_songwriting.pdf" target="_blank">View Certificate →</a></div>
-      </div>
-      <!-- Berklee Vocal -->
-      <div class="cred-card" data-cat="music">
-        <div class="cred-icon">🎵</div>
-        <div class="cred-institution">Berklee College of Music</div>
-        <div class="cred-name">The Art of Vocal Production</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Professional vocal production techniques from world-class faculty</div>
-        <div class="cred-year">2024</div>
-        <div class="cred-view"><a href="assets/berklee_vocal.pdf" target="_blank">View Certificate →</a></div>
-      </div>
-      <!-- Berklee Lyrics -->
-      <div class="cred-card" data-cat="music">
-        <div class="cred-icon">🎵</div>
-        <div class="cred-institution">Berklee College of Music</div>
-        <div class="cred-name">Songwriting: Writing the Lyrics</div>
-        <div style="font-size:.78rem;color:var(--muted);margin-top:4px">Advanced lyric writing and songcraft techniques</div>
-        <div class="cred-year">2024</div>
-        <div class="cred-view"><a href="assets/berklee_lyrics.pdf" target="_blank">View Certificate →</a></div>
-      </div>
-    </div>
-    <div style="margin-top:16px;padding:16px 20px;border:1px solid var(--border);border-radius:4px;
-      font-family:var(--font-m);font-size:.72rem;color:var(--muted);text-align:center">
-      "Knowledge creates freedom." — Barbaros Kaptan · Continuous learning since 2024 · Harvard · IBM · Google · Anthropic · Berklee
-    </div>
-  </div>
-</section>
-
-<!-- DIPLOMAS SECTION — for additional uploads -->
-<section id="diplomas">
-  <div class="container">
-    <span class="eyebrow">Diplomas & Documents</span>
-    <h2 class="section-title">Official<br><span class="gold-text">Documentation.</span></h2>
-    <div class="diploma-grid" id="diploma-grid">
-      <!-- Diplomas will be added here -->
-      <div class="diploma-card">
-        <div class="diploma-preview">📜</div>
-        <div class="diploma-info">
-          <div class="diploma-title">Harvard — Lead with Technology & AI</div>
-          <div class="diploma-institution">Harvard University · edX</div>
-          <a href="assets/harvard_ai.pdf" target="_blank" class="diploma-view-btn">View Document →</a>
-        </div>
-      </div>
-      <div class="diploma-card">
-        <div class="diploma-preview">📜</div>
-        <div class="diploma-info">
-          <div class="diploma-title">Berklee — Songwriting Certificate</div>
-          <div class="diploma-institution">Berklee Online</div>
-          <a href="assets/berklee_songwriting.pdf" target="_blank" class="diploma-view-btn">View Document →</a>
-        </div>
-      </div>
-      <div class="diploma-card">
-        <div class="diploma-preview">📜</div>
-        <div class="diploma-info">
-          <div class="diploma-title">Berklee — Vocal Production</div>
-          <div class="diploma-institution">Berklee Online</div>
-          <a href="assets/berklee_vocal.pdf" target="_blank" class="diploma-view-btn">View Document →</a>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:24px;padding:20px;border:1px dashed var(--border);border-radius:4px;text-align:center;font-family:var(--font-m);font-size:.75rem;color:var(--muted)">
-      Additional diplomas and documents will be added here. Send files to add more credentials.
     </div>
   </div>
 </section>
@@ -462,7 +312,7 @@ footer a:hover{color:var(--gold)}
     <span class="eyebrow">The Workforce™</span>
     <h2 class="section-title">ObscuronLabs™ Team.<br><span class="gold-text">Thirteen Agents. One Mission.</span></h2>
     <div style="margin-top:48px;border-radius:16px;overflow:hidden;border:1px solid var(--border);position:relative">
-      <img src="obscuronlabs team members.png" alt="ObscuronLabs Team — 13 Agents & Barbaros Kaptan" style="width:100%;max-height:560px;object-fit:cover;object-position:center top;display:block" loading="lazy">
+      <img src="obscuronlabs team members.png" alt="ObscuronLabs Team — 13 Agents & Barbaros Kaptan" style="width:100%;max-height:560px;object-fit:contain;object-position:center center;display:block;background:#000" loading="lazy">
       <div style="background:linear-gradient(to top,rgba(0,0,0,.85),transparent);color:var(--gold-b);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:24px 28px 18px;position:absolute;bottom:0;left:0;right:0">ObscuronLabs™ — Barbaros Kaptan & All 13 Agents · The Complete Team</div>
     </div>
   </div>
@@ -523,21 +373,5 @@ footer a:hover{color:var(--gold)}
     <a href="index.html#contact">Contact</a>
   </div>
 </footer>
-<script>
-function filterCreds(cat) {
-  document.querySelectorAll('.cred-filter').forEach(b => {
-    b.style.background = 'none';
-    b.style.color = 'var(--muted)';
-    b.style.borderColor = 'var(--border)';
-  });
-  const active = document.getElementById('f-' + cat);
-  active.style.background = 'var(--gold-d)';
-  active.style.color = 'var(--gold)';
-  active.style.borderColor = 'var(--border2)';
-  document.querySelectorAll('#creds-grid .cred-card').forEach(c => {
-    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
-  });
-}
-</script>
 </body>
 </html>
