@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/obscuron_landing_page.html"
+  status = 200
