@@ -3,454 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ObscuronLabs™ — AI Intelligence. Engineered.</title>
-<meta name="description" content="ObscuronLabs™ deploys 13 specialized AI agents across 9 domains to engineer intelligence infrastructure for businesses that refuse to operate at human speed.">
+<title>ObscuronLabs™ — AI · Automation · Digital Intelligence</title>
+<meta name="description" content="ObscuronLabs™ deploys AI agents and automation systems for businesses worldwide. Custom AI solutions, multi-agent pipelines, and digital intelligence infrastructure.">
+<meta property="og:title" content="ObscuronLabs™ — AI · Automation · Digital Intelligence">
+<meta property="og:description" content="We deploy AI agents, automation systems, and digital intelligence infrastructure for businesses that refuse to operate at human speed.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:     #05090F;
-  --bg2:    #080D17;
-  --bg3:    #0C1422;
-  --bg4:    #101C2E;
-  --gold:   #D4A840;
-  --gold-b: #F2CC5A;
-  --gold-d: rgba(212,168,64,0.15);
-  --gold-g: linear-gradient(135deg,#B8881A 0%,#F2CC5A 40%,#C49A28 70%,#F2CC5A 100%);
-  --text:   #E4D8C4;
-  --muted:  #7A6E5E;
-  --muted2: #2A2218;
-  --border: rgba(201,164,110,0.14);
-  --border2:rgba(201,164,110,0.28);
-  --green:  #4ADE80;
-  --font-h: 'Exo 2', sans-serif;
-  --font-m: 'JetBrains Mono', monospace;
-  --radius: 4px;
-  --nav-h:  68px;
-}
+:root{--bg:#05090F;--bg2:#080D17;--bg3:#0C1422;--bg4:#101C2E;--gold:#D4A840;--gold-b:#F2CC5A;--gold-d:rgba(212,168,64,0.15);--gold-g:linear-gradient(135deg,#B8881A 0%,#F2CC5A 40%,#C49A28 70%,#F2CC5A 100%);--text:#E4D8C4;--muted:#7A6E5E;--muted2:#2A2218;--border:rgba(201,164,110,0.14);--border2:rgba(201,164,110,0.28);--green:#4ADE80;--font-h:'Exo 2',sans-serif;--font-m:'JetBrains Mono',monospace;--radius:4px;--nav-h:68px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:var(--font-h);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-}
+body{font-family:var(--font-h);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-
-/* ── GRID BG ── */
-.grid-bg{
-  position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(201,164,110,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(201,164,110,.04) 1px,transparent 1px);
-  background-size:60px 60px;
-  animation:gridDrift 25s linear infinite;
-}
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(201,164,110,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,164,110,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 25s linear infinite}
 @keyframes gridDrift{from{background-position:0 0}to{background-position:60px 60px}}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:var(--nav-h);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(16px,5vw,64px);
-  border-bottom:1px solid var(--border);
-  background:rgba(5,9,15,.85);
-  backdrop-filter:blur(16px);
-}
-.nav-logo{
-  display:flex;align-items:center;gap:12px;
-  text-decoration:none;
-}
-.nav-logo-icon{
-  height:40px;width:auto;
-  filter:drop-shadow(0 0 10px rgba(212,168,64,.5));
-}
-.nav-logo-text{display:none}
-.nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,40px)}
-.nav-links a{
-  color:var(--muted);font-size:.875rem;font-weight:500;letter-spacing:.06em;
-  text-decoration:none;text-transform:uppercase;
-  transition:color .2s;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,5vw,64px);border-bottom:1px solid var(--border);background:rgba(5,9,15,.85);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo-icon{height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(212,168,64,.5))}
+.nav-links{display:flex;align-items:center;gap:clamp(14px,2vw,28px)}
+.nav-links a{color:var(--muted);font-size:.8rem;font-weight:500;letter-spacing:.06em;text-decoration:none;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--gold)}
-.nav-lang{
-  display:flex;gap:6px;align-items:center;margin-left:16px;
-}
-.nav-lang button{
-  background:none;border:none;color:var(--muted);font-family:var(--font-h);
-  font-size:.75rem;cursor:pointer;padding:2px 4px;transition:color .2s;
-}
-.nav-lang button.active,
-.nav-lang button:hover{color:var(--gold)}
-.nav-cta{
-  display:flex;align-items:center;gap:8px;
-}
-.btn-ghost{
-  padding:9px 22px;border:1px solid var(--border2);border-radius:var(--radius);
-  color:var(--gold);font-family:var(--font-h);font-size:.82rem;font-weight:600;
-  letter-spacing:.06em;text-transform:uppercase;background:none;cursor:pointer;
-  transition:background .2s,box-shadow .2s;text-decoration:none;display:inline-block;
-}
+.nav-lang{display:flex;gap:4px;align-items:center;margin-left:12px}
+.nav-lang button{background:none;border:none;color:var(--muted);font-family:var(--font-h);font-size:.7rem;cursor:pointer;padding:2px 3px;transition:color .2s}
+.nav-lang button.active,.nav-lang button:hover{color:var(--gold)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.btn-ghost{padding:9px 22px;border:1px solid var(--border2);border-radius:var(--radius);color:var(--gold);font-family:var(--font-h);font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:none;cursor:pointer;transition:background .2s,box-shadow .2s;text-decoration:none;display:inline-block}
 .btn-ghost:hover{background:var(--gold-d);box-shadow:0 0 20px rgba(201,164,110,.2)}
-.btn-solid{
-  padding:9px 22px;border:1px solid var(--gold);border-radius:var(--radius);
-  color:var(--bg);background:var(--gold);font-family:var(--font-h);font-size:.82rem;
-  font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-  transition:background .2s,box-shadow .2s;text-decoration:none;display:inline-block;
-}
+.btn-solid{padding:9px 22px;border:1px solid var(--gold);border-radius:var(--radius);color:var(--bg);background:var(--gold);font-family:var(--font-h);font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,box-shadow .2s;text-decoration:none;display:inline-block}
 .btn-solid:hover{background:var(--gold-b);box-shadow:0 0 30px rgba(201,164,110,.4)}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--gold);transition:.3s}
-.mobile-menu{
-  display:none;position:fixed;inset:0;top:var(--nav-h);
-  background:var(--bg2);z-index:99;flex-direction:column;align-items:center;
-  justify-content:center;gap:32px;
-}
+.mobile-menu{display:none;position:fixed;inset:0;top:var(--nav-h);background:var(--bg2);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:24px;overflow-y:auto;padding:32px 16px}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:var(--text);font-size:1.4rem;font-weight:700;text-decoration:none;letter-spacing:.06em}
-
-/* ── SECTION WRAPPER ── */
+.mobile-menu a{color:var(--text);font-size:1.2rem;font-weight:700;text-decoration:none;letter-spacing:.06em}
 section{position:relative;z-index:1;padding:clamp(60px,10vh,120px) clamp(16px,5vw,80px)}
 .container{max-width:1200px;margin:0 auto}
-.eyebrow{
-  font-family:var(--font-m);font-size:.72rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:16px;
-  display:block;
-}
-.section-title{
-  font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;
-  text-wrap:balance;margin-bottom:16px;
-}
-.gold-text{
-  background:var(--gold-g);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
+.eyebrow{font-family:var(--font-m);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.section-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;text-wrap:balance;margin-bottom:16px}
+.gold-text{background:var(--gold-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .section-sub{color:var(--muted);font-size:1.05rem;font-weight:300;max-width:560px;line-height:1.7}
 .divider{border:none;border-top:1px solid var(--border);margin:0}
-
-/* ── HERO ── */
-#hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding-top:calc(var(--nav-h) + 40px);
-  padding-bottom:80px;
-}
-.hero-inner{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:clamp(40px,6vw,80px);align-items:center;
-  max-width:1200px;margin:0 auto;width:100%;
-}
-.hero-h1{
-  font-size:clamp(2.6rem,6vw,5rem);font-weight:900;line-height:1.02;
-  letter-spacing:-.02em;text-wrap:balance;margin-bottom:24px;
-}
-.hero-sub{
-  font-size:clamp(.95rem,1.5vw,1.15rem);color:var(--muted);
-  font-weight:300;line-height:1.75;margin-bottom:36px;max-width:480px;
-}
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:calc(var(--nav-h) + 40px);padding-bottom:80px}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;max-width:1200px;margin:0 auto;width:100%}
+.hero-h1{font-size:clamp(2.6rem,6vw,5rem);font-weight:900;line-height:1.02;letter-spacing:-.02em;text-wrap:balance;margin-bottom:24px}
+.hero-sub{font-size:clamp(.95rem,1.5vw,1.15rem);color:var(--muted);font-weight:300;line-height:1.75;margin-bottom:36px;max-width:480px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
-.hero-video-wrap{
-  position:relative;border-radius:8px;overflow:hidden;
-  border:1px solid var(--border2);
-  box-shadow:0 0 60px rgba(201,164,110,.15),0 0 120px rgba(201,164,110,.07);
-  aspect-ratio:16/9;background:var(--bg3);
-}
+.hero-video-wrap{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border2);box-shadow:0 0 60px rgba(201,164,110,.15),0 0 120px rgba(201,164,110,.07);aspect-ratio:16/9;background:var(--bg3)}
 .hero-video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
-.hero-video-glow{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%,rgba(201,164,110,.1) 0%,transparent 70%);
-}
-
-/* ── STATS ── */
-#stats{
-  padding:40px clamp(16px,5vw,80px);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:var(--bg2);
-}
-.stats-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;max-width:1200px;margin:0 auto;
-}
-.stat{
-  padding:32px 24px;text-align:center;
-  border-right:1px solid var(--border);
-}
+.hero-video-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(201,164,110,.1) 0%,transparent 70%)}
+#stats{padding:40px clamp(16px,5vw,80px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:0 auto}
+.stat{padding:32px 24px;text-align:center;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
-.stat-num{
-  font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;
-  background:var(--gold-g);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-  font-variant-numeric:tabular-nums;
-}
+.stat-num{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;background:var(--gold-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-variant-numeric:tabular-nums}
 .stat-label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-
-/* ── SERVICES ── */
-.services-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;margin-top:56px;
-}
-.service-item{
-  background:var(--bg2);padding:32px 28px;
-  transition:background .2s;
-}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:56px}
+.service-item{background:var(--bg2);padding:32px 28px;transition:background .2s}
 .service-item:hover{background:var(--bg3)}
-.service-num{
-  font-family:var(--font-m);font-size:.72rem;color:var(--gold);
-  letter-spacing:.1em;margin-bottom:14px;display:block;
-}
+.service-num{font-family:var(--font-m);font-size:.72rem;color:var(--gold);letter-spacing:.1em;margin-bottom:14px;display:block}
 .service-name{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--text)}
 .service-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
-.services-note{
-  margin-top:28px;font-family:var(--font-m);font-size:.8rem;
-  color:var(--muted);letter-spacing:.06em;
-  border-left:2px solid var(--gold);padding-left:16px;
-}
-
-/* ── AGENTS ── */
+.services-note{margin-top:28px;font-family:var(--font-m);font-size:.8rem;color:var(--muted);letter-spacing:.06em;border-left:2px solid var(--gold);padding-left:16px}
+.solutions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.solution-card{border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;background:var(--bg3);transition:border-color .2s,box-shadow .2s}
+.solution-card:hover{border-color:var(--border2);box-shadow:0 0 40px rgba(201,164,110,.1)}
+.solution-name{font-size:1.1rem;font-weight:700;margin-bottom:10px;color:var(--text)}
+.solution-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+.solutions-cta{text-align:center;margin-top:40px}
 #agents{background:var(--bg2)}
 .team-photo-wrap{margin-top:48px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);position:relative}
 .team-photo{width:100%;max-height:620px;object-fit:contain;object-position:center center;display:block;background:#000}
 .team-photo-caption{background:linear-gradient(to top,rgba(0,0,0,.8),transparent);color:var(--gold-b);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:20px 24px 16px;position:absolute;bottom:0;left:0;right:0}
-.agents-scroll{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;margin-top:56px;
-}
-.agent-card{
-  background:var(--bg3);padding:24px 20px;
-  position:relative;transition:background .2s;
-}
+.agents-scroll{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:56px}
+.agent-card{background:var(--bg3);padding:24px 20px;position:relative;transition:background .2s}
 .agent-card:hover{background:var(--bg4)}
-.agent-id{
-  font-family:var(--font-m);font-size:.68rem;color:var(--gold);
-  letter-spacing:.12em;margin-bottom:10px;
-}
+.agent-id{font-family:var(--font-m);font-size:.68rem;color:var(--gold);letter-spacing:.12em;margin-bottom:10px}
 .agent-name{font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text)}
 .agent-role{font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.4}
-.agent-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;
-  color:var(--green);text-transform:uppercase;
-}
+.agent-badge{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;color:var(--green);text-transform:uppercase}
 .agent-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);display:block;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-/* ── PIPELINE ── */
-.pipeline-steps{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;margin-top:56px;position:relative;
-}
-.pipeline-steps::before{
-  content:'';position:absolute;top:28px;left:12.5%;right:12.5%;
-  height:1px;background:linear-gradient(90deg,var(--gold),rgba(201,164,110,.2));
-  z-index:0;
-}
-.pipeline-step{
-  text-align:center;padding:0 12px;position:relative;z-index:1;
-}
-.step-num{
-  width:56px;height:56px;border-radius:50%;
-  border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 16px;
-  font-family:var(--font-m);font-size:.8rem;color:var(--gold);
-  background:var(--bg);
-}
+.pipeline-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;position:relative}
+.pipeline-steps::before{content:'';position:absolute;top:28px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,var(--gold),rgba(201,164,110,.2));z-index:0}
+.pipeline-step{text-align:center;padding:0 12px;position:relative;z-index:1}
+.step-num{width:56px;height:56px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:var(--font-m);font-size:.8rem;color:var(--gold);background:var(--bg)}
 .step-title{font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--text)}
 .step-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
-
-/* ── LEADERSHIP ── */
-#leadership{background:var(--bg2)}
-.team-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:24px;margin-top:56px;
-}
-.team-card{
-  border:1px solid var(--border);border-radius:var(--radius);
-  padding:36px 28px;background:var(--bg3);
-  text-align:center;transition:border-color .2s,box-shadow .2s;
-}
-.team-card:hover{
-  border-color:var(--border2);
-  box-shadow:0 0 40px rgba(201,164,110,.1);
-}
-.team-avatar{
-  width:80px;height:80px;border-radius:50%;
-  border:2px solid var(--gold);margin:0 auto 20px;
-  background:var(--bg4);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;color:var(--gold);font-weight:800;
-}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:56px}
+.project-card{border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;background:var(--bg3);transition:border-color .2s}
+.project-card:hover{border-color:var(--border2)}
+.project-id{font-family:var(--font-m);font-size:.68rem;color:var(--gold);letter-spacing:.12em;margin-bottom:10px}
+.project-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.project-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+#about{background:var(--bg2)}
+.about-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(40px,6vw,80px);align-items:start;margin-top:56px}
+.about-text p{font-size:.95rem;color:var(--muted);line-height:1.8;margin-bottom:20px}
+.about-values{display:flex;flex-direction:column;gap:12px}
+.value-chip{border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;background:var(--bg3);font-size:.82rem;color:var(--text);font-weight:600;letter-spacing:.04em;border-left:3px solid var(--gold)}
+#leadership{background:var(--bg)}
+.team-grid{display:grid;grid-template-columns:1fr;gap:24px;margin:56px auto 0;max-width:420px}
+.team-card{border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;background:var(--bg3);text-align:center;transition:border-color .2s,box-shadow .2s}
+.team-card:hover{border-color:var(--border2);box-shadow:0 0 40px rgba(201,164,110,.1)}
+.team-avatar{width:80px;height:80px;border-radius:50%;border:2px solid var(--gold);margin:0 auto 20px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--gold);font-weight:800}
 .team-name{font-size:1.1rem;font-weight:800;margin-bottom:4px}
-.team-title{
-  font-family:var(--font-m);font-size:.72rem;color:var(--gold);
-  letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;
-}
-.team-bio{font-size:.85rem;color:var(--muted);line-height:1.7}
-
-/* ── PRODUCTS ── */
-.products-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:24px;margin-top:56px;
-}
-.product-card{
-  border:1px solid var(--border);border-radius:var(--radius);
-  padding:36px 28px;background:var(--bg2);
-  display:flex;flex-direction:column;
-  transition:border-color .2s,box-shadow .2s;
-}
-.product-card.featured{
-  border-color:var(--border2);
-  box-shadow:0 0 50px rgba(201,164,110,.12);
-}
-.product-card:hover{
-  border-color:var(--border2);box-shadow:0 0 40px rgba(201,164,110,.1);
-}
-.product-label{
-  font-family:var(--font-m);font-size:.68rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:12px;
-}
+.team-title{font-family:var(--font-m);font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.team-bio{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.product-card{border:1px solid var(--border);border-radius:var(--radius);padding:36px 28px;background:var(--bg2);display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+.product-card.featured{border-color:var(--border2);box-shadow:0 0 50px rgba(201,164,110,.12)}
+.product-card:hover{border-color:var(--border2);box-shadow:0 0 40px rgba(201,164,110,.1)}
+.product-label{font-family:var(--font-m);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .product-name{font-size:1.2rem;font-weight:800;margin-bottom:8px;color:var(--text)}
 .product-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:24px;flex:1}
-.product-price{
-  font-size:2rem;font-weight:900;margin-bottom:24px;
-  background:var(--gold-g);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;
-}
-.product-price span{font-size:.85rem;color:var(--muted);-webkit-text-fill-color:var(--muted)}
-
-/* ── CONTACT ── */
 #contact{background:var(--bg2)}
-.contact-inner{
-  display:grid;grid-template-columns:1fr 1.4fr;
-  gap:clamp(40px,6vw,80px);align-items:start;max-width:1000px;
-}
+.contact-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(40px,6vw,80px);align-items:start;max-width:1000px}
 .contact-form{display:flex;flex-direction:column;gap:16px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-field{display:flex;flex-direction:column;gap:6px}
 .form-field label{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.form-field input,
-.form-field textarea,
-.form-field select{
-  background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);
-  color:var(--text);font-family:var(--font-h);font-size:.9rem;
-  padding:12px 14px;outline:none;
-  transition:border-color .2s;
-}
-.form-field input:focus,
-.form-field textarea:focus{border-color:var(--border2);box-shadow:0 0 0 3px rgba(201,164,110,.08)}
+.form-field input,.form-field textarea,.form-field select{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-h);font-size:.9rem;padding:12px 14px;outline:none;transition:border-color .2s}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--border2);box-shadow:0 0 0 3px rgba(201,164,110,.08)}
 .form-field textarea{min-height:120px;resize:vertical}
+.form-field select option{background:var(--bg3)}
 .form-note{font-size:.78rem;color:var(--muted);margin-top:8px;font-family:var(--font-m)}
-
-/* ── FAQ ── */
 .faq-list{margin-top:56px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-item:last-child{border-bottom:none}
-.faq-q{
-  width:100%;background:none;border:none;color:var(--text);
-  font-family:var(--font-h);font-size:.97rem;font-weight:600;
-  padding:22px 28px;text-align:left;cursor:pointer;
-  display:flex;justify-content:space-between;align-items:center;gap:16px;
-  transition:background .2s;
-}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--font-h);font-size:.97rem;font-weight:600;padding:22px 28px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background .2s}
 .faq-q:hover{background:var(--bg3)}
-.faq-q .faq-icon{
-  color:var(--gold);font-size:1.2rem;flex-shrink:0;
-  transition:transform .3s;
-}
+.faq-q .faq-icon{color:var(--gold);font-size:1.2rem;flex-shrink:0;transition:transform .3s}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-a{
-  max-height:0;overflow:hidden;transition:max-height .3s ease;
-}
-.faq-a-inner{
-  padding:0 28px 22px;font-size:.88rem;color:var(--muted);line-height:1.75;
-}
-
-/* ── FOOTER ── */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--border);
-  padding:48px clamp(16px,5vw,80px) 32px;
-  background:var(--bg);
-}
-.footer-top{
-  display:flex;justify-content:space-between;align-items:start;
-  max-width:1200px;margin:0 auto;gap:40px;flex-wrap:wrap;
-  padding-bottom:32px;border-bottom:1px solid var(--border);
-  margin-bottom:24px;
-}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a-inner{padding:0 28px 22px;font-size:.88rem;color:var(--muted);line-height:1.75}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48px clamp(16px,5vw,80px) 32px;background:var(--bg)}
+.footer-top{display:flex;justify-content:space-between;align-items:start;max-width:1200px;margin:0 auto;gap:40px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid var(--border);margin-bottom:24px}
 .footer-brand p{font-size:.83rem;color:var(--muted);margin-top:10px;max-width:280px;line-height:1.6}
 .footer-links{display:flex;gap:48px;flex-wrap:wrap}
-.footer-col h4{
-  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
-}
-.footer-col a{
-  display:block;color:var(--muted);font-size:.85rem;
-  text-decoration:none;margin-bottom:10px;transition:color .2s;
-}
+.footer-col h4{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.footer-col a{display:block;color:var(--muted);font-size:.85rem;text-decoration:none;margin-bottom:10px;transition:color .2s}
 .footer-col a:hover{color:var(--text)}
-.footer-bottom{
-  max-width:1200px;margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;font-size:.75rem;color:var(--muted);
-  font-family:var(--font-m);
-}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.75rem;color:var(--muted);font-family:var(--font-m)}
 .footer-bottom a{color:var(--muted);text-decoration:none}
 .footer-bottom a:hover{color:var(--gold)}
-
-/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr}
-  .hero-video-wrap{order:-1}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(2){border-right:none}
-  .stat:nth-child(3){border-top:1px solid var(--border)}
-  .services-grid{grid-template-columns:repeat(2,1fr)}
-  .agents-scroll{grid-template-columns:repeat(2,1fr)}
-  .pipeline-steps{grid-template-columns:repeat(2,1fr);gap:32px}
-  .pipeline-steps::before{display:none}
-  .team-grid{grid-template-columns:1fr}
-  .products-grid{grid-template-columns:1fr}
-  .contact-inner{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .nav-cta .btn-solid{display:none}
-  .hamburger{display:flex}
+.hero-inner{grid-template-columns:1fr}
+.hero-video-wrap{order:-1}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
+.stat:nth-child(2){border-right:none}
+.stat:nth-child(3){border-top:1px solid var(--border)}
+.services-grid{grid-template-columns:repeat(2,1fr)}
+.solutions-grid{grid-template-columns:1fr}
+.agents-scroll{grid-template-columns:repeat(2,1fr)}
+.pipeline-steps{grid-template-columns:repeat(2,1fr);gap:32px}
+.pipeline-steps::before{display:none}
+.products-grid{grid-template-columns:1fr}
+.contact-inner{grid-template-columns:1fr}
+.form-row{grid-template-columns:1fr}
+.about-inner{grid-template-columns:1fr}
+.projects-grid{grid-template-columns:1fr}
+.nav-links{display:none}
+.nav-cta .btn-solid{display:none}
+.hamburger{display:flex}
 }
 @media(max-width:600px){
-  .services-grid{grid-template-columns:1fr}
-  .agents-scroll{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-links{gap:24px}
+.services-grid{grid-template-columns:1fr}
+.agents-scroll{grid-template-columns:1fr}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
+.footer-links{gap:24px}
 }
-
-/* ── RTL ── */
 [dir="rtl"] .hero-inner{direction:rtl}
 [dir="rtl"] .services-note{border-left:none;border-right:2px solid var(--gold);padding-left:0;padding-right:16px}
 [dir="rtl"] .nav-logo{flex-direction:row-reverse}
+[dir="rtl"] .value-chip{border-left:none;border-right:3px solid var(--gold)}
 </style>
 </head>
 <body>
 <div class="grid-bg" aria-hidden="true"></div>
-
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
+  <a href="#hero" class="nav-logo">
     <img src="logo.png.jpg" alt="ObscuronLabs™" class="nav-logo-icon">
   </a>
   <div class="nav-links">
+    <a href="#hero" data-i="nav_home">Home</a>
     <a href="#services" data-i="nav_services">Services</a>
-    <a href="#agents" data-i="nav_agents">Agents</a>
-    <a href="#leadership" data-i="nav_team">Team</a>
+    <a href="#solutions" data-i="nav_solutions">Solutions</a>
     <a href="#products" data-i="nav_products">Products</a>
+    <a href="#projects" data-i="nav_projects">Projects</a>
+    <a href="#about" data-i="nav_about">About</a>
     <a href="#contact" data-i="nav_contact">Contact</a>
     <a href="barbaros.html" style="color:var(--gold);font-weight:700;letter-spacing:.04em">Barbaros Kaptan ↗</a>
     <div class="nav-lang">
@@ -459,46 +201,52 @@ footer{
       <button onclick="setLang('de')" id="lang-de">DE</button>
       <button onclick="setLang('it')" id="lang-it">IT</button>
       <button onclick="setLang('ar')" id="lang-ar">AR</button>
+      <button onclick="setLang('fr')" id="lang-fr">FR</button>
+      <button onclick="setLang('sq')" id="lang-sq">SQ</button>
     </div>
   </div>
   <div class="nav-cta">
-    <a href="#contact" class="btn-solid" data-i="nav_cta">Get a Quote →</a>
+    <a href="#contact" class="btn-solid" data-i="nav_cta">Talk to Us →</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-
 <div class="mobile-menu" id="mobile-menu">
+  <a href="#hero" onclick="closeMobile()" data-i="nav_home">Home</a>
   <a href="#services" onclick="closeMobile()" data-i="nav_services">Services</a>
-  <a href="#agents" onclick="closeMobile()" data-i="nav_agents">Agents</a>
-  <a href="#leadership" onclick="closeMobile()" data-i="nav_team">Team</a>
+  <a href="#solutions" onclick="closeMobile()" data-i="nav_solutions">Solutions</a>
   <a href="#products" onclick="closeMobile()" data-i="nav_products">Products</a>
+  <a href="#projects" onclick="closeMobile()" data-i="nav_projects">Projects</a>
+  <a href="#about" onclick="closeMobile()" data-i="nav_about">About</a>
   <a href="#contact" onclick="closeMobile()" data-i="nav_contact">Contact</a>
+  <a href="barbaros.html" style="color:var(--gold);font-weight:700">Barbaros Kaptan ↗</a>
   <div class="nav-lang">
     <button onclick="setLang('en')" class="active" id="mlang-en">EN</button>
     <button onclick="setLang('tr')" id="mlang-tr">TR</button>
     <button onclick="setLang('de')" id="mlang-de">DE</button>
     <button onclick="setLang('it')" id="mlang-it">IT</button>
     <button onclick="setLang('ar')" id="mlang-ar">AR</button>
+    <button onclick="setLang('fr')" id="mlang-fr">FR</button>
+    <button onclick="setLang('sq')" id="mlang-sq">SQ</button>
   </div>
-  <a href="#contact" class="btn-solid" onclick="closeMobile()" data-i="nav_cta">Get a Quote →</a>
+  <a href="#contact" class="btn-solid" onclick="closeMobile()" data-i="nav_cta">Talk to Us →</a>
 </div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
     <div>
-      <span class="eyebrow" data-i="hero_eyebrow">AI · Automation · Intelligence</span>
+      <span class="eyebrow" data-i="hero_eyebrow">AI · AUTOMATION · DIGITAL INTELLIGENCE</span>
       <h1 class="hero-h1">
-        <span data-i="hero_h1a">We Don't</span><br>
-        <span data-i="hero_h1b">Automate.</span><br>
-        <span class="gold-text" data-i="hero_h1c">We Architect.</span>
+        <span data-i="hero_h1a">YOUR BUSINESS</span><br>
+        <span data-i="hero_h1b">RUNS WHILE</span><br>
+        <span class="gold-text" data-i="hero_h1c">YOU SLEEP.</span>
       </h1>
-      <p class="hero-sub" data-i="hero_sub">13 specialized AI agents. 9 operational domains. Intelligence infrastructure custom-engineered for businesses that refuse to operate at human speed.</p>
+      <p class="hero-sub" data-i="hero_sub">We deploy AI agents, automation systems, and digital intelligence infrastructure for businesses that refuse to operate at human speed.</p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn-solid" data-i="hero_cta1">Start a Project →</a>
-        <a href="#agents" class="btn-ghost" data-i="hero_cta2">Meet the Agents</a>
+        <a href="#solutions" class="btn-solid" data-i="hero_cta1">EXPLORE SOLUTIONS →</a>
+        <a href="#contact" class="btn-ghost" data-i="hero_cta2">TALK TO US</a>
       </div>
     </div>
     <div class="hero-video-wrap">
@@ -509,206 +257,126 @@ footer{
     </div>
   </div>
 </section>
-
 <hr class="divider">
 
 <!-- STATS -->
 <div id="stats">
   <div class="stats-grid">
-    <div class="stat">
-      <div class="stat-num">13+</div>
-      <div class="stat-label" data-i="stat1">AI Agents</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">9</div>
-      <div class="stat-label" data-i="stat2">Service Domains</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">50+</div>
-      <div class="stat-label" data-i="stat3">Projects Delivered</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5</div>
-      <div class="stat-label" data-i="stat4">Languages Supported</div>
-    </div>
+    <div class="stat"><div class="stat-num">13+</div><div class="stat-label" data-i="stat1">AI Agents</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label" data-i="stat2">Service Domains</div></div>
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label" data-i="stat3">Projects Delivered</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label" data-i="stat4">Languages Supported</div></div>
   </div>
 </div>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <span class="eyebrow" data-i="services_eyebrow">What We Build</span>
-    <h2 class="section-title" data-i="services_title">Nine Domains.<br><span class="gold-text" data-i="services_title2">Infinite Leverage.</span></h2>
-    <p class="section-sub" data-i="services_sub">Every engagement is custom-scoped. No templates, no fixed packages — only architectures built for your exact context.</p>
+    <span class="eyebrow" data-i="services_eyebrow">WHAT WE BUILD</span>
+    <h2 class="section-title"><span data-i="services_title">Six Domains.</span><br><span class="gold-text" data-i="services_title2">Infinite Leverage.</span></h2>
+    <p class="section-sub" data-i="services_sub">Every engagement is custom-scoped. No templates — only architectures built for your exact context.</p>
     <div class="services-grid">
-      <div class="service-item">
-        <span class="service-num">01</span>
-        <div class="service-name" data-i="s1_name">AI Strategy & Consulting</div>
-        <div class="service-desc" data-i="s1_desc">Full-stack intelligence audits. We map where AI compounds your advantage — and where it doesn't.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">02</span>
-        <div class="service-name" data-i="s2_name">Business Process Automation</div>
-        <div class="service-desc" data-i="s2_desc">Eliminate the operational drag. We automate workflows, approvals, and reporting at depth.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">03</span>
-        <div class="service-name" data-i="s3_name">Data Intelligence & BI</div>
-        <div class="service-desc" data-i="s3_desc">Live dashboards, predictive signals, and decision-grade analytics — built for speed and clarity.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">04</span>
-        <div class="service-name" data-i="s4_name">Lead Generation & Sales AI</div>
-        <div class="service-desc" data-i="s4_desc">AI-driven prospecting pipelines that qualify, enrich, and engage — before your competitors wake up.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">05</span>
-        <div class="service-name" data-i="s5_name">Web & Digital Solutions</div>
-        <div class="service-desc" data-i="s5_desc">Precision-built digital presence. From architecture to deployment — performance and identity at every layer.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">06</span>
-        <div class="service-name" data-i="s6_name">Creative AI & Content</div>
-        <div class="service-desc" data-i="s6_desc">Brand-aligned content at scale. Copywriting, visual direction, and campaign intelligence — without compromise.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">07</span>
-        <div class="service-name" data-i="s7_name">Customer Service AI</div>
-        <div class="service-desc" data-i="s7_desc">Intelligent support agents that resolve, escalate, and learn — deployed across all channels simultaneously.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">08</span>
-        <div class="service-name" data-i="s8_name">Digital Marketing & SEO AI</div>
-        <div class="service-desc" data-i="s8_desc">Algorithmic growth engines. Organic reach, paid performance, and conversion intelligence — unified.</div>
-      </div>
-      <div class="service-item">
-        <span class="service-num">09</span>
-        <div class="service-name" data-i="s9_name">AI Training & Workshops</div>
-        <div class="service-desc" data-i="s9_desc">Organizational AI fluency — from executive briefings to hands-on implementation sessions.</div>
-      </div>
+      <div class="service-item"><span class="service-num">01</span><div class="service-name" data-i="s1_name">AI Solutions</div><div class="service-desc" data-i="s1_desc">End-to-end AI system design and deployment. From model selection to production infrastructure.</div></div>
+      <div class="service-item"><span class="service-num">02</span><div class="service-name" data-i="s2_name">Business Automation</div><div class="service-desc" data-i="s2_desc">Eliminate operational drag. We automate workflows, approvals, and reporting at depth.</div></div>
+      <div class="service-item"><span class="service-num">03</span><div class="service-name" data-i="s3_name">AI Agents & Multi-Agent Systems</div><div class="service-desc" data-i="s3_desc">Coordinated AI agent networks that operate autonomously across your entire business.</div></div>
+      <div class="service-item"><span class="service-num">04</span><div class="service-name" data-i="s4_name">Data & Business Intelligence</div><div class="service-desc" data-i="s4_desc">Live dashboards, predictive signals, and decision-grade analytics built for speed and clarity.</div></div>
+      <div class="service-item"><span class="service-num">05</span><div class="service-name" data-i="s5_name">Digital Solutions</div><div class="service-desc" data-i="s5_desc">Precision-built digital presence. Architecture, performance, and identity at every layer.</div></div>
+      <div class="service-item"><span class="service-num">06</span><div class="service-name" data-i="s6_name">AI Consulting & Implementation</div><div class="service-desc" data-i="s6_desc">Strategic AI roadmaps, model evaluation, and hands-on implementation support.</div></div>
     </div>
     <p class="services-note" data-i="services_note">All services are custom-quoted. We scope every engagement individually — because your business is not a template.</p>
   </div>
 </section>
 
-<!-- AGENTS -->
+<!-- SOLUTIONS -->
+<section id="solutions" style="background:var(--bg2)">
+  <div class="container">
+    <span class="eyebrow" data-i="solutions_eyebrow">BUILT AROUND YOUR BUSINESS</span>
+    <h2 class="section-title"><span data-i="solutions_title">Custom Solutions.</span><br><span class="gold-text" data-i="solutions_title2">Zero Compromise.</span></h2>
+    <p class="section-sub" data-i="solutions_sub">We don't sell packages. We engineer solutions specific to your operations, your stack, and your goals.</p>
+    <div class="solutions-grid">
+      <div class="solution-card"><div class="solution-name" data-i="sol1_name">Enterprise AI Integration</div><div class="solution-desc" data-i="sol1_desc">Full-stack AI deployment into your existing infrastructure. Custom models, agent coordination, and monitoring — built for enterprise scale.</div></div>
+      <div class="solution-card"><div class="solution-name" data-i="sol2_name">Workflow Intelligence</div><div class="solution-desc" data-i="sol2_desc">Map, analyze, and automate your critical business processes. From HR to finance to operations — we find the leverage points.</div></div>
+      <div class="solution-card"><div class="solution-name" data-i="sol3_name">AI-Powered Growth</div><div class="solution-desc" data-i="sol3_desc">Lead generation, customer intelligence, and marketing automation working as one coordinated system.</div></div>
+    </div>
+    <div class="solutions-cta"><a href="#contact" class="btn-solid" data-i="sol_cta">DISCUSS YOUR PROJECT →</a></div>
+  </div>
+</section>
+
+<!-- INTELLIGENCE NETWORK -->
 <section id="agents">
   <div class="container">
-    <span class="eyebrow" data-i="agents_eyebrow">The Workforce™</span>
-    <h2 class="section-title" data-i="agents_title">Thirteen Agents.<br><span class="gold-text" data-i="agents_title2">Always Operational.</span></h2>
-    <p class="section-sub" data-i="agents_sub">Each agent is purpose-built for a specific intelligence domain. Deployed individually or as a coordinated multi-agent pipeline.</p>
+    <span class="eyebrow" data-i="agents_eyebrow">INTELLIGENCE NETWORK</span>
+    <h2 class="section-title"><span data-i="agents_title">Thirteen AI Systems.</span><br><span class="gold-text" data-i="agents_title2">Always Operational.</span></h2>
+    <p class="section-sub" data-i="agents_sub">Specialized AI agents purpose-built for specific intelligence domains. Each system operates independently or as part of a coordinated multi-agent pipeline.</p>
     <div class="team-photo-wrap">
-      <img src="obscuronlabs team members.jpg" alt="ObscuronLabs Team — 13 Agents & Barbaros Kaptan" class="team-photo" loading="lazy">
-      <div class="team-photo-caption">ObscuronLabs™ Team — All 13 Agents & Barbaros Kaptan, Founder & CEO</div>
+      <img src="obscuronlabs team members.jpg" alt="ObscuronLabs Intelligence Network — 13 AI Agents" class="team-photo" loading="lazy">
+      <div class="team-photo-caption" data-i="agents_caption">ObscuronLabs™ Intelligence Network — 13 Specialized AI Systems</div>
     </div>
     <div class="agents-scroll">
-      <div class="agent-card">
-        <div class="agent-id">AGT-001</div>
-        <div class="agent-name">Nox Vale</div>
-        <div class="agent-role" data-i="agt1">AI Strategist — Maps business context and intelligence architecture.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-002</div>
-        <div class="agent-name">Pery Ashcroft</div>
-        <div class="agent-role" data-i="agt2">Automation Architect — Designs and deploys workflow engines.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-003</div>
-        <div class="agent-name">Atlas Mercer</div>
-        <div class="agent-role" data-i="agt3">Data Intelligence — Transforms raw data into actionable signals.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-004</div>
-        <div class="agent-name">Vanta Noire</div>
-        <div class="agent-role" data-i="agt4">Lead Generation — Identifies, qualifies, and prioritizes prospects.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-005</div>
-        <div class="agent-name">Veil Corvin</div>
-        <div class="agent-role" data-i="agt5">Web Systems — Architects and deploys digital infrastructure.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-006</div>
-        <div class="agent-name">Shade Holloway</div>
-        <div class="agent-role" data-i="agt6">Creative AI — Generates brand-aligned content at scale.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-007</div>
-        <div class="agent-name">Echo Virel</div>
-        <div class="agent-role" data-i="agt7">Customer Intelligence — Manages and learns from every interaction.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-008</div>
-        <div class="agent-name">Oracle Voss</div>
-        <div class="agent-role" data-i="agt8">Market Analytics — Real-time competitive and market intelligence.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-009</div>
-        <div class="agent-name">Helix Arden</div>
-        <div class="agent-role" data-i="agt9">SEO & Growth — Drives organic reach through algorithmic precision.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-010</div>
-        <div class="agent-name">Cipher Blackwell</div>
-        <div class="agent-role" data-i="agt10">Security & Ops — Monitors, protects, and audits all systems.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-011</div>
-        <div class="agent-name">Mirror Vale</div>
-        <div class="agent-role" data-i="agt11">Content Strategy — Shapes narrative and messaging across channels.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-012</div>
-        <div class="agent-name">Aether Crowe</div>
-        <div class="agent-role" data-i="agt12">Training Systems — Builds and delivers AI knowledge transfer programs.</div>
-        <div class="agent-badge">Active</div>
-      </div>
-      <div class="agent-card">
-        <div class="agent-id">AGT-013</div>
-        <div class="agent-name">Ghost Mercer</div>
-        <div class="agent-role" data-i="agt13">Stealth Operations — Executes sensitive tasks with zero exposure.</div>
-        <div class="agent-badge">Active</div>
-      </div>
+      <div class="agent-card"><div class="agent-id">AGT-001</div><div class="agent-name">Nox Vale</div><div class="agent-role" data-i="agt1">AI Strategist — Maps business context and intelligence architecture.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-002</div><div class="agent-name">Pery Ashcroft</div><div class="agent-role" data-i="agt2">Automation Architect — Designs and deploys workflow engines.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-003</div><div class="agent-name">Atlas Mercer</div><div class="agent-role" data-i="agt3">Data Intelligence — Transforms raw data into actionable signals.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-004</div><div class="agent-name">Vanta Noire</div><div class="agent-role" data-i="agt4">Lead Generation — Identifies, qualifies, and prioritizes prospects.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-005</div><div class="agent-name">Veil Corvin</div><div class="agent-role" data-i="agt5">Web Systems — Architects and deploys digital infrastructure.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-006</div><div class="agent-name">Shade Holloway</div><div class="agent-role" data-i="agt6">Creative AI — Generates brand-aligned content at scale.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-007</div><div class="agent-name">Echo Virel</div><div class="agent-role" data-i="agt7">Customer Intelligence — Manages and learns from every interaction.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-008</div><div class="agent-name">Oracle Voss</div><div class="agent-role" data-i="agt8">Market Analytics — Real-time competitive and market intelligence.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-009</div><div class="agent-name">Helix Arden</div><div class="agent-role" data-i="agt9">SEO & Growth — Drives organic reach through algorithmic precision.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-010</div><div class="agent-name">Cipher Blackwell</div><div class="agent-role" data-i="agt10">Security & Ops — Monitors, protects, and audits all systems.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-011</div><div class="agent-name">Mirror Vale</div><div class="agent-role" data-i="agt11">Content Strategy — Shapes narrative and messaging across channels.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-012</div><div class="agent-name">Aether Crowe</div><div class="agent-role" data-i="agt12">Training Systems — Builds and delivers AI knowledge transfer programs.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-013</div><div class="agent-name">Ghost Mercer</div><div class="agent-role" data-i="agt13">Stealth Operations — Executes sensitive tasks with zero exposure.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-OPS-001</div><div class="agent-name">Maya Serrin</div><div class="agent-role" data-i="agt14">AI Operations Coordinator — Manages multi-agent pipeline orchestration and enterprise automation layer.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-OPS-002</div><div class="agent-name">Leo Mercer</div><div class="agent-role" data-i="agt15">AI Strategy Coordinator — Drives engagement analytics and business intelligence across all active pipelines.</div><div class="agent-badge">Active</div></div>
     </div>
   </div>
 </section>
 
 <!-- PIPELINE -->
-<section id="pipeline">
+<section id="pipeline" style="background:var(--bg2)">
   <div class="container">
-    <span class="eyebrow" data-i="pipeline_eyebrow">How It Works</span>
-    <h2 class="section-title" data-i="pipeline_title">From Discovery<br><span class="gold-text" data-i="pipeline_title2">to Continuous Intelligence.</span></h2>
+    <span class="eyebrow" data-i="pipeline_eyebrow">HOW IT WORKS</span>
+    <h2 class="section-title"><span data-i="pipeline_title">From Discovery</span><br><span class="gold-text" data-i="pipeline_title2">to Continuous Intelligence.</span></h2>
     <div class="pipeline-steps">
-      <div class="pipeline-step">
-        <div class="step-num">01</div>
-        <div class="step-title" data-i="step1_t">Discovery Call</div>
-        <div class="step-desc" data-i="step1_d">We map your operations, goals, and intelligence gaps in a focused session.</div>
+      <div class="pipeline-step"><div class="step-num">01</div><div class="step-title" data-i="step1_t">Discovery Call</div><div class="step-desc" data-i="step1_d">We map your operations, goals, and intelligence gaps in a focused session.</div></div>
+      <div class="pipeline-step"><div class="step-num">02</div><div class="step-title" data-i="step2_t">Agent Assignment</div><div class="step-desc" data-i="step2_d">We select and configure the exact agents your use case demands.</div></div>
+      <div class="pipeline-step"><div class="step-num">03</div><div class="step-title" data-i="step3_t">Live Deployment</div><div class="step-desc" data-i="step3_d">Your intelligence infrastructure goes live — integrated into your existing stack.</div></div>
+      <div class="pipeline-step"><div class="step-num">04</div><div class="step-title" data-i="step4_t">Continuous Intelligence</div><div class="step-desc" data-i="step4_d">Agents learn, adapt, and report — so your advantage compounds over time.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS / USE CASES -->
+<section id="projects">
+  <div class="container">
+    <span class="eyebrow" data-i="projects_eyebrow">USE CASES</span>
+    <h2 class="section-title"><span data-i="projects_title">What Our AI</span><br><span class="gold-text" data-i="projects_title2">Systems Can Do.</span></h2>
+    <p class="section-sub" data-i="projects_sub">Five capability examples. Real outcomes. No fabricated clients — only what our systems are built to achieve.</p>
+    <div class="projects-grid">
+      <div class="project-card"><div class="project-id">UC-001</div><div class="project-title" data-i="uc1_title">Automated Sales Pipeline</div><div class="project-desc" data-i="uc1_desc">AI agents qualify inbound leads, enrich contact data, draft personalized outreach, and schedule follow-ups — with zero human intervention.</div></div>
+      <div class="project-card"><div class="project-id">UC-002</div><div class="project-title" data-i="uc2_title">24/7 Customer Intelligence</div><div class="project-desc" data-i="uc2_desc">Multi-agent support system resolves tier-1 tickets, escalates complex cases, and learns from every interaction to continuously improve.</div></div>
+      <div class="project-card"><div class="project-id">UC-003</div><div class="project-title" data-i="uc3_title">Real-Time Business Intelligence</div><div class="project-desc" data-i="uc3_desc">Live dashboards pulling from multiple data sources, with predictive signals and automated weekly executive reports.</div></div>
+      <div class="project-card"><div class="project-id">UC-004</div><div class="project-title" data-i="uc4_title">Content at Scale</div><div class="project-desc" data-i="uc4_desc">AI content pipeline produces brand-aligned articles, social posts, and campaign copy — reviewed and published at 10× human speed.</div></div>
+      <div class="project-card" style="grid-column:1/-1;max-width:560px"><div class="project-id">UC-005</div><div class="project-title" data-i="uc5_title">Digital Infrastructure Build</div><div class="project-desc" data-i="uc5_desc">Full website architecture, SEO optimization, performance monitoring, and automated content updates — deployed and maintained by AI.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <span class="eyebrow" data-i="about_eyebrow">WHO WE ARE</span>
+    <h2 class="section-title"><span data-i="about_title">ObscuronLabs™</span><br><span class="gold-text" data-i="about_title2">Intelligence, Engineered.</span></h2>
+    <div class="about-inner">
+      <div class="about-text">
+        <p data-i="about_p1">ObscuronLabs™ is a global AI automation and digital intelligence company. We architect, deploy, and operate AI systems for businesses that need to operate faster, smarter, and more efficiently than their competitors.</p>
+        <p data-i="about_p2">Founded by Barbaros Kaptan, ObscuronLabs™ operates as a fully AI-augmented organization — combining human strategic leadership with a network of specialized AI agents to deliver outcomes that conventional agencies cannot match.</p>
       </div>
-      <div class="pipeline-step">
-        <div class="step-num">02</div>
-        <div class="step-title" data-i="step2_t">Agent Assignment</div>
-        <div class="step-desc" data-i="step2_d">We select and configure the exact agents your use case demands.</div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-num">03</div>
-        <div class="step-title" data-i="step3_t">Live Deployment</div>
-        <div class="step-desc" data-i="step3_d">Your intelligence infrastructure goes live — integrated into your existing stack.</div>
-      </div>
-      <div class="pipeline-step">
-        <div class="step-num">04</div>
-        <div class="step-title" data-i="step4_t">Continuous Intelligence</div>
-        <div class="step-desc" data-i="step4_d">Agents learn, adapt, and report — so your advantage compounds over time.</div>
+      <div class="about-values">
+        <div class="value-chip" data-i="about_v1">Human-Led, AI-Powered</div>
+        <div class="value-chip" data-i="about_v2">Custom — Not Templated</div>
+        <div class="value-chip" data-i="about_v3">Confidential by Default</div>
+        <div class="value-chip" data-i="about_v4">24-Hour Response Commitment</div>
       </div>
     </div>
   </div>
@@ -717,26 +385,15 @@ footer{
 <!-- LEADERSHIP -->
 <section id="leadership">
   <div class="container">
-    <span class="eyebrow" data-i="team_eyebrow">Leadership</span>
-    <h2 class="section-title" data-i="team_title">The Minds<br><span class="gold-text" data-i="team_title2">Behind the Machine.</span></h2>
+    <span class="eyebrow" data-i="team_eyebrow">HUMAN LEADERSHIP</span>
+    <h2 class="section-title"><span data-i="team_title">Founder &</span><br><span class="gold-text" data-i="team_title2">CEO.</span></h2>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-avatar">BK</div>
         <div class="team-name">Barbaros Kaptan</div>
         <div class="team-title" data-i="tm1_title">Founder & CEO</div>
-        <div class="team-bio" data-i="tm1_bio">AI entrepreneur and IBM AI Engineering certified architect. Founder of the Obscuron intelligence framework — built to operate where conventional automation fails.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">MS</div>
-        <div class="team-name">Maya Serrin</div>
-        <div class="team-title" data-i="tm2_title">Head of AI Operations</div>
-        <div class="team-bio" data-i="tm2_bio">Leads the multi-agent pipeline and enterprise automation layer. Specialized in deploying coordinated AI systems across complex organizational environments.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">LM</div>
-        <div class="team-name">Leo Mercer</div>
-        <div class="team-title" data-i="tm3_title">Chief Strategy Officer</div>
-        <div class="team-bio" data-i="tm3_bio">Drives client engagement and business development across five markets. Translates AI capability into strategic commercial advantage for every engagement.</div>
+        <div class="team-bio" data-i="tm1_bio">AI entrepreneur, IBM AI Engineering certified architect. Founder of ObscuronLabs™ — built to operate where conventional automation fails.</div>
+        <a href="barbaros.html" class="btn-ghost" data-i="tm1_link">Full Profile ↗</a>
       </div>
     </div>
   </div>
@@ -745,30 +402,27 @@ footer{
 <!-- PRODUCTS -->
 <section id="products">
   <div class="container">
-    <span class="eyebrow" data-i="products_eyebrow">Ready-to-Deploy</span>
-    <h2 class="section-title" data-i="products_title">Launch Today.<br><span class="gold-text" data-i="products_title2">Scale Tomorrow.</span></h2>
+    <span class="eyebrow" data-i="products_eyebrow">READY-TO-DEPLOY</span>
+    <h2 class="section-title"><span data-i="products_title">Launch Today.</span><br><span class="gold-text" data-i="products_title2">Scale Tomorrow.</span></h2>
     <p class="section-sub" data-i="products_sub">Pre-configured intelligence products for businesses ready to move immediately.</p>
     <div class="products-grid">
       <div class="product-card">
-        <div class="product-label" data-i="p1_label">Pro Suite</div>
-        <div class="product-name" data-i="p1_name">Obscuron Pro</div>
-        <div class="product-desc" data-i="p1_desc">Complete n8n automation workflow. 13 agents pre-configured. Discord integration. Plug in your API keys and deploy.</div>
-        <div class="product-price">$59 <span data-i="p_once">one-time</span></div>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank" class="btn-ghost" data-i="p_buy">Get Access →</a>
+        <div class="product-label" data-i="p1_label">CORE</div>
+        <div class="product-name" data-i="p1_name">Obscuron Core</div>
+        <div class="product-desc" data-i="p1_desc">Essential n8n automation workflow. 13 agents pre-configured. Discord integration. Plug in your API keys and deploy.</div>
+        <a href="#contact" class="btn-ghost" data-i="p_pricing">REQUEST PRICING →</a>
       </div>
       <div class="product-card featured">
-        <div class="product-label" data-i="p2_label">Elite Bundle — Most Popular</div>
-        <div class="product-name" data-i="p2_name">Obscuron Elite</div>
-        <div class="product-desc" data-i="p2_desc">Full stack: workflows, Discord integration, priority onboarding support. Everything in Pro, plus direct access to our team for deployment.</div>
-        <div class="product-price">$149 <span data-i="p_once">one-time</span></div>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank" class="btn-solid" data-i="p_buy">Get Access →</a>
+        <div class="product-label" data-i="p2_label">PROFESSIONAL — MOST POPULAR</div>
+        <div class="product-name" data-i="p2_name">Obscuron Professional</div>
+        <div class="product-desc" data-i="p2_desc">Full stack: automation workflows, Discord integration, priority onboarding support. Everything in Core, plus direct deployment assistance.</div>
+        <a href="#contact" class="btn-solid" data-i="p_pricing">REQUEST PRICING →</a>
       </div>
       <div class="product-card">
-        <div class="product-label" data-i="p3_label">Agency Kit</div>
-        <div class="product-name" data-i="p3_name">Obscuron Agency</div>
-        <div class="product-desc" data-i="p3_desc">Lead generation and email automation stack purpose-built for agencies. Multi-client ready. Resell to your own customers.</div>
-        <div class="product-price">$89 <span data-i="p_once">one-time</span></div>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank" class="btn-ghost" data-i="p_buy">Get Access →</a>
+        <div class="product-label" data-i="p3_label">ENTERPRISE</div>
+        <div class="product-name" data-i="p3_name">Obscuron Enterprise</div>
+        <div class="product-desc" data-i="p3_desc">Lead generation and email automation stack for agencies and enterprise teams. Multi-client ready. White-label available.</div>
+        <a href="#contact" class="btn-ghost" data-i="p_pricing">REQUEST PRICING →</a>
       </div>
     </div>
   </div>
@@ -777,38 +431,36 @@ footer{
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <span class="eyebrow" data-i="contact_eyebrow">Start Your Project</span>
-    <h2 class="section-title" data-i="contact_title">Let's Build<br><span class="gold-text" data-i="contact_title2">Something Significant.</span></h2>
+    <span class="eyebrow" data-i="contact_eyebrow">START YOUR PROJECT</span>
+    <h2 class="section-title"><span data-i="contact_title">Let's Build</span><br><span class="gold-text" data-i="contact_title2">Something Significant.</span></h2>
     <div class="contact-inner">
       <div>
-        <p class="section-sub" data-i="contact_sub">Every engagement starts with a conversation. Tell us what you're trying to build — we'll tell you exactly how our agents can architect it.</p>
+        <p class="section-sub" data-i="contact_sub">Every engagement starts with a conversation. Tell us what you're trying to build — we'll tell you exactly how our systems can architect it.</p>
         <br>
-        <p style="font-family:var(--font-m);font-size:.78rem;color:var(--muted);line-height:1.8" data-i="contact_details">
-          Response within 24 hours.<br>
-          All consultations are confidential.<br>
-          Custom pricing for every engagement.
-        </p>
+        <p style="font-family:var(--font-m);font-size:.78rem;color:var(--muted);line-height:1.8" data-i="contact_details">Response within 24 hours.<br>All consultations are confidential.<br>Custom pricing for every engagement.</p>
       </div>
       <form class="contact-form" onsubmit="handleContact(event)">
         <div class="form-row">
-          <div class="form-field">
-            <label data-i="f_name">Full Name</label>
-            <input type="text" id="f_name" required autocomplete="name">
-          </div>
-          <div class="form-field">
-            <label data-i="f_email">Email</label>
-            <input type="email" id="f_email" required autocomplete="email">
-          </div>
+          <div class="form-field"><label data-i="f_name">Full Name</label><input type="text" id="f_name" required autocomplete="name"></div>
+          <div class="form-field"><label data-i="f_email">Email</label><input type="email" id="f_email" required autocomplete="email"></div>
         </div>
+        <div class="form-field"><label data-i="f_company">Company</label><input type="text" id="f_company" autocomplete="organization"></div>
         <div class="form-field">
-          <label data-i="f_company">Company</label>
-          <input type="text" id="f_company" autocomplete="organization">
+          <label data-i="f_interest_label">Area of Interest</label>
+          <select id="f_interest" required>
+            <option value="" data-i="f_interest_default">-- Select --</option>
+            <option data-i="f_int_ai">AI Solutions</option>
+            <option data-i="f_int_auto">Business Automation</option>
+            <option data-i="f_int_agents">AI Agents &amp; Multi-Agent Systems</option>
+            <option data-i="f_int_data">Data &amp; Business Intelligence</option>
+            <option data-i="f_int_digital">Digital Solutions</option>
+            <option data-i="f_int_consult">AI Consulting</option>
+            <option data-i="f_int_products">Products</option>
+            <option data-i="f_int_other">Other</option>
+          </select>
         </div>
-        <div class="form-field">
-          <label data-i="f_project">Project Description</label>
-          <textarea id="f_project" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn-solid" data-i="f_submit">Request Custom Quote →</button>
+        <div class="form-field"><label data-i="f_project">Project Description</label><textarea id="f_project" rows="4" required></textarea></div>
+        <button type="submit" class="btn-solid" data-i="f_submit">REQUEST CONSULTATION →</button>
         <p class="form-note" data-i="f_note">© 2026 ObscuronLabs™ — All communications are confidential.</p>
       </form>
     </div>
@@ -818,51 +470,15 @@ footer{
 <!-- FAQ -->
 <section id="faq" style="background:var(--bg2)">
   <div class="container">
-    <span class="eyebrow" data-i="faq_eyebrow">Common Questions</span>
-    <h2 class="section-title" data-i="faq_title">Before You Ask.<br><span class="gold-text" data-i="faq_title2">We've Answered.</span></h2>
+    <span class="eyebrow" data-i="faq_eyebrow">COMMON QUESTIONS</span>
+    <h2 class="section-title"><span data-i="faq_title">Before You Ask.</span><br><span class="gold-text" data-i="faq_title2">We've Answered.</span></h2>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq1">How are services priced?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa1">Every engagement is custom-quoted based on scope, complexity, and timeline. We don't do templates — because your business isn't one. Contact us for a detailed proposal.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq2">Which AI models power your agents?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa2">We work with OpenAI, Anthropic Claude, and custom fine-tuned models via OpenRouter. Model selection depends on the task — we always match the optimal model to the problem.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq3">Do I need technical knowledge to use your systems?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa3">No. Our agents handle all technical complexity. You interact through simple dashboards and reports. We architect the system; you use the results.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq4">How long does deployment take?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa4">Typically 3–14 days depending on scope. Emergency deployments are available for time-critical engagements — contact us for expedited timelines.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq5">Is my data secure?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa5">Yes. All workflows run in isolated environments. No data is retained beyond the scope of the engagement. We operate under strict confidentiality for every client.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          <span data-i="fq6">Can agents work together on complex tasks?</span>
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner" data-i="fa6">Yes — our multi-agent pipeline routes tasks automatically between specialized agents. Maya Serrin handles triage, Leo Mercer manages strategy, and each downstream agent executes its domain in parallel.</div></div>
-      </div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq1">How are services priced?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa1">Every engagement is custom-quoted based on scope, complexity, and timeline. We don't do templates — because your business isn't one. Contact us for a detailed proposal.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq2">Which AI models power your agents?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa2">We work with OpenAI, Anthropic Claude, and custom fine-tuned models via OpenRouter. Model selection depends on the task — we always match the optimal model to the problem.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq3">Do I need technical knowledge to use your systems?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa3">No. Our agents handle all technical complexity. You interact through simple dashboards and reports. We architect the system; you use the results.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq4">How long does deployment take?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa4">Typically 3–14 days depending on scope. Emergency deployments are available for time-critical engagements.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq5">Is my data secure?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa5">Yes. All workflows run in isolated environments. No data is retained beyond the scope of the engagement. We operate under strict confidentiality for every client.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span data-i="fq6">Can agents work together on complex tasks?</span><span class="faq-icon">+</span></button><div class="faq-a"><div class="faq-a-inner" data-i="fa6">Yes — our multi-agent pipeline coordinates tasks automatically between specialized AI systems. Each agent handles its domain while the orchestration layer ensures seamless handoffs and parallel execution.</div></div></div>
     </div>
   </div>
 </section>
@@ -871,31 +487,29 @@ footer{
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <a href="#" class="nav-logo" style="text-decoration:none">
-        <img src="logo.png.jpg" alt="ObscuronLabs™" class="nav-logo-icon" style="height:36px">
-      </a>
-      <p data-i="footer_desc">AI intelligence infrastructure for businesses that demand more than automation — they demand advantage.</p>
+      <a href="#hero" class="nav-logo"><img src="logo.png.jpg" alt="ObscuronLabs™" class="nav-logo-icon" style="height:36px"></a>
+      <p data-i="footer_desc">Global AI automation and digital intelligence infrastructure. Built for businesses that demand advantage.</p>
     </div>
     <div class="footer-links">
       <div class="footer-col">
         <h4 data-i="fc1">Services</h4>
-        <a href="#services" data-i="s1_name">AI Strategy</a>
-        <a href="#services" data-i="s2_name">Automation</a>
-        <a href="#services" data-i="s4_name">Lead Generation</a>
-        <a href="#services" data-i="s7_name">Customer AI</a>
+        <a href="#services" data-i="s1_name">AI Solutions</a>
+        <a href="#services" data-i="s2_name">Business Automation</a>
+        <a href="#services" data-i="s3_name">AI Agents</a>
+        <a href="#services" data-i="s4_name">Data & BI</a>
       </div>
       <div class="footer-col">
         <h4 data-i="fc2">Company</h4>
-        <a href="#agents" data-i="nav_agents">Agents</a>
-        <a href="#leadership" data-i="nav_team">Team</a>
-        <a href="#products" data-i="nav_products">Products</a>
+        <a href="#agents" data-i="fc2_net">Intelligence Network</a>
+        <a href="#projects" data-i="nav_projects">Projects</a>
+        <a href="#about" data-i="nav_about">About</a>
         <a href="#contact" data-i="nav_contact">Contact</a>
       </div>
       <div class="footer-col">
         <h4 data-i="fc3">Products</h4>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank">Obscuron Pro — $59</a>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank">Obscuron Elite — $149</a>
-        <a href="https://obscuron.gumroad.com/l/jkfld" target="_blank">Obscuron Agency — $89</a>
+        <a href="#products" data-i="p1_name">Obscuron Core</a>
+        <a href="#products" data-i="p2_name">Obscuron Professional</a>
+        <a href="#products" data-i="p3_name">Obscuron Enterprise</a>
       </div>
     </div>
   </div>
@@ -907,286 +521,424 @@ footer{
     </div>
   </div>
 </footer>
-
 <script>
-// ── TRANSLATIONS ──
 const T = {
-  en: {
-    nav_services:"Services",nav_agents:"Agents",nav_team:"Team",
-    nav_products:"Products",nav_contact:"Contact",nav_cta:"Get a Quote →",
-    hero_eyebrow:"AI · Automation · Intelligence",
-    hero_h1a:"We Don't",hero_h1b:"Automate.",hero_h1c:"We Architect.",
-    hero_sub:"13 specialized AI agents. 9 operational domains. Intelligence infrastructure custom-engineered for businesses that refuse to operate at human speed.",
-    hero_cta1:"Start a Project →",hero_cta2:"Meet the Agents",
-    stat1:"AI Agents",stat2:"Service Domains",stat3:"Projects Delivered",stat4:"Languages",
-    services_eyebrow:"What We Build",
-    services_title:"Nine Domains.",services_title2:"Infinite Leverage.",
-    services_sub:"Every engagement is custom-scoped. No templates, no fixed packages — only architectures built for your exact context.",
-    s1_name:"AI Strategy & Consulting",s1_desc:"Full-stack intelligence audits. We map where AI compounds your advantage — and where it doesn't.",
-    s2_name:"Business Process Automation",s2_desc:"Eliminate the operational drag. We automate workflows, approvals, and reporting at depth.",
-    s3_name:"Data Intelligence & BI",s3_desc:"Live dashboards, predictive signals, and decision-grade analytics — built for speed and clarity.",
-    s4_name:"Lead Generation & Sales AI",s4_desc:"AI-driven prospecting pipelines that qualify, enrich, and engage — before your competitors wake up.",
-    s5_name:"Web & Digital Solutions",s5_desc:"Precision-built digital presence. Performance and identity at every layer.",
-    s6_name:"Creative AI & Content",s6_desc:"Brand-aligned content at scale. Copywriting, visual direction, and campaign intelligence.",
-    s7_name:"Customer Service AI",s7_desc:"Intelligent support agents that resolve, escalate, and learn — across all channels simultaneously.",
-    s8_name:"Digital Marketing & SEO AI",s8_desc:"Algorithmic growth engines. Organic reach, paid performance, and conversion intelligence — unified.",
-    s9_name:"AI Training & Workshops",s9_desc:"Organizational AI fluency — from executive briefings to hands-on implementation sessions.",
-    services_note:"All services are custom-quoted. We scope every engagement individually — because your business is not a template.",
-    agents_eyebrow:"The Workforce™",agents_title:"Thirteen Agents.",agents_title2:"Always Operational.",
-    agents_sub:"Each agent is purpose-built for a specific intelligence domain.",
-    agt1:"AI Strategist",agt2:"Automation Architect",agt3:"Data Intelligence",agt4:"Lead Generation",
-    agt5:"Web Systems",agt6:"Creative AI",agt7:"Customer Intelligence",agt8:"Market Analytics",
-    agt9:"SEO & Growth",agt10:"Security & Ops",agt11:"Content Strategy",agt12:"Training Systems",agt13:"Stealth Operations",
-    pipeline_eyebrow:"How It Works",pipeline_title:"From Discovery",pipeline_title2:"to Continuous Intelligence.",
-    step1_t:"Discovery Call",step1_d:"We map your operations, goals, and intelligence gaps.",
-    step2_t:"Agent Assignment",step2_d:"We select and configure the exact agents your use case demands.",
-    step3_t:"Live Deployment",step3_d:"Your intelligence infrastructure goes live — integrated into your existing stack.",
-    step4_t:"Continuous Intelligence",step4_d:"Agents learn, adapt, and report — your advantage compounds over time.",
-    team_eyebrow:"Leadership",team_title:"The Minds",team_title2:"Behind the Machine.",
-    tm1_title:"Founder & CEO",tm1_bio:"AI entrepreneur and IBM AI Engineering certified architect. Founder of the Obscuron intelligence framework.",
-    tm2_title:"Head of AI Operations",tm2_bio:"Leads the multi-agent pipeline and enterprise automation layer across complex organizational environments.",
-    tm3_title:"Chief Strategy Officer",tm3_bio:"Drives client engagement and business development across five markets.",
-    products_eyebrow:"Ready-to-Deploy",products_title:"Launch Today.",products_title2:"Scale Tomorrow.",
-    products_sub:"Pre-configured intelligence products for businesses ready to move immediately.",
-    p1_label:"Pro Suite",p1_name:"Obscuron Pro",p1_desc:"Complete n8n automation workflow. 13 agents pre-configured. Discord integration.",
-    p2_label:"Elite Bundle — Most Popular",p2_name:"Obscuron Elite",p2_desc:"Full stack: workflows, Discord integration, priority onboarding support.",
-    p3_label:"Agency Kit",p3_name:"Obscuron Agency",p3_desc:"Lead generation and email automation stack purpose-built for agencies.",
-    p_once:"one-time",p_buy:"Get Access →",
-    contact_eyebrow:"Start Your Project",contact_title:"Let's Build",contact_title2:"Something Significant.",
-    contact_sub:"Every engagement starts with a conversation. Tell us what you're trying to build.",
-    contact_details:"Response within 24 hours.\nAll consultations are confidential.\nCustom pricing for every engagement.",
-    f_name:"Full Name",f_email:"Email",f_company:"Company",f_project:"Project Description",
-    f_submit:"Request Custom Quote →",f_note:"© 2026 ObscuronLabs™ — All communications are confidential.",
-    faq_eyebrow:"Common Questions",faq_title:"Before You Ask.",faq_title2:"We've Answered.",
-    fq1:"How are services priced?",fa1:"Every engagement is custom-quoted. We don't do templates — because your business isn't one.",
-    fq2:"Which AI models power your agents?",fa2:"We work with OpenAI, Anthropic Claude, and custom models via OpenRouter. Model selection depends on the task.",
-    fq3:"Do I need technical knowledge?",fa3:"No. Our agents handle all technical complexity. You use the results.",
-    fq4:"How long does deployment take?",fa4:"Typically 3–14 days. Emergency deployments available for time-critical engagements.",
-    fq5:"Is my data secure?",fa5:"Yes. All workflows run in isolated environments. No data is retained beyond the engagement.",
-    fq6:"Can agents work together?",fa6:"Yes — our multi-agent pipeline routes tasks automatically between specialized agents.",
-    footer_desc:"AI intelligence infrastructure for businesses that demand advantage, not just automation.",
-    fc1:"Services",fc2:"Company",fc3:"Products",fp1:"Privacy Policy",fp2:"Terms of Service"
-  },
-  tr: {
-    nav_services:"Hizmetler",nav_agents:"Ajanlar",nav_team:"Ekip",
-    nav_products:"Ürünler",nav_contact:"İletişim",nav_cta:"Teklif Al →",
-    hero_eyebrow:"YZ · Otomasyon · Zeka",
-    hero_h1a:"Sadece",hero_h1b:"Otomatize Etmiyoruz.",hero_h1c:"Mühendislik Yapıyoruz.",
-    hero_sub:"13 uzman yapay zeka ajanı. 9 operasyonel alan. İnsan hızında çalışmayı reddeden işletmeler için özel mühendislik.",
-    hero_cta1:"Projeye Başla →",hero_cta2:"Ajanları Tanı",
-    stat1:"YZ Ajanı",stat2:"Hizmet Alanı",stat3:"Tamamlanan Proje",stat4:"Desteklenen Dil",
-    services_eyebrow:"Ne İnşa Ediyoruz",services_title:"Dokuz Alan.",services_title2:"Sonsuz Kaldıraç.",
-    services_sub:"Her proje özel kapsamlıdır. Şablonlar yok, sabit paketler yok — yalnızca sizin bağlamınız için mimariler.",
-    s1_name:"YZ Strateji & Danışmanlık",s1_desc:"Tam yığın zeka denetimleri. YZ'nin avantajınızı nerede artırdığını haritalıyoruz.",
-    s2_name:"İş Süreci Otomasyonu",s2_desc:"Operasyonel yükü ortadan kaldırın. İş akışlarını, onayları ve raporlamayı derinlemesine otomatize ediyoruz.",
-    s3_name:"Veri Zekası & BI",s3_desc:"Canlı gösterge panelleri, tahmine dayalı sinyaller ve karar kalitesinde analizler.",
-    s4_name:"Müşteri Adayı Üretimi & Satış YZ",s4_desc:"Rakipleriniz uyanmadan önce nitelendiren, zenginleştiren ve etkileşim kuran YZ odaklı boru hatları.",
-    s5_name:"Web & Dijital Çözümler",s5_desc:"Hassas inşa edilmiş dijital varlık. Her katmanda performans ve kimlik.",
-    s6_name:"Yaratıcı YZ & İçerik",s6_desc:"Ölçekte marka uyumlu içerik. Metin yazarlığı, görsel yön ve kampanya zekası.",
-    s7_name:"Müşteri Hizmetleri YZ",s7_desc:"Tüm kanallarda aynı anda çözen, yükselten ve öğrenen akıllı destek ajanları.",
-    s8_name:"Dijital Pazarlama & SEO YZ",s8_desc:"Algoritmik büyüme motorları. Organik erişim, ücretli performans ve dönüşüm zekası — birleşik.",
-    s9_name:"YZ Eğitimi & Atölyeler",s9_desc:"Organizasyonel YZ akıcılığı — yönetici brifingleri'nden uygulamalı oturumlara.",
-    services_note:"Tüm hizmetler özel fiyatlandırılır. Her projeyi bireysel olarak kapsamlandırıyoruz — çünkü işiniz bir şablon değil.",
-    agents_eyebrow:"İşgücü™",agents_title:"On Üç Ajan.",agents_title2:"Her Zaman Operasyonel.",
-    agents_sub:"Her ajan belirli bir zeka alanı için özel olarak inşa edilmiştir.",
-    agt1:"YZ Stratejisti",agt2:"Otomasyon Mimarı",agt3:"Veri Zekası",agt4:"Müşteri Adayı Üretimi",
-    agt5:"Web Sistemleri",agt6:"Yaratıcı YZ",agt7:"Müşteri Zekası",agt8:"Pazar Analitiği",
-    agt9:"SEO & Büyüme",agt10:"Güvenlik & Ops",agt11:"İçerik Stratejisi",agt12:"Eğitim Sistemleri",agt13:"Gizli Operasyonlar",
-    pipeline_eyebrow:"Nasıl Çalışır",pipeline_title:"Keşiften",pipeline_title2:"Sürekli Zekaya.",
-    step1_t:"Keşif Görüşmesi",step1_d:"Operasyonlarınızı, hedeflerinizi ve zeka boşluklarınızı haritalıyoruz.",
-    step2_t:"Ajan Ataması",step2_d:"Kullanım durumunuzun gerektirdiği tam ajanları seçip yapılandırıyoruz.",
-    step3_t:"Canlı Dağıtım",step3_d:"Zeka altyapınız canlıya geçiyor — mevcut yığınınıza entegre edilmiş.",
-    step4_t:"Sürekli Zeka",step4_d:"Ajanlar öğrenir, uyum sağlar ve raporlar — avantajınız zaman içinde birikir.",
-    team_eyebrow:"Liderlik",team_title:"Makinenin",team_title2:"Arkasındaki Zihinler.",
-    tm1_title:"Kurucu & CEO",tm1_bio:"YZ girişimcisi ve IBM YZ Mühendisliği sertifikalı mimar. Obscuron zeka çerçevesinin kurucusu.",
-    tm2_title:"YZ Operasyonları Başkanı",tm2_bio:"Çok ajanlı boru hattını ve kurumsal otomasyon katmanını yönetir.",
-    tm3_title:"Strateji Direktörü",tm3_bio:"Beş piyasada müşteri katılımı ve iş geliştirmeyi yönetir.",
-    products_eyebrow:"Hazır Dağıtım",products_title:"Bugün Başlat.",products_title2:"Yarın Ölçeklendir.",
-    products_sub:"Hemen harekete geçmeye hazır işletmeler için önceden yapılandırılmış ürünler.",
-    p1_label:"Pro Paketi",p1_name:"Obscuron Pro",p1_desc:"Tam n8n otomasyon iş akışı. 13 ajan önceden yapılandırılmış. Discord entegrasyonu.",
-    p2_label:"Elite Paket — En Popüler",p2_name:"Obscuron Elite",p2_desc:"Tam yığın: iş akışları, Discord entegrasyonu, öncelikli destek.",
-    p3_label:"Ajans Kiti",p3_name:"Obscuron Agency",p3_desc:"Ajanslar için özel olarak inşa edilmiş müşteri adayı üretimi ve e-posta otomasyonu.",
-    p_once:"tek seferlik",p_buy:"Erişim Al →",
-    contact_eyebrow:"Projenizi Başlatın",contact_title:"Birlikte İnşa",contact_title2:"Edelim.",
-    contact_sub:"Her proje bir konuşmayla başlar. Neyi inşa etmek istediğinizi bize söyleyin.",
-    contact_details:"24 saat içinde yanıt.\nTüm danışmalar gizlidir.\nHer proje için özel fiyatlandırma.",
-    f_name:"Ad Soyad",f_email:"E-posta",f_company:"Şirket",f_project:"Proje Açıklaması",
-    f_submit:"Özel Teklif İste →",f_note:"© 2026 ObscuronLabs™ — Tüm iletişimler gizlidir.",
-    faq_eyebrow:"Sık Sorulan Sorular",faq_title:"Sormadan Önce.",faq_title2:"Yanıtladık.",
-    fq1:"Hizmetler nasıl fiyatlandırılır?",fa1:"Her proje özel fiyatlandırılır. Şablonlar kullanmıyoruz — çünkü işiniz bir şablon değil.",
-    fq2:"Ajanlarınız hangi YZ modellerini kullanıyor?",fa2:"OpenAI, Anthropic Claude ve OpenRouter üzerinden özel modeller. Model seçimi göreve bağlıdır.",
-    fq3:"Teknik bilgiye ihtiyacım var mı?",fa3:"Hayır. Ajanlarımız tüm teknik karmaşıklığı halleder. Siz sonuçları kullanırsınız.",
-    fq4:"Dağıtım ne kadar sürer?",fa4:"Genellikle 3–14 gün. Acil dağıtımlar da mevcuttur.",
-    fq5:"Verilerim güvende mi?",fa5:"Evet. Tüm iş akışları izole ortamlarda çalışır. Veriler proje dışında saklanmaz.",
-    fq6:"Ajanlar birlikte çalışabilir mi?",fa6:"Evet — çok ajanlı boru hattımız görevleri ajanlar arasında otomatik olarak yönlendirir.",
-    footer_desc:"Sadece otomasyon değil, avantaj talep eden işletmeler için YZ zeka altyapısı.",
-    fc1:"Hizmetler",fc2:"Şirket",fc3:"Ürünler",fp1:"Gizlilik Politikası",fp2:"Kullanım Şartları"
-  },
-  de: {
-    nav_services:"Leistungen",nav_agents:"Agenten",nav_team:"Team",
-    nav_products:"Produkte",nav_contact:"Kontakt",nav_cta:"Angebot →",
-    hero_eyebrow:"KI · Automatisierung · Intelligenz",
-    hero_h1a:"Wir automatisieren",hero_h1b:"nicht einfach.",hero_h1c:"Wir bauen.",
-    hero_sub:"13 spezialisierte KI-Agenten. 9 Einsatzdomänen. Intelligenzinfrastruktur für Unternehmen, die sich weigern, im Menschentakt zu arbeiten.",
-    hero_cta1:"Projekt starten →",hero_cta2:"Agenten kennenlernen",
-    stat1:"KI-Agenten",stat2:"Servicedomänen",stat3:"Projekte abgeschlossen",stat4:"Sprachen",
-    services_eyebrow:"Was wir bauen",services_title:"Neun Domänen.",services_title2:"Unendlicher Hebel.",
-    services_sub:"Jedes Engagement ist individuell. Keine Vorlagen, keine Festpakete — nur Architekturen für Ihren genauen Kontext.",
-    s1_name:"KI-Strategie & Beratung",s1_desc:"Vollständige Intelligenzaudits. Wir kartieren, wo KI Ihren Vorteil vervielfacht.",
-    s2_name:"Geschäftsprozessautomatisierung",s2_desc:"Operativen Ballast beseitigen. Workflows, Genehmigungen und Reporting tiefgreifend automatisieren.",
-    s3_name:"Dateintelligenz & BI",s3_desc:"Live-Dashboards, prädiktive Signale und entscheidungsreife Analysen.",
-    s4_name:"Lead-Generierung & Vertriebs-KI",s4_desc:"KI-gesteuerte Prospecting-Pipelines, die qualifizieren, anreichern und einbinden.",
-    s5_name:"Web & Digitale Lösungen",s5_desc:"Präzise gebaute digitale Präsenz. Leistung und Identität auf jeder Ebene.",
-    s6_name:"Kreative KI & Content",s6_desc:"Markenkonformer Content im Maßstab. Texterstellung, visuelle Richtung und Kampagnenintelligenz.",
-    s7_name:"Kundenservice-KI",s7_desc:"Intelligente Support-Agenten, die lösen, eskalieren und lernen — auf allen Kanälen.",
-    s8_name:"Digitales Marketing & SEO-KI",s8_desc:"Algorithmische Wachstumsmaschinen. Organische Reichweite und Conversion-Intelligenz.",
-    s9_name:"KI-Training & Workshops",s9_desc:"Organisationale KI-Kompetenz — von Führungsbriefings bis zu praktischen Sessions.",
-    services_note:"Alle Leistungen werden individuell kalkuliert. Wir scopen jedes Engagement einzeln.",
-    agents_eyebrow:"Die Belegschaft™",agents_title:"Dreizehn Agenten.",agents_title2:"Immer im Einsatz.",
-    agents_sub:"Jeder Agent ist für eine spezifische Intelligenzdomäne entwickelt.",
-    agt1:"KI-Stratege",agt2:"Automatisierungsarchitekt",agt3:"Dateintelligenz",agt4:"Lead-Generierung",
-    agt5:"Web-Systeme",agt6:"Kreative KI",agt7:"Kundenintelligenz",agt8:"Marktanalyse",
-    agt9:"SEO & Wachstum",agt10:"Sicherheit & Ops",agt11:"Content-Strategie",agt12:"Trainingssysteme",agt13:"Verdeckte Operationen",
-    pipeline_eyebrow:"So funktioniert es",pipeline_title:"Von der Entdeckung",pipeline_title2:"zur kontinuierlichen Intelligenz.",
-    step1_t:"Discovery Call",step1_d:"Wir kartieren Ihre Abläufe, Ziele und Intelligenzlücken.",
-    step2_t:"Agentenzuweisung",step2_d:"Wir wählen die exakt passenden Agenten für Ihren Anwendungsfall.",
-    step3_t:"Live-Deployment",step3_d:"Ihre Intelligenzinfrastruktur geht live — in Ihren Stack integriert.",
-    step4_t:"Kontinuierliche Intelligenz",step4_d:"Agenten lernen, passen sich an und berichten — Ihr Vorteil wächst.",
-    team_eyebrow:"Führung",team_title:"Die Köpfe",team_title2:"hinter der Maschine.",
-    tm1_title:"Gründer & CEO",tm1_bio:"KI-Unternehmer und IBM KI-Engineering-zertifizierter Architekt. Gründer des Obscuron-Intelligenzrahmens.",
-    tm2_title:"Leiter KI-Betrieb",tm2_bio:"Leitet die Multi-Agenten-Pipeline und die Unternehmensautomatisierungsschicht.",
-    tm3_title:"Chief Strategy Officer",tm3_bio:"Treibt Kundenbindung und Geschäftsentwicklung in fünf Märkten voran.",
-    products_eyebrow:"Sofort einsatzbereit",products_title:"Heute starten.",products_title2:"Morgen skalieren.",
-    products_sub:"Vorkonfigurierte Intelligenzprodukte für Unternehmen, die sofort loslegen wollen.",
-    p1_label:"Pro Suite",p1_name:"Obscuron Pro",p1_desc:"Vollständiger n8n-Automatisierungs-Workflow. 13 Agenten vorkonfiguriert.",
-    p2_label:"Elite Bundle — Beliebtestes",p2_name:"Obscuron Elite",p2_desc:"Vollständiger Stack: Workflows, Discord-Integration, Priority-Support.",
-    p3_label:"Agentur-Kit",p3_name:"Obscuron Agency",p3_desc:"Lead-Generierung und E-Mail-Automatisierung für Agenturen.",
-    p_once:"einmalig",p_buy:"Zugang holen →",
-    contact_eyebrow:"Ihr Projekt starten",contact_title:"Lass uns etwas",contact_title2:"Bedeutendes bauen.",
-    contact_sub:"Jedes Engagement beginnt mit einem Gespräch.",
-    contact_details:"Antwort innerhalb 24 Stunden.\nAlle Beratungen sind vertraulich.\nIndividuelle Preise für jedes Projekt.",
-    f_name:"Vollständiger Name",f_email:"E-Mail",f_company:"Unternehmen",f_project:"Projektbeschreibung",
-    f_submit:"Individuelles Angebot anfragen →",f_note:"© 2026 ObscuronLabs™ — Alle Kommunikationen sind vertraulich.",
-    faq_eyebrow:"Häufige Fragen",faq_title:"Bevor Sie fragen.",faq_title2:"Haben wir geantwortet.",
-    fq1:"Wie werden Leistungen berechnet?",fa1:"Jedes Engagement wird individuell kalkuliert. Keine Vorlagen.",
-    fq2:"Welche KI-Modelle nutzen Ihre Agenten?",fa2:"OpenAI, Anthropic Claude und benutzerdefinierte Modelle via OpenRouter.",
-    fq3:"Brauche ich technisches Wissen?",fa3:"Nein. Unsere Agenten übernehmen die gesamte technische Komplexität.",
-    fq4:"Wie lange dauert das Deployment?",fa4:"Typischerweise 3–14 Tage. Notfalldeployments verfügbar.",
-    fq5:"Sind meine Daten sicher?",fa5:"Ja. Alle Workflows laufen in isolierten Umgebungen. Keine Datenspeicherung über das Projekt hinaus.",
-    fq6:"Können Agenten zusammenarbeiten?",fa6:"Ja — unsere Multi-Agenten-Pipeline leitet Aufgaben automatisch weiter.",
-    footer_desc:"KI-Intelligenzinfrastruktur für Unternehmen, die mehr als Automatisierung verlangen.",
-    fc1:"Leistungen",fc2:"Unternehmen",fc3:"Produkte",fp1:"Datenschutz",fp2:"AGB"
-  },
-  it: {
-    nav_services:"Servizi",nav_agents:"Agenti",nav_team:"Team",
-    nav_products:"Prodotti",nav_contact:"Contatti",nav_cta:"Richiedi Preventivo →",
-    hero_eyebrow:"IA · Automazione · Intelligenza",
-    hero_h1a:"Non",hero_h1b:"Automatizziamo.",hero_h1c:"Progettiamo.",
-    hero_sub:"13 agenti IA specializzati. 9 domini operativi. Infrastruttura di intelligenza per aziende che rifiutano di operare alla velocità umana.",
-    hero_cta1:"Avvia un Progetto →",hero_cta2:"Conosci gli Agenti",
-    stat1:"Agenti IA",stat2:"Domini di Servizio",stat3:"Progetti Consegnati",stat4:"Lingue",
-    services_eyebrow:"Cosa Costruiamo",services_title:"Nove Domini.",services_title2:"Leva Infinita.",
-    services_sub:"Ogni progetto è personalizzato. Nessun modello, nessun pacchetto fisso — solo architetture per il tuo contesto.",
-    s1_name:"Strategia IA & Consulenza",s1_desc:"Audit completi di intelligenza. Mappiamo dove l'IA moltiplica il tuo vantaggio.",
-    s2_name:"Automazione dei Processi Aziendali",s2_desc:"Elimina il freno operativo. Automatizziamo workflow, approvazioni e reportistica.",
-    s3_name:"Data Intelligence & BI",s3_desc:"Dashboard live, segnali predittivi e analisi di qualità decisionale.",
-    s4_name:"Lead Generation & Sales IA",s4_desc:"Pipeline di prospecting guidate dall'IA che qualificano, arricchiscono e coinvolgono.",
-    s5_name:"Soluzioni Web & Digitali",s5_desc:"Presenza digitale costruita con precisione. Performance e identità a ogni livello.",
-    s6_name:"IA Creativa & Contenuti",s6_desc:"Contenuti allineati al brand su larga scala. Copywriting, direzione visiva e intelligenza campagna.",
-    s7_name:"Customer Service IA",s7_desc:"Agenti di supporto intelligenti che risolvono, escalano e imparano — su tutti i canali.",
-    s8_name:"Digital Marketing & SEO IA",s8_desc:"Motori di crescita algoritmici. Portata organica e intelligenza di conversione — unificati.",
-    s9_name:"Formazione IA & Workshop",s9_desc:"Competenza IA organizzativa — da briefing dirigenziali a sessioni pratiche.",
-    services_note:"Tutti i servizi sono quotati su misura. Definiamo ogni progetto individualmente.",
-    agents_eyebrow:"La Forza Lavoro™",agents_title:"Tredici Agenti.",agents_title2:"Sempre Operativi.",
-    agents_sub:"Ogni agente è costruito per uno specifico dominio di intelligenza.",
-    agt1:"Stratega IA",agt2:"Architetto dell'Automazione",agt3:"Data Intelligence",agt4:"Lead Generation",
-    agt5:"Sistemi Web",agt6:"IA Creativa",agt7:"Customer Intelligence",agt8:"Analisi di Mercato",
-    agt9:"SEO & Crescita",agt10:"Sicurezza & Ops",agt11:"Strategia Contenuti",agt12:"Sistemi di Formazione",agt13:"Operazioni Riservate",
-    pipeline_eyebrow:"Come Funziona",pipeline_title:"Dalla Scoperta",pipeline_title2:"all'Intelligenza Continua.",
-    step1_t:"Discovery Call",step1_d:"Mappiamo le tue operazioni, obiettivi e lacune di intelligenza.",
-    step2_t:"Assegnazione Agenti",step2_d:"Selezioniamo e configuriamo gli agenti esatti per il tuo caso d'uso.",
-    step3_t:"Deployment Live",step3_d:"La tua infrastruttura di intelligenza va in diretta — integrata nel tuo stack.",
-    step4_t:"Intelligenza Continua",step4_d:"Gli agenti imparano, si adattano e riportano — il tuo vantaggio cresce.",
-    team_eyebrow:"Leadership",team_title:"Le Menti",team_title2:"Dietro la Macchina.",
-    tm1_title:"Fondatore & CEO",tm1_bio:"Imprenditore IA certificato IBM AI Engineering. Fondatore del framework di intelligenza Obscuron.",
-    tm2_title:"Responsabile Operazioni IA",tm2_bio:"Guida la pipeline multi-agente e lo strato di automazione aziendale.",
-    tm3_title:"Chief Strategy Officer",tm3_bio:"Guida il coinvolgimento clienti e lo sviluppo commerciale in cinque mercati.",
-    products_eyebrow:"Pronti al Deploy",products_title:"Lancia Oggi.",products_title2:"Scala Domani.",
-    products_sub:"Prodotti di intelligenza preconfigurati per aziende pronte a muoversi subito.",
-    p1_label:"Pro Suite",p1_name:"Obscuron Pro",p1_desc:"Workflow di automazione n8n completo. 13 agenti preconfigurati.",
-    p2_label:"Elite Bundle — Più Popolare",p2_name:"Obscuron Elite",p2_desc:"Stack completo: workflow, integrazione Discord, supporto prioritario.",
-    p3_label:"Agency Kit",p3_name:"Obscuron Agency",p3_desc:"Stack di lead generation ed email automation per agenzie.",
-    p_once:"una tantum",p_buy:"Ottieni Accesso →",
-    contact_eyebrow:"Avvia il Tuo Progetto",contact_title:"Costruiamo",contact_title2:"Qualcosa di Significativo.",
-    contact_sub:"Ogni progetto inizia con una conversazione.",
-    contact_details:"Risposta entro 24 ore.\nTutte le consulenze sono riservate.\nPrezzi personalizzati per ogni progetto.",
-    f_name:"Nome Completo",f_email:"Email",f_company:"Azienda",f_project:"Descrizione Progetto",
-    f_submit:"Richiedi Preventivo Personalizzato →",f_note:"© 2026 ObscuronLabs™ — Tutte le comunicazioni sono riservate.",
-    faq_eyebrow:"Domande Frequenti",faq_title:"Prima che tu chieda.",faq_title2:"Abbiamo risposto.",
-    fq1:"Come vengono quotati i servizi?",fa1:"Ogni progetto è quotato su misura. Non usiamo modelli.",
-    fq2:"Quali modelli IA usano i vostri agenti?",fa2:"OpenAI, Anthropic Claude e modelli personalizzati via OpenRouter.",
-    fq3:"Ho bisogno di conoscenze tecniche?",fa3:"No. I nostri agenti gestiscono tutta la complessità tecnica.",
-    fq4:"Quanto tempo richiede il deployment?",fa4:"Tipicamente 3–14 giorni. Deployment d'emergenza disponibili.",
-    fq5:"I miei dati sono al sicuro?",fa5:"Sì. Tutti i workflow girano in ambienti isolati. Nessun dato conservato.",
-    fq6:"Gli agenti possono collaborare?",fa6:"Sì — la nostra pipeline multi-agente instrada automaticamente i compiti.",
-    footer_desc:"Infrastruttura di intelligenza IA per aziende che esigono vantaggio, non solo automazione.",
-    fc1:"Servizi",fc2:"Azienda",fc3:"Prodotti",fp1:"Privacy",fp2:"Termini di Servizio"
-  },
-  ar: {
-    nav_services:"الخدمات",nav_agents:"الوكلاء",nav_team:"الفريق",
-    nav_products:"المنتجات",nav_contact:"التواصل",nav_cta:"احصل على عرض →",
-    hero_eyebrow:"الذكاء الاصطناعي · الأتمتة · الذكاء",
-    hero_h1a:"لا نُؤتمت",hero_h1b:"فحسب.",hero_h1c:"نحن نبني.",
-    hero_sub:"13 وكيل ذكاء اصطناعي متخصص. 9 مجالات تشغيلية. بنية تحتية استخباراتية لمؤسسات ترفض العمل بالسرعة البشرية.",
-    hero_cta1:"ابدأ مشروعاً →",hero_cta2:"تعرف على الوكلاء",
-    stat1:"وكلاء الذكاء الاصطناعي",stat2:"مجالات الخدمة",stat3:"مشاريع مُنجزة",stat4:"لغات مدعومة",
-    services_eyebrow:"ما نبنيه",services_title:"تسعة مجالات.",services_title2:"نفوذ لا محدود.",
-    services_sub:"كل مشروع مُصمَّم خصيصاً. لا قوالب، لا حزم ثابتة — فقط بنى مصممة لسياقك.",
-    s1_name:"استراتيجية الذكاء الاصطناعي والاستشارات",s1_desc:"تدقيقات شاملة للذكاء. نرسم خريطة حيث يُضاعف الذكاء الاصطناعي ميزتك.",
-    s2_name:"أتمتة العمليات التجارية",s2_desc:"القضاء على الثقل التشغيلي. أتمتة سير العمل والموافقات والتقارير.",
-    s3_name:"ذكاء البيانات وذكاء الأعمال",s3_desc:"لوحات معلومات مباشرة وإشارات تنبؤية وتحليلات بجودة القرار.",
-    s4_name:"توليد العملاء المحتملين والمبيعات بالذكاء الاصطناعي",s4_desc:"خطوط أنابيب التنقيب المدفوعة بالذكاء الاصطناعي.",
-    s5_name:"الحلول الرقمية والويب",s5_desc:"حضور رقمي مبني بدقة. الأداء والهوية في كل طبقة.",
-    s6_name:"الذكاء الاصطناعي الإبداعي والمحتوى",s6_desc:"محتوى متوافق مع العلامة التجارية على نطاق واسع.",
-    s7_name:"ذكاء اصطناعي لخدمة العملاء",s7_desc:"وكلاء دعم ذكيون يحلون ويُصعّدون ويتعلمون عبر جميع القنوات.",
-    s8_name:"التسويق الرقمي وتحسين محركات البحث بالذكاء الاصطناعي",s8_desc:"محركات نمو خوارزمية. وصول عضوي وذكاء التحويل — موحَّد.",
-    s9_name:"تدريب الذكاء الاصطناعي وورش العمل",s9_desc:"كفاءة الذكاء الاصطناعي التنظيمية — من إحاطات المديرين إلى الجلسات العملية.",
-    services_note:"جميع الخدمات مسعَّرة بشكل مخصص. نحدد نطاق كل مشروع بشكل فردي.",
-    agents_eyebrow:"القوى العاملة™",agents_title:"ثلاثة عشر وكيلاً.",agents_title2:"دائماً في العمل.",
-    agents_sub:"كل وكيل مبني خصيصاً لمجال ذكاء محدد.",
-    agt1:"استراتيجي الذكاء الاصطناعي",agt2:"مهندس الأتمتة",agt3:"ذكاء البيانات",agt4:"توليد العملاء",
-    agt5:"أنظمة الويب",agt6:"الذكاء الاصطناعي الإبداعي",agt7:"ذكاء العملاء",agt8:"تحليلات السوق",
-    agt9:"تحسين محركات البحث والنمو",agt10:"الأمن والعمليات",agt11:"استراتيجية المحتوى",agt12:"أنظمة التدريب",agt13:"العمليات السرية",
-    pipeline_eyebrow:"كيف يعمل",pipeline_title:"من الاكتشاف",pipeline_title2:"إلى الذكاء المستمر.",
-    step1_t:"مكالمة الاكتشاف",step1_d:"نرسم خريطة عملياتك وأهدافك وثغرات الذكاء لديك.",
-    step2_t:"تعيين الوكلاء",step2_d:"نختار ونُهيئ الوكلاء المناسبين تماماً لحالتك.",
-    step3_t:"النشر المباشر",step3_d:"تعمل بنيتك التحتية الاستخباراتية مباشرة — متكاملة مع منظومتك.",
-    step4_t:"الذكاء المستمر",step4_d:"يتعلم الوكلاء ويتكيفون ويُبلّغون — تتراكم ميزتك بمرور الوقت.",
-    team_eyebrow:"القيادة",team_title:"العقول",team_title2:"وراء الآلة.",
-    tm1_title:"المؤسس والرئيس التنفيذي",tm1_bio:"رائد أعمال في الذكاء الاصطناعي وحاصل على شهادة IBM AI Engineering. مؤسس إطار الذكاء Obscuron.",
-    tm2_title:"رئيس عمليات الذكاء الاصطناعي",tm2_bio:"يقود خط أنابيب الوكلاء المتعددين وطبقة الأتمتة المؤسسية.",
-    tm3_title:"كبير مسؤولي الاستراتيجية",tm3_bio:"يقود مشاركة العملاء وتطوير الأعمال في خمسة أسواق.",
-    products_eyebrow:"جاهز للنشر",products_title:"ابدأ اليوم.",products_title2:"توسَّع غداً.",
-    products_sub:"منتجات ذكاء مُهيَّأة مسبقاً للمؤسسات المستعدة للتحرك فوراً.",
-    p1_label:"الحزمة الاحترافية",p1_name:"Obscuron Pro",p1_desc:"سير عمل أتمتة n8n كامل. 13 وكيل مُهيَّأ مسبقاً.",
-    p2_label:"الحزمة النخبة — الأكثر شعبية",p2_name:"Obscuron Elite",p2_desc:"المنظومة الكاملة: سير العمل وتكامل Discord والدعم ذي الأولوية.",
-    p3_label:"حزمة الوكالة",p3_name:"Obscuron Agency",p3_desc:"توليد العملاء وأتمتة البريد الإلكتروني للوكالات.",
-    p_once:"دفعة واحدة",p_buy:"احصل على الوصول →",
-    contact_eyebrow:"ابدأ مشروعك",contact_title:"لنبني",contact_title2:"شيئاً ذا قيمة.",
-    contact_sub:"كل مشروع يبدأ بمحادثة. أخبرنا بما تريد بناءه.",
-    contact_details:"رد خلال 24 ساعة.\nجميع الاستشارات سرية.\nتسعير مخصص لكل مشروع.",
-    f_name:"الاسم الكامل",f_email:"البريد الإلكتروني",f_company:"الشركة",f_project:"وصف المشروع",
-    f_submit:"طلب عرض سعر مخصص →",f_note:"© 2026 ObscuronLabs™ — جميع الاتصالات سرية.",
-    faq_eyebrow:"أسئلة شائعة",faq_title:"قبل أن تسأل.",faq_title2:"أجبنا.",
-    fq1:"كيف يتم تسعير الخدمات؟",fa1:"كل مشروع مسعَّر بشكل مخصص. لا نستخدم قوالب.",
-    fq2:"ما نماذج الذكاء الاصطناعي التي يستخدمها وكلاؤكم؟",fa2:"OpenAI وAnthropic Claude ونماذج مخصصة عبر OpenRouter.",
-    fq3:"هل أحتاج معرفة تقنية؟",fa3:"لا. وكلاؤنا يتعاملون مع كل التعقيد التقني.",
-    fq4:"كم يستغرق النشر؟",fa4:"عادةً 3–14 أيام. النشر الطارئ متاح أيضاً.",
-    fq5:"هل بياناتي آمنة؟",fa5:"نعم. تعمل جميع سير العمل في بيئات معزولة.",
-    fq6:"هل يمكن للوكلاء العمل معاً؟",fa6:"نعم — يوجّه خط الأنابيب متعدد الوكلاء المهام تلقائياً.",
-    footer_desc:"بنية تحتية استخباراتية للذكاء الاصطناعي للمؤسسات التي تطالب بالميزة لا مجرد الأتمتة.",
-    fc1:"الخدمات",fc2:"الشركة",fc3:"المنتجات",fp1:"سياسة الخصوصية",fp2:"شروط الخدمة"
-  }
+en:{
+nav_home:"Home",nav_services:"Services",nav_solutions:"Solutions",nav_products:"Products",nav_projects:"Projects",nav_about:"About",nav_contact:"Contact",nav_cta:"Talk to Us →",
+hero_eyebrow:"AI · AUTOMATION · DIGITAL INTELLIGENCE",hero_h1a:"YOUR BUSINESS",hero_h1b:"RUNS WHILE",hero_h1c:"YOU SLEEP.",
+hero_sub:"We deploy AI agents, automation systems, and digital intelligence infrastructure for businesses that refuse to operate at human speed.",
+hero_cta1:"EXPLORE SOLUTIONS →",hero_cta2:"TALK TO US",
+stat1:"AI Agents",stat2:"Service Domains",stat3:"Projects Delivered",stat4:"Languages Supported",
+services_eyebrow:"WHAT WE BUILD",services_title:"Six Domains.",services_title2:"Infinite Leverage.",
+services_sub:"Every engagement is custom-scoped. No templates — only architectures built for your exact context.",
+s1_name:"AI Solutions",s1_desc:"End-to-end AI system design and deployment. From model selection to production infrastructure.",
+s2_name:"Business Automation",s2_desc:"Eliminate operational drag. We automate workflows, approvals, and reporting at depth.",
+s3_name:"AI Agents & Multi-Agent Systems",s3_desc:"Coordinated AI agent networks that operate autonomously across your entire business.",
+s4_name:"Data & Business Intelligence",s4_desc:"Live dashboards, predictive signals, and decision-grade analytics built for speed and clarity.",
+s5_name:"Digital Solutions",s5_desc:"Precision-built digital presence. Architecture, performance, and identity at every layer.",
+s6_name:"AI Consulting & Implementation",s6_desc:"Strategic AI roadmaps, model evaluation, and hands-on implementation support.",
+services_note:"All services are custom-quoted. We scope every engagement individually — because your business is not a template.",
+solutions_eyebrow:"BUILT AROUND YOUR BUSINESS",solutions_title:"Custom Solutions.",solutions_title2:"Zero Compromise.",
+solutions_sub:"We don't sell packages. We engineer solutions specific to your operations, your stack, and your goals.",
+sol1_name:"Enterprise AI Integration",sol1_desc:"Full-stack AI deployment into your existing infrastructure. Custom models, agent coordination, and monitoring — built for enterprise scale.",
+sol2_name:"Workflow Intelligence",sol2_desc:"Map, analyze, and automate your critical business processes. From HR to finance to operations — we find the leverage points.",
+sol3_name:"AI-Powered Growth",sol3_desc:"Lead generation, customer intelligence, and marketing automation working as one coordinated system.",
+sol_cta:"DISCUSS YOUR PROJECT →",
+agents_eyebrow:"INTELLIGENCE NETWORK",agents_title:"Thirteen AI Systems.",agents_title2:"Always Operational.",agents_caption:"ObscuronLabs™ Intelligence Network — 13 Specialized AI Systems",
+agents_sub:"Specialized AI agents purpose-built for specific intelligence domains. Each system operates independently or as part of a coordinated multi-agent pipeline.",
+agt1:"AI Strategist — Maps business context and intelligence architecture.",agt2:"Automation Architect — Designs and deploys workflow engines.",agt3:"Data Intelligence — Transforms raw data into actionable signals.",
+agt4:"Lead Generation — Identifies, qualifies, and prioritizes prospects.",agt5:"Web Systems — Architects and deploys digital infrastructure.",agt6:"Creative AI — Generates brand-aligned content at scale.",
+agt7:"Customer Intelligence — Manages and learns from every interaction.",agt8:"Market Analytics — Real-time competitive and market intelligence.",agt9:"SEO & Growth — Drives organic reach through algorithmic precision.",
+agt10:"Security & Ops — Monitors, protects, and audits all systems.",agt11:"Content Strategy — Shapes narrative and messaging across channels.",agt12:"Training Systems — Builds and delivers AI knowledge transfer programs.",
+agt13:"Stealth Operations — Executes sensitive tasks with zero exposure.",agt14:"AI Operations Coordinator — Manages multi-agent pipeline orchestration and enterprise automation layer.",agt15:"AI Strategy Coordinator — Drives engagement analytics and business intelligence across all active pipelines.",
+pipeline_eyebrow:"HOW IT WORKS",pipeline_title:"From Discovery",pipeline_title2:"to Continuous Intelligence.",
+step1_t:"Discovery Call",step1_d:"We map your operations, goals, and intelligence gaps in a focused session.",
+step2_t:"Agent Assignment",step2_d:"We select and configure the exact agents your use case demands.",
+step3_t:"Live Deployment",step3_d:"Your intelligence infrastructure goes live — integrated into your existing stack.",
+step4_t:"Continuous Intelligence",step4_d:"Agents learn, adapt, and report — so your advantage compounds over time.",
+projects_eyebrow:"USE CASES",projects_title:"What Our AI",projects_title2:"Systems Can Do.",
+projects_sub:"Five capability examples. Real outcomes. No fabricated clients — only what our systems are built to achieve.",
+uc1_title:"Automated Sales Pipeline",uc1_desc:"AI agents qualify inbound leads, enrich contact data, draft personalized outreach, and schedule follow-ups — with zero human intervention.",
+uc2_title:"24/7 Customer Intelligence",uc2_desc:"Multi-agent support system resolves tier-1 tickets, escalates complex cases, and learns from every interaction to continuously improve.",
+uc3_title:"Real-Time Business Intelligence",uc3_desc:"Live dashboards pulling from multiple data sources, with predictive signals and automated weekly executive reports.",
+uc4_title:"Content at Scale",uc4_desc:"AI content pipeline produces brand-aligned articles, social posts, and campaign copy — reviewed and published at 10× human speed.",
+uc5_title:"Digital Infrastructure Build",uc5_desc:"Full website architecture, SEO optimization, performance monitoring, and automated content updates — deployed and maintained by AI.",
+about_eyebrow:"WHO WE ARE",about_title:"ObscuronLabs™",about_title2:"Intelligence, Engineered.",
+about_p1:"ObscuronLabs™ is a global AI automation and digital intelligence company. We architect, deploy, and operate AI systems for businesses that need to operate faster, smarter, and more efficiently than their competitors.",
+about_p2:"Founded by Barbaros Kaptan, ObscuronLabs™ operates as a fully AI-augmented organization — combining human strategic leadership with a network of specialized AI agents to deliver outcomes that conventional agencies cannot match.",
+about_v1:"Human-Led, AI-Powered",about_v2:"Custom — Not Templated",about_v3:"Confidential by Default",about_v4:"24-Hour Response Commitment",
+team_eyebrow:"HUMAN LEADERSHIP",team_title:"Founder &",team_title2:"CEO.",
+tm1_title:"Founder & CEO",tm1_bio:"AI entrepreneur, IBM AI Engineering certified architect. Founder of ObscuronLabs™ — built to operate where conventional automation fails.",tm1_link:"Full Profile ↗",
+products_eyebrow:"READY-TO-DEPLOY",products_title:"Launch Today.",products_title2:"Scale Tomorrow.",
+products_sub:"Pre-configured intelligence products for businesses ready to move immediately.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Essential n8n automation workflow. 13 agents pre-configured. Discord integration. Plug in your API keys and deploy.",
+p2_label:"PROFESSIONAL — MOST POPULAR",p2_name:"Obscuron Professional",p2_desc:"Full stack: automation workflows, Discord integration, priority onboarding support. Everything in Core, plus direct deployment assistance.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Lead generation and email automation stack for agencies and enterprise teams. Multi-client ready. White-label available.",
+p_pricing:"REQUEST PRICING →",
+contact_eyebrow:"START YOUR PROJECT",contact_title:"Let's Build",contact_title2:"Something Significant.",
+contact_sub:"Every engagement starts with a conversation. Tell us what you're trying to build — we'll tell you exactly how our systems can architect it.",
+contact_details:"Response within 24 hours.\nAll consultations are confidential.\nCustom pricing for every engagement.",
+f_name:"Full Name",f_email:"Email",f_company:"Company",f_interest_label:"Area of Interest",f_interest_default:"-- Select --",
+f_int_ai:"AI Solutions",f_int_auto:"Business Automation",f_int_agents:"AI Agents & Multi-Agent Systems",f_int_data:"Data & Business Intelligence",f_int_digital:"Digital Solutions",f_int_consult:"AI Consulting",f_int_products:"Products",f_int_other:"Other",
+f_project:"Project Description",f_submit:"REQUEST CONSULTATION →",f_note:"© 2026 ObscuronLabs™ — All communications are confidential.",
+faq_eyebrow:"COMMON QUESTIONS",faq_title:"Before You Ask.",faq_title2:"We've Answered.",
+fq1:"How are services priced?",fa1:"Every engagement is custom-quoted based on scope, complexity, and timeline. We don't do templates — because your business isn't one.",
+fq2:"Which AI models power your agents?",fa2:"We work with OpenAI, Anthropic Claude, and custom fine-tuned models via OpenRouter. Model selection depends on the task.",
+fq3:"Do I need technical knowledge?",fa3:"No. Our agents handle all technical complexity. You interact through simple dashboards and reports. We architect the system; you use the results.",
+fq4:"How long does deployment take?",fa4:"Typically 3–14 days depending on scope. Emergency deployments available for time-critical engagements.",
+fq5:"Is my data secure?",fa5:"Yes. All workflows run in isolated environments. No data is retained beyond the scope of the engagement.",
+fq6:"Can agents work together?",fa6:"Yes — our multi-agent pipeline coordinates tasks automatically between specialized AI systems. Each agent handles its domain while the orchestration layer ensures seamless handoffs and parallel execution.",
+footer_desc:"Global AI automation and digital intelligence infrastructure. Built for businesses that demand advantage.",
+fc1:"Services",fc2:"Company",fc2_net:"Intelligence Network",fc3:"Products",fp1:"Privacy Policy",fp2:"Terms of Service"
+},
+tr:{
+nav_home:"Anasayfa",nav_services:"Hizmetler",nav_solutions:"Çözümler",nav_products:"Ürünler",nav_projects:"Projeler",nav_about:"Hakkımızda",nav_contact:"İletişim",nav_cta:"Bize Ulaşın →",
+hero_eyebrow:"YZ · OTOMATİZASYON · DİJİTAL ZEKÂ",hero_h1a:"İŞİNİZ",hero_h1b:"SİZ UYURKEN",hero_h1c:"DEVAM EDER.",
+hero_sub:"İnsan hızında çalışmayı reddeden işletmeler için yapay zeka ajanları, otomasyon sistemleri ve dijital zeka altyapısı kuruyoruz.",
+hero_cta1:"ÇÖZÜMLERİ KEŞFET →",hero_cta2:"BİZİMLE KONUŞ",
+stat1:"YZ Ajanı",stat2:"Hizmet Alanı",stat3:"Tamamlanan Proje",stat4:"Desteklenen Dil",
+services_eyebrow:"NE İNŞA EDİYORUZ",services_title:"Altı Alan.",services_title2:"Sonsuz Kaldıraç.",
+services_sub:"Her proje özel kapsamlıdır. Şablonlar yok — yalnızca sizin bağlamınız için mimariler.",
+s1_name:"YZ Çözümleri",s1_desc:"Uçtan uca YZ sistem tasarımı ve konuşlandırması. Model seçiminden üretim altyapısına.",
+s2_name:"İş Otomasyonu",s2_desc:"Operasyonel yükü ortadan kaldırın. İş akışlarını, onayları ve raporlamayı derinlemesine otomatize ediyoruz.",
+s3_name:"YZ Ajanları ve Çok Ajanlı Sistemler",s3_desc:"Tüm işletmenizde özerk çalışan koordineli YZ ajan ağları.",
+s4_name:"Veri ve İş Zekası",s4_desc:"Canlı gösterge panelleri, tahmine dayalı sinyaller ve hız için inşa edilmiş analitikler.",
+s5_name:"Dijital Çözümler",s5_desc:"Hassas inşa edilmiş dijital varlık. Her katmanda mimari, performans ve kimlik.",
+s6_name:"YZ Danışmanlığı ve Uygulama",s6_desc:"Stratejik YZ yol haritaları, model değerlendirmesi ve uygulamalı destek.",
+services_note:"Tüm hizmetler özel fiyatlandırılır. Her projeyi bireysel olarak kapsamlandırıyoruz — çünkü işiniz bir şablon değil.",
+solutions_eyebrow:"İŞİNİZE ÖZEL",solutions_title:"Özel Çözümler.",solutions_title2:"Sıfır Taviz.",
+solutions_sub:"Paket satmıyoruz. Operasyonlarınıza, altyapınıza ve hedeflerinize özel çözümler üretiyoruz.",
+sol1_name:"Kurumsal YZ Entegrasyonu",sol1_desc:"Mevcut altyapınıza tam yığın YZ konuşlandırması. Özel modeller, ajan koordinasyonu ve izleme.",
+sol2_name:"İş Akışı Zekası",sol2_desc:"Kritik iş süreçlerinizi haritalayın, analiz edin ve otomatize edin. Kaldıraç noktalarını buluyoruz.",
+sol3_name:"YZ Destekli Büyüme",sol3_desc:"Müşteri adayı üretimi, müşteri zekası ve pazarlama otomasyonu — koordineli bir sistem olarak.",
+sol_cta:"PROJENİZİ KONUŞALIM →",
+agents_eyebrow:"ZEKA AĞI",agents_title:"On Üç YZ Sistemi.",agents_title2:"Her Zaman Operasyonel.",agents_caption:"ObscuronLabs™ Zeka Ağı — 13 Uzmanlaşmış YZ Sistemi",
+agents_sub:"Belirli zeka alanları için özel olarak inşa edilmiş uzman YZ ajanları. Her sistem bağımsız veya koordineli çok ajanlı bir yapı içinde çalışır.",
+agt1:"YZ Stratejisti — İş bağlamını ve zeka mimarisini haritalıyor.",agt2:"Otomasyon Mimarı — İş akışı motorları tasarlıyor ve konuşlandırıyor.",agt3:"Veri Zekası — Ham veriyi eyleme dönüştürülebilir sinyallere çeviriyor.",
+agt4:"Müşteri Adayı Üretimi — Potansiyel müşterileri tanımlıyor, nitelendiriyor ve önceliklendiriyor.",agt5:"Web Sistemleri — Dijital altyapıyı tasarlıyor ve konuşlandırıyor.",agt6:"Yaratıcı YZ — Ölçekte marka uyumlu içerik üretiyor.",
+agt7:"Müşteri Zekası — Her etkileşimi yönetiyor ve öğreniyor.",agt8:"Pazar Analitiği — Gerçek zamanlı rekabetçi ve pazar zekası.",agt9:"SEO ve Büyüme — Algoritmik hassasiyetle organik erişimi artırıyor.",
+agt10:"Güvenlik ve Ops — Tüm sistemleri izliyor, koruyor ve denetliyor.",agt11:"İçerik Stratejisi — Kanallarda anlatıyı ve mesajlaşmayı şekillendiriyor.",agt12:"Eğitim Sistemleri — YZ bilgi aktarım programları oluşturuyor.",
+agt13:"Gizli Operasyonlar — Hassas görevleri sıfır ifşayla yürütüyor.",agt14:"YZ Operasyon Koordinatörü — Çok ajanlı hat orkestrasyonunu yönetiyor.",agt15:"YZ Strateji Koordinatörü — Tüm aktif hatlarda iş zekasını yönlendiriyor.",
+pipeline_eyebrow:"NASIL ÇALIŞIR",pipeline_title:"Keşiften",pipeline_title2:"Sürekli Zekaya.",
+step1_t:"Keşif Görüşmesi",step1_d:"Operasyonlarınızı, hedeflerinizi ve zeka boşluklarınızı haritalıyoruz.",
+step2_t:"Ajan Ataması",step2_d:"Kullanım durumunuzun gerektirdiği tam ajanları seçip yapılandırıyoruz.",
+step3_t:"Canlı Dağıtım",step3_d:"Zeka altyapınız canlıya geçiyor — mevcut yığınınıza entegre edilmiş.",
+step4_t:"Sürekli Zeka",step4_d:"Ajanlar öğrenir, uyum sağlar ve raporlar — avantajınız zaman içinde birikir.",
+projects_eyebrow:"KULLANIM SENARYOLARI",projects_title:"YZ Sistemlerimiz",projects_title2:"Neler Yapabilir.",
+projects_sub:"Beş yetenek örneği. Gerçek sonuçlar. Uydurma müşteri yok — yalnızca sistemlerimizin başarabileceği şeyler.",
+uc1_title:"Otomatik Satış Hattı",uc1_desc:"YZ ajanları gelen müşteri adaylarını nitelendiriyor, iletişim verilerini zenginleştiriyor ve takipleri planlıyor — sıfır insan müdahalesiyle.",
+uc2_title:"7/24 Müşteri Zekası",uc2_desc:"Çok ajanlı destek sistemi birinci seviye talepleri çözüyor, karmaşık vakaları yönlendiriyor ve her etkileşimden öğreniyor.",
+uc3_title:"Gerçek Zamanlı İş Zekası",uc3_desc:"Birden fazla veri kaynağından canlı gösterge panelleri, tahmine dayalı sinyaller ve otomatik haftalık yönetici raporları.",
+uc4_title:"Ölçekte İçerik",uc4_desc:"YZ içerik hattı marka uyumlu makaleler, sosyal medya paylaşımları ve kampanya metinleri üretiyor — 10× insan hızında.",
+uc5_title:"Dijital Altyapı İnşası",uc5_desc:"Tam web sitesi mimarisi, SEO optimizasyonu, performans izleme ve otomatik içerik güncellemeleri — YZ tarafından konuşlandırılıp yönetiliyor.",
+about_eyebrow:"BİZ KİMİZ",about_title:"ObscuronLabs™",about_title2:"Zeka, Mühendislik.",
+about_p1:"ObscuronLabs™ küresel bir YZ otomasyon ve dijital zeka şirketidir. Rakiplerinden daha hızlı, akıllı ve verimli çalışması gereken işletmeler için YZ sistemleri tasarlıyor, konuşlandırıyor ve işletiyoruz.",
+about_p2:"Barbaros Kaptan tarafından kurulan ObscuronLabs™, insan stratejik liderliğini uzman YZ ajanları ağıyla birleştiren tam YZ destekli bir organizasyon olarak faaliyet gösteriyor.",
+about_v1:"İnsan Liderliğinde, YZ Destekli",about_v2:"Özel — Şablonsuz",about_v3:"Varsayılan Olarak Gizli",about_v4:"24 Saatlik Yanıt Taahhüdü",
+team_eyebrow:"İNSAN LİDERLİĞİ",team_title:"Kurucu ve",team_title2:"CEO.",
+tm1_title:"Kurucu & CEO",tm1_bio:"YZ girişimcisi, IBM YZ Mühendisliği sertifikalı mimar. ObscuronLabs™'ın kurucusu — geleneksel otomasyonun yetersiz kaldığı yerde çalışmak için inşa edildi.",tm1_link:"Tam Profil ↗",
+products_eyebrow:"HAZIR DAĞITIM",products_title:"Bugün Başlat.",products_title2:"Yarın Ölçeklendir.",
+products_sub:"Hemen harekete geçmeye hazır işletmeler için önceden yapılandırılmış zeka ürünleri.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Temel n8n otomasyon iş akışı. 13 ajan önceden yapılandırılmış. Discord entegrasyonu.",
+p2_label:"PROFESSIONAL — EN POPÜLER",p2_name:"Obscuron Professional",p2_desc:"Tam yığın: otomasyon iş akışları, Discord entegrasyonu, öncelikli destek. Core'daki her şey artı doğrudan dağıtım yardımı.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Ajanslar ve kurumsal ekipler için müşteri adayı üretimi ve e-posta otomasyon yığını. Çok müşteriye hazır.",
+p_pricing:"FİYAT İSTE →",
+contact_eyebrow:"PROJENİZİ BAŞLATIN",contact_title:"Birlikte İnşa",contact_title2:"Edelim.",
+contact_sub:"Her proje bir konuşmayla başlar. Neyi inşa etmek istediğinizi bize söyleyin.",
+contact_details:"24 saat içinde yanıt.\nTüm danışmalar gizlidir.\nHer proje için özel fiyatlandırma.",
+f_name:"Ad Soyad",f_email:"E-posta",f_company:"Şirket",f_interest_label:"İlgi Alanı",f_interest_default:"-- Seçin --",
+f_int_ai:"YZ Çözümleri",f_int_auto:"İş Otomasyonu",f_int_agents:"YZ Ajanları ve Çok Ajanlı Sistemler",f_int_data:"Veri ve İş Zekası",f_int_digital:"Dijital Çözümler",f_int_consult:"YZ Danışmanlığı",f_int_products:"Ürünler",f_int_other:"Diğer",
+f_project:"Proje Açıklaması",f_submit:"DANIŞMANLIK İSTE →",f_note:"© 2026 ObscuronLabs™ — Tüm iletişimler gizlidir.",
+faq_eyebrow:"SIK SORULAN SORULAR",faq_title:"Sormadan Önce.",faq_title2:"Yanıtladık.",
+fq1:"Hizmetler nasıl fiyatlandırılır?",fa1:"Her proje özel fiyatlandırılır. Şablonlar kullanmıyoruz — çünkü işiniz bir şablon değil.",
+fq2:"Ajanlarınız hangi YZ modellerini kullanıyor?",fa2:"OpenAI, Anthropic Claude ve OpenRouter üzerinden özel modeller. Model seçimi göreve bağlıdır.",
+fq3:"Teknik bilgiye ihtiyacım var mı?",fa3:"Hayır. Ajanlarımız tüm teknik karmaşıklığı halleder. Siz sonuçları kullanırsınız.",
+fq4:"Dağıtım ne kadar sürer?",fa4:"Genellikle 3–14 gün. Acil dağıtımlar da mevcuttur.",
+fq5:"Verilerim güvende mi?",fa5:"Evet. Tüm iş akışları izole ortamlarda çalışır. Veriler proje dışında saklanmaz.",
+fq6:"Ajanlar birlikte çalışabilir mi?",fa6:"Evet — çok ajanlı hat, görevleri uzmanlaşmış YZ sistemleri arasında otomatik olarak koordine eder.",
+footer_desc:"Küresel YZ otomasyon ve dijital zeka altyapısı. Avantaj talep eden işletmeler için.",
+fc1:"Hizmetler",fc2:"Şirket",fc2_net:"Zeka Ağı",fc3:"Ürünler",fp1:"Gizlilik Politikası",fp2:"Kullanım Şartları"
+},
+de:{
+nav_home:"Startseite",nav_services:"Leistungen",nav_solutions:"Lösungen",nav_products:"Produkte",nav_projects:"Projekte",nav_about:"Über uns",nav_contact:"Kontakt",nav_cta:"Kontakt →",
+hero_eyebrow:"KI · AUTOMATISIERUNG · DIGITALE INTELLIGENZ",hero_h1a:"IHR UNTERNEHMEN",hero_h1b:"LÄUFT WÄHREND",hero_h1c:"SIE SCHLAFEN.",
+hero_sub:"Wir setzen KI-Agenten, Automatisierungssysteme und digitale Intelligenzinfrastruktur für Unternehmen ein, die sich weigern, im Menschentakt zu arbeiten.",
+hero_cta1:"LÖSUNGEN ENTDECKEN →",hero_cta2:"KONTAKT",
+stat1:"KI-Agenten",stat2:"Servicedomänen",stat3:"Projekte abgeschlossen",stat4:"Unterstützte Sprachen",
+services_eyebrow:"WAS WIR BAUEN",services_title:"Sechs Domänen.",services_title2:"Unendlicher Hebel.",
+services_sub:"Jedes Engagement ist individuell. Keine Vorlagen — nur Architekturen für Ihren genauen Kontext.",
+s1_name:"KI-Lösungen",s1_desc:"End-to-End KI-Systemdesign und -deployment. Von der Modellauswahl bis zur Produktionsinfrastruktur.",
+s2_name:"Geschäftsautomatisierung",s2_desc:"Operativen Ballast beseitigen. Workflows, Genehmigungen und Reporting tiefgreifend automatisieren.",
+s3_name:"KI-Agenten & Multi-Agenten-Systeme",s3_desc:"Koordinierte KI-Agentennetzwerke, die autonom in Ihrem gesamten Unternehmen arbeiten.",
+s4_name:"Daten & Business Intelligence",s4_desc:"Live-Dashboards, prädiktive Signale und entscheidungsreife Analysen für Geschwindigkeit.",
+s5_name:"Digitale Lösungen",s5_desc:"Präzise gebaute digitale Präsenz. Architektur, Leistung und Identität auf jeder Ebene.",
+s6_name:"KI-Beratung & Implementierung",s6_desc:"Strategische KI-Roadmaps, Modellbewertung und praxisnahe Implementierungsunterstützung.",
+services_note:"Alle Leistungen werden individuell kalkuliert. Wir scopen jedes Engagement einzeln.",
+solutions_eyebrow:"RUND UM IHR UNTERNEHMEN",solutions_title:"Maßgeschneiderte Lösungen.",solutions_title2:"Null Kompromiss.",
+solutions_sub:"Wir verkaufen keine Pakete. Wir entwickeln Lösungen für Ihre Abläufe, Ihren Stack und Ihre Ziele.",
+sol1_name:"Enterprise KI-Integration",sol1_desc:"Vollständiges KI-Deployment in Ihre bestehende Infrastruktur. Benutzerdefinierte Modelle, Agentenkoordination und Monitoring.",
+sol2_name:"Workflow-Intelligenz",sol2_desc:"Analysieren und automatisieren Sie Ihre kritischen Geschäftsprozesse. Wir finden die Hebelpunkte.",
+sol3_name:"KI-gesteuertes Wachstum",sol3_desc:"Lead-Generierung, Kundenintelligenz und Marketing-Automatisierung als ein koordiniertes System.",
+sol_cta:"IHR PROJEKT BESPRECHEN →",
+agents_eyebrow:"INTELLIGENZNETZWERK",agents_title:"Dreizehn KI-Systeme.",agents_title2:"Immer im Einsatz.",agents_caption:"ObscuronLabs™ Intelligenznetzwerk — 13 Spezialisierte KI-Systeme",
+agents_sub:"Spezialisierte KI-Agenten für spezifische Intelligenzdomänen. Jedes System arbeitet eigenständig oder als Teil einer koordinierten Multi-Agenten-Pipeline.",
+agt1:"KI-Stratege",agt2:"Automatisierungsarchitekt",agt3:"Dateintelligenz",agt4:"Lead-Generierung",agt5:"Web-Systeme",agt6:"Kreative KI",agt7:"Kundenintelligenz",agt8:"Marktanalyse",agt9:"SEO & Wachstum",agt10:"Sicherheit & Ops",agt11:"Content-Strategie",agt12:"Trainingssysteme",agt13:"Verdeckte Operationen",agt14:"KI-Betriebskoordinator",agt15:"KI-Strategiekoordinator",
+pipeline_eyebrow:"SO FUNKTIONIERT ES",pipeline_title:"Von der Entdeckung",pipeline_title2:"zur kontinuierlichen Intelligenz.",
+step1_t:"Discovery Call",step1_d:"Wir kartieren Ihre Abläufe, Ziele und Intelligenzlücken.",step2_t:"Agentenzuweisung",step2_d:"Wir wählen die exakt passenden Agenten.",step3_t:"Live-Deployment",step3_d:"Ihre Infrastruktur geht live — in Ihren Stack integriert.",step4_t:"Kontinuierliche Intelligenz",step4_d:"Agenten lernen, passen sich an — Ihr Vorteil wächst.",
+projects_eyebrow:"ANWENDUNGSFÄLLE",projects_title:"Was unsere KI",projects_title2:"Systeme können.",
+projects_sub:"Fünf Fähigkeitsbeispiele. Echte Ergebnisse. Keine fiktiven Kunden.",
+uc1_title:"Automatisierte Sales-Pipeline",uc1_desc:"KI-Agenten qualifizieren Leads, reichern Daten an und planen Folgemaßnahmen — ohne menschliche Eingriffe.",
+uc2_title:"24/7 Kundenintelligenz",uc2_desc:"Multi-Agenten-Support löst Tier-1-Tickets, eskaliert komplexe Fälle und lernt kontinuierlich.",
+uc3_title:"Echtzeit-Business-Intelligence",uc3_desc:"Live-Dashboards aus mehreren Quellen mit prädiktiven Signalen und automatisierten Berichten.",
+uc4_title:"Content im Maßstab",uc4_desc:"KI-Content-Pipeline produziert markenkonformen Content — 10× Menschengeschwindigkeit.",
+uc5_title:"Digitale Infrastruktur",uc5_desc:"Website-Architektur, SEO, Performance-Monitoring und automatische Updates — von KI betrieben.",
+about_eyebrow:"WER WIR SIND",about_title:"ObscuronLabs™",about_title2:"Intelligenz, Engineered.",
+about_p1:"ObscuronLabs™ ist ein globales KI-Automatisierungs- und digitales Intelligenzunternehmen. Wir bauen KI-Systeme für Unternehmen, die schneller und smarter agieren müssen.",
+about_p2:"Von Barbaros Kaptan gegründet, verbindet ObscuronLabs™ menschliche Führung mit einem Netzwerk spezialisierter KI-Agenten.",
+about_v1:"Menschgeführt, KI-gestützt",about_v2:"Maßgeschneidert — Keine Vorlagen",about_v3:"Vertraulich per Standard",about_v4:"24-Stunden-Antwortversprechen",
+team_eyebrow:"MENSCHLICHE FÜHRUNG",team_title:"Gründer &",team_title2:"CEO.",
+tm1_title:"Gründer & CEO",tm1_bio:"KI-Unternehmer, IBM KI-Engineering-zertifizierter Architekt. Gründer von ObscuronLabs™.",tm1_link:"Vollständiges Profil ↗",
+products_eyebrow:"SOFORT EINSATZBEREIT",products_title:"Heute starten.",products_title2:"Morgen skalieren.",
+products_sub:"Vorkonfigurierte Intelligenzprodukte für Unternehmen, die sofort loslegen wollen.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Vollständiger n8n-Workflow. 13 Agenten vorkonfiguriert. Discord-Integration.",
+p2_label:"PROFESSIONAL — BELIEBTESTES",p2_name:"Obscuron Professional",p2_desc:"Vollständiger Stack: Workflows, Discord, Priority-Support. Alles in Core plus direkter Deployment-Hilfe.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Lead-Generierung und E-Mail-Automatisierung für Agenturen. Multi-Client-fähig.",
+p_pricing:"PREIS ANFRAGEN →",
+contact_eyebrow:"IHR PROJEKT STARTEN",contact_title:"Lass uns etwas",contact_title2:"Bedeutendes bauen.",
+contact_sub:"Jedes Engagement beginnt mit einem Gespräch.",
+contact_details:"Antwort innerhalb 24 Stunden.\nAlle Beratungen vertraulich.\nIndividuelle Preise.",
+f_name:"Vollständiger Name",f_email:"E-Mail",f_company:"Unternehmen",f_interest_label:"Interessengebiet",f_interest_default:"-- Auswählen --",
+f_int_ai:"KI-Lösungen",f_int_auto:"Geschäftsautomatisierung",f_int_agents:"KI-Agenten & Multi-Agenten",f_int_data:"Daten & BI",f_int_digital:"Digitale Lösungen",f_int_consult:"KI-Beratung",f_int_products:"Produkte",f_int_other:"Sonstiges",
+f_project:"Projektbeschreibung",f_submit:"BERATUNG ANFRAGEN →",f_note:"© 2026 ObscuronLabs™ — Alle Kommunikationen vertraulich.",
+faq_eyebrow:"HÄUFIGE FRAGEN",faq_title:"Bevor Sie fragen.",faq_title2:"Haben wir geantwortet.",
+fq1:"Wie werden Leistungen berechnet?",fa1:"Individuell kalkuliert. Keine Vorlagen.",fq2:"Welche KI-Modelle?",fa2:"OpenAI, Anthropic Claude und benutzerdefinierte Modelle via OpenRouter.",fq3:"Brauche ich technisches Wissen?",fa3:"Nein. Unsere Agenten übernehmen die Komplexität.",fq4:"Deployment-Dauer?",fa4:"3–14 Tage. Notfalldeployments verfügbar.",fq5:"Datensicherheit?",fa5:"Alle Workflows in isolierten Umgebungen.",fq6:"Können Agenten zusammenarbeiten?",fa6:"Ja — Multi-Agenten-Pipeline koordiniert Aufgaben automatisch zwischen spezialisierten KI-Systemen.",
+footer_desc:"Globale KI-Automatisierung und digitale Intelligenzinfrastruktur für Unternehmen.",
+fc1:"Leistungen",fc2:"Unternehmen",fc2_net:"Intelligenznetzwerk",fc3:"Produkte",fp1:"Datenschutz",fp2:"AGB"
+},
+it:{
+nav_home:"Home",nav_services:"Servizi",nav_solutions:"Soluzioni",nav_products:"Prodotti",nav_projects:"Progetti",nav_about:"Chi siamo",nav_contact:"Contatti",nav_cta:"Contattaci →",
+hero_eyebrow:"IA · AUTOMAZIONE · INTELLIGENZA DIGITALE",hero_h1a:"LA TUA AZIENDA",hero_h1b:"FUNZIONA MENTRE",hero_h1c:"DORMI.",
+hero_sub:"Distribuiamo agenti IA, sistemi di automazione e infrastruttura di intelligenza digitale per aziende che rifiutano di operare alla velocità umana.",
+hero_cta1:"ESPLORA SOLUZIONI →",hero_cta2:"CONTATTACI",
+stat1:"Agenti IA",stat2:"Domini di Servizio",stat3:"Progetti Consegnati",stat4:"Lingue Supportate",
+services_eyebrow:"COSA COSTRUIAMO",services_title:"Sei Domini.",services_title2:"Leva Infinita.",
+services_sub:"Ogni progetto è personalizzato. Nessun modello — solo architetture per il tuo contesto.",
+s1_name:"Soluzioni IA",s1_desc:"Design e deployment di sistemi IA end-to-end. Dalla selezione del modello all'infrastruttura.",
+s2_name:"Automazione Aziendale",s2_desc:"Elimina il freno operativo. Automatizziamo workflow, approvazioni e reportistica.",
+s3_name:"Agenti IA e Sistemi Multi-Agente",s3_desc:"Reti di agenti IA coordinati che operano autonomamente in tutta la tua azienda.",
+s4_name:"Dati e Business Intelligence",s4_desc:"Dashboard live, segnali predittivi e analisi di qualità decisionale.",
+s5_name:"Soluzioni Digitali",s5_desc:"Presenza digitale costruita con precisione. Architettura, performance e identità.",
+s6_name:"Consulenza IA e Implementazione",s6_desc:"Roadmap strategiche IA, valutazione modelli e supporto all'implementazione.",
+services_note:"Tutti i servizi sono quotati su misura. Definiamo ogni progetto individualmente.",
+solutions_eyebrow:"COSTRUITO INTORNO AL TUO BUSINESS",solutions_title:"Soluzioni Custom.",solutions_title2:"Zero Compromessi.",
+solutions_sub:"Non vendiamo pacchetti. Progettiamo soluzioni specifiche per le tue operazioni e i tuoi obiettivi.",
+sol1_name:"Integrazione IA Enterprise",sol1_desc:"Deployment IA completo nella tua infrastruttura esistente. Modelli personalizzati e coordinamento agenti.",
+sol2_name:"Workflow Intelligence",sol2_desc:"Mappa, analizza e automatizza i tuoi processi aziendali critici.",
+sol3_name:"Crescita Guidata dall'IA",sol3_desc:"Lead generation, intelligenza cliente e automazione marketing come sistema coordinato.",
+sol_cta:"DISCUTI IL TUO PROGETTO →",
+agents_eyebrow:"RETE INTELLIGENCE",agents_title:"Tredici Sistemi IA.",agents_title2:"Sempre Operativi.",agents_caption:"Rete Intelligence ObscuronLabs™ — 13 Sistemi IA Specializzati",
+agents_sub:"Agenti IA specializzati per domini di intelligenza specifici. Ogni sistema opera indipendentemente o come parte di una pipeline multi-agente.",
+agt1:"Stratega IA",agt2:"Architetto Automazione",agt3:"Data Intelligence",agt4:"Lead Generation",agt5:"Sistemi Web",agt6:"IA Creativa",agt7:"Customer Intelligence",agt8:"Analisi di Mercato",agt9:"SEO & Crescita",agt10:"Sicurezza & Ops",agt11:"Strategia Contenuti",agt12:"Sistemi di Formazione",agt13:"Operazioni Riservate",agt14:"Coordinatore Operazioni IA",agt15:"Coordinatore Strategia IA",
+pipeline_eyebrow:"COME FUNZIONA",pipeline_title:"Dalla Scoperta",pipeline_title2:"all'Intelligenza Continua.",
+step1_t:"Discovery Call",step1_d:"Mappiamo le tue operazioni, obiettivi e lacune.",step2_t:"Assegnazione Agenti",step2_d:"Selezioniamo gli agenti esatti.",step3_t:"Deployment Live",step3_d:"La tua infrastruttura va in diretta.",step4_t:"Intelligenza Continua",step4_d:"Gli agenti imparano e si adattano.",
+projects_eyebrow:"CASI D'USO",projects_title:"Cosa possono fare",projects_title2:"i nostri sistemi IA.",
+projects_sub:"Cinque esempi di capacità. Risultati reali. Nessun cliente inventato.",
+uc1_title:"Pipeline di Vendita Automatizzata",uc1_desc:"Gli agenti IA qualificano lead, arricchiscono dati e pianificano follow-up — senza intervento umano.",
+uc2_title:"Customer Intelligence 24/7",uc2_desc:"Sistema multi-agente risolve ticket, escalona casi complessi e impara continuamente.",
+uc3_title:"Business Intelligence in Tempo Reale",uc3_desc:"Dashboard live da più fonti con segnali predittivi e report automatici.",
+uc4_title:"Contenuti in Scala",uc4_desc:"Pipeline IA produce articoli e copy — a 10× velocità umana.",
+uc5_title:"Build Infrastruttura Digitale",uc5_desc:"Architettura web, SEO, monitoraggio e aggiornamenti — gestiti dall'IA.",
+about_eyebrow:"CHI SIAMO",about_title:"ObscuronLabs™",about_title2:"Intelligenza, Engineered.",
+about_p1:"ObscuronLabs™ è un'azienda globale di automazione IA e intelligenza digitale. Costruiamo sistemi IA per aziende che devono operare più velocemente dei loro concorrenti.",
+about_p2:"Fondata da Barbaros Kaptan, ObscuronLabs™ combina leadership umana con una rete di agenti IA specializzati.",
+about_v1:"Guidato da Umani, Potenziato dall'IA",about_v2:"Personalizzato — Non Templato",about_v3:"Riservato per Default",about_v4:"Impegno di Risposta 24 Ore",
+team_eyebrow:"LEADERSHIP UMANA",team_title:"Fondatore &",team_title2:"CEO.",
+tm1_title:"Fondatore & CEO",tm1_bio:"Imprenditore IA, architetto certificato IBM AI Engineering. Fondatore di ObscuronLabs™.",tm1_link:"Profilo Completo ↗",
+products_eyebrow:"PRONTI AL DEPLOY",products_title:"Lancia Oggi.",products_title2:"Scala Domani.",
+products_sub:"Prodotti di intelligenza preconfigurati per aziende pronte a muoversi.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Workflow n8n completo. 13 agenti preconfigurati. Integrazione Discord.",
+p2_label:"PROFESSIONAL — PIÙ POPOLARE",p2_name:"Obscuron Professional",p2_desc:"Stack completo: workflow, Discord, supporto prioritario e assistenza al deployment.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack lead generation ed email per agenzie. Multi-client. White-label disponibile.",
+p_pricing:"RICHIEDI PREZZI →",
+contact_eyebrow:"AVVIA IL TUO PROGETTO",contact_title:"Costruiamo",contact_title2:"Qualcosa di Significativo.",
+contact_sub:"Ogni progetto inizia con una conversazione.",
+contact_details:"Risposta entro 24 ore.\nTutte le consulenze riservate.\nPrezzi personalizzati.",
+f_name:"Nome Completo",f_email:"Email",f_company:"Azienda",f_interest_label:"Area di Interesse",f_interest_default:"-- Seleziona --",
+f_int_ai:"Soluzioni IA",f_int_auto:"Automazione Aziendale",f_int_agents:"Agenti IA",f_int_data:"Dati & BI",f_int_digital:"Soluzioni Digitali",f_int_consult:"Consulenza IA",f_int_products:"Prodotti",f_int_other:"Altro",
+f_project:"Descrizione Progetto",f_submit:"RICHIEDI CONSULENZA →",f_note:"© 2026 ObscuronLabs™ — Tutte le comunicazioni sono riservate.",
+faq_eyebrow:"DOMANDE FREQUENTI",faq_title:"Prima che tu chieda.",faq_title2:"Abbiamo risposto.",
+fq1:"Come vengono quotati i servizi?",fa1:"Ogni progetto è quotato su misura. Non usiamo modelli.",fq2:"Quali modelli IA?",fa2:"OpenAI, Anthropic Claude e modelli personalizzati via OpenRouter.",fq3:"Ho bisogno di conoscenze tecniche?",fa3:"No. I nostri agenti gestiscono tutta la complessità.",fq4:"Quanto dura il deployment?",fa4:"3–14 giorni. Deployment d'emergenza disponibili.",fq5:"I miei dati sono al sicuro?",fa5:"Sì. Ambienti isolati. Nessun dato conservato.",fq6:"Gli agenti collaborano?",fa6:"Sì — la pipeline multi-agente coordina i compiti automaticamente tra sistemi IA specializzati.",
+footer_desc:"Infrastruttura globale di automazione IA e intelligenza digitale per aziende che esigono vantaggio.",
+fc1:"Servizi",fc2:"Azienda",fc2_net:"Rete Intelligence",fc3:"Prodotti",fp1:"Privacy",fp2:"Termini"
+},
+ar:{
+nav_home:"الرئيسية",nav_services:"الخدمات",nav_solutions:"الحلول",nav_products:"المنتجات",nav_projects:"المشاريع",nav_about:"من نحن",nav_contact:"التواصل",nav_cta:"تواصل معنا →",
+hero_eyebrow:"الذكاء الاصطناعي · الأتمتة · الذكاء الرقمي",hero_h1a:"عملك يعمل",hero_h1b:"بينما",hero_h1c:"أنت نائم.",
+hero_sub:"نوزّع وكلاء الذكاء الاصطناعي وأنظمة الأتمتة والبنية التحتية للذكاء الرقمي للمؤسسات التي ترفض العمل بالسرعة البشرية.",
+hero_cta1:"استكشف الحلول →",hero_cta2:"تحدث إلينا",
+stat1:"وكلاء الذكاء الاصطناعي",stat2:"مجالات الخدمة",stat3:"مشاريع مُنجزة",stat4:"لغات مدعومة",
+services_eyebrow:"ما نبنيه",services_title:"ستة مجالات.",services_title2:"نفوذ لا محدود.",
+services_sub:"كل مشروع مُصمَّم خصيصاً. لا قوالب — فقط بنى مصممة لسياقك.",
+s1_name:"حلول الذكاء الاصطناعي",s1_desc:"تصميم ونشر أنظمة الذكاء الاصطناعي من البداية إلى النهاية.",
+s2_name:"أتمتة الأعمال",s2_desc:"القضاء على الثقل التشغيلي. أتمتة سير العمل والموافقات.",
+s3_name:"وكلاء الذكاء الاصطناعي وأنظمة متعددة الوكلاء",s3_desc:"شبكات وكلاء ذكاء اصطناعي منسقة تعمل باستقلالية عبر أعمالك.",
+s4_name:"البيانات وذكاء الأعمال",s4_desc:"لوحات معلومات مباشرة وإشارات تنبؤية وتحليلات بجودة القرار.",
+s5_name:"الحلول الرقمية",s5_desc:"حضور رقمي مبني بدقة. الأداء والهوية في كل طبقة.",
+s6_name:"استشارات وتطبيق الذكاء الاصطناعي",s6_desc:"خرائط طريق استراتيجية وتقييم نماذج ودعم التطبيق.",
+services_note:"جميع الخدمات مسعَّرة بشكل مخصص. نحدد نطاق كل مشروع بشكل فردي.",
+solutions_eyebrow:"مبني حول أعمالك",solutions_title:"حلول مخصصة.",solutions_title2:"صفر تنازلات.",
+solutions_sub:"لا نبيع حزماً. نصمم حلولاً خاصة بعملياتك وأهدافك.",
+sol1_name:"تكامل الذكاء الاصطناعي المؤسسي",sol1_desc:"نشر ذكاء اصطناعي كامل في بنيتك التحتية الحالية.",
+sol2_name:"ذكاء سير العمل",sol2_desc:"رسم خريطة وتحليل وأتمتة عملياتك التجارية الحيوية.",
+sol3_name:"نمو مدفوع بالذكاء الاصطناعي",sol3_desc:"توليد العملاء وذكاء العملاء وأتمتة التسويق كنظام واحد منسق.",
+sol_cta:"ناقش مشروعك →",
+agents_eyebrow:"شبكة الذكاء",agents_title:"ثلاثة عشر نظام ذكاء اصطناعي.",agents_title2:"دائماً في العمل.",agents_caption:"شبكة ذكاء ObscuronLabs™ — 13 نظام ذكاء اصطناعي متخصص",
+agents_sub:"وكلاء ذكاء اصطناعي متخصصون لمجالات ذكاء محددة.",
+agt1:"استراتيجي الذكاء الاصطناعي",agt2:"مهندس الأتمتة",agt3:"ذكاء البيانات",agt4:"توليد العملاء",agt5:"أنظمة الويب",agt6:"الذكاء الإبداعي",agt7:"ذكاء العملاء",agt8:"تحليلات السوق",agt9:"تحسين محركات البحث",agt10:"الأمن والعمليات",agt11:"استراتيجية المحتوى",agt12:"أنظمة التدريب",agt13:"العمليات السرية",agt14:"منسق عمليات الذكاء الاصطناعي",agt15:"منسق استراتيجية الذكاء الاصطناعي",
+pipeline_eyebrow:"كيف يعمل",pipeline_title:"من الاكتشاف",pipeline_title2:"إلى الذكاء المستمر.",
+step1_t:"مكالمة الاكتشاف",step1_d:"نرسم خريطة عملياتك وأهدافك.",step2_t:"تعيين الوكلاء",step2_d:"نختار الوكلاء المناسبين تماماً.",step3_t:"النشر المباشر",step3_d:"بنيتك التحتية تعمل مباشرة.",step4_t:"الذكاء المستمر",step4_d:"الوكلاء يتعلمون ويتكيفون.",
+projects_eyebrow:"حالات الاستخدام",projects_title:"ما يمكن لأنظمتنا",projects_title2:"تحقيقه.",
+projects_sub:"خمسة أمثلة على القدرات. نتائج حقيقية. لا عملاء مزيفون.",
+uc1_title:"خط مبيعات آلي",uc1_desc:"وكلاء الذكاء الاصطناعي يؤهلون العملاء ويثرون البيانات ويجدولون المتابعات — بدون تدخل بشري.",
+uc2_title:"ذكاء العملاء على مدار الساعة",uc2_desc:"نظام متعدد الوكلاء يحل التذاكر ويُصعّد الحالات المعقدة ويتعلم باستمرار.",
+uc3_title:"ذكاء أعمال في الوقت الفعلي",uc3_desc:"لوحات معلومات مباشرة مع إشارات تنبؤية وتقارير أسبوعية آلية.",
+uc4_title:"محتوى بالجملة",uc4_desc:"خط محتوى ذكاء اصطناعي ينتج مقالات ومنشورات — بسرعة 10 أضعاف البشر.",
+uc5_title:"بناء البنية التحتية الرقمية",uc5_desc:"معمارية موقع، SEO، مراقبة أداء وتحديثات آلية — تدار بالذكاء الاصطناعي.",
+about_eyebrow:"من نحن",about_title:"ObscuronLabs™",about_title2:"ذكاء مهندَس.",
+about_p1:"ObscuronLabs™ شركة عالمية لأتمتة الذكاء الاصطناعي والذكاء الرقمي. نبني أنظمة ذكاء اصطناعي للمؤسسات التي تحتاج للعمل بشكل أسرع وأذكى.",
+about_p2:"تأسست على يد Barbaros Kaptan، تجمع ObscuronLabs™ القيادة البشرية مع شبكة من وكلاء الذكاء الاصطناعي المتخصصين.",
+about_v1:"بقيادة بشرية، مدعوم بالذكاء الاصطناعي",about_v2:"مخصص — لا قوالب",about_v3:"سري بشكل افتراضي",about_v4:"التزام الرد خلال 24 ساعة",
+team_eyebrow:"القيادة البشرية",team_title:"المؤسس و",team_title2:"الرئيس التنفيذي.",
+tm1_title:"المؤسس والرئيس التنفيذي",tm1_bio:"رائد أعمال في الذكاء الاصطناعي، حاصل على شهادة IBM AI Engineering. مؤسس ObscuronLabs™.",tm1_link:"الملف الكامل ↗",
+products_eyebrow:"جاهز للنشر",products_title:"ابدأ اليوم.",products_title2:"توسَّع غداً.",
+products_sub:"منتجات ذكاء مُهيَّأة مسبقاً للمؤسسات المستعدة للتحرك.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"سير عمل أتمتة n8n كامل. 13 وكيل مُهيَّأ مسبقاً. تكامل Discord.",
+p2_label:"PROFESSIONAL — الأكثر شعبية",p2_name:"Obscuron Professional",p2_desc:"المنظومة الكاملة: سير العمل وDiscord والدعم ذي الأولوية ومساعدة النشر.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"توليد العملاء وأتمتة البريد للوكالات. متعدد العملاء. white-label متاح.",
+p_pricing:"اطلب الأسعار →",
+contact_eyebrow:"ابدأ مشروعك",contact_title:"لنبني",contact_title2:"شيئاً ذا قيمة.",
+contact_sub:"كل مشروع يبدأ بمحادثة.",
+contact_details:"رد خلال 24 ساعة.\nجميع الاستشارات سرية.\nتسعير مخصص.",
+f_name:"الاسم الكامل",f_email:"البريد الإلكتروني",f_company:"الشركة",f_interest_label:"مجال الاهتمام",f_interest_default:"-- اختر --",
+f_int_ai:"حلول الذكاء الاصطناعي",f_int_auto:"أتمتة الأعمال",f_int_agents:"وكلاء الذكاء الاصطناعي",f_int_data:"البيانات وذكاء الأعمال",f_int_digital:"الحلول الرقمية",f_int_consult:"استشارات الذكاء الاصطناعي",f_int_products:"المنتجات",f_int_other:"أخرى",
+f_project:"وصف المشروع",f_submit:"طلب استشارة →",f_note:"© 2026 ObscuronLabs™ — جميع الاتصالات سرية.",
+faq_eyebrow:"أسئلة شائعة",faq_title:"قبل أن تسأل.",faq_title2:"أجبنا.",
+fq1:"كيف يتم التسعير؟",fa1:"كل مشروع مسعَّر بشكل مخصص. لا قوالب.",fq2:"ما نماذج الذكاء الاصطناعي؟",fa2:"OpenAI وAnthropic Claude ونماذج مخصصة عبر OpenRouter.",fq3:"هل أحتاج معرفة تقنية؟",fa3:"لا. وكلاؤنا يتعاملون مع كل التعقيد.",fq4:"كم يستغرق النشر؟",fa4:"3–14 أيام. النشر الطارئ متاح.",fq5:"بياناتي آمنة؟",fa5:"نعم. بيئات معزولة. لا بيانات محتجزة.",fq6:"هل يتعاون الوكلاء؟",fa6:"نعم — تنسق pipeline متعددة الوكلاء المهام تلقائياً بين الأنظمة المتخصصة.",
+footer_desc:"بنية تحتية عالمية لأتمتة الذكاء الاصطناعي والذكاء الرقمي للمؤسسات.",
+fc1:"الخدمات",fc2:"الشركة",fc2_net:"شبكة الذكاء",fc3:"المنتجات",fp1:"سياسة الخصوصية",fp2:"شروط الخدمة"
+},
+fr:{
+nav_home:"Accueil",nav_services:"Services",nav_solutions:"Solutions",nav_products:"Produits",nav_projects:"Projets",nav_about:"À propos",nav_contact:"Contact",nav_cta:"Nous contacter →",
+hero_eyebrow:"IA · AUTOMATISATION · INTELLIGENCE NUMÉRIQUE",hero_h1a:"VOTRE ENTREPRISE",hero_h1b:"FONCTIONNE PENDANT",hero_h1c:"QUE VOUS DORMEZ.",
+hero_sub:"Nous déployons des agents IA, des systèmes d'automatisation et une infrastructure d'intelligence numérique pour les entreprises qui refusent d'opérer à la vitesse humaine.",
+hero_cta1:"EXPLORER LES SOLUTIONS →",hero_cta2:"NOUS CONTACTER",
+stat1:"Agents IA",stat2:"Domaines de Service",stat3:"Projets Livrés",stat4:"Langues Supportées",
+services_eyebrow:"CE QUE NOUS CONSTRUISONS",services_title:"Six Domaines.",services_title2:"Levier Infini.",
+services_sub:"Chaque engagement est personnalisé. Pas de modèles — uniquement des architectures adaptées à votre contexte.",
+s1_name:"Solutions IA",s1_desc:"Conception et déploiement de systèmes IA de bout en bout. De la sélection du modèle à l'infrastructure de production.",
+s2_name:"Automatisation des Processus",s2_desc:"Éliminez la friction opérationnelle. Nous automatisons les workflows, approbations et rapports en profondeur.",
+s3_name:"Agents IA et Systèmes Multi-Agents",s3_desc:"Réseaux d'agents IA coordonnés qui opèrent de façon autonome dans toute votre entreprise.",
+s4_name:"Données et Business Intelligence",s4_desc:"Tableaux de bord en direct, signaux prédictifs et analytiques de qualité décisionnelle.",
+s5_name:"Solutions Numériques",s5_desc:"Présence numérique construite avec précision. Architecture, performance et identité à chaque couche.",
+s6_name:"Conseil IA et Implémentation",s6_desc:"Feuilles de route IA, évaluation de modèles et support d'implémentation pratique.",
+services_note:"Tous les services sont devisés sur mesure. Nous scoppons chaque engagement individuellement.",
+solutions_eyebrow:"CONSTRUIT AUTOUR DE VOTRE ENTREPRISE",solutions_title:"Solutions Sur Mesure.",solutions_title2:"Zéro Compromis.",
+solutions_sub:"Nous ne vendons pas de packages. Nous concevons des solutions spécifiques à vos opérations et objectifs.",
+sol1_name:"Intégration IA Enterprise",sol1_desc:"Déploiement IA complet dans votre infrastructure existante. Modèles personnalisés et coordination d'agents.",
+sol2_name:"Intelligence de Workflow",sol2_desc:"Cartographiez et automatisez vos processus critiques. Nous trouvons les points de levier.",
+sol3_name:"Croissance Portée par l'IA",sol3_desc:"Génération de leads, intelligence client et automatisation marketing comme système coordonné.",
+sol_cta:"DISCUTER DE VOTRE PROJET →",
+agents_eyebrow:"RÉSEAU D'INTELLIGENCE",agents_title:"Treize Systèmes IA.",agents_title2:"Toujours Opérationnels.",agents_caption:"Réseau d'Intelligence ObscuronLabs™ — 13 Systèmes IA Spécialisés",
+agents_sub:"Agents IA spécialisés pour des domaines d'intelligence spécifiques. Chaque système opère indépendamment ou dans une pipeline multi-agents.",
+agt1:"Stratège IA",agt2:"Architecte Automation",agt3:"Data Intelligence",agt4:"Génération de Leads",agt5:"Systèmes Web",agt6:"IA Créative",agt7:"Intelligence Client",agt8:"Analytique Marché",agt9:"SEO & Croissance",agt10:"Sécurité & Ops",agt11:"Stratégie Contenu",agt12:"Systèmes de Formation",agt13:"Opérations Discrètes",agt14:"Coordinateur Opérations IA",agt15:"Coordinateur Stratégie IA",
+pipeline_eyebrow:"COMMENT ÇA MARCHE",pipeline_title:"De la Découverte",pipeline_title2:"à l'Intelligence Continue.",
+step1_t:"Appel de Découverte",step1_d:"Nous cartographions vos opérations, objectifs et lacunes.",step2_t:"Attribution des Agents",step2_d:"Nous sélectionnons les agents exacts.",step3_t:"Déploiement Live",step3_d:"Votre infrastructure va en production.",step4_t:"Intelligence Continue",step4_d:"Les agents apprennent et s'adaptent.",
+projects_eyebrow:"CAS D'USAGE",projects_title:"Ce que nos systèmes",projects_title2:"IA peuvent faire.",
+projects_sub:"Cinq exemples de capacités. Résultats réels. Pas de clients inventés.",
+uc1_title:"Pipeline de Vente Automatisée",uc1_desc:"Les agents qualifient les leads, enrichissent les données et planifient les suivis — sans intervention humaine.",
+uc2_title:"Intelligence Client 24/7",uc2_desc:"Système multi-agents résout les tickets, escalade les cas complexes et apprend continuellement.",
+uc3_title:"Business Intelligence Temps Réel",uc3_desc:"Tableaux de bord en direct avec signaux prédictifs et rapports automatisés.",
+uc4_title:"Contenu à l'Échelle",uc4_desc:"Pipeline IA produit articles et copy — à 10× la vitesse humaine.",
+uc5_title:"Construction d'Infrastructure Digitale",uc5_desc:"Architecture web, SEO, monitoring et mises à jour automatiques — gérés par l'IA.",
+about_eyebrow:"QUI NOUS SOMMES",about_title:"ObscuronLabs™",about_title2:"Intelligence, Engineered.",
+about_p1:"ObscuronLabs™ est une société mondiale d'automatisation IA et d'intelligence numérique. Nous construisons des systèmes IA pour les entreprises qui doivent opérer plus vite que leurs concurrents.",
+about_p2:"Fondée par Barbaros Kaptan, ObscuronLabs™ combine leadership humain et réseau d'agents IA spécialisés pour des résultats que les agences conventionnelles ne peuvent égaler.",
+about_v1:"Dirigé par l'Humain, Propulsé par l'IA",about_v2:"Personnalisé — Pas de Modèles",about_v3:"Confidentiel par Défaut",about_v4:"Engagement de Réponse 24H",
+team_eyebrow:"LEADERSHIP HUMAIN",team_title:"Fondateur &",team_title2:"CEO.",
+tm1_title:"Fondateur & CEO",tm1_bio:"Entrepreneur IA, architecte certifié IBM AI Engineering. Fondateur d'ObscuronLabs™.",tm1_link:"Profil Complet ↗",
+products_eyebrow:"PRÊT AU DÉPLOIEMENT",products_title:"Lancez Aujourd'hui.",products_title2:"Scalez Demain.",
+products_sub:"Produits d'intelligence préconfigurés pour les entreprises prêtes à agir.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Workflow n8n complet. 13 agents préconfigurés. Intégration Discord.",
+p2_label:"PROFESSIONAL — LE PLUS POPULAIRE",p2_name:"Obscuron Professional",p2_desc:"Stack complet: workflows, Discord, support prioritaire et assistance au déploiement.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack de génération de leads et email pour agences. Multi-client. White-label disponible.",
+p_pricing:"DEMANDER UN PRIX →",
+contact_eyebrow:"DÉMARRER VOTRE PROJET",contact_title:"Construisons",contact_title2:"Quelque Chose de Significatif.",
+contact_sub:"Chaque engagement commence par une conversation.",
+contact_details:"Réponse sous 24 heures.\nToutes les consultations sont confidentielles.\nTarification personnalisée.",
+f_name:"Nom Complet",f_email:"Email",f_company:"Entreprise",f_interest_label:"Domaine d'Intérêt",f_interest_default:"-- Sélectionner --",
+f_int_ai:"Solutions IA",f_int_auto:"Automatisation",f_int_agents:"Agents IA",f_int_data:"Données & BI",f_int_digital:"Solutions Numériques",f_int_consult:"Conseil IA",f_int_products:"Produits",f_int_other:"Autre",
+f_project:"Description du Projet",f_submit:"DEMANDER UNE CONSULTATION →",f_note:"© 2026 ObscuronLabs™ — Toutes les communications sont confidentielles.",
+faq_eyebrow:"QUESTIONS FRÉQUENTES",faq_title:"Avant de demander.",faq_title2:"Nous avons répondu.",
+fq1:"Comment les services sont-ils tarifés?",fa1:"Chaque engagement est devisé sur mesure. Pas de modèles.",fq2:"Quels modèles IA?",fa2:"OpenAI, Anthropic Claude et modèles personnalisés via OpenRouter.",fq3:"Besoin de connaissances techniques?",fa3:"Non. Nos agents gèrent toute la complexité.",fq4:"Durée du déploiement?",fa4:"3–14 jours. Déploiements d'urgence disponibles.",fq5:"Mes données sont-elles sécurisées?",fa5:"Oui. Environnements isolés. Aucune donnée conservée.",fq6:"Les agents collaborent-ils?",fa6:"Oui — la pipeline multi-agents coordonne les tâches automatiquement entre les systèmes spécialisés.",
+footer_desc:"Infrastructure mondiale d'automatisation IA et d'intelligence numérique pour les entreprises qui exigent l'avantage.",
+fc1:"Services",fc2:"Entreprise",fc2_net:"Réseau Intelligence",fc3:"Produits",fp1:"Confidentialité",fp2:"Conditions d'Utilisation"
+},
+sq:{
+nav_home:"Kryefaqja",nav_services:"Shërbime",nav_solutions:"Zgjidhje",nav_products:"Produkte",nav_projects:"Projekte",nav_about:"Rreth nesh",nav_contact:"Kontakt",nav_cta:"Na kontaktoni →",
+hero_eyebrow:"IA · AUTOMATIZIM · INTELIGJENCË DIXHITALE",hero_h1a:"BIZNESI JUAJ",hero_h1b:"FUNKSIONON NDËRSA",hero_h1c:"JU FLINI.",
+hero_sub:"Ne vendosim agjentë IA, sisteme automatizimi dhe infrastrukturë inteligjence dixhitale për bizneset që refuzojnë të operojnë me shpejtësinë njerëzore.",
+hero_cta1:"EKSPLORONI ZGJIDHJET →",hero_cta2:"NA KONTAKTONI",
+stat1:"Agjentë IA",stat2:"Fusha Shërbimi",stat3:"Projekte të Dorëzuara",stat4:"Gjuhë të Mbështetura",
+services_eyebrow:"ÇKA NDËRTOJMË",services_title:"Gjashtë Fusha.",services_title2:"Levë e Pafundme.",
+services_sub:"Çdo angazhim është i personalizuar. Pa shabllone — vetëm arkitektura për kontekstin tuaj.",
+s1_name:"Zgjidhje IA",s1_desc:"Dizajn dhe vendosje e sistemeve IA nga fillimi në fund.",
+s2_name:"Automatizim Biznesi",s2_desc:"Eliminoni fërkimin operacional. Automatizojmë rrjedhat e punës dhe raportimin.",
+s3_name:"Agjentë IA dhe Sisteme Multi-Agjent",s3_desc:"Rrjete agjentësh IA të koordinuar që operojnë autonomisht nëpër biznesin tuaj.",
+s4_name:"Të Dhëna dhe Inteligjencë Biznesi",s4_desc:"Panele live, sinjale parashikuese dhe analitikë cilësore.",
+s5_name:"Zgjidhje Dixhitale",s5_desc:"Prani dixhitale e ndërtuar me precizion. Arkitekturë, performancë dhe identitet.",
+s6_name:"Këshillim dhe Implementim IA",s6_desc:"Harta rrugore strategjike IA, vlerësim modelesh dhe mbështetje implementimi.",
+services_note:"Të gjitha shërbimet janë çmimosur me porosi. Ne përcaktojmë fushëveprimin e çdo angazhimi individualisht.",
+solutions_eyebrow:"NDËRTUAR RRETH BIZNESIT TUAJ",solutions_title:"Zgjidhje me Porosi.",solutions_title2:"Zero Kompromise.",
+solutions_sub:"Ne nuk shesim paketa. Inxhinierojmë zgjidhje specifike për operacionet dhe qëllimet tuaja.",
+sol1_name:"Integrimi Enterprise i IA",sol1_desc:"Vendosje e plotë IA në infrastrukturën tuaj ekzistuese.",
+sol2_name:"Inteligjencë Rrjedhash Pune",sol2_desc:"Hartoni dhe automatizoni proceset kritike të biznesit tuaj.",
+sol3_name:"Rritje e Drejtuar nga IA",sol3_desc:"Gjenerimi i plumbave, inteligjenca e klientit dhe automatizimi i marketingut si sistem i koordinuar.",
+sol_cta:"DISKUTONI PROJEKTIN TUAJ →",
+agents_eyebrow:"RRJETI I INTELIGJENCËS",agents_title:"Trembëdhjetë Sisteme IA.",agents_title2:"Gjithmonë Operacionale.",agents_caption:"Rrjeti i Inteligjencës ObscuronLabs™ — 13 Sisteme IA të Specializuara",
+agents_sub:"Agjentë IA të specializuar për fusha specifike inteligjence. Çdo sistem operon në mënyrë të pavarur ose si pjesë e një pipeline multi-agjent.",
+agt1:"Strateg IA",agt2:"Arkitekt Automatizimi",agt3:"Inteligjencë të Dhënash",agt4:"Gjenerim Plumbash",agt5:"Sisteme Web",agt6:"IA Krijuese",agt7:"Inteligjencë Klienti",agt8:"Analitikë Tregu",agt9:"SEO dhe Rritje",agt10:"Siguri dhe Operacione",agt11:"Strategji Përmbajtjeje",agt12:"Sisteme Trajnimi",agt13:"Operacione Diskrete",agt14:"Koordinator Operacionesh IA",agt15:"Koordinator Strategjie IA",
+pipeline_eyebrow:"SI FUNKSIONON",pipeline_title:"Nga Zbulimi",pipeline_title2:"deri tek Inteligjenca e Vazhdueshme.",
+step1_t:"Thirrja e Zbulimit",step1_d:"Hartojmë operacionet, qëllimet dhe boshllëqet tuaja.",step2_t:"Caktimi i Agjentëve",step2_d:"Zgjedhim agjentët e saktë.",step3_t:"Vendosja Live",step3_d:"Infrastruktura juaj shkon live.",step4_t:"Inteligjencë e Vazhdueshme",step4_d:"Agjentët mësojnë dhe adaptohen.",
+projects_eyebrow:"RASTE PËRDORIMI",projects_title:"Çfarë mund të bëjnë",projects_title2:"sistemet tona IA.",
+projects_sub:"Pesë shembuj aftësish. Rezultate reale. Pa klientë të trilluar.",
+uc1_title:"Pipeline i Automatizuar Shitjesh",uc1_desc:"Agjentët IA kualifikojnë plumbat dhe planifikojnë ndjekjet — pa ndërhyrje njerëzore.",
+uc2_title:"Inteligjencë Klienti 24/7",uc2_desc:"Sistemi multi-agjent zgjidh biletat dhe eskalon rastet komplekse duke mësuar vazhdimisht.",
+uc3_title:"Inteligjencë Biznesi në Kohë Reale",uc3_desc:"Panele live me sinjale parashikuese dhe raporte të automatizuara.",
+uc4_title:"Përmbajtje në Shkallë",uc4_desc:"Pipeline IA prodhon artikuj dhe kopje — me 10× shpejtësinë njerëzore.",
+uc5_title:"Ndërtimi i Infrastrukturës Dixhitale",uc5_desc:"Arkitekturë website, SEO, monitorim dhe përditësime të automatizuara — të menaxhuara nga IA.",
+about_eyebrow:"KU JEMI NE",about_title:"ObscuronLabs™",about_title2:"Inteligjencë e Inxhinieruar.",
+about_p1:"ObscuronLabs™ është një kompani globale e automatizimit IA dhe inteligjencës dixhitale. Ndërtojmë sisteme IA për bizneset që duhet të operojnë më shpejt dhe më mençur se konkurrentët e tyre.",
+about_p2:"E themeluar nga Barbaros Kaptan, ObscuronLabs™ kombinon udhëheqjen njerëzore me një rrjet agjentësh IA të specializuar.",
+about_v1:"Drejtuar nga Njerëzit, Fuqizuar nga IA",about_v2:"Me Porosi — Pa Shabllone",about_v3:"Konfidencial si Parazgjedhje",about_v4:"Angazhim Përgjigje 24 Orë",
+team_eyebrow:"UDHËHEQJA NJERËZORE",team_title:"Themeluesi dhe",team_title2:"CEO.",
+tm1_title:"Themelues dhe CEO",tm1_bio:"Sipërmarrës IA, arkitekt i certifikuar IBM AI Engineering. Themelues i ObscuronLabs™.",tm1_link:"Profili i Plotë ↗",
+products_eyebrow:"GATI PËR VENDOSJE",products_title:"Lësho Sot.",products_title2:"Shkallo Nesër.",
+products_sub:"Produkte inteligjence të parakonfiguruara për bizneset gati të lëvizin menjëherë.",
+p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"Rrjedhë pune n8n e plotë. 13 agjentë të parakonfiguruar. Integrim Discord.",
+p2_label:"PROFESSIONAL — MË POPULLORI",p2_name:"Obscuron Professional",p2_desc:"Stack i plotë: rrjedha pune, Discord, mbështetje prioritare dhe ndihmë vendosjeje.",
+p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack gjenerimi plumbash dhe email për agjenci. Gati për shumë klientë. White-label i disponueshëm.",
+p_pricing:"KËRKO ÇMIMIN →",
+contact_eyebrow:"FILLONI PROJEKTIN TUAJ",contact_title:"Le të Ndërtojmë",contact_title2:"Diçka të Rëndësishme.",
+contact_sub:"Çdo angazhim fillon me një bisedë.",
+contact_details:"Përgjigje brenda 24 orëve.\nTë gjitha konsultimet janë konfidenciale.\nÇmime të personalizuara.",
+f_name:"Emri i Plotë",f_email:"Email",f_company:"Kompania",f_interest_label:"Fusha e Interesit",f_interest_default:"-- Zgjidhni --",
+f_int_ai:"Zgjidhje IA",f_int_auto:"Automatizim Biznesi",f_int_agents:"Agjentë IA",f_int_data:"Të Dhëna dhe BI",f_int_digital:"Zgjidhje Dixhitale",f_int_consult:"Këshillim IA",f_int_products:"Produkte",f_int_other:"Tjetër",
+f_project:"Përshkrimi i Projektit",f_submit:"KËRKO KONSULTIM →",f_note:"© 2026 ObscuronLabs™ — Të gjitha komunikimet janë konfidenciale.",
+faq_eyebrow:"PYETJE TË SHPESHTA",faq_title:"Para se të pyesni.",faq_title2:"Ne kemi përgjigjur.",
+fq1:"Si çmosen shërbimet?",fa1:"Çdo projekt çmimoset me porosi. Pa shabllone.",fq2:"Cilat modele IA?",fa2:"OpenAI, Anthropic Claude dhe modele të personalizuara via OpenRouter.",fq3:"Kërkohen njohuri teknike?",fa3:"Jo. Agjentët tanë menaxhojnë gjithë kompleksitetin.",fq4:"Sa zgjat vendosja?",fa4:"3–14 ditë. Vendosje urgjente e disponueshme.",fq5:"Të dhënat janë të sigurta?",fa5:"Po. Mjedise të izoluara. Asnjë të dhënë e ruajtur.",fq6:"A bashkëpunojnë agjentët?",fa6:"Po — pipeline multi-agjent koordinon detyrat automatikisht midis sistemeve të specializuara.",
+footer_desc:"Infrastrukturë globale automatizimi IA dhe inteligjence dixhitale për bizneset që kërkojnë avantazh.",
+fc1:"Shërbime",fc2:"Kompania",fc2_net:"Rrjeti i Inteligjencës",fc3:"Produkte",fp1:"Politika e Privatësisë",fp2:"Kushtet e Shërbimit"
+}
 };
 
 let currentLang = 'en';
@@ -1194,6 +946,7 @@ let currentLang = 'en';
 function setLang(lang) {
   currentLang = lang;
   const t = T[lang];
+  if (!t) return;
   document.querySelectorAll('[data-i]').forEach(el => {
     const key = el.getAttribute('data-i');
     if (t[key] !== undefined) el.textContent = t[key];
@@ -1201,12 +954,12 @@ function setLang(lang) {
   const isRtl = lang === 'ar';
   document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
   document.documentElement.setAttribute('lang', lang);
-  document.querySelectorAll('.nav-lang button, .mobile-menu .nav-lang button').forEach(b => {
-    b.classList.toggle('active', b.id === 'lang-' + lang || b.id === 'mlang-' + lang);
+  document.querySelectorAll('.nav-lang button').forEach(b => {
+    const id = b.id.replace('lang-','').replace('mlang-','');
+    b.classList.toggle('active', id === lang);
   });
 }
 
-// FAQ
 function toggleFaq(btn) {
   const item = btn.parentElement;
   const wasOpen = item.classList.contains('open');
@@ -1221,7 +974,6 @@ function toggleFaq(btn) {
   }
 }
 
-// Mobile menu
 document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('mobile-menu').classList.toggle('open');
 });
@@ -1229,7 +981,6 @@ function closeMobile() {
   document.getElementById('mobile-menu').classList.remove('open');
 }
 
-// Contact form
 function handleContact(e) {
   e.preventDefault();
   const btn = e.target.querySelector('[type=submit]');
@@ -1238,7 +989,7 @@ function handleContact(e) {
   btn.style.borderColor = '#4ADE80';
   btn.style.color = '#05090F';
   setTimeout(() => {
-    btn.textContent = T[currentLang].f_submit || 'Request Custom Quote →';
+    btn.textContent = T[currentLang].f_submit || 'REQUEST CONSULTATION →';
     btn.style.background = '';
     btn.style.borderColor = '';
     btn.style.color = '';
@@ -1246,13 +997,10 @@ function handleContact(e) {
   }, 4000);
 }
 
-// Smooth nav active state
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 100) current = s.id;
-  });
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
 }, {passive:true});
 </script>
 </body>
