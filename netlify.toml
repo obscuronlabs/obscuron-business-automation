@@ -1,4 +1,2 @@
-[[redirects]]
-  from = "/"
-  to = "/obscuron_landing_page.html"
-  status = 200
+# Netlify serves index.html at the root by default.
+# No redirect needed.
