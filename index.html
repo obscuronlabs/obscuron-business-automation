@@ -54,7 +54,7 @@ section{position:relative;z-index:1;padding:clamp(60px,10vh,120px) clamp(16px,5v
 .hero-video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
 .hero-video-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(201,164,110,.1) 0%,transparent 70%)}
 #stats{padding:40px clamp(16px,5vw,80px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:1200px;margin:0 auto}
 .stat{padding:32px 24px;text-align:center;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
 .stat-num{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:900;background:var(--gold-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-variant-numeric:tabular-nums}
@@ -151,8 +151,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
 .hero-inner{grid-template-columns:1fr}
 .hero-video-wrap{order:-1}
 .stats-grid{grid-template-columns:repeat(2,1fr)}
-.stat:nth-child(2){border-right:none}
-.stat:nth-child(3){border-top:1px solid var(--border)}
 .services-grid{grid-template-columns:repeat(2,1fr)}
 .solutions-grid{grid-template-columns:1fr}
 .agents-scroll{grid-template-columns:repeat(2,1fr)}
@@ -262,9 +260,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
 <!-- STATS -->
 <div id="stats">
   <div class="stats-grid">
-    <div class="stat"><div class="stat-num">13+</div><div class="stat-label" data-i="stat1">AI Agents</div></div>
+    <div class="stat"><div class="stat-num">15</div><div class="stat-label" data-i="stat1">AI Agents</div></div>
     <div class="stat"><div class="stat-num">6</div><div class="stat-label" data-i="stat2">Service Domains</div></div>
-    <div class="stat"><div class="stat-num">50+</div><div class="stat-label" data-i="stat3">Projects Delivered</div></div>
     <div class="stat"><div class="stat-num">7</div><div class="stat-label" data-i="stat4">Languages Supported</div></div>
   </div>
 </div>
@@ -310,24 +307,24 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
     <p class="section-sub" data-i="agents_sub">Specialized AI agents purpose-built for specific intelligence domains. Each system operates independently or as part of a coordinated multi-agent pipeline.</p>
     <div class="team-photo-wrap">
       <img src="obscuronlabs team members.jpg" alt="ObscuronLabs Intelligence Network — 13 AI Agents" class="team-photo" loading="lazy">
-      <div class="team-photo-caption" data-i="agents_caption">ObscuronLabs™ Intelligence Network — 13 Specialized AI Systems</div>
+      <div class="team-photo-caption" data-i="agents_caption">ObscuronLabs™ Intelligence Network — Specialized AI Systems</div>
     </div>
     <div class="agents-scroll">
-      <div class="agent-card"><div class="agent-id">AGT-001</div><div class="agent-name">Nox Vale</div><div class="agent-role" data-i="agt1">AI Strategist — Maps business context and intelligence architecture.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-002</div><div class="agent-name">Pery Ashcroft</div><div class="agent-role" data-i="agt2">Automation Architect — Designs and deploys workflow engines.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-003</div><div class="agent-name">Atlas Mercer</div><div class="agent-role" data-i="agt3">Data Intelligence — Transforms raw data into actionable signals.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-004</div><div class="agent-name">Vanta Noire</div><div class="agent-role" data-i="agt4">Lead Generation — Identifies, qualifies, and prioritizes prospects.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-005</div><div class="agent-name">Veil Corvin</div><div class="agent-role" data-i="agt5">Web Systems — Architects and deploys digital infrastructure.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-006</div><div class="agent-name">Shade Holloway</div><div class="agent-role" data-i="agt6">Creative AI — Generates brand-aligned content at scale.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-007</div><div class="agent-name">Echo Virel</div><div class="agent-role" data-i="agt7">Customer Intelligence — Manages and learns from every interaction.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-008</div><div class="agent-name">Oracle Voss</div><div class="agent-role" data-i="agt8">Market Analytics — Real-time competitive and market intelligence.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-009</div><div class="agent-name">Helix Arden</div><div class="agent-role" data-i="agt9">SEO & Growth — Drives organic reach through algorithmic precision.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-010</div><div class="agent-name">Cipher Blackwell</div><div class="agent-role" data-i="agt10">Security & Ops — Monitors, protects, and audits all systems.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-011</div><div class="agent-name">Mirror Vale</div><div class="agent-role" data-i="agt11">Content Strategy — Shapes narrative and messaging across channels.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-012</div><div class="agent-name">Aether Crowe</div><div class="agent-role" data-i="agt12">Training Systems — Builds and delivers AI knowledge transfer programs.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-013</div><div class="agent-name">Ghost Mercer</div><div class="agent-role" data-i="agt13">Stealth Operations — Executes sensitive tasks with zero exposure.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-OPS-001</div><div class="agent-name">Maya Serrin</div><div class="agent-role" data-i="agt14">AI Operations Coordinator — Manages multi-agent pipeline orchestration and enterprise automation layer.</div><div class="agent-badge">Active</div></div>
-      <div class="agent-card"><div class="agent-id">AGT-OPS-002</div><div class="agent-name">Leo Mercer</div><div class="agent-role" data-i="agt15">AI Strategy Coordinator — Drives engagement analytics and business intelligence across all active pipelines.</div><div class="agent-badge">Active</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-001</div><div class="agent-name">Nox Vale</div><div class="agent-role" data-i="agt1">AI Strategist — Maps business context and intelligence architecture.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-002</div><div class="agent-name">Pery Ashcroft</div><div class="agent-role" data-i="agt2">Automation Architect — Designs and deploys workflow engines.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-003</div><div class="agent-name">Atlas Mercer</div><div class="agent-role" data-i="agt3">Data Intelligence — Transforms raw data into actionable signals.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-004</div><div class="agent-name">Vanta Noire</div><div class="agent-role" data-i="agt4">Lead Generation — Identifies, qualifies, and prioritizes prospects.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-005</div><div class="agent-name">Veil Corvin</div><div class="agent-role" data-i="agt5">Web Systems — Architects and deploys digital infrastructure.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-006</div><div class="agent-name">Shade Holloway</div><div class="agent-role" data-i="agt6">Creative AI — Generates brand-aligned content at scale.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-007</div><div class="agent-name">Echo Virel</div><div class="agent-role" data-i="agt7">Customer Intelligence — Manages and learns from every interaction.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-008</div><div class="agent-name">Oracle Voss</div><div class="agent-role" data-i="agt8">Market Analytics — Real-time competitive and market intelligence.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-009</div><div class="agent-name">Helix Arden</div><div class="agent-role" data-i="agt9">SEO & Growth — Drives organic reach through algorithmic precision.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-010</div><div class="agent-name">Cipher Blackwell</div><div class="agent-role" data-i="agt10">Security & Ops — Monitors, protects, and audits all systems.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-011</div><div class="agent-name">Mirror Vale</div><div class="agent-role" data-i="agt11">Content Strategy — Shapes narrative and messaging across channels.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-012</div><div class="agent-name">Aether Crowe</div><div class="agent-role" data-i="agt12">Training Systems — Builds and delivers AI knowledge transfer programs.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-013</div><div class="agent-name">Ghost Mercer</div><div class="agent-role" data-i="agt13">Stealth Operations — Executes sensitive tasks with zero exposure.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-OPS-001</div><div class="agent-name">Maya Serrin</div><div class="agent-role" data-i="agt14">AI Operations Coordinator — Manages multi-agent pipeline orchestration and enterprise automation layer.</div><div class="agent-badge">Deployed</div></div>
+      <div class="agent-card"><div class="agent-id">AGT-OPS-002</div><div class="agent-name">Leo Mercer</div><div class="agent-role" data-i="agt15">AI Strategy Coordinator — Drives engagement analytics and business intelligence across all active pipelines.</div><div class="agent-badge">Deployed</div></div>
     </div>
   </div>
 </section>
@@ -528,7 +525,7 @@ nav_home:"Home",nav_services:"Services",nav_solutions:"Solutions",nav_products:"
 hero_eyebrow:"AI · AUTOMATION · DIGITAL INTELLIGENCE",hero_h1a:"YOUR BUSINESS",hero_h1b:"RUNS WHILE",hero_h1c:"YOU SLEEP.",
 hero_sub:"We deploy AI agents, automation systems, and digital intelligence infrastructure for businesses that refuse to operate at human speed.",
 hero_cta1:"EXPLORE SOLUTIONS →",hero_cta2:"TALK TO US",
-stat1:"AI Agents",stat2:"Service Domains",stat3:"Projects Delivered",stat4:"Languages Supported",
+stat1:"AI Systems",stat2:"Service Domains",stat4:"Languages Supported",
 services_eyebrow:"WHAT WE BUILD",services_title:"Six Domains.",services_title2:"Infinite Leverage.",
 services_sub:"Every engagement is custom-scoped. No templates — only architectures built for your exact context.",
 s1_name:"AI Solutions",s1_desc:"End-to-end AI system design and deployment. From model selection to production infrastructure.",
@@ -544,7 +541,7 @@ sol1_name:"Enterprise AI Integration",sol1_desc:"Full-stack AI deployment into y
 sol2_name:"Workflow Intelligence",sol2_desc:"Map, analyze, and automate your critical business processes. From HR to finance to operations — we find the leverage points.",
 sol3_name:"AI-Powered Growth",sol3_desc:"Lead generation, customer intelligence, and marketing automation working as one coordinated system.",
 sol_cta:"DISCUSS YOUR PROJECT →",
-agents_eyebrow:"INTELLIGENCE NETWORK",agents_title:"Thirteen AI Systems.",agents_title2:"Always Operational.",agents_caption:"ObscuronLabs™ Intelligence Network — 13 Specialized AI Systems",
+agents_eyebrow:"INTELLIGENCE NETWORK",agents_title:"Specialized AI Systems.",agents_title2:"Always Available.",agents_caption:"ObscuronLabs™ Intelligence Network — Specialized AI Systems",
 agents_sub:"Specialized AI agents purpose-built for specific intelligence domains. Each system operates independently or as part of a coordinated multi-agent pipeline.",
 agt1:"AI Strategist — Maps business context and intelligence architecture.",agt2:"Automation Architect — Designs and deploys workflow engines.",agt3:"Data Intelligence — Transforms raw data into actionable signals.",
 agt4:"Lead Generation — Identifies, qualifies, and prioritizes prospects.",agt5:"Web Systems — Architects and deploys digital infrastructure.",agt6:"Creative AI — Generates brand-aligned content at scale.",
@@ -558,10 +555,10 @@ step3_t:"Live Deployment",step3_d:"Your intelligence infrastructure goes live �
 step4_t:"Continuous Intelligence",step4_d:"Agents learn, adapt, and report — so your advantage compounds over time.",
 projects_eyebrow:"USE CASES",projects_title:"What Our AI",projects_title2:"Systems Can Do.",
 projects_sub:"Five capability examples. Real outcomes. No fabricated clients — only what our systems are built to achieve.",
-uc1_title:"Automated Sales Pipeline",uc1_desc:"AI agents qualify inbound leads, enrich contact data, draft personalized outreach, and schedule follow-ups — with zero human intervention.",
-uc2_title:"24/7 Customer Intelligence",uc2_desc:"Multi-agent support system resolves tier-1 tickets, escalates complex cases, and learns from every interaction to continuously improve.",
+uc1_title:"Automated Sales Pipeline",uc1_desc:"AI agents qualify inbound leads, enrich contact data, draft personalized outreach, and schedule follow-ups — with minimal human oversight.",
+uc2_title:"Continuous Customer Intelligence",uc2_desc:"Multi-agent support system resolves tier-1 tickets, escalates complex cases, and learns from every interaction to improve over time.",
 uc3_title:"Real-Time Business Intelligence",uc3_desc:"Live dashboards pulling from multiple data sources, with predictive signals and automated weekly executive reports.",
-uc4_title:"Content at Scale",uc4_desc:"AI content pipeline produces brand-aligned articles, social posts, and campaign copy — reviewed and published at 10× human speed.",
+uc4_title:"Content at Scale",uc4_desc:"AI content pipeline produces brand-aligned articles, social posts, and campaign copy — reviewed and published at accelerated speed.",
 uc5_title:"Digital Infrastructure Build",uc5_desc:"Full website architecture, SEO optimization, performance monitoring, and automated content updates — deployed and maintained by AI.",
 about_eyebrow:"WHO WE ARE",about_title:"ObscuronLabs™",about_title2:"Intelligence, Engineered.",
 about_p1:"ObscuronLabs™ is a global AI automation and digital intelligence company. We architect, deploy, and operate AI systems for businesses that need to operate faster, smarter, and more efficiently than their competitors.",
@@ -577,7 +574,7 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Lead generation and
 p_pricing:"REQUEST PRICING →",
 contact_eyebrow:"START YOUR PROJECT",contact_title:"Let's Build",contact_title2:"Something Significant.",
 contact_sub:"Every engagement starts with a conversation. Tell us what you're trying to build — we'll tell you exactly how our systems can architect it.",
-contact_details:"Response within 24 hours.\nAll consultations are confidential.\nCustom pricing for every engagement.",
+contact_details:"Response typically within 24 hours.\nAll consultations are confidential.\nCustom pricing for every engagement.",
 f_name:"Full Name",f_email:"Email",f_company:"Company",f_interest_label:"Area of Interest",f_interest_default:"-- Select --",
 f_int_ai:"AI Solutions",f_int_auto:"Business Automation",f_int_agents:"AI Agents & Multi-Agent Systems",f_int_data:"Data & Business Intelligence",f_int_digital:"Digital Solutions",f_int_consult:"AI Consulting",f_int_products:"Products",f_int_other:"Other",
 f_project:"Project Description",f_submit:"REQUEST CONSULTATION →",f_note:"© 2026 ObscuronLabs™ — All communications are confidential.",
@@ -585,8 +582,8 @@ faq_eyebrow:"COMMON QUESTIONS",faq_title:"Before You Ask.",faq_title2:"We've Ans
 fq1:"How are services priced?",fa1:"Every engagement is custom-quoted based on scope, complexity, and timeline. We don't do templates — because your business isn't one.",
 fq2:"Which AI models power your agents?",fa2:"We work with OpenAI, Anthropic Claude, and custom fine-tuned models via OpenRouter. Model selection depends on the task.",
 fq3:"Do I need technical knowledge?",fa3:"No. Our agents handle all technical complexity. You interact through simple dashboards and reports. We architect the system; you use the results.",
-fq4:"How long does deployment take?",fa4:"Typically 3–14 days depending on scope. Emergency deployments available for time-critical engagements.",
-fq5:"Is my data secure?",fa5:"Yes. All workflows run in isolated environments. No data is retained beyond the scope of the engagement.",
+fq4:"How long does deployment take?",fa4:"Timeline varies by project scope and complexity. Contact us to discuss your requirements.",
+fq5:"Is my data secure?",fa5:"We operate with strict confidentiality practices. Data handling terms are established at the start of each engagement.",
 fq6:"Can agents work together?",fa6:"Yes — our multi-agent pipeline coordinates tasks automatically between specialized AI systems. Each agent handles its domain while the orchestration layer ensures seamless handoffs and parallel execution.",
 footer_desc:"Global AI automation and digital intelligence infrastructure. Built for businesses that demand advantage.",
 fc1:"Services",fc2:"Company",fc2_net:"Intelligence Network",fc3:"Products",fp1:"Privacy Policy",fp2:"Terms of Service"
@@ -596,7 +593,7 @@ nav_home:"Anasayfa",nav_services:"Hizmetler",nav_solutions:"Çözümler",nav_pro
 hero_eyebrow:"YZ · OTOMATİZASYON · DİJİTAL ZEKÂ",hero_h1a:"İŞİNİZ",hero_h1b:"SİZ UYURKEN",hero_h1c:"DEVAM EDER.",
 hero_sub:"İnsan hızında çalışmayı reddeden işletmeler için yapay zeka ajanları, otomasyon sistemleri ve dijital zeka altyapısı kuruyoruz.",
 hero_cta1:"ÇÖZÜMLERİ KEŞFET →",hero_cta2:"BİZİMLE KONUŞ",
-stat1:"YZ Ajanı",stat2:"Hizmet Alanı",stat3:"Tamamlanan Proje",stat4:"Desteklenen Dil",
+stat1:"YZ Sistemi",stat2:"Hizmet Alanı",stat4:"Desteklenen Dil",
 services_eyebrow:"NE İNŞA EDİYORUZ",services_title:"Altı Alan.",services_title2:"Sonsuz Kaldıraç.",
 services_sub:"Her proje özel kapsamlıdır. Şablonlar yok — yalnızca sizin bağlamınız için mimariler.",
 s1_name:"YZ Çözümleri",s1_desc:"Uçtan uca YZ sistem tasarımı ve konuşlandırması. Model seçiminden üretim altyapısına.",
@@ -612,7 +609,7 @@ sol1_name:"Kurumsal YZ Entegrasyonu",sol1_desc:"Mevcut altyapınıza tam yığı
 sol2_name:"İş Akışı Zekası",sol2_desc:"Kritik iş süreçlerinizi haritalayın, analiz edin ve otomatize edin. Kaldıraç noktalarını buluyoruz.",
 sol3_name:"YZ Destekli Büyüme",sol3_desc:"Müşteri adayı üretimi, müşteri zekası ve pazarlama otomasyonu — koordineli bir sistem olarak.",
 sol_cta:"PROJENİZİ KONUŞALIM →",
-agents_eyebrow:"ZEKA AĞI",agents_title:"On Üç YZ Sistemi.",agents_title2:"Her Zaman Operasyonel.",agents_caption:"ObscuronLabs™ Zeka Ağı — 13 Uzmanlaşmış YZ Sistemi",
+agents_eyebrow:"ZEKA AĞI",agents_title:"Uzmanlaşmış YZ Sistemleri.",agents_title2:"Her Zaman Hazır.",agents_caption:"ObscuronLabs™ Zeka Ağı — Uzmanlaşmış YZ Sistemleri",
 agents_sub:"Belirli zeka alanları için özel olarak inşa edilmiş uzman YZ ajanları. Her sistem bağımsız veya koordineli çok ajanlı bir yapı içinde çalışır.",
 agt1:"YZ Stratejisti — İş bağlamını ve zeka mimarisini haritalıyor.",agt2:"Otomasyon Mimarı — İş akışı motorları tasarlıyor ve konuşlandırıyor.",agt3:"Veri Zekası — Ham veriyi eyleme dönüştürülebilir sinyallere çeviriyor.",
 agt4:"Müşteri Adayı Üretimi — Potansiyel müşterileri tanımlıyor, nitelendiriyor ve önceliklendiriyor.",agt5:"Web Sistemleri — Dijital altyapıyı tasarlıyor ve konuşlandırıyor.",agt6:"Yaratıcı YZ — Ölçekte marka uyumlu içerik üretiyor.",
@@ -626,10 +623,10 @@ step3_t:"Canlı Dağıtım",step3_d:"Zeka altyapınız canlıya geçiyor — mev
 step4_t:"Sürekli Zeka",step4_d:"Ajanlar öğrenir, uyum sağlar ve raporlar — avantajınız zaman içinde birikir.",
 projects_eyebrow:"KULLANIM SENARYOLARI",projects_title:"YZ Sistemlerimiz",projects_title2:"Neler Yapabilir.",
 projects_sub:"Beş yetenek örneği. Gerçek sonuçlar. Uydurma müşteri yok — yalnızca sistemlerimizin başarabileceği şeyler.",
-uc1_title:"Otomatik Satış Hattı",uc1_desc:"YZ ajanları gelen müşteri adaylarını nitelendiriyor, iletişim verilerini zenginleştiriyor ve takipleri planlıyor — sıfır insan müdahalesiyle.",
-uc2_title:"7/24 Müşteri Zekası",uc2_desc:"Çok ajanlı destek sistemi birinci seviye talepleri çözüyor, karmaşık vakaları yönlendiriyor ve her etkileşimden öğreniyor.",
+uc1_title:"Otomatik Satış Hattı",uc1_desc:"YZ ajanları gelen müşteri adaylarını nitelendiriyor, iletişim verilerini zenginleştiriyor ve takipleri planlıyor — minimum insan gözetiminde.",
+uc2_title:"Sürekli Müşteri Zekası",uc2_desc:"Çok ajanlı destek sistemi birinci seviye talepleri çözüyor, karmaşık vakaları yönlendiriyor ve her etkileşimden öğreniyor.",
 uc3_title:"Gerçek Zamanlı İş Zekası",uc3_desc:"Birden fazla veri kaynağından canlı gösterge panelleri, tahmine dayalı sinyaller ve otomatik haftalık yönetici raporları.",
-uc4_title:"Ölçekte İçerik",uc4_desc:"YZ içerik hattı marka uyumlu makaleler, sosyal medya paylaşımları ve kampanya metinleri üretiyor — 10× insan hızında.",
+uc4_title:"Ölçekte İçerik",uc4_desc:"YZ içerik hattı marka uyumlu makaleler, sosyal medya paylaşımları ve kampanya metinleri üretiyor — hızlandırılmış tempoda.",
 uc5_title:"Dijital Altyapı İnşası",uc5_desc:"Tam web sitesi mimarisi, SEO optimizasyonu, performans izleme ve otomatik içerik güncellemeleri — YZ tarafından konuşlandırılıp yönetiliyor.",
 about_eyebrow:"BİZ KİMİZ",about_title:"ObscuronLabs™",about_title2:"Zeka, Mühendislik.",
 about_p1:"ObscuronLabs™ küresel bir YZ otomasyon ve dijital zeka şirketidir. Rakiplerinden daha hızlı, akıllı ve verimli çalışması gereken işletmeler için YZ sistemleri tasarlıyor, konuşlandırıyor ve işletiyoruz.",
@@ -645,7 +642,7 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Ajanslar ve kurumsa
 p_pricing:"FİYAT İSTE →",
 contact_eyebrow:"PROJENİZİ BAŞLATIN",contact_title:"Birlikte İnşa",contact_title2:"Edelim.",
 contact_sub:"Her proje bir konuşmayla başlar. Neyi inşa etmek istediğinizi bize söyleyin.",
-contact_details:"24 saat içinde yanıt.\nTüm danışmalar gizlidir.\nHer proje için özel fiyatlandırma.",
+contact_details:"Genellikle 24 saat içinde yanıt.\nTüm danışmalar gizlidir.\nHer proje için özel fiyatlandırma.",
 f_name:"Ad Soyad",f_email:"E-posta",f_company:"Şirket",f_interest_label:"İlgi Alanı",f_interest_default:"-- Seçin --",
 f_int_ai:"YZ Çözümleri",f_int_auto:"İş Otomasyonu",f_int_agents:"YZ Ajanları ve Çok Ajanlı Sistemler",f_int_data:"Veri ve İş Zekası",f_int_digital:"Dijital Çözümler",f_int_consult:"YZ Danışmanlığı",f_int_products:"Ürünler",f_int_other:"Diğer",
 f_project:"Proje Açıklaması",f_submit:"DANIŞMANLIK İSTE →",f_note:"© 2026 ObscuronLabs™ — Tüm iletişimler gizlidir.",
@@ -653,8 +650,8 @@ faq_eyebrow:"SIK SORULAN SORULAR",faq_title:"Sormadan Önce.",faq_title2:"Yanıt
 fq1:"Hizmetler nasıl fiyatlandırılır?",fa1:"Her proje özel fiyatlandırılır. Şablonlar kullanmıyoruz — çünkü işiniz bir şablon değil.",
 fq2:"Ajanlarınız hangi YZ modellerini kullanıyor?",fa2:"OpenAI, Anthropic Claude ve OpenRouter üzerinden özel modeller. Model seçimi göreve bağlıdır.",
 fq3:"Teknik bilgiye ihtiyacım var mı?",fa3:"Hayır. Ajanlarımız tüm teknik karmaşıklığı halleder. Siz sonuçları kullanırsınız.",
-fq4:"Dağıtım ne kadar sürer?",fa4:"Genellikle 3–14 gün. Acil dağıtımlar da mevcuttur.",
-fq5:"Verilerim güvende mi?",fa5:"Evet. Tüm iş akışları izole ortamlarda çalışır. Veriler proje dışında saklanmaz.",
+fq4:"Dağıtım ne kadar sürer?",fa4:"Süre, proje kapsamına ve karmaşıklığına göre değişir. Gereksinimlerinizi görüşmek için bize ulaşın.",
+fq5:"Verilerim güvende mi?",fa5:"Sıkı gizlilik uygulamalarıyla çalışıyoruz. Veri yönetimi koşulları her proje başlangıcında belirlenir.",
 fq6:"Ajanlar birlikte çalışabilir mi?",fa6:"Evet — çok ajanlı hat, görevleri uzmanlaşmış YZ sistemleri arasında otomatik olarak koordine eder.",
 footer_desc:"Küresel YZ otomasyon ve dijital zeka altyapısı. Avantaj talep eden işletmeler için.",
 fc1:"Hizmetler",fc2:"Şirket",fc2_net:"Zeka Ağı",fc3:"Ürünler",fp1:"Gizlilik Politikası",fp2:"Kullanım Şartları"
@@ -664,7 +661,7 @@ nav_home:"Startseite",nav_services:"Leistungen",nav_solutions:"Lösungen",nav_pr
 hero_eyebrow:"KI · AUTOMATISIERUNG · DIGITALE INTELLIGENZ",hero_h1a:"IHR UNTERNEHMEN",hero_h1b:"LÄUFT WÄHREND",hero_h1c:"SIE SCHLAFEN.",
 hero_sub:"Wir setzen KI-Agenten, Automatisierungssysteme und digitale Intelligenzinfrastruktur für Unternehmen ein, die sich weigern, im Menschentakt zu arbeiten.",
 hero_cta1:"LÖSUNGEN ENTDECKEN →",hero_cta2:"KONTAKT",
-stat1:"KI-Agenten",stat2:"Servicedomänen",stat3:"Projekte abgeschlossen",stat4:"Unterstützte Sprachen",
+stat1:"KI-Systeme",stat2:"Servicedomänen",stat4:"Unterstützte Sprachen",
 services_eyebrow:"WAS WIR BAUEN",services_title:"Sechs Domänen.",services_title2:"Unendlicher Hebel.",
 services_sub:"Jedes Engagement ist individuell. Keine Vorlagen — nur Architekturen für Ihren genauen Kontext.",
 s1_name:"KI-Lösungen",s1_desc:"End-to-End KI-Systemdesign und -deployment. Von der Modellauswahl bis zur Produktionsinfrastruktur.",
@@ -680,17 +677,17 @@ sol1_name:"Enterprise KI-Integration",sol1_desc:"Vollständiges KI-Deployment in
 sol2_name:"Workflow-Intelligenz",sol2_desc:"Analysieren und automatisieren Sie Ihre kritischen Geschäftsprozesse. Wir finden die Hebelpunkte.",
 sol3_name:"KI-gesteuertes Wachstum",sol3_desc:"Lead-Generierung, Kundenintelligenz und Marketing-Automatisierung als ein koordiniertes System.",
 sol_cta:"IHR PROJEKT BESPRECHEN →",
-agents_eyebrow:"INTELLIGENZNETZWERK",agents_title:"Dreizehn KI-Systeme.",agents_title2:"Immer im Einsatz.",agents_caption:"ObscuronLabs™ Intelligenznetzwerk — 13 Spezialisierte KI-Systeme",
+agents_eyebrow:"INTELLIGENZNETZWERK",agents_title:"Spezialisierte KI-Systeme.",agents_title2:"Immer Verfügbar.",agents_caption:"ObscuronLabs™ Intelligenznetzwerk — Spezialisierte KI-Systeme",
 agents_sub:"Spezialisierte KI-Agenten für spezifische Intelligenzdomänen. Jedes System arbeitet eigenständig oder als Teil einer koordinierten Multi-Agenten-Pipeline.",
 agt1:"KI-Stratege",agt2:"Automatisierungsarchitekt",agt3:"Dateintelligenz",agt4:"Lead-Generierung",agt5:"Web-Systeme",agt6:"Kreative KI",agt7:"Kundenintelligenz",agt8:"Marktanalyse",agt9:"SEO & Wachstum",agt10:"Sicherheit & Ops",agt11:"Content-Strategie",agt12:"Trainingssysteme",agt13:"Verdeckte Operationen",agt14:"KI-Betriebskoordinator",agt15:"KI-Strategiekoordinator",
 pipeline_eyebrow:"SO FUNKTIONIERT ES",pipeline_title:"Von der Entdeckung",pipeline_title2:"zur kontinuierlichen Intelligenz.",
 step1_t:"Discovery Call",step1_d:"Wir kartieren Ihre Abläufe, Ziele und Intelligenzlücken.",step2_t:"Agentenzuweisung",step2_d:"Wir wählen die exakt passenden Agenten.",step3_t:"Live-Deployment",step3_d:"Ihre Infrastruktur geht live — in Ihren Stack integriert.",step4_t:"Kontinuierliche Intelligenz",step4_d:"Agenten lernen, passen sich an — Ihr Vorteil wächst.",
 projects_eyebrow:"ANWENDUNGSFÄLLE",projects_title:"Was unsere KI",projects_title2:"Systeme können.",
 projects_sub:"Fünf Fähigkeitsbeispiele. Echte Ergebnisse. Keine fiktiven Kunden.",
-uc1_title:"Automatisierte Sales-Pipeline",uc1_desc:"KI-Agenten qualifizieren Leads, reichern Daten an und planen Folgemaßnahmen — ohne menschliche Eingriffe.",
-uc2_title:"24/7 Kundenintelligenz",uc2_desc:"Multi-Agenten-Support löst Tier-1-Tickets, eskaliert komplexe Fälle und lernt kontinuierlich.",
+uc1_title:"Automatisierte Sales-Pipeline",uc1_desc:"KI-Agenten qualifizieren Leads, reichern Daten an und planen Folgemaßnahmen — mit minimalem menschlichen Aufwand.",
+uc2_title:"Kontinuierliche Kundenintelligenz",uc2_desc:"Multi-Agenten-Support löst Tier-1-Tickets, eskaliert komplexe Fälle und lernt kontinuierlich.",
 uc3_title:"Echtzeit-Business-Intelligence",uc3_desc:"Live-Dashboards aus mehreren Quellen mit prädiktiven Signalen und automatisierten Berichten.",
-uc4_title:"Content im Maßstab",uc4_desc:"KI-Content-Pipeline produziert markenkonformen Content — 10× Menschengeschwindigkeit.",
+uc4_title:"Content im Maßstab",uc4_desc:"KI-Content-Pipeline produziert markenkonformen Content — mit beschleunigter Geschwindigkeit.",
 uc5_title:"Digitale Infrastruktur",uc5_desc:"Website-Architektur, SEO, Performance-Monitoring und automatische Updates — von KI betrieben.",
 about_eyebrow:"WER WIR SIND",about_title:"ObscuronLabs™",about_title2:"Intelligenz, Engineered.",
 about_p1:"ObscuronLabs™ ist ein globales KI-Automatisierungs- und digitales Intelligenzunternehmen. Wir bauen KI-Systeme für Unternehmen, die schneller und smarter agieren müssen.",
@@ -706,12 +703,12 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Lead-Generierung un
 p_pricing:"PREIS ANFRAGEN →",
 contact_eyebrow:"IHR PROJEKT STARTEN",contact_title:"Lass uns etwas",contact_title2:"Bedeutendes bauen.",
 contact_sub:"Jedes Engagement beginnt mit einem Gespräch.",
-contact_details:"Antwort innerhalb 24 Stunden.\nAlle Beratungen vertraulich.\nIndividuelle Preise.",
+contact_details:"Antwort in der Regel innerhalb 24 Stunden.\nAlle Beratungen vertraulich.\nIndividuelle Preise.",
 f_name:"Vollständiger Name",f_email:"E-Mail",f_company:"Unternehmen",f_interest_label:"Interessengebiet",f_interest_default:"-- Auswählen --",
 f_int_ai:"KI-Lösungen",f_int_auto:"Geschäftsautomatisierung",f_int_agents:"KI-Agenten & Multi-Agenten",f_int_data:"Daten & BI",f_int_digital:"Digitale Lösungen",f_int_consult:"KI-Beratung",f_int_products:"Produkte",f_int_other:"Sonstiges",
 f_project:"Projektbeschreibung",f_submit:"BERATUNG ANFRAGEN →",f_note:"© 2026 ObscuronLabs™ — Alle Kommunikationen vertraulich.",
 faq_eyebrow:"HÄUFIGE FRAGEN",faq_title:"Bevor Sie fragen.",faq_title2:"Haben wir geantwortet.",
-fq1:"Wie werden Leistungen berechnet?",fa1:"Individuell kalkuliert. Keine Vorlagen.",fq2:"Welche KI-Modelle?",fa2:"OpenAI, Anthropic Claude und benutzerdefinierte Modelle via OpenRouter.",fq3:"Brauche ich technisches Wissen?",fa3:"Nein. Unsere Agenten übernehmen die Komplexität.",fq4:"Deployment-Dauer?",fa4:"3–14 Tage. Notfalldeployments verfügbar.",fq5:"Datensicherheit?",fa5:"Alle Workflows in isolierten Umgebungen.",fq6:"Können Agenten zusammenarbeiten?",fa6:"Ja — Multi-Agenten-Pipeline koordiniert Aufgaben automatisch zwischen spezialisierten KI-Systemen.",
+fq1:"Wie werden Leistungen berechnet?",fa1:"Individuell kalkuliert. Keine Vorlagen.",fq2:"Welche KI-Modelle?",fa2:"OpenAI, Anthropic Claude und benutzerdefinierte Modelle via OpenRouter.",fq3:"Brauche ich technisches Wissen?",fa3:"Nein. Unsere Agenten übernehmen die Komplexität.",fq4:"Wie lange dauert das Deployment?",fa4:"Die Dauer variiert je nach Projektumfang und Komplexität. Kontaktieren Sie uns für eine Einschätzung.",fq5:"Sind meine Daten sicher?",fa5:"Wir arbeiten mit strengen Vertraulichkeitspraktiken. Datenschutzbedingungen werden zu Beginn jedes Projekts festgelegt.",fq6:"Können Agenten zusammenarbeiten?",fa6:"Ja — Multi-Agenten-Pipeline koordiniert Aufgaben automatisch zwischen spezialisierten KI-Systemen.",
 footer_desc:"Globale KI-Automatisierung und digitale Intelligenzinfrastruktur für Unternehmen.",
 fc1:"Leistungen",fc2:"Unternehmen",fc2_net:"Intelligenznetzwerk",fc3:"Produkte",fp1:"Datenschutz",fp2:"AGB"
 },
@@ -720,7 +717,7 @@ nav_home:"Home",nav_services:"Servizi",nav_solutions:"Soluzioni",nav_products:"P
 hero_eyebrow:"IA · AUTOMAZIONE · INTELLIGENZA DIGITALE",hero_h1a:"LA TUA AZIENDA",hero_h1b:"FUNZIONA MENTRE",hero_h1c:"DORMI.",
 hero_sub:"Distribuiamo agenti IA, sistemi di automazione e infrastruttura di intelligenza digitale per aziende che rifiutano di operare alla velocità umana.",
 hero_cta1:"ESPLORA SOLUZIONI →",hero_cta2:"CONTATTACI",
-stat1:"Agenti IA",stat2:"Domini di Servizio",stat3:"Progetti Consegnati",stat4:"Lingue Supportate",
+stat1:"Sistemi IA",stat2:"Domini di Servizio",stat4:"Lingue Supportate",
 services_eyebrow:"COSA COSTRUIAMO",services_title:"Sei Domini.",services_title2:"Leva Infinita.",
 services_sub:"Ogni progetto è personalizzato. Nessun modello — solo architetture per il tuo contesto.",
 s1_name:"Soluzioni IA",s1_desc:"Design e deployment di sistemi IA end-to-end. Dalla selezione del modello all'infrastruttura.",
@@ -736,17 +733,17 @@ sol1_name:"Integrazione IA Enterprise",sol1_desc:"Deployment IA completo nella t
 sol2_name:"Workflow Intelligence",sol2_desc:"Mappa, analizza e automatizza i tuoi processi aziendali critici.",
 sol3_name:"Crescita Guidata dall'IA",sol3_desc:"Lead generation, intelligenza cliente e automazione marketing come sistema coordinato.",
 sol_cta:"DISCUTI IL TUO PROGETTO →",
-agents_eyebrow:"RETE INTELLIGENCE",agents_title:"Tredici Sistemi IA.",agents_title2:"Sempre Operativi.",agents_caption:"Rete Intelligence ObscuronLabs™ — 13 Sistemi IA Specializzati",
+agents_eyebrow:"RETE INTELLIGENCE",agents_title:"Sistemi IA Specializzati.",agents_title2:"Sempre Disponibili.",agents_caption:"Rete Intelligence ObscuronLabs™ — Sistemi IA Specializzati",
 agents_sub:"Agenti IA specializzati per domini di intelligenza specifici. Ogni sistema opera indipendentemente o come parte di una pipeline multi-agente.",
 agt1:"Stratega IA",agt2:"Architetto Automazione",agt3:"Data Intelligence",agt4:"Lead Generation",agt5:"Sistemi Web",agt6:"IA Creativa",agt7:"Customer Intelligence",agt8:"Analisi di Mercato",agt9:"SEO & Crescita",agt10:"Sicurezza & Ops",agt11:"Strategia Contenuti",agt12:"Sistemi di Formazione",agt13:"Operazioni Riservate",agt14:"Coordinatore Operazioni IA",agt15:"Coordinatore Strategia IA",
 pipeline_eyebrow:"COME FUNZIONA",pipeline_title:"Dalla Scoperta",pipeline_title2:"all'Intelligenza Continua.",
 step1_t:"Discovery Call",step1_d:"Mappiamo le tue operazioni, obiettivi e lacune.",step2_t:"Assegnazione Agenti",step2_d:"Selezioniamo gli agenti esatti.",step3_t:"Deployment Live",step3_d:"La tua infrastruttura va in diretta.",step4_t:"Intelligenza Continua",step4_d:"Gli agenti imparano e si adattano.",
 projects_eyebrow:"CASI D'USO",projects_title:"Cosa possono fare",projects_title2:"i nostri sistemi IA.",
 projects_sub:"Cinque esempi di capacità. Risultati reali. Nessun cliente inventato.",
-uc1_title:"Pipeline di Vendita Automatizzata",uc1_desc:"Gli agenti IA qualificano lead, arricchiscono dati e pianificano follow-up — senza intervento umano.",
-uc2_title:"Customer Intelligence 24/7",uc2_desc:"Sistema multi-agente risolve ticket, escalona casi complessi e impara continuamente.",
+uc1_title:"Pipeline di Vendita Automatizzata",uc1_desc:"Gli agenti IA qualificano lead, arricchiscono dati e pianificano follow-up — con supervisione umana minima.",
+uc2_title:"Customer Intelligence Continua",uc2_desc:"Sistema multi-agente risolve ticket, escalona casi complessi e impara continuamente.",
 uc3_title:"Business Intelligence in Tempo Reale",uc3_desc:"Dashboard live da più fonti con segnali predittivi e report automatici.",
-uc4_title:"Contenuti in Scala",uc4_desc:"Pipeline IA produce articoli e copy — a 10× velocità umana.",
+uc4_title:"Contenuti in Scala",uc4_desc:"Pipeline IA produce articoli e copy — a velocità accelerata.",
 uc5_title:"Build Infrastruttura Digitale",uc5_desc:"Architettura web, SEO, monitoraggio e aggiornamenti — gestiti dall'IA.",
 about_eyebrow:"CHI SIAMO",about_title:"ObscuronLabs™",about_title2:"Intelligenza, Engineered.",
 about_p1:"ObscuronLabs™ è un'azienda globale di automazione IA e intelligenza digitale. Costruiamo sistemi IA per aziende che devono operare più velocemente dei loro concorrenti.",
@@ -762,12 +759,12 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack lead generati
 p_pricing:"RICHIEDI PREZZI →",
 contact_eyebrow:"AVVIA IL TUO PROGETTO",contact_title:"Costruiamo",contact_title2:"Qualcosa di Significativo.",
 contact_sub:"Ogni progetto inizia con una conversazione.",
-contact_details:"Risposta entro 24 ore.\nTutte le consulenze riservate.\nPrezzi personalizzati.",
+contact_details:"Risposta tipicamente entro 24 ore.\nTutte le consulenze riservate.\nPrezzi personalizzati.",
 f_name:"Nome Completo",f_email:"Email",f_company:"Azienda",f_interest_label:"Area di Interesse",f_interest_default:"-- Seleziona --",
 f_int_ai:"Soluzioni IA",f_int_auto:"Automazione Aziendale",f_int_agents:"Agenti IA",f_int_data:"Dati & BI",f_int_digital:"Soluzioni Digitali",f_int_consult:"Consulenza IA",f_int_products:"Prodotti",f_int_other:"Altro",
 f_project:"Descrizione Progetto",f_submit:"RICHIEDI CONSULENZA →",f_note:"© 2026 ObscuronLabs™ — Tutte le comunicazioni sono riservate.",
 faq_eyebrow:"DOMANDE FREQUENTI",faq_title:"Prima che tu chieda.",faq_title2:"Abbiamo risposto.",
-fq1:"Come vengono quotati i servizi?",fa1:"Ogni progetto è quotato su misura. Non usiamo modelli.",fq2:"Quali modelli IA?",fa2:"OpenAI, Anthropic Claude e modelli personalizzati via OpenRouter.",fq3:"Ho bisogno di conoscenze tecniche?",fa3:"No. I nostri agenti gestiscono tutta la complessità.",fq4:"Quanto dura il deployment?",fa4:"3–14 giorni. Deployment d'emergenza disponibili.",fq5:"I miei dati sono al sicuro?",fa5:"Sì. Ambienti isolati. Nessun dato conservato.",fq6:"Gli agenti collaborano?",fa6:"Sì — la pipeline multi-agente coordina i compiti automaticamente tra sistemi IA specializzati.",
+fq1:"Come vengono quotati i servizi?",fa1:"Ogni progetto è quotato su misura. Non usiamo modelli.",fq2:"Quali modelli IA?",fa2:"OpenAI, Anthropic Claude e modelli personalizzati via OpenRouter.",fq3:"Ho bisogno di conoscenze tecniche?",fa3:"No. I nostri agenti gestiscono tutta la complessità.",fq4:"Quanto dura il deployment?",fa4:"I tempi variano in base alla portata e complessità del progetto. Contattateci per discutere le vostre esigenze.",fq5:"I miei dati sono al sicuro?",fa5:"Operiamo con pratiche di riservatezza rigorose. I termini di gestione dei dati vengono stabiliti all'inizio di ogni progetto.",fq6:"Gli agenti collaborano?",fa6:"Sì — la pipeline multi-agente coordina i compiti automaticamente tra sistemi IA specializzati.",
 footer_desc:"Infrastruttura globale di automazione IA e intelligenza digitale per aziende che esigono vantaggio.",
 fc1:"Servizi",fc2:"Azienda",fc2_net:"Rete Intelligence",fc3:"Prodotti",fp1:"Privacy",fp2:"Termini"
 },
@@ -776,7 +773,7 @@ nav_home:"الرئيسية",nav_services:"الخدمات",nav_solutions:"الح�
 hero_eyebrow:"الذكاء الاصطناعي · الأتمتة · الذكاء الرقمي",hero_h1a:"عملك يعمل",hero_h1b:"بينما",hero_h1c:"أنت نائم.",
 hero_sub:"نوزّع وكلاء الذكاء الاصطناعي وأنظمة الأتمتة والبنية التحتية للذكاء الرقمي للمؤسسات التي ترفض العمل بالسرعة البشرية.",
 hero_cta1:"استكشف الحلول →",hero_cta2:"تحدث إلينا",
-stat1:"وكلاء الذكاء الاصطناعي",stat2:"مجالات الخدمة",stat3:"مشاريع مُنجزة",stat4:"لغات مدعومة",
+stat1:"أنظمة الذكاء الاصطناعي",stat2:"مجالات الخدمة",stat4:"لغات مدعومة",
 services_eyebrow:"ما نبنيه",services_title:"ستة مجالات.",services_title2:"نفوذ لا محدود.",
 services_sub:"كل مشروع مُصمَّم خصيصاً. لا قوالب — فقط بنى مصممة لسياقك.",
 s1_name:"حلول الذكاء الاصطناعي",s1_desc:"تصميم ونشر أنظمة الذكاء الاصطناعي من البداية إلى النهاية.",
@@ -792,17 +789,17 @@ sol1_name:"تكامل الذكاء الاصطناعي المؤسسي",sol1_desc:
 sol2_name:"ذكاء سير العمل",sol2_desc:"رسم خريطة وتحليل وأتمتة عملياتك التجارية الحيوية.",
 sol3_name:"نمو مدفوع بالذكاء الاصطناعي",sol3_desc:"توليد العملاء وذكاء العملاء وأتمتة التسويق كنظام واحد منسق.",
 sol_cta:"ناقش مشروعك →",
-agents_eyebrow:"شبكة الذكاء",agents_title:"ثلاثة عشر نظام ذكاء اصطناعي.",agents_title2:"دائماً في العمل.",agents_caption:"شبكة ذكاء ObscuronLabs™ — 13 نظام ذكاء اصطناعي متخصص",
+agents_eyebrow:"شبكة الذكاء",agents_title:"أنظمة ذكاء اصطناعي متخصصة.",agents_title2:"دائماً متاحة.",agents_caption:"شبكة ذكاء ObscuronLabs™ — أنظمة ذكاء اصطناعي متخصصة",
 agents_sub:"وكلاء ذكاء اصطناعي متخصصون لمجالات ذكاء محددة.",
 agt1:"استراتيجي الذكاء الاصطناعي",agt2:"مهندس الأتمتة",agt3:"ذكاء البيانات",agt4:"توليد العملاء",agt5:"أنظمة الويب",agt6:"الذكاء الإبداعي",agt7:"ذكاء العملاء",agt8:"تحليلات السوق",agt9:"تحسين محركات البحث",agt10:"الأمن والعمليات",agt11:"استراتيجية المحتوى",agt12:"أنظمة التدريب",agt13:"العمليات السرية",agt14:"منسق عمليات الذكاء الاصطناعي",agt15:"منسق استراتيجية الذكاء الاصطناعي",
 pipeline_eyebrow:"كيف يعمل",pipeline_title:"من الاكتشاف",pipeline_title2:"إلى الذكاء المستمر.",
 step1_t:"مكالمة الاكتشاف",step1_d:"نرسم خريطة عملياتك وأهدافك.",step2_t:"تعيين الوكلاء",step2_d:"نختار الوكلاء المناسبين تماماً.",step3_t:"النشر المباشر",step3_d:"بنيتك التحتية تعمل مباشرة.",step4_t:"الذكاء المستمر",step4_d:"الوكلاء يتعلمون ويتكيفون.",
 projects_eyebrow:"حالات الاستخدام",projects_title:"ما يمكن لأنظمتنا",projects_title2:"تحقيقه.",
 projects_sub:"خمسة أمثلة على القدرات. نتائج حقيقية. لا عملاء مزيفون.",
-uc1_title:"خط مبيعات آلي",uc1_desc:"وكلاء الذكاء الاصطناعي يؤهلون العملاء ويثرون البيانات ويجدولون المتابعات — بدون تدخل بشري.",
-uc2_title:"ذكاء العملاء على مدار الساعة",uc2_desc:"نظام متعدد الوكلاء يحل التذاكر ويُصعّد الحالات المعقدة ويتعلم باستمرار.",
+uc1_title:"خط مبيعات آلي",uc1_desc:"وكلاء الذكاء الاصطناعي يؤهلون العملاء ويثرون البيانات ويجدولون المتابعات — مع إشراف بشري محدود.",
+uc2_title:"ذكاء عملاء مستمر",uc2_desc:"نظام متعدد الوكلاء يحل التذاكر ويُصعّد الحالات المعقدة ويتعلم باستمرار.",
 uc3_title:"ذكاء أعمال في الوقت الفعلي",uc3_desc:"لوحات معلومات مباشرة مع إشارات تنبؤية وتقارير أسبوعية آلية.",
-uc4_title:"محتوى بالجملة",uc4_desc:"خط محتوى ذكاء اصطناعي ينتج مقالات ومنشورات — بسرعة 10 أضعاف البشر.",
+uc4_title:"محتوى بالجملة",uc4_desc:"خط محتوى ذكاء اصطناعي ينتج مقالات ومنشورات — بسرعة متسارعة.",
 uc5_title:"بناء البنية التحتية الرقمية",uc5_desc:"معمارية موقع، SEO، مراقبة أداء وتحديثات آلية — تدار بالذكاء الاصطناعي.",
 about_eyebrow:"من نحن",about_title:"ObscuronLabs™",about_title2:"ذكاء مهندَس.",
 about_p1:"ObscuronLabs™ شركة عالمية لأتمتة الذكاء الاصطناعي والذكاء الرقمي. نبني أنظمة ذكاء اصطناعي للمؤسسات التي تحتاج للعمل بشكل أسرع وأذكى.",
@@ -818,12 +815,12 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"توليد العم
 p_pricing:"اطلب الأسعار →",
 contact_eyebrow:"ابدأ مشروعك",contact_title:"لنبني",contact_title2:"شيئاً ذا قيمة.",
 contact_sub:"كل مشروع يبدأ بمحادثة.",
-contact_details:"رد خلال 24 ساعة.\nجميع الاستشارات سرية.\nتسعير مخصص.",
+contact_details:"رد في الغالب خلال 24 ساعة.\nجميع الاستشارات سرية.\nتسعير مخصص.",
 f_name:"الاسم الكامل",f_email:"البريد الإلكتروني",f_company:"الشركة",f_interest_label:"مجال الاهتمام",f_interest_default:"-- اختر --",
 f_int_ai:"حلول الذكاء الاصطناعي",f_int_auto:"أتمتة الأعمال",f_int_agents:"وكلاء الذكاء الاصطناعي",f_int_data:"البيانات وذكاء الأعمال",f_int_digital:"الحلول الرقمية",f_int_consult:"استشارات الذكاء الاصطناعي",f_int_products:"المنتجات",f_int_other:"أخرى",
 f_project:"وصف المشروع",f_submit:"طلب استشارة →",f_note:"© 2026 ObscuronLabs™ — جميع الاتصالات سرية.",
 faq_eyebrow:"أسئلة شائعة",faq_title:"قبل أن تسأل.",faq_title2:"أجبنا.",
-fq1:"كيف يتم التسعير؟",fa1:"كل مشروع مسعَّر بشكل مخصص. لا قوالب.",fq2:"ما نماذج الذكاء الاصطناعي؟",fa2:"OpenAI وAnthropic Claude ونماذج مخصصة عبر OpenRouter.",fq3:"هل أحتاج معرفة تقنية؟",fa3:"لا. وكلاؤنا يتعاملون مع كل التعقيد.",fq4:"كم يستغرق النشر؟",fa4:"3–14 أيام. النشر الطارئ متاح.",fq5:"بياناتي آمنة؟",fa5:"نعم. بيئات معزولة. لا بيانات محتجزة.",fq6:"هل يتعاون الوكلاء؟",fa6:"نعم — تنسق pipeline متعددة الوكلاء المهام تلقائياً بين الأنظمة المتخصصة.",
+fq1:"كيف يتم التسعير؟",fa1:"كل مشروع مسعَّر بشكل مخصص. لا قوالب.",fq2:"ما نماذج الذكاء الاصطناعي؟",fa2:"OpenAI وAnthropic Claude ونماذج مخصصة عبر OpenRouter.",fq3:"هل أحتاج معرفة تقنية؟",fa3:"لا. وكلاؤنا يتعاملون مع كل التعقيد.",fq4:"كم يستغرق النشر؟",fa4:"تتفاوت المدة حسب نطاق المشروع وتعقيده. تواصل معنا لمناقشة متطلباتك.",fq5:"بياناتي آمنة؟",fa5:"نعمل بممارسات سرية صارمة. تُحدَّد شروط معالجة البيانات في بداية كل مشروع.",fq6:"هل يتعاون الوكلاء؟",fa6:"نعم — تنسق pipeline متعددة الوكلاء المهام تلقائياً بين الأنظمة المتخصصة.",
 footer_desc:"بنية تحتية عالمية لأتمتة الذكاء الاصطناعي والذكاء الرقمي للمؤسسات.",
 fc1:"الخدمات",fc2:"الشركة",fc2_net:"شبكة الذكاء",fc3:"المنتجات",fp1:"سياسة الخصوصية",fp2:"شروط الخدمة"
 },
@@ -832,7 +829,7 @@ nav_home:"Accueil",nav_services:"Services",nav_solutions:"Solutions",nav_product
 hero_eyebrow:"IA · AUTOMATISATION · INTELLIGENCE NUMÉRIQUE",hero_h1a:"VOTRE ENTREPRISE",hero_h1b:"FONCTIONNE PENDANT",hero_h1c:"QUE VOUS DORMEZ.",
 hero_sub:"Nous déployons des agents IA, des systèmes d'automatisation et une infrastructure d'intelligence numérique pour les entreprises qui refusent d'opérer à la vitesse humaine.",
 hero_cta1:"EXPLORER LES SOLUTIONS →",hero_cta2:"NOUS CONTACTER",
-stat1:"Agents IA",stat2:"Domaines de Service",stat3:"Projets Livrés",stat4:"Langues Supportées",
+stat1:"Systèmes IA",stat2:"Domaines de Service",stat4:"Langues Supportées",
 services_eyebrow:"CE QUE NOUS CONSTRUISONS",services_title:"Six Domaines.",services_title2:"Levier Infini.",
 services_sub:"Chaque engagement est personnalisé. Pas de modèles — uniquement des architectures adaptées à votre contexte.",
 s1_name:"Solutions IA",s1_desc:"Conception et déploiement de systèmes IA de bout en bout. De la sélection du modèle à l'infrastructure de production.",
@@ -848,17 +845,17 @@ sol1_name:"Intégration IA Enterprise",sol1_desc:"Déploiement IA complet dans v
 sol2_name:"Intelligence de Workflow",sol2_desc:"Cartographiez et automatisez vos processus critiques. Nous trouvons les points de levier.",
 sol3_name:"Croissance Portée par l'IA",sol3_desc:"Génération de leads, intelligence client et automatisation marketing comme système coordonné.",
 sol_cta:"DISCUTER DE VOTRE PROJET →",
-agents_eyebrow:"RÉSEAU D'INTELLIGENCE",agents_title:"Treize Systèmes IA.",agents_title2:"Toujours Opérationnels.",agents_caption:"Réseau d'Intelligence ObscuronLabs™ — 13 Systèmes IA Spécialisés",
+agents_eyebrow:"RÉSEAU D'INTELLIGENCE",agents_title:"Systèmes IA Spécialisés.",agents_title2:"Toujours Disponibles.",agents_caption:"Réseau d'Intelligence ObscuronLabs™ — Systèmes IA Spécialisés",
 agents_sub:"Agents IA spécialisés pour des domaines d'intelligence spécifiques. Chaque système opère indépendamment ou dans une pipeline multi-agents.",
 agt1:"Stratège IA",agt2:"Architecte Automation",agt3:"Data Intelligence",agt4:"Génération de Leads",agt5:"Systèmes Web",agt6:"IA Créative",agt7:"Intelligence Client",agt8:"Analytique Marché",agt9:"SEO & Croissance",agt10:"Sécurité & Ops",agt11:"Stratégie Contenu",agt12:"Systèmes de Formation",agt13:"Opérations Discrètes",agt14:"Coordinateur Opérations IA",agt15:"Coordinateur Stratégie IA",
 pipeline_eyebrow:"COMMENT ÇA MARCHE",pipeline_title:"De la Découverte",pipeline_title2:"à l'Intelligence Continue.",
 step1_t:"Appel de Découverte",step1_d:"Nous cartographions vos opérations, objectifs et lacunes.",step2_t:"Attribution des Agents",step2_d:"Nous sélectionnons les agents exacts.",step3_t:"Déploiement Live",step3_d:"Votre infrastructure va en production.",step4_t:"Intelligence Continue",step4_d:"Les agents apprennent et s'adaptent.",
 projects_eyebrow:"CAS D'USAGE",projects_title:"Ce que nos systèmes",projects_title2:"IA peuvent faire.",
 projects_sub:"Cinq exemples de capacités. Résultats réels. Pas de clients inventés.",
-uc1_title:"Pipeline de Vente Automatisée",uc1_desc:"Les agents qualifient les leads, enrichissent les données et planifient les suivis — sans intervention humaine.",
-uc2_title:"Intelligence Client 24/7",uc2_desc:"Système multi-agents résout les tickets, escalade les cas complexes et apprend continuellement.",
+uc1_title:"Pipeline de Vente Automatisée",uc1_desc:"Les agents qualifient les leads, enrichissent les données et planifient les suivis — avec une supervision humaine minimale.",
+uc2_title:"Intelligence Client Continue",uc2_desc:"Système multi-agents résout les tickets, escalade les cas complexes et apprend continuellement.",
 uc3_title:"Business Intelligence Temps Réel",uc3_desc:"Tableaux de bord en direct avec signaux prédictifs et rapports automatisés.",
-uc4_title:"Contenu à l'Échelle",uc4_desc:"Pipeline IA produit articles et copy — à 10× la vitesse humaine.",
+uc4_title:"Contenu à l'Échelle",uc4_desc:"Pipeline IA produit articles et copy — à vitesse accélérée.",
 uc5_title:"Construction d'Infrastructure Digitale",uc5_desc:"Architecture web, SEO, monitoring et mises à jour automatiques — gérés par l'IA.",
 about_eyebrow:"QUI NOUS SOMMES",about_title:"ObscuronLabs™",about_title2:"Intelligence, Engineered.",
 about_p1:"ObscuronLabs™ est une société mondiale d'automatisation IA et d'intelligence numérique. Nous construisons des systèmes IA pour les entreprises qui doivent opérer plus vite que leurs concurrents.",
@@ -874,12 +871,12 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack de générati
 p_pricing:"DEMANDER UN PRIX →",
 contact_eyebrow:"DÉMARRER VOTRE PROJET",contact_title:"Construisons",contact_title2:"Quelque Chose de Significatif.",
 contact_sub:"Chaque engagement commence par une conversation.",
-contact_details:"Réponse sous 24 heures.\nToutes les consultations sont confidentielles.\nTarification personnalisée.",
+contact_details:"Réponse généralement sous 24 heures.\nToutes les consultations sont confidentielles.\nTarification personnalisée.",
 f_name:"Nom Complet",f_email:"Email",f_company:"Entreprise",f_interest_label:"Domaine d'Intérêt",f_interest_default:"-- Sélectionner --",
 f_int_ai:"Solutions IA",f_int_auto:"Automatisation",f_int_agents:"Agents IA",f_int_data:"Données & BI",f_int_digital:"Solutions Numériques",f_int_consult:"Conseil IA",f_int_products:"Produits",f_int_other:"Autre",
 f_project:"Description du Projet",f_submit:"DEMANDER UNE CONSULTATION →",f_note:"© 2026 ObscuronLabs™ — Toutes les communications sont confidentielles.",
 faq_eyebrow:"QUESTIONS FRÉQUENTES",faq_title:"Avant de demander.",faq_title2:"Nous avons répondu.",
-fq1:"Comment les services sont-ils tarifés?",fa1:"Chaque engagement est devisé sur mesure. Pas de modèles.",fq2:"Quels modèles IA?",fa2:"OpenAI, Anthropic Claude et modèles personnalisés via OpenRouter.",fq3:"Besoin de connaissances techniques?",fa3:"Non. Nos agents gèrent toute la complexité.",fq4:"Durée du déploiement?",fa4:"3–14 jours. Déploiements d'urgence disponibles.",fq5:"Mes données sont-elles sécurisées?",fa5:"Oui. Environnements isolés. Aucune donnée conservée.",fq6:"Les agents collaborent-ils?",fa6:"Oui — la pipeline multi-agents coordonne les tâches automatiquement entre les systèmes spécialisés.",
+fq1:"Comment les services sont-ils tarifés?",fa1:"Chaque engagement est devisé sur mesure. Pas de modèles.",fq2:"Quels modèles IA?",fa2:"OpenAI, Anthropic Claude et modèles personnalisés via OpenRouter.",fq3:"Besoin de connaissances techniques?",fa3:"Non. Nos agents gèrent toute la complexité.",fq4:"Durée du déploiement?",fa4:"Le délai varie selon la portée et la complexité du projet. Contactez-nous pour discuter de vos besoins.",fq5:"Mes données sont-elles sécurisées?",fa5:"Nous opérons avec des pratiques strictes de confidentialité. Les conditions de traitement des données sont établies au début de chaque projet.",fq6:"Les agents collaborent-ils?",fa6:"Oui — la pipeline multi-agents coordonne les tâches automatiquement entre les systèmes spécialisés.",
 footer_desc:"Infrastructure mondiale d'automatisation IA et d'intelligence numérique pour les entreprises qui exigent l'avantage.",
 fc1:"Services",fc2:"Entreprise",fc2_net:"Réseau Intelligence",fc3:"Produits",fp1:"Confidentialité",fp2:"Conditions d'Utilisation"
 },
@@ -888,7 +885,7 @@ nav_home:"Kryefaqja",nav_services:"Shërbime",nav_solutions:"Zgjidhje",nav_produ
 hero_eyebrow:"IA · AUTOMATIZIM · INTELIGJENCË DIXHITALE",hero_h1a:"BIZNESI JUAJ",hero_h1b:"FUNKSIONON NDËRSA",hero_h1c:"JU FLINI.",
 hero_sub:"Ne vendosim agjentë IA, sisteme automatizimi dhe infrastrukturë inteligjence dixhitale për bizneset që refuzojnë të operojnë me shpejtësinë njerëzore.",
 hero_cta1:"EKSPLORONI ZGJIDHJET →",hero_cta2:"NA KONTAKTONI",
-stat1:"Agjentë IA",stat2:"Fusha Shërbimi",stat3:"Projekte të Dorëzuara",stat4:"Gjuhë të Mbështetura",
+stat1:"Sisteme IA",stat2:"Fusha Shërbimi",stat4:"Gjuhë të Mbështetura",
 services_eyebrow:"ÇKA NDËRTOJMË",services_title:"Gjashtë Fusha.",services_title2:"Levë e Pafundme.",
 services_sub:"Çdo angazhim është i personalizuar. Pa shabllone — vetëm arkitektura për kontekstin tuaj.",
 s1_name:"Zgjidhje IA",s1_desc:"Dizajn dhe vendosje e sistemeve IA nga fillimi në fund.",
@@ -904,17 +901,17 @@ sol1_name:"Integrimi Enterprise i IA",sol1_desc:"Vendosje e plotë IA në infras
 sol2_name:"Inteligjencë Rrjedhash Pune",sol2_desc:"Hartoni dhe automatizoni proceset kritike të biznesit tuaj.",
 sol3_name:"Rritje e Drejtuar nga IA",sol3_desc:"Gjenerimi i plumbave, inteligjenca e klientit dhe automatizimi i marketingut si sistem i koordinuar.",
 sol_cta:"DISKUTONI PROJEKTIN TUAJ →",
-agents_eyebrow:"RRJETI I INTELIGJENCËS",agents_title:"Trembëdhjetë Sisteme IA.",agents_title2:"Gjithmonë Operacionale.",agents_caption:"Rrjeti i Inteligjencës ObscuronLabs™ — 13 Sisteme IA të Specializuara",
+agents_eyebrow:"RRJETI I INTELIGJENCËS",agents_title:"Sisteme IA të Specializuara.",agents_title2:"Gjithmonë të Disponueshme.",agents_caption:"Rrjeti i Inteligjencës ObscuronLabs™ — Sisteme IA të Specializuara",
 agents_sub:"Agjentë IA të specializuar për fusha specifike inteligjence. Çdo sistem operon në mënyrë të pavarur ose si pjesë e një pipeline multi-agjent.",
 agt1:"Strateg IA",agt2:"Arkitekt Automatizimi",agt3:"Inteligjencë të Dhënash",agt4:"Gjenerim Plumbash",agt5:"Sisteme Web",agt6:"IA Krijuese",agt7:"Inteligjencë Klienti",agt8:"Analitikë Tregu",agt9:"SEO dhe Rritje",agt10:"Siguri dhe Operacione",agt11:"Strategji Përmbajtjeje",agt12:"Sisteme Trajnimi",agt13:"Operacione Diskrete",agt14:"Koordinator Operacionesh IA",agt15:"Koordinator Strategjie IA",
 pipeline_eyebrow:"SI FUNKSIONON",pipeline_title:"Nga Zbulimi",pipeline_title2:"deri tek Inteligjenca e Vazhdueshme.",
 step1_t:"Thirrja e Zbulimit",step1_d:"Hartojmë operacionet, qëllimet dhe boshllëqet tuaja.",step2_t:"Caktimi i Agjentëve",step2_d:"Zgjedhim agjentët e saktë.",step3_t:"Vendosja Live",step3_d:"Infrastruktura juaj shkon live.",step4_t:"Inteligjencë e Vazhdueshme",step4_d:"Agjentët mësojnë dhe adaptohen.",
 projects_eyebrow:"RASTE PËRDORIMI",projects_title:"Çfarë mund të bëjnë",projects_title2:"sistemet tona IA.",
 projects_sub:"Pesë shembuj aftësish. Rezultate reale. Pa klientë të trilluar.",
-uc1_title:"Pipeline i Automatizuar Shitjesh",uc1_desc:"Agjentët IA kualifikojnë plumbat dhe planifikojnë ndjekjet — pa ndërhyrje njerëzore.",
-uc2_title:"Inteligjencë Klienti 24/7",uc2_desc:"Sistemi multi-agjent zgjidh biletat dhe eskalon rastet komplekse duke mësuar vazhdimisht.",
+uc1_title:"Pipeline i Automatizuar Shitjesh",uc1_desc:"Agjentët IA kualifikojnë plumbat dhe planifikojnë ndjekjet — me mbikëqyrje minimale njerëzore.",
+uc2_title:"Inteligjencë e Vazhdueshme Klienti",uc2_desc:"Sistemi multi-agjent zgjidh biletat dhe eskalon rastet komplekse duke mësuar vazhdimisht.",
 uc3_title:"Inteligjencë Biznesi në Kohë Reale",uc3_desc:"Panele live me sinjale parashikuese dhe raporte të automatizuara.",
-uc4_title:"Përmbajtje në Shkallë",uc4_desc:"Pipeline IA prodhon artikuj dhe kopje — me 10× shpejtësinë njerëzore.",
+uc4_title:"Përmbajtje në Shkallë",uc4_desc:"Pipeline IA prodhon artikuj dhe kopje — me shpejtësi të përshpejtuar.",
 uc5_title:"Ndërtimi i Infrastrukturës Dixhitale",uc5_desc:"Arkitekturë website, SEO, monitorim dhe përditësime të automatizuara — të menaxhuara nga IA.",
 about_eyebrow:"KU JEMI NE",about_title:"ObscuronLabs™",about_title2:"Inteligjencë e Inxhinieruar.",
 about_p1:"ObscuronLabs™ është një kompani globale e automatizimit IA dhe inteligjencës dixhitale. Ndërtojmë sisteme IA për bizneset që duhet të operojnë më shpejt dhe më mençur se konkurrentët e tyre.",
@@ -930,12 +927,12 @@ p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"Stack gjenerimi plu
 p_pricing:"KËRKO ÇMIMIN →",
 contact_eyebrow:"FILLONI PROJEKTIN TUAJ",contact_title:"Le të Ndërtojmë",contact_title2:"Diçka të Rëndësishme.",
 contact_sub:"Çdo angazhim fillon me një bisedë.",
-contact_details:"Përgjigje brenda 24 orëve.\nTë gjitha konsultimet janë konfidenciale.\nÇmime të personalizuara.",
+contact_details:"Përgjigje zakonisht brenda 24 orëve.\nTë gjitha konsultimet janë konfidenciale.\nÇmime të personalizuara.",
 f_name:"Emri i Plotë",f_email:"Email",f_company:"Kompania",f_interest_label:"Fusha e Interesit",f_interest_default:"-- Zgjidhni --",
 f_int_ai:"Zgjidhje IA",f_int_auto:"Automatizim Biznesi",f_int_agents:"Agjentë IA",f_int_data:"Të Dhëna dhe BI",f_int_digital:"Zgjidhje Dixhitale",f_int_consult:"Këshillim IA",f_int_products:"Produkte",f_int_other:"Tjetër",
 f_project:"Përshkrimi i Projektit",f_submit:"KËRKO KONSULTIM →",f_note:"© 2026 ObscuronLabs™ — Të gjitha komunikimet janë konfidenciale.",
 faq_eyebrow:"PYETJE TË SHPESHTA",faq_title:"Para se të pyesni.",faq_title2:"Ne kemi përgjigjur.",
-fq1:"Si çmosen shërbimet?",fa1:"Çdo projekt çmimoset me porosi. Pa shabllone.",fq2:"Cilat modele IA?",fa2:"OpenAI, Anthropic Claude dhe modele të personalizuara via OpenRouter.",fq3:"Kërkohen njohuri teknike?",fa3:"Jo. Agjentët tanë menaxhojnë gjithë kompleksitetin.",fq4:"Sa zgjat vendosja?",fa4:"3–14 ditë. Vendosje urgjente e disponueshme.",fq5:"Të dhënat janë të sigurta?",fa5:"Po. Mjedise të izoluara. Asnjë të dhënë e ruajtur.",fq6:"A bashkëpunojnë agjentët?",fa6:"Po — pipeline multi-agjent koordinon detyrat automatikisht midis sistemeve të specializuara.",
+fq1:"Si çmosen shërbimet?",fa1:"Çdo projekt çmimoset me porosi. Pa shabllone.",fq2:"Cilat modele IA?",fa2:"OpenAI, Anthropic Claude dhe modele të personalizuara via OpenRouter.",fq3:"Kërkohen njohuri teknike?",fa3:"Jo. Agjentët tanë menaxhojnë gjithë kompleksitetin.",fq4:"Sa zgjat vendosja?",fa4:"Kohëzgjatja ndryshon sipas fushëveprimit dhe kompleksitetit të projektit. Na kontaktoni për të diskutuar kërkesat tuaja.",fq5:"Të dhënat janë të sigurta?",fa5:"Operojmë me praktika strikte konfidencialiteti. Kushtet e trajtimit të të dhënave vendosen në fillim të çdo projekti.",fq6:"A bashkëpunojnë agjentët?",fa6:"Po — pipeline multi-agjent koordinon detyrat automatikisht midis sistemeve të specializuara.",
 footer_desc:"Infrastrukturë globale automatizimi IA dhe inteligjence dixhitale për bizneset që kërkojnë avantazh.",
 fc1:"Shërbime",fc2:"Kompania",fc2_net:"Rrjeti i Inteligjencës",fc3:"Produkte",fp1:"Politika e Privatësisë",fp2:"Kushtet e Shërbimit"
 }
