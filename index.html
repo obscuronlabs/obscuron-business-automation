@@ -8,6 +8,7 @@
 <meta property="og:title" content="ObscuronLabs™ — AI · Automation · Digital Intelligence">
 <meta property="og:description" content="We deploy AI agents, automation systems, and digital intelligence infrastructure for businesses that refuse to operate at human speed.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://obscuronlabs.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -148,6 +149,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
 .footer-bottom a{color:var(--muted);text-decoration:none}
 .footer-bottom a:hover{color:var(--gold)}
 @media(max-width:900px){
+.stats-grid .stat:nth-child(2n){border-right:none}
 .hero-inner{grid-template-columns:1fr}
 .hero-video-wrap{order:-1}
 .stats-grid{grid-template-columns:repeat(2,1fr)}
@@ -220,13 +222,13 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
   <a href="#contact" onclick="closeMobile()" data-i="nav_contact">Contact</a>
   <a href="barbaros.html" style="color:var(--gold);font-weight:700">Barbaros Kaptan ↗</a>
   <div class="nav-lang">
-    <button onclick="setLang('en')" class="active" id="mlang-en">EN</button>
-    <button onclick="setLang('tr')" id="mlang-tr">TR</button>
-    <button onclick="setLang('de')" id="mlang-de">DE</button>
-    <button onclick="setLang('it')" id="mlang-it">IT</button>
-    <button onclick="setLang('ar')" id="mlang-ar">AR</button>
-    <button onclick="setLang('fr')" id="mlang-fr">FR</button>
-    <button onclick="setLang('sq')" id="mlang-sq">SQ</button>
+    <button onclick="setLang('en');closeMobile()" class="active" id="mlang-en">EN</button>
+    <button onclick="setLang('tr');closeMobile()" id="mlang-tr">TR</button>
+    <button onclick="setLang('de');closeMobile()" id="mlang-de">DE</button>
+    <button onclick="setLang('it');closeMobile()" id="mlang-it">IT</button>
+    <button onclick="setLang('ar');closeMobile()" id="mlang-ar">AR</button>
+    <button onclick="setLang('fr');closeMobile()" id="mlang-fr">FR</button>
+    <button onclick="setLang('sq');closeMobile()" id="mlang-sq">SQ</button>
   </div>
   <a href="#contact" class="btn-solid" onclick="closeMobile()" data-i="nav_cta">Talk to Us →</a>
 </div>
@@ -436,7 +438,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:48
         <br>
         <p style="font-family:var(--font-m);font-size:.78rem;color:var(--muted);line-height:1.8" data-i="contact_details">Response within 24 hours.<br>All consultations are confidential.<br>Custom pricing for every engagement.</p>
       </div>
-      <form class="contact-form" onsubmit="handleContact(event)">
+      <form class="contact-form" name="contact" data-netlify="true" onsubmit="handleContact(event)">
+        <input type="hidden" name="form-name" value="contact">
         <div class="form-row">
           <div class="form-field"><label data-i="f_name">Full Name</label><input type="text" id="f_name" required autocomplete="name"></div>
           <div class="form-field"><label data-i="f_email">Email</label><input type="email" id="f_email" required autocomplete="email"></div>
@@ -769,10 +772,10 @@ footer_desc:"Infrastruttura globale di automazione IA e intelligenza digitale pe
 fc1:"Servizi",fc2:"Azienda",fc2_net:"Rete Intelligence",fc3:"Prodotti",fp1:"Privacy",fp2:"Termini"
 },
 ar:{
-nav_home:"الرئيسية",nav_services:"الخدمات",nav_solutions:"الحلول",nav_products:"المنتجات",nav_projects:"المشاريع",nav_about:"من نحن",nav_contact:"التواصل",nav_cta:"تواصل معنا →",
+nav_home:"الرئيسية",nav_services:"الخدمات",nav_solutions:"الحلول",nav_products:"المنتجات",nav_projects:"المشاريع",nav_about:"من نحن",nav_contact:"التواصل",nav_cta:"تواصل معنا ←",
 hero_eyebrow:"الذكاء الاصطناعي · الأتمتة · الذكاء الرقمي",hero_h1a:"عملك يعمل",hero_h1b:"بينما",hero_h1c:"أنت نائم.",
 hero_sub:"نوزّع وكلاء الذكاء الاصطناعي وأنظمة الأتمتة والبنية التحتية للذكاء الرقمي للمؤسسات التي ترفض العمل بالسرعة البشرية.",
-hero_cta1:"استكشف الحلول →",hero_cta2:"تحدث إلينا",
+hero_cta1:"استكشف الحلول ←",hero_cta2:"تحدث إلينا",
 stat1:"أنظمة الذكاء الاصطناعي",stat2:"مجالات الخدمة",stat4:"لغات مدعومة",
 services_eyebrow:"ما نبنيه",services_title:"ستة مجالات.",services_title2:"نفوذ لا محدود.",
 services_sub:"كل مشروع مُصمَّم خصيصاً. لا قوالب — فقط بنى مصممة لسياقك.",
@@ -788,7 +791,7 @@ solutions_sub:"لا نبيع حزماً. نصمم حلولاً خاصة بعمل
 sol1_name:"تكامل الذكاء الاصطناعي المؤسسي",sol1_desc:"نشر ذكاء اصطناعي كامل في بنيتك التحتية الحالية.",
 sol2_name:"ذكاء سير العمل",sol2_desc:"رسم خريطة وتحليل وأتمتة عملياتك التجارية الحيوية.",
 sol3_name:"نمو مدفوع بالذكاء الاصطناعي",sol3_desc:"توليد العملاء وذكاء العملاء وأتمتة التسويق كنظام واحد منسق.",
-sol_cta:"ناقش مشروعك →",
+sol_cta:"ناقش مشروعك ←",
 agents_eyebrow:"شبكة الذكاء",agents_title:"أنظمة ذكاء اصطناعي متخصصة.",agents_title2:"دائماً متاحة.",agents_caption:"شبكة ذكاء ObscuronLabs™ — أنظمة ذكاء اصطناعي متخصصة",
 agents_sub:"وكلاء ذكاء اصطناعي متخصصون لمجالات ذكاء محددة.",
 agt1:"استراتيجي الذكاء الاصطناعي",agt2:"مهندس الأتمتة",agt3:"ذكاء البيانات",agt4:"توليد العملاء",agt5:"أنظمة الويب",agt6:"الذكاء الإبداعي",agt7:"ذكاء العملاء",agt8:"تحليلات السوق",agt9:"تحسين محركات البحث",agt10:"الأمن والعمليات",agt11:"استراتيجية المحتوى",agt12:"أنظمة التدريب",agt13:"العمليات السرية",agt14:"منسق عمليات الذكاء الاصطناعي",agt15:"منسق استراتيجية الذكاء الاصطناعي",
@@ -812,13 +815,13 @@ products_sub:"منتجات ذكاء مُهيَّأة مسبقاً للمؤسسا
 p1_label:"CORE",p1_name:"Obscuron Core",p1_desc:"سير عمل أتمتة n8n كامل. 13 وكيل مُهيَّأ مسبقاً. تكامل Discord.",
 p2_label:"PROFESSIONAL — الأكثر شعبية",p2_name:"Obscuron Professional",p2_desc:"المنظومة الكاملة: سير العمل وDiscord والدعم ذي الأولوية ومساعدة النشر.",
 p3_label:"ENTERPRISE",p3_name:"Obscuron Enterprise",p3_desc:"توليد العملاء وأتمتة البريد للوكالات. متعدد العملاء. white-label متاح.",
-p_pricing:"اطلب الأسعار →",
+p_pricing:"اطلب الأسعار ←",
 contact_eyebrow:"ابدأ مشروعك",contact_title:"لنبني",contact_title2:"شيئاً ذا قيمة.",
 contact_sub:"كل مشروع يبدأ بمحادثة.",
 contact_details:"رد في الغالب خلال 24 ساعة.\nجميع الاستشارات سرية.\nتسعير مخصص.",
 f_name:"الاسم الكامل",f_email:"البريد الإلكتروني",f_company:"الشركة",f_interest_label:"مجال الاهتمام",f_interest_default:"-- اختر --",
 f_int_ai:"حلول الذكاء الاصطناعي",f_int_auto:"أتمتة الأعمال",f_int_agents:"وكلاء الذكاء الاصطناعي",f_int_data:"البيانات وذكاء الأعمال",f_int_digital:"الحلول الرقمية",f_int_consult:"استشارات الذكاء الاصطناعي",f_int_products:"المنتجات",f_int_other:"أخرى",
-f_project:"وصف المشروع",f_submit:"طلب استشارة →",f_note:"© 2026 ObscuronLabs™ — جميع الاتصالات سرية.",
+f_project:"وصف المشروع",f_submit:"طلب استشارة ←",f_note:"© 2026 ObscuronLabs™ — جميع الاتصالات سرية.",
 faq_eyebrow:"أسئلة شائعة",faq_title:"قبل أن تسأل.",faq_title2:"أجبنا.",
 fq1:"كيف يتم التسعير؟",fa1:"كل مشروع مسعَّر بشكل مخصص. لا قوالب.",fq2:"ما نماذج الذكاء الاصطناعي؟",fa2:"OpenAI وAnthropic Claude ونماذج مخصصة عبر OpenRouter.",fq3:"هل أحتاج معرفة تقنية؟",fa3:"لا. وكلاؤنا يتعاملون مع كل التعقيد.",fq4:"كم يستغرق النشر؟",fa4:"تتفاوت المدة حسب نطاق المشروع وتعقيده. تواصل معنا لمناقشة متطلباتك.",fq5:"بياناتي آمنة؟",fa5:"نعمل بممارسات سرية صارمة. تُحدَّد شروط معالجة البيانات في بداية كل مشروع.",fq6:"هل يتعاون الوكلاء؟",fa6:"نعم — تنسق pipeline متعددة الوكلاء المهام تلقائياً بين الأنظمة المتخصصة.",
 footer_desc:"بنية تحتية عالمية لأتمتة الذكاء الاصطناعي والذكاء الرقمي للمؤسسات.",
