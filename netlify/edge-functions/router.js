@@ -3,10 +3,6 @@ export default async (request, context) => {
   const host = url.hostname;
 
   if (host === 'neocomusmusic.com' || host === 'www.neocomusmusic.com') {
-    const rewriteUrl = new URL(request.url);
-    rewriteUrl.pathname = '/neocomus_website.html';
-    return context.rewrite(rewriteUrl.toString());
+    return context.rewrite('/neocomus_website.html');
   }
 };
-
-export const config = { path: '/*' };
