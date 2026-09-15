@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olivia Oya Kaptan — Co-Founder & Creative Director | ObscuronLabs™</title>
+<meta name="description" content="Olivia Oya Kaptan — Co-Founder & Creative Director of ObscuronLabs™. International performing artist, Berklee certified, music and digital media strategist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05090F;--bg2:#080D17;--bg3:#0C1422;--bg4:#101C2E;
+  --gold:#D4A840;--gold-b:#F2CC5A;--gold-d:rgba(212,168,64,.15);
+  --gold-g:linear-gradient(135deg,#B8881A 0%,#F2CC5A 40%,#C49A28 70%,#F2CC5A 100%);
+  --purple:#6C3DB1;--purple-g:linear-gradient(135deg,#4A1D8A,#8B5CF6);
+  --text:#E4D8C4;--muted:#7A6E5E;--border:rgba(201,164,110,.14);
+  --border2:rgba(201,164,110,.28);--green:#4ADE80;
+  --font-h:'Exo 2',sans-serif;--font-m:'JetBrains Mono',monospace;
+  --nav-h:68px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-h);background:var(--bg);color:var(--text);overflow-x:hidden}
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(201,164,110,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(201,164,110,.04) 1px,transparent 1px);
+  background-size:60px 60px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(16px,5vw,64px);border-bottom:1px solid var(--border);
+  background:rgba(5,9,15,.85);backdrop-filter:blur(16px);}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo-icon{height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(212,168,64,.5))}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-links a{color:var(--muted);font-size:.8rem;font-weight:500;letter-spacing:.06em;text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.btn-ghost{padding:9px 22px;border:1px solid var(--border2);border-radius:4px;
+  color:var(--gold);font-family:var(--font-h);font-size:.82rem;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;background:none;text-decoration:none;display:inline-block;transition:background .2s}
+.btn-ghost:hover{background:var(--gold-d)}
+.btn-solid{padding:9px 22px;border:1px solid var(--gold);border-radius:4px;
+  color:var(--bg);background:var(--gold);font-family:var(--font-h);font-size:.82rem;
+  font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;display:inline-block}
+
+/* HERO */
+#hero{position:relative;z-index:1;padding:calc(var(--nav-h)+80px) clamp(16px,5vw,80px) 80px}
+.hero-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);
+  border-radius:100px;padding:6px 16px;font-family:var(--font-m);font-size:.72rem;
+  color:var(--gold);letter-spacing:.1em;margin-bottom:24px}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:6px}
+.gold-text{background:var(--gold-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-role{font-family:var(--font-m);font-size:.85rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+.hero-desc{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:32px;max-width:440px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.disciplines{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.disc-tag{font-family:var(--font-m);font-size:.72rem;color:var(--muted);letter-spacing:.08em;
+  border:1px solid var(--border);border-radius:4px;padding:5px 12px;text-transform:uppercase}
+.hero-visual{display:flex;align-items:center;justify-content:center}
+.monogram-wrap{width:300px;height:300px;border-radius:50%;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;position:relative;
+  background:radial-gradient(circle at 50%,rgba(108,61,177,.12),transparent 70%)}
+.monogram-wrap::before{content:'';position:absolute;inset:-1px;border-radius:50%;
+  border:1px solid transparent;
+  background:linear-gradient(135deg,rgba(108,61,177,.4),rgba(212,168,64,.4)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;mask-composite:exclude}
+.monogram{font-size:4rem;font-weight:900;background:var(--gold-g);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ring-outer{position:absolute;inset:-30px;border-radius:50%;border:1px dashed rgba(212,168,64,.2);animation:spin 30s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:80px clamp(16px,5vw,80px)}
+section:nth-child(even){background:var(--bg2)}
+.container{max-width:1000px;margin:0 auto}
+.eyebrow{font-family:var(--font-m);font-size:.72rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:16px}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.1;letter-spacing:-.02em;margin-bottom:24px;text-wrap:balance}
+.section-sub{font-size:.97rem;color:var(--muted);line-height:1.75;max-width:640px;margin-bottom:48px}
+p.body{font-size:.97rem;color:var(--muted);line-height:1.8;margin-bottom:16px}
+
+/* BIO */
+.bio-grid{display:grid;grid-template-columns:3fr 2fr;gap:60px;align-items:start}
+.bio-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bio-stat{padding:20px;border:1px solid var(--border);border-radius:4px;background:var(--bg3)}
+.bio-stat-num{font-size:1.8rem;font-weight:900;background:var(--gold-g);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bio-stat-lbl{font-family:var(--font-m);font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+/* NEOCOMUS */
+.neocomus-card{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:40px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:32px}
+.nc-label{font-family:var(--font-m);font-size:.7rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.nc-title{font-size:1.4rem;font-weight:800;margin-bottom:12px}
+.nc-desc{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.genre-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.genre-tag{font-family:var(--font-m);font-size:.68rem;color:var(--muted);border:1px solid var(--border);border-radius:2px;padding:3px 9px;letter-spacing:.06em}
+.lang-row{font-family:var(--font-m);font-size:.75rem;color:var(--gold);letter-spacing:.06em}
+.nc-links{display:flex;flex-direction:column;gap:10px}
+.nc-link{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s;padding:10px 14px;border:1px solid var(--border);border-radius:4px}
+.nc-link:hover{color:var(--gold);border-color:var(--border2)}
+.nc-link-icon{width:32px;text-align:center;font-size:1rem}
+.nc-link-label{font-family:var(--font-m);font-size:.68rem;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+
+/* CERTIFICATIONS */
+.cert-group{margin-bottom:48px}
+.cert-group-title{font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.cert-school-badge{font-family:var(--font-m);font-size:.65rem;color:var(--bg);background:var(--gold);
+  padding:2px 8px;border-radius:2px;letter-spacing:.04em}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.cert-card{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:16px 20px}
+.cert-card.specialization{border-color:var(--border2);background:var(--bg4)}
+.cert-type{font-family:var(--font-m);font-size:.65rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.cert-name{font-size:.9rem;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px}
+.cert-date{font-family:var(--font-m);font-size:.68rem;color:var(--muted);letter-spacing:.04em}
+
+/* CONNECT */
+.connect-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.connect-card{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:20px 24px;text-decoration:none;transition:border-color .2s}
+.connect-card:hover{border-color:var(--border2)}
+.connect-platform{font-family:var(--font-m);font-size:.68rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.connect-handle{font-size:.9rem;color:var(--text);font-weight:500}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);
+  padding:32px clamp(16px,5vw,64px);display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:16px;font-size:.75rem;color:var(--muted);font-family:var(--font-m)}
+footer a{color:var(--muted);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-inner,.bio-grid,.neocomus-card{grid-template-columns:1fr;gap:40px}
+  .monogram-wrap{width:200px;height:200px}
+  .monogram{font-size:2.6rem}
+  .ring-outer{inset:-20px}
+  .hero-visual{order:-1}
+}
+@media(max-width:540px){
+  .bio-stats{grid-template-columns:1fr}
+  .cert-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png.jpg" alt="ObscuronLabs™" class="nav-logo-icon">
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="barbaros.html">Barbaros Kaptan ↗</a>
+    <a href="oya.html" class="active">Olivia Oya Kaptan ↗</a>
+  </div>
+  <a href="index.html#contact" class="btn-solid">Talk to Us →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Co-Founder · ObscuronLabs™</div>
+      <h1><span class="gold-text">Olivia Oya</span><br>Kaptan</h1>
+      <div class="hero-role">Co-Founder & Creative Director</div>
+      <p class="hero-desc">International performing artist, music entrepreneur, and digital media strategist. Co-leading ObscuronLabs™ at the intersection of creative direction, AI-powered content systems, and music.</p>
+      <div class="hero-ctas">
+        <a href="https://neocomusmusic.com" target="_blank" rel="noopener" class="btn-solid">NeoComus Music ↗</a>
+        <a href="index.html#contact" class="btn-ghost">Contact</a>
+      </div>
+      <div class="disciplines">
+        <span class="disc-tag">Music Direction</span>
+        <span class="disc-tag">Creative Strategy</span>
+        <span class="disc-tag">Digital Media</span>
+        <span class="disc-tag">Content Systems</span>
+        <span class="disc-tag">AI for Creativity</span>
+        <span class="disc-tag">Brand Media</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="monogram-wrap">
+        <div class="ring-outer"></div>
+        <div class="monogram">OOK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="container">
+    <span class="eyebrow">Professional Bio</span>
+    <div class="bio-grid">
+      <div>
+        <p class="body">Olivia Oya Kaptan is Co-Founder and Creative Director of ObscuronLabs™, leading the company's music, digital media, and content strategy practice. An international performing artist since 1995, she performs in eight languages across jazz, blues, Latin, pop, and soft rock.</p>
+        <p class="body">Through NeoComus Music, she bridges creative direction with AI-powered content systems — producing music, digital campaigns, and brand media at the intersection of technology and human expression.</p>
+        <p class="body">Berklee College of Music certified across music business, songwriting, vocal production, and music education. University of Michigan and AMII certified in AI for Creative Work and Generative AI. At ObscuronLabs™, she shapes the creative voice of every client engagement — ensuring that intelligence infrastructure carries a distinctly human aesthetic.</p>
+      </div>
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <div class="bio-stat-num">1995</div>
+          <div class="bio-stat-lbl">Performing Since</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-num">8</div>
+          <div class="bio-stat-lbl">Languages</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-num">30+</div>
+          <div class="bio-stat-lbl">Certifications</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-num">5</div>
+          <div class="bio-stat-lbl">Music Genres</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEOCOMUS -->
+<section id="neocomus">
+  <div class="container">
+    <span class="eyebrow">Music & Digital Media</span>
+    <h2 class="section-title">NeoComus <span class="gold-text">Music.</span></h2>
+    <p class="section-sub">An independent music and digital media project combining live vocal performance, AI-assisted production, and multi-platform content distribution.</p>
+    <div class="neocomus-card">
+      <div>
+        <div class="nc-label">Project</div>
+        <div class="nc-title">NeoComus Music</div>
+        <div class="nc-desc">Original music across jazz, blues, Latin, pop and soft rock — performed in 8 languages. Combining traditional vocal artistry with modern AI-assisted production and digital media strategy.</div>
+        <div class="genre-tags">
+          <span class="genre-tag">Jazz</span>
+          <span class="genre-tag">Blues</span>
+          <span class="genre-tag">Latin</span>
+          <span class="genre-tag">Pop</span>
+          <span class="genre-tag">Soft Rock</span>
+        </div>
+        <div class="lang-row">EN · TR · ES · FR · IT · PT · EL · AR</div>
+      </div>
+      <div>
+        <div class="nc-label">Channels</div>
+        <div class="nc-links">
+          <a href="https://neocomusmusic.com" target="_blank" rel="noopener" class="nc-link">
+            <span class="nc-link-icon">🌐</span>
+            <div><div class="nc-link-label">Website</div>neocomusmusic.com</div>
+          </a>
+          <a href="https://www.youtube.com/@NeoComusMusic" target="_blank" rel="noopener" class="nc-link">
+            <span class="nc-link-icon">▶</span>
+            <div><div class="nc-link-label">YouTube</div>@NeoComusMusic</div>
+          </a>
+          <a href="https://www.instagram.com/neocomusmusic2026/" target="_blank" rel="noopener" class="nc-link">
+            <span class="nc-link-icon">◈</span>
+            <div><div class="nc-link-label">Instagram</div>@neocomusmusic2026</div>
+          </a>
+          <a href="https://www.tiktok.com/@neocomusmusic6" target="_blank" rel="noopener" class="nc-link">
+            <span class="nc-link-icon">♪</span>
+            <div><div class="nc-link-label">TikTok</div>@neocomusmusic6</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="credentials">
+  <div class="container">
+    <span class="eyebrow">Education & Certifications</span>
+    <h2 class="section-title">Verified <span class="gold-text">Credentials.</span></h2>
+
+    <!-- BERKLEE -->
+    <div class="cert-group">
+      <div class="cert-group-title">
+        <span class="cert-school-badge">BERKLEE</span>
+        Berklee College of Music
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization</div>
+          <div class="cert-name">Music Business</div>
+          <div class="cert-date">May 21, 2026</div>
+        </div>
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization</div>
+          <div class="cert-name">Music Education for Teachers</div>
+          <div class="cert-date">May 20, 2026</div>
+        </div>
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization</div>
+          <div class="cert-name">The Singer Songwriter</div>
+          <div class="cert-date">May 21, 2026</div>
+        </div>
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization</div>
+          <div class="cert-name">Writing and Producing Music in Your Home Studio</div>
+          <div class="cert-date">May 19, 2026</div>
+        </div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Copyright Law in the Music Business</div><div class="cert-date">May 18, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Developing Your Musicianship</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Guitar for Beginners</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">How Music Can Change Your Life</div><div class="cert-date">May 25, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">How to Make Money with Your Music Copyrights</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Improvisação no Jazz</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Jazz Improvisation</div><div class="cert-date">May 18, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Music Business Foundations</div><div class="cert-date">May 17, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Music for Wellness</div><div class="cert-date">May 23, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Musicianship: Chord Charts, Diatonic Chords, and Minor Keys</div><div class="cert-date">May 22, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Musicianship: Tensions, Harmonic Function, and Modal Interchange</div><div class="cert-date">May 22, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Pro Tools Basics</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Singing Popular Music</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Songwriting: Writing the Lyrics</div><div class="cert-date">May 18, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Songwriting: Writing the Music</div><div class="cert-date">May 19, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Teaching Popular Music in the Classroom</div><div class="cert-date">May 17, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">The Art of Music Production</div><div class="cert-date">May 17, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">The Art of Vocal Production</div><div class="cert-date">May 19, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">The Technology of Music Production</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Creativity and Entrepreneurship</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Introduction to Ableton Live</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Interview Skills & Communication Mastery</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Professional Communication & Interview Mastery</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Public Speaking Skills for Professional Success</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course</div><div class="cert-name">Master Voice, Accent & Pronunciation Skills</div><div class="cert-date">May 22, 2026</div></div>
+      </div>
+    </div>
+
+    <!-- MICHIGAN + AMII + UAL -->
+    <div class="cert-group">
+      <div class="cert-group-title">
+        <span class="cert-school-badge">AI</span>
+        AI & Creative Technology
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization · University of Michigan</div>
+          <div class="cert-name">AI for Creative Work</div>
+          <div class="cert-date">May 21, 2026</div>
+        </div>
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization · AMII</div>
+          <div class="cert-name">Generative AI Fundamentals</div>
+          <div class="cert-date">May 22, 2026</div>
+        </div>
+        <div class="cert-card"><div class="cert-type">Course · UAL Creative Computing Institute</div><div class="cert-name">Creative AI: Sound, Music and Interaction</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · University of Michigan</div><div class="cert-name">AI Basics and Tools for Creativity</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · University of Michigan</div><div class="cert-name">Using AI to Expand Creativity</div><div class="cert-date">May 20, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · AMII</div><div class="cert-name">Building and Deploying Generative AI Models</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · AMII</div><div class="cert-name">Generative AI for Audio and Images: Models and Applications</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · AMII</div><div class="cert-name">Introduction to Generative AI: Concepts and Techniques</div><div class="cert-date">May 22, 2026</div></div>
+      </div>
+    </div>
+
+    <!-- OTHER -->
+    <div class="cert-group">
+      <div class="cert-group-title">
+        <span class="cert-school-badge">OTHER</span>
+        Additional Credentials
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card specialization">
+          <div class="cert-type">Specialization · UC Irvine</div>
+          <div class="cert-name">Remote Leadership for Managers</div>
+          <div class="cert-date">May 24, 2026</div>
+        </div>
+        <div class="cert-card"><div class="cert-type">Diploma · Alison</div><div class="cert-name">Music Theory</div><div class="cert-date">April 27, 2024</div></div>
+        <div class="cert-card"><div class="cert-type">Course · Yale University</div><div class="cert-name">Music and Social Action</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · Duke University</div><div class="cert-name">Music as Biology: What We Like to Hear and Why</div><div class="cert-date">May 25, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · EDUCBA</div><div class="cert-name">Build a Job-Ready Professional Resume</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · EDUCBA</div><div class="cert-name">Interview Preparation: Resume to Final Round</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · EDUCBA</div><div class="cert-name">Interview Skills & Communication Mastery</div><div class="cert-date">May 21, 2026</div></div>
+        <div class="cert-card"><div class="cert-type">Course · EDUCBA</div><div class="cert-name">Master Voice, Accent & Pronunciation Skills</div><div class="cert-date">May 21, 2026</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="container">
+    <span class="eyebrow">Connect</span>
+    <h2 class="section-title">Get in <span class="gold-text">Touch.</span></h2>
+    <div class="connect-grid">
+      <a href="https://www.instagram.com/olivia_oya_kaptan/" target="_blank" rel="noopener" class="connect-card">
+        <div class="connect-platform">Personal Instagram</div>
+        <div class="connect-handle">@olivia_oya_kaptan</div>
+      </a>
+      <a href="https://www.youtube.com/@oliviaoyak.8886" target="_blank" rel="noopener" class="connect-card">
+        <div class="connect-platform">Personal YouTube</div>
+        <div class="connect-handle">@oliviaoyak.8886</div>
+      </a>
+      <a href="https://www.instagram.com/neocomusmusic2026/" target="_blank" rel="noopener" class="connect-card">
+        <div class="connect-platform">NeoComus Instagram</div>
+        <div class="connect-handle">@neocomusmusic2026</div>
+      </a>
+      <a href="https://www.youtube.com/@NeoComusMusic" target="_blank" rel="noopener" class="connect-card">
+        <div class="connect-platform">NeoComus YouTube</div>
+        <div class="connect-handle">@NeoComusMusic</div>
+      </a>
+      <a href="mailto:hello@obscuronlabs.com" class="connect-card">
+        <div class="connect-platform">Business Inquiries</div>
+        <div class="connect-handle">hello@obscuronlabs.com</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 ObscuronLabs™. All rights reserved.</span>
+  <div style="display:flex;gap:20px">
+    <a href="index.html">Home</a>
+    <a href="barbaros.html">Barbaros Kaptan</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </div>
+</footer>
+</body>
+</html>
