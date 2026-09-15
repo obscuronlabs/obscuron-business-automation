@@ -1,0 +1,306 @@
+<title>Medya & Gazeteci Listesi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
+<style>
+  :root {
+    --bg: #080808;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --red: #C8001A;
+    --gold: #C9A84C;
+    --white: #F0ECE8;
+    --dim: rgba(240,236,232,0.6);
+    --faint: rgba(240,236,232,0.12);
+    --rule: rgba(200,0,26,0.25);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #080808; --bg2: #111111; --bg3: #1a1a1a;
+      --white: #F0ECE8; --dim: rgba(240,236,232,0.6); --faint: rgba(240,236,232,0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #080808; --bg2: #111111; --bg3: #1a1a1a;
+    --white: #F0ECE8; --dim: rgba(240,236,232,0.6); --faint: rgba(240,236,232,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    padding: 0 0 4rem;
+  }
+
+  /* Header */
+  .header {
+    border-bottom: 1px solid var(--rule);
+    padding: 2.5rem 3rem 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .header-left {}
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .header-note {
+    font-size: 0.9rem;
+    color: var(--dim);
+    font-style: italic;
+    max-width: 320px;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  /* Section */
+  .section {
+    padding: 2.5rem 3rem 0;
+  }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Cards grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+  }
+  .card {
+    background: var(--bg);
+    padding: 1.4rem 1.5rem;
+    transition: background 0.15s;
+  }
+  .card:hover { background: var(--bg3); }
+  .card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.03em;
+  }
+  .card-platform {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    margin-bottom: 0.55rem;
+  }
+  .card-desc {
+    font-size: 0.88rem;
+    color: var(--dim);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .card-tag {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--faint);
+    color: var(--dim);
+  }
+  .card-tag.hot { border-color: rgba(200,0,26,0.4); color: var(--red); }
+  .card-tag.warm { border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+  /* Note box */
+  .note {
+    margin: 2.5rem 3rem 0;
+    padding: 1.2rem 1.5rem;
+    border-left: 3px solid var(--red);
+    background: rgba(200,0,26,0.06);
+    font-size: 0.95rem;
+    color: var(--dim);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .note strong { color: var(--white); font-style: normal; }
+
+  @media (max-width: 600px) {
+    .header, .section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .header-note { text-align: left; }
+    .note { margin-left: 1.5rem; margin-right: 1.5rem; }
+  }
+</style>
+
+<div class="header">
+  <div class="header-left">
+    <span class="eyebrow">Dokunma! Öldürme! · Kampanya Hedefleri</span>
+    <h1>Medya & Gazeteci Listesi</h1>
+  </div>
+  <p class="header-note">ABD öncelikli, küresel erişimli kadın gazeteciler ve medya organları</p>
+</div>
+
+<div class="section">
+  <div class="section-label">Ulusal TV & Büyük Medya — ABD</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-name">Christiane Amanpour</div>
+      <div class="card-platform">CNN International</div>
+      <div class="card-desc">Küresel kadın hakları ve insan hakları haberlerinin sembol ismi. 15 dilli protest şarkı doğrudan onun kapsama alanı.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Clarissa Ward</div>
+      <div class="card-platform">CNN — Baş Uluslararası Muhabir</div>
+      <div class="card-desc">Savaş ve insan hakları habercisi. Kadına şiddet konusunu uluslararası bağlamda ele alır.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Amy Goodman</div>
+      <div class="card-platform">Democracy Now</div>
+      <div class="card-desc">Bağımsız, aktivist medya. Protest müzik ve sosyal hareketlere açık. DM yerine e-posta ile ulaş.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Maria Hinojosa</div>
+      <div class="card-platform">NPR / Futuro Media</div>
+      <div class="card-desc">Latinx toplulukları ve kadın sesi. İspanyolca versiyonuyla pitch yapılırsa çok güçlü bir bağlantı noktası.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Soledad O'Brien</div>
+      <div class="card-platform">CBS / Bağımsız Prodüksiyon</div>
+      <div class="card-desc">Sosyal adalet odaklı belgesel yapımcısı ve gazeteci. Geniş sosyal medya kitlesi.</div>
+      <span class="card-tag">Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Yamiche Alcindor</div>
+      <div class="card-platform">NBC News</div>
+      <div class="card-desc">Sosyal adalet ve eşitlik haberleri. Twitter/X'te çok aktif, DM ile ulaşılabilir.</div>
+      <span class="card-tag">Aday</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Yazılı Medya & Köşe Yazarları</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-name">Rebecca Traister</div>
+      <div class="card-platform">New York Magazine / The Cut</div>
+      <div class="card-desc">ABD'nin en etkili feminist yazarlarından. Kadın öfkesi ve aktivizm üzerine kitap yazdı. Bu şarkı tam onun alanı.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Jill Filipovic</div>
+      <div class="card-platform">TIME · Guardian · CNN</div>
+      <div class="card-desc">Kadın hakları üzerine uluslararası boyutlu yazılar. Türkiye ve MENA bölgesine özel ilgi gösteriyor.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Jessica Valenti</div>
+      <div class="card-platform">Substack (200K+ abone)</div>
+      <div class="card-desc">Feminist aktivist yazar. Bağımsız platform — bir yazısı viral olursa büyük etki. DM açık.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Roxane Gay</div>
+      <div class="card-platform">NYT / Kendi Platformu</div>
+      <div class="card-desc">Kültür eleştirmeni, yazar. Geniş sosyal medya kitlesi. Sanat ve aktivizm kesişimini sever.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Aktivist & Sosyal Medya Liderleri</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-name">Tarana Burke</div>
+      <div class="card-platform">#MeToo Kurucusu</div>
+      <div class="card-desc">Kadına şiddete karşı küresel hareketin sembolü. Onun bir paylaşımı kampanyayı dünyaya taşır.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Glennon Doyle</div>
+      <div class="card-platform">Instagram 2M+ / Podcast</div>
+      <div class="card-desc">Kadın güçlendirme alanının en büyük dijital sesi. Müzik içeriklerine açık, DM ile ulaşılabilir.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Zainab Salbi</div>
+      <div class="card-platform">Women for Women International</div>
+      <div class="card-desc">Savaş mağduru kadınlar için çalışan kuruluşun kurucusu. Uluslararası bağlantıları çok güçlü.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Malala Yousafzai</div>
+      <div class="card-platform">Malala Fund</div>
+      <div class="card-desc">Nobel Barış Ödülü sahibi. Kadın hakları konusundaki bir desteği global yankı uyandırır.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Müzik & Kültür Medyası</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-name">Pitchfork</div>
+      <div class="card-platform">pitchfork.com</div>
+      <div class="card-desc">Protest müzik kategorisine ilgi gösterir. "Female rage" ve aktivist müzik şu an editoryal odakları.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">Rolling Stone</div>
+      <div class="card-platform">rollingstone.com</div>
+      <div class="card-desc">Sosyal bilinçli müzik haberleri. 15 dilli şarkı hikayesi onların "weird and wonderful" kategorisine girer.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+    <div class="card">
+      <div class="card-name">NPR Music</div>
+      <div class="card-platform">npr.org/music</div>
+      <div class="card-desc">Dünya müziği + aktivizm kesişimi. Türk sanatçı hikayesi onlara çok uygun.</div>
+      <span class="card-tag hot">Öncelikli</span>
+    </div>
+    <div class="card">
+      <div class="card-name">The Guardian Music</div>
+      <div class="card-platform">theguardian.com/music</div>
+      <div class="card-desc">Kadın hakları ve müzik haberlerine çok açık. İngilizce + uluslararası kapsam.</div>
+      <span class="card-tag warm">Güçlü Aday</span>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Strateji:</strong> "Öncelikli" olarak işaretlenenlere broşür + kısa kişisel mesaj gönder — herkese aynı toplu mail atmak yerine her birine <em>neden onlara ulaştığını</em> bir cümleyle belirt. 25 Kasım tarihini embargo olarak kullan: <strong>"Şarkı 25 Kasım'da yayınlanıyor — önceden dinlemek ister misiniz?"</strong>
+</div>
