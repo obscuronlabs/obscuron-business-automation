@@ -1485,9 +1485,9 @@ function enterSite() {
 
 // Init dots on load
 window.addEventListener('load', function() {
-  currentTrack = tracks.length - 1;
+  currentTrack = 0;
   buildDots();
-  loadTrack(currentTrack);
+  loadTrack(0);
   document.body.style.paddingBottom = '160px';
 });
 </script>
