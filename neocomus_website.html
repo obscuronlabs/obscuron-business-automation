@@ -1499,6 +1499,14 @@ function loadTrack(index) {
     `https://open.spotify.com/embed/track/${t.id}?utm_source=generator&theme=0&autoplay=1`;
   document.getElementById('now-playing-title').textContent = t.title;
   buildDots();
+  // Always make player visible
+  if (!playerOpen) {
+    playerOpen = true;
+    const p = document.getElementById('music-player');
+    if (p) p.style.transform = 'translateY(0)';
+    const container = document.getElementById('spotify-embed-container');
+    if (container) container.style.display = 'block';
+  }
 }
 
 function nextTrack() { loadTrack((currentTrack + 1) % tracks.length); }
@@ -1538,6 +1546,12 @@ window.addEventListener('load', function() {
   buildDots();
   loadTrack(0);
   document.body.style.paddingBottom = '160px';
+  // Open the player so it's visible and track actually plays
+  playerOpen = true;
+  const p = document.getElementById('music-player');
+  if (p) p.style.transform = 'translateY(0)';
+  const container = document.getElementById('spotify-embed-container');
+  if (container) container.style.display = 'block';
 });
 </script>
 
