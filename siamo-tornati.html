@@ -504,11 +504,14 @@
       b.classList.toggle('active', b.getAttribute('data-setlang') === lang);
     });
     document.documentElement.setAttribute('lang', lang);
-    try { localStorage.setItem('st-lang', lang); } catch(e){}
   }
 
   document.querySelectorAll('.langswitch button').forEach(function(b){
-    b.addEventListener('click', function(){ applyLang(b.getAttribute('data-setlang')); });
+    b.addEventListener('click', function(){
+      var lang = b.getAttribute('data-setlang');
+      applyLang(lang);
+      try { localStorage.setItem('st-lang', lang); } catch(e){}
+    });
   });
 
   var startLang = 'en';
