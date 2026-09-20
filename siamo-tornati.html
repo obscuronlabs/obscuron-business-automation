@@ -309,8 +309,8 @@
   <img src="assets/siamo-tornati/hero.jpg" alt="Periscope view of Mount Etna from the sea">
 
   <div class="langswitch" role="tablist" aria-label="Language">
-    <button type="button" data-setlang="tr" class="active">TR</button>
-    <button type="button" data-setlang="en">EN</button>
+    <button type="button" data-setlang="tr">TR</button>
+    <button type="button" data-setlang="en" class="active">EN</button>
     <button type="button" data-setlang="it">IT</button>
     <button type="button" data-setlang="sq">SQ</button>
   </div>
@@ -511,7 +511,7 @@
     b.addEventListener('click', function(){ applyLang(b.getAttribute('data-setlang')); });
   });
 
-  var startLang = 'tr';
+  var startLang = 'en';
   try {
     var saved = localStorage.getItem('st-lang');
     if (saved && DICT[saved]) startLang = saved;
