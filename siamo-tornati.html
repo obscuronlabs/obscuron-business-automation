@@ -249,6 +249,19 @@
     margin:10px 0 0;
   }
 
+    /* ---------- Preview video ---------- */
+  .preview-video{
+    margin-top:20px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--sea);
+  }
+  .preview-video video{
+    width:100%;
+    height:auto;
+    display:block;
+  }
   /* ---------- Book block ---------- */
   .book{
     display:flex;
@@ -377,6 +390,11 @@
       <div>
         <p data-i18n="s3Lede"></p>
       </div>
+    </div>
+        <div class="preview-video">
+      <video controls preload="metadata" poster="assets/siamo-tornati/hero.jpg">
+        <source src="assets/siamo-tornati/teaser.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
 
