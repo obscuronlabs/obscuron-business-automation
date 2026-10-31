@@ -407,6 +407,46 @@
     </div>
     
         <div id="music-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5px; background: rgba(201,168,76,0.1);">
+      <!-- BU GECE BİZİM MASA -->
+      <div class="music-card" style="background: var(--black); padding: 0; position: relative; overflow: hidden; transition: background 0.3s;" onmouseover="this.style.background='var(--black-3)'" onmouseout="this.style.background='var(--black)'">
+        <div style="position: absolute; top: 8px; right: 8px; z-index: 2; background: #C9A84C; color: #000; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.2rem 0.5rem;">NEW</div>
+        <div style="width: 100%; aspect-ratio: 1; overflow: hidden;">
+          <img src="assets/bu-gece-bizim-masa/cover.jpg" alt="Bu Gece Bizim Masa" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding: 0.9rem 0.8rem 0.7rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem;">
+            <div style="width: 46px; height: 46px; border: 1px solid rgba(201,168,76,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.3s, background 0.3s;" onclick="loadTrack(25)" onmouseover="this.style.borderColor='#C9A84C';this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.35)';this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="4,2 14,8 4,14" fill="#C9A84C"/></svg>
+            </div>
+          </div>
+          <div style="font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.3rem;">BU GECE BİZİM MASA</div>
+          <div style="font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 0.7rem;">KEYFİMİZ YERİNDE · SINGLE · OCT 2026</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+            <a href="https://open.spotify.com/track/52gLzSy192wgn7tOlny0Wo" target="_blank" style="font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); transition: all 0.3s;" onmouseover="this.style.color='#C9A84C';this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.color='';this.style.borderColor=''">Spotify</a>
+            <button class="lyrics-btn" onclick="openLyrics('BU GECE BİZİM MASA')">Lyrics</button>
+          </div>
+        </div>
+      </div>
+      <!-- KÖRDÜĞÜM MASAL -->
+      <div class="music-card" style="background: var(--black); padding: 0; position: relative; overflow: hidden; transition: background 0.3s;" onmouseover="this.style.background='var(--black-3)'" onmouseout="this.style.background='var(--black)'">
+        <div style="position: absolute; top: 8px; right: 8px; z-index: 2; background: #C9A84C; color: #000; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.2rem 0.5rem;">NEW</div>
+        <div style="width: 100%; aspect-ratio: 1; overflow: hidden;">
+          <img src="assets/kordugum-masal/cover.jpg" alt="Kördüğüm Masal" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding: 0.9rem 0.8rem 0.7rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem;">
+            <div style="width: 46px; height: 46px; border: 1px solid rgba(201,168,76,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.3s, background 0.3s;" onclick="loadTrack(26)" onmouseover="this.style.borderColor='#C9A84C';this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.35)';this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="4,2 14,8 4,14" fill="#C9A84C"/></svg>
+            </div>
+          </div>
+          <div style="font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.3rem;">KÖRDÜĞÜM MASAL</div>
+          <div style="font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 0.7rem;">YARIM KALMIŞ HİKAYE · SINGLE · OCT 2026</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+            <a href="https://open.spotify.com/track/5VDa5wFKdiQzYtUgEUKecQ" target="_blank" style="font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); transition: all 0.3s;" onmouseover="this.style.color='#C9A84C';this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.color='';this.style.borderColor=''">Spotify</a>
+            <button class="lyrics-btn" onclick="openLyrics('KÖRDÜĞÜM MASAL')">Lyrics</button>
+          </div>
+        </div>
+      </div>
       <!-- LIGHT ME UP -->
       <div class="music-card" style="background: var(--black); padding: 0; position: relative; overflow: hidden; transition: background 0.3s;" onmouseover="this.style.background='var(--black-3)'" onmouseout="this.style.background='var(--black)'">
         <div style="position: absolute; top: 8px; right: 8px; z-index: 2; background: #C9A84C; color: #000; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.2rem 0.5rem;">NEW</div>
@@ -1617,7 +1657,9 @@ const tracks = [
   { id: '24swRvxtl7Thql1s3YanIO', title: 'THE LAST TRIBE', type: 'album' },
   { id: '7JU0vEr0VJOwoL09E1EUDv', title: 'SIAMO TORNATI', type: 'album' },
   { id: '1Lv5EXQNEBlv8xVBqtSYv5', title: 'ÖZÜR YOK', type: 'album' },
-  { id: '6GgJGtHTzeGMmdEJCuoF9c', title: 'LIGHT ME UP', type: 'album' }
+  { id: '6GgJGtHTzeGMmdEJCuoF9c', title: 'LIGHT ME UP', type: 'album' },
+  { id: '52gLzSy192wgn7tOlny0Wo', title: 'BU GECE BİZİM MASA' },
+  { id: '5VDa5wFKdiQzYtUgEUKecQ', title: 'KÖRDÜĞÜM MASAL' }
 ];
 
 let currentTrack = 0;
@@ -1712,6 +1754,54 @@ window.addEventListener('load', function() {
 </div>
 <script>
 const lyricsDB = {
+"BU GECE BİZİM MASA": `Kadehler dolsun yavaşça
+Gece çöksün masamıza
+Biraz dert, biraz kahkaha
+Hepsi yakışır dostluğumuza
+
+Sözler dökülür içimizden
+Kimse saklamaz kendinden
+Bir bakmışsın gülmüşüz yine
+Dertler erir rakı içinde
+
+Bu gece bizim masa, dünya beklesin
+Dostluk var burada, dertler sönsün
+Kaldır kadehi dostum, hayat güzel desin
+Bu gece bizim masa, keyfimiz yerinde
+
+Hafif dokunuş, ama hüzne batmıyor
+Bir eski şarkı çalar uzaktan
+Kalbimiz titrer ama kısa bir an
+Sonra biri bir laf atar ortaya
+Güleriz yine, döner dünya
+
+Bazen susarız, bazen taşarız
+Ama sonunda hep toparlanırız
+Çünkü biliriz…
+Bu masa iyileştirir bizi
+
+Bu gece bizim masa, dünya beklesin
+Dostluk var burada, dertler sönsün
+Kaldır kadehi dostum, hayat güzel desin
+Bu gece bizim masa, keyfimiz yerinde
+Bu gece bizim masa… keyfimiz yerinde`,
+"KÖRDÜĞÜM MASAL": `Sustu şehir, lambalar yorgun ve soluk
+Gönlümde bitmeyen o bitkin yolculuk
+Sen saraylar içinde, ben tozlu sokakta
+Aynı göğe baksak da yollarımız kopuk
+
+Bir yemin ettim ki dönülmez geriye
+Aşk dediğin sığar mı bir tek cümleye
+Gözlerin uçurum, bakamam aşağı
+Düşersem yanarım, külüm kalmaz geriye
+
+Yazamaz kalem seni, kaderin kara düğümü
+Söküp atamadım içimden şu kördüğümü
+Bizim hikayemiz yarım kalmış bir masal
+Ben senin için feda ettim ömrümü
+
+Zaman dursun, dünya dönsün tersine
+Razıyım seninle gelen her bir derde`,
 "LIGHT ME UP": `Light me up, I'm breaking through the noise
 Hold the line, I'm rising with my voice
 Beat is burning, running in my veins
