@@ -407,6 +407,27 @@
     </div>
     
         <div id="music-grid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5px; background: rgba(201,168,76,0.1);">
+      <!-- DOKUNMA ÖLDÜRME -->
+      <div class="music-card" style="background: var(--black); padding: 0; position: relative; overflow: hidden; transition: background 0.3s;" onmouseover="this.style.background='var(--black-3)'" onmouseout="this.style.background='var(--black)'">
+        <div style="width: 100%; aspect-ratio: 1; overflow: hidden;">
+          <img src="assets/dokunma-oldurme/cover.jpg" alt="Dokunma Öldürme" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding: 0.9rem 0.8rem 0.7rem;">
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.7rem;">
+            <div style="width: 46px; height: 46px; border: 1px solid rgba(201,168,76,0.35); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.3s, background 0.3s;" onclick="loadTrack(29)" onmouseover="this.style.borderColor='#C9A84C';this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.35)';this.style.background='transparent'">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polygon points="4,2 14,8 4,14" fill="#C9A84C"/></svg>
+            </div>
+          </div>
+          <div style="font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.3rem;">DOKUNMA ÖLDÜRME</div>
+          <div style="font-size: 0.6rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 0.7rem;">DON'T TOUCH DON'T KILL · 15 LANGUAGES · NOV 2026</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+            <a href="https://open.spotify.com/album/1bN74hAMgzz4lN8EGOSSYo" target="_blank" style="font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); transition: all 0.3s;" onmouseover="this.style.color='#C9A84C';this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.color='';this.style.borderColor=''">Spotify</a>
+            <a href="https://music.youtube.com/watch?v=gC7xHD2gbJ0" target="_blank" style="font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); transition: all 0.3s;" onmouseover="this.style.color='#C9A84C';this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.color='';this.style.borderColor=''">YouTube</a>
+            <a href="https://music.apple.com/us/album/dokunma-%C3%B6ld%C3%BCrme-dont-touch-dont-kill-15-languages/6836763644" target="_blank" style="font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-dim); text-decoration: none; padding: 0.3rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); transition: all 0.3s;" onmouseover="this.style.color='#C9A84C';this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.color='';this.style.borderColor=''">Apple</a>
+            <button class="lyrics-btn" onclick="openLyrics('DOKUNMA ÖLDÜRME')">Lyrics</button>
+          </div>
+        </div>
+      </div>
       <!-- HOLD ON -->
       <div class="music-card" style="background: var(--black); padding: 0; position: relative; overflow: hidden; transition: background 0.3s;" onmouseover="this.style.background='var(--black-3)'" onmouseout="this.style.background='var(--black)'">
         <div style="width: 100%; aspect-ratio: 1; overflow: hidden;">
@@ -1697,7 +1718,8 @@ const tracks = [
   { id: '52gLzSy192wgn7tOlny0Wo', title: 'BU GECE BİZİM MASA' },
   { id: '5VDa5wFKdiQzYtUgEUKecQ', title: 'KÖRDÜĞÜM MASAL' },
   { id: '4OKVljWrHK4vgA91wdy6lD', title: 'MOVE WITH ME', type: 'album' },
-  { id: '7KfJYAGs0xhfHN1CzZHkKn', title: 'HOLD ON', type: 'album' }
+  { id: '7KfJYAGs0xhfHN1CzZHkKn', title: 'HOLD ON', type: 'album' },
+  { id: '1bN74hAMgzz4lN8EGOSSYo', title: 'DOKUNMA ÖLDÜRME', type: 'album' }
 ];
 
 let currentTrack = 0;
@@ -1792,6 +1814,770 @@ window.addEventListener('load', function() {
 </div>
 <script>
 const lyricsDB = {
+"DOKUNMA ÖLDÜRME": `— TÜRKÇE —
+
+Bir kişi daha eksilmeyeceğiz
+Bir kişi daha susmayacağız
+Bu sokak bizim
+Bu hayat bizim
+
+Gecenin içinde korku değil, öfke büyür içimizde
+Yalnız değiliz artık, milyonlarız aynı sesle
+Bir çığlık düştü toprağa, yankılandı gökyüzünde
+Karanlık çöktü sandılar… biz doğduk yeniden
+
+Adımızı silmek isteyen, gözümüzü yere eğdiren
+Bizi "sessiz" sanan herkes, bu meydanda görecek
+Korku duvarı yıkıldı, bu şehir artık uyanık
+Kadınlar yürürken susmaz, taş bile dile gelir artık
+
+Susmayacağız! Susmayacağız
+Bir kişi daha eksilmeyeceğiz
+Yeter artık! Yeter artık
+Bu düzeni biz değiştireceğiz
+
+Dokunma
+Öldürme
+Tacize sessiz kalma
+Kadınlar burada
+Meydanlar bizim
+
+Bir "hayır" dedik diye suçlu, bir gülüşümüz bile hedef
+Bir sokakta yürümek bile bize haram mı, söyle
+Adalet sustuğu gün, biz daha sert konuşuruz
+Bir anne ağladığında, bütün şehir ayağa kalkar
+
+Bizi korumayan yasa, bizi korumayan vicdan
+Bizi yok sayan herkes, bu ateşi unutmasın
+Korku değil, cesaret var; geri adım yok artık
+Kadınların yürüdüğü yerde zulüm barınama
+
+Susmayacağız! Susmayacağız
+Bir kişi daha eksilmeyeceğiz
+Yeter artık! Yeter artık
+Bu düzeni biz değiştireceğiz
+
+Dokunma
+Öldürme
+Tacize sessiz kalma
+Kadınlar burada
+Meydanlar bizim
+
+Kız kardeşim… elini tutuyorum
+Karanlığa karşı yürüyorum
+Bu sokaklarda korku değil
+Bizim adımız yazılı artık
+
+Bir gün değil, her gün savaş
+Ama bu savaşta umut var
+Çünkü biz varız
+Çünkü biz birlikteyiz
+
+Susmayacağız
+Susmayacağız
+Bir kişi daha eksilmeyeceğiz
+
+Susmayacağız
+Susmayacağız
+Kadınlar geri çekilmeyecek
+
+Dokunma
+Öldürme
+Tacize sessiz kalma
+
+Kadınlar burada
+Meydanlar bizim
+Bu hayat bizim
+
+— ENGLISH —
+
+DON'T TOUCH ! DON'T KILL !
+We will not lose one more person
+We will not be silenced one more time
+These streets are ours! This life is ours
+
+In the heart of night, not fear but rage grows inside us
+We are no longer alone — we are millions, one voice
+A cry fell to the earth and echoed through the sky
+They thought darkness had come… we were reborn
+
+Those who want to erase our name, who force our eyes to the ground
+Everyone who thought us "silent" — they will see us in this square
+The wall of fear has crumbled, this city is awake now
+When women march, they do not hush — even the stones speak
+
+We will not be silenced! We will not be silenced
+We will not lose one more person
+Enough! Enough
+We will change this order
+
+Don't touch! Don't kill! Don't stay silent to harassment
+Women are here! The squares are ours
+
+We said "no" and they made us the guilty ones — even a smile becomes a target
+Is walking down a street forbidden for us too — tell me
+On the day justice falls silent, we speak even louder
+When a mother weeps, the whole city rises
+
+The law that doesn't protect us, the conscience that ignores us
+Everyone who renders us invisible — let them not forget this fire
+Not fear, but courage — there is no stepping back now
+Where women walk, oppression cannot stay
+
+My sister… I am holding your hand
+I walk against the darkness
+In these streets there is no fear
+Our name is written here now
+
+Not one day — every day a fight
+But in this fight there is hope
+Because we are here… Because we stand together
+
+We will not be silenced! We will not be silenced
+We will not lose one more person
+We will not be silenced! We will not be silenced
+Women will not retreat
+
+Don't touch! Don't kill! Don't stay silent to harassment
+Women are here! The squares are ours! This life is ours
+
+— ESPAÑOL —
+
+DON'T TOUCH ! DON'T KILL !
+No perderemos a una persona más
+No callaremos una vez más
+¡Estas calles son nuestras
+¡Esta vida es nuestra
+
+En el corazón de la noche, no es miedo sino rabia lo que crece en nosotras
+Ya no estamos solas — somos millones, una sola voz
+Un grito cayó a la tierra y retumbó en el cielo
+Creyeron que la oscuridad había llegado… nosotras renacimos
+
+Quienes quieren borrar nuestro nombre, quienes nos fuerzan a bajar la mirada
+Todos los que nos creyeron "calladas" — nos verán en esta plaza
+El muro del miedo se ha derrumbado, esta ciudad está despierta
+Cuando las mujeres marchan, no se callan — ¡hasta las piedras hablan
+
+¡No callaremos! ¡No callaremos
+¡No perderemos a una persona más
+¡Basta ya! ¡Basta ya
+¡Nosotras cambiaremos este orden
+
+¡No toques! ¡No mates! ¡No guardes silencio ante el acoso
+¡Las mujeres estamos aquí! ¡Las plazas son nuestras!
+
+Dijimos "no" y nos convirtieron en culpables — hasta una sonrisa se vuelve blanco
+¿También nos está prohibido caminar por una calle — dímelo
+El día que la justicia enmudece, nosotras hablamos aún más fuerte
+¡Cuando llora una madre, toda la ciudad se levanta
+
+La ley que no nos protege, la conciencia que nos ignora
+Quienes nos hacen invisibles — que no olviden este fuego
+No miedo, sino valentía — ya no hay marcha atrás
+¡Donde caminan las mujeres, la opresión no puede quedarse
+
+Hermana… estoy tomando tu mano
+Camino contra la oscuridad
+En estas calles no hay miedo
+¡Nuestro nombre ya está escrito aquí
+
+No un día — cada día es lucha
+¡Pero en esta lucha hay esperanza
+¡Porque estamos aquí… porque estamos juntas
+
+¡No callaremos! ¡No callaremos
+¡No perderemos a una persona más
+¡No callaremos! ¡No callaremos
+¡Las mujeres no retrocederán
+
+¡No toques! ¡No mates! ¡No guardes silencio ante el acoso
+¡Las mujeres estamos aquí! ¡Las plazas son nuestras! ¡Esta vida es nuestra
+
+— FRANÇAIS —
+
+Ne touche pas ! N'assassine pas !
+Nous ne perdrons pas une personne de plus
+Nous ne nous tairons pas une fois de plus
+Ces rues sont les nôtres ! Cette vie est la nôtre
+
+Au cœur de la nuit, ce n'est pas la peur mais la colère qui grandit en nous
+Nous ne sommes plus seules — nous sommes des millions, une seule voix
+Un cri est tombé sur la terre et a résonné dans le ciel
+Ils ont cru que les ténèbres avaient tout envahi… nous sommes renaissantes
+
+Ceux qui veulent effacer notre nom, qui nous forcent à baisser les yeux
+Tous ceux qui nous croyaient "silencieuses" — ils nous verront sur cette place
+Le mur de la peur s'est effondré, cette ville est éveillée désormais
+Quand les femmes marchent, elles ne se taisent pas — même les pierres prennent la parole
+
+Nous ne nous tairons pas ! Nous ne nous tairons pas
+Nous ne perdrons pas une personne de plus
+Ça suffit ! Ça suffit
+C'est nous qui changerons cet ordre
+
+Ne touche pas ! N'assassine pas ! Ne reste pas silencieuse face au harcèlement
+Les femmes sont là ! Les places sont nôtres
+
+Nous avons dit "non" et ils ont fait de nous les coupables — même un sourire devient une cible
+Même marcher dans une rue nous est-il interdit — dis-moi
+Le jour où la justice se tait, nous parlons encore plus fort
+Quand une mère pleure, toute la ville se lève
+
+La loi qui ne nous protège pas, la conscience qui nous efface
+Tous ceux qui nous rendent invisibles — qu'ils n'oublient pas ce feu
+Non la peur, mais le courage — il n'y a plus de retour en arrière
+Là où les femmes marchent, l'oppression ne peut pas rester
+
+Ma sœur… je tiens ta main
+Je marche contre l'obscurité
+Dans ces rues, il n'y a pas de peur
+Notre nom est désormais gravé ici
+
+Pas un seul jour — chaque jour est un combat
+Mais dans ce combat, il y a de l'espoir
+Parce que nous sommes là… Parce que nous sommes ensemble
+
+Nous ne nous tairons pas ! Nous ne nous tairons pas
+Nous ne perdrons pas une personne de plus
+Nous ne nous tairons pas ! Nous ne nous tairons pas
+Les femmes ne reculeront pas
+
+Ne touche pas ! N'assassine pas ! Ne reste pas silencieuse face au harcèlement
+Les femmes sont là ! Les places sont nôtres ! Cette vie est la nôtre
+
+— DEUTSCH —
+
+Fass uns nicht an! Töte nicht!
+Wir werden keine einzige Person mehr verlieren
+Wir werden kein einziges Mal mehr schweigen
+Diese Straßen gehören uns! Dieses Leben gehört uns
+
+Im Herzen der Nacht wächst in uns keine Angst, sondern Wut
+Wir sind nicht mehr allein — wir sind Millionen, eine einzige Stimme
+Ein Schrei fiel auf die Erde und hallte durch den Himmel
+Sie dachten, die Dunkelheit habe gesiegt… wir wurden neu geboren
+
+Die uns unseren Namen nehmen wollen, die uns zwingen, die Augen zu senken
+Alle, die uns für "still" hielten — sie werden uns auf diesem Platz sehen
+Die Mauer der Angst ist gefallen, diese Stadt ist jetzt wach
+Wenn Frauen marschieren, schweigen sie nicht — selbst Steine beginnen zu sprechen
+
+Wir werden nicht schweigen! Wir werden nicht schweigen
+Wir werden keine einzige Person mehr verlieren
+Es reicht! Es reicht
+Wir werden diese Ordnung verändern
+
+Fass uns nicht an! Töte nicht! Schweige nicht zu Belästigung
+Die Frauen sind hier! Die Plätze gehören uns
+
+Wir sagten "Nein" und sie machten uns zu den Schuldigen — selbst ein Lächeln wird zur Zielscheibe
+Ist es uns auch verboten, eine Straße entlangzugehen — sag es mir
+An dem Tag, an dem die Gerechtigkeit schweigt, sprechen wir noch lauter
+Wenn eine Mutter weint, erhebt sich die ganze Stadt
+
+Das Gesetz, das uns nicht schützt, das Gewissen, das uns auslöscht
+Alle, die uns unsichtbar machen — sie sollen dieses Feuer nicht vergessen
+Keine Angst, sondern Mut — es gibt kein Zurück mehr
+Wo Frauen gehen, kann Unterdrückung nicht bleiben
+
+Schwester… ich halte deine Hand
+Ich marschiere gegen die Dunkelheit
+Auf diesen Straßen gibt es keine Angst
+Unser Name steht jetzt hier geschrieben
+
+Nicht ein Tag — jeden Tag ist Kampf
+Aber in diesem Kampf steckt Hoffnung
+Denn wir sind hier… Denn wir sind zusammen
+
+Wir werden nicht schweigen! Wir werden nicht schweigen
+Wir werden keine einzige Person mehr verlieren
+Wir werden nicht schweigen! Wir werden nicht schweigen
+Frauen werden nicht zurückweichen
+
+Fass uns nicht an! Töte nicht! Schweige nicht zu Belästigung
+Die Frauen sind hier! Die Plätze gehören uns! Dieses Leben gehört uns
+
+— ITALIANO —
+
+Non toccare! Non uccidere!
+Non perderemo un'altra persona
+Non taceremo un'altra volta
+Queste strade sono nostre! Questa vita è nostra
+
+Nel cuore della notte, non è la paura ma la rabbia a crescere dentro di noi
+Non siamo più sole — siamo milioni, una voce sola
+Un grido è caduto sulla terra ed è risuonato nel cielo
+Credevano che il buio avesse vinto… noi siamo rinascite
+
+Chi vuole cancellare il nostro nome, chi ci costringe ad abbassare gli occhi
+Chi ci credeva "silenziose" — ci vedrà in questa piazza
+Il muro della paura è crollato, questa città è ora sveglia
+Quando le donne marciano non tacciono — persino le pietre prendono la parola
+
+Non taceremo! Non taceremo
+Non perderemo un'altra persona
+Basta! Basta
+Saremo noi a cambiare questo sistema
+
+Non toccare! Non uccidere! Non stare in silenzio davanti alle molestie
+Le donne sono qui! Le piazze sono nostre
+
+Abbiamo detto "no" e ci hanno reso le colpevoli — persino un sorriso diventa un bersaglio
+Anche camminare per una strada ci è forse vietato — dimmi
+Il giorno in cui la giustizia tace, noi parliamo ancora più forte
+Quando una madre piange, l'intera città si alza
+
+La legge che non ci protegge, la coscienza che ci cancella
+Chi ci rende invisibili — non dimentichi questo fuoco
+Non paura, ma coraggio — non si torna più indietro
+Dove camminano le donne, l'oppressione non può restare
+
+Sorella… stringo la tua mano
+Cammino contro il buio
+In queste strade non c'è paura
+Il nostro nome è ora scritto qui
+
+Non un giorno — ogni giorno è lotta
+Ma in questa lotta c'è speranza
+Perché siamo qui… Perché siamo insieme
+
+Non taceremo! Non taceremo
+Non perderemo un'altra persona
+Non taceremo! Non taceremo
+Le donne non si ritireranno
+
+Non toccare! Non uccidere! Non stare in silenzio davanti alle molestie
+Le donne sono qui! Le piazze sono nostre! Questa vita è nostra
+
+— PORTUGUÊS —
+
+Não toque! Não mate!
+Não perderemos mais uma pessoa
+Não calaremos mais uma vez
+Estas ruas são nossas! Esta vida é nossa
+
+No coração da noite, não é medo mas raiva que cresce dentro de nós
+Não estamos mais sozinhas — somos milhões, uma só voz
+Um grito caiu na terra e ecoou pelo céu
+Pensaram que a escuridão havia vencido… nós renascemos
+
+Os que querem apagar o nosso nome, os que nos forçam a baixar os olhos
+Todos os que nos julgavam "silenciosas" — vão nos ver nesta praça
+O muro do medo ruiu, esta cidade está desperta agora
+Quando as mulheres marcham, não se calam — até as pedras falam
+
+Não vamos calar! Não vamos calar
+Não perderemos mais uma pessoa
+Chega! Chega
+Vamos mudar esta ordem
+
+Não toque! Não mate! Não fique em silêncio diante do assédio
+As mulheres estão aqui! As praças são nossas
+
+Dissemos "não" e nos tornaram as culpadas — até um sorriso vira alvo
+Caminhar numa rua também nos é proibido — diz-me
+No dia em que a justiça cala, nós falamos ainda mais alto
+Quando uma mãe chora, a cidade inteira se levanta
+
+A lei que não nos protege, a consciência que nos apaga
+Todos os que nos tornam invisíveis — que não se esqueçam deste fogo
+Não medo, mas coragem — não há mais recuo
+Onde as mulheres caminham, a opressão não pode permanecer
+
+Irmã… estou segurando a tua mão
+Caminho contra a escuridão
+Nestas ruas não há medo
+O nosso nome já está escrito aqui
+
+Não um dia — cada dia é luta
+Mas nesta luta há esperança
+Porque estamos aqui… Porque estamos juntas
+
+Não vamos calar! Não vamos calar
+Não perderemos mais uma pessoa
+Não vamos calar! Não vamos calar
+As mulheres não vão recuar
+
+Não toque! Não mate! Não fique em silêncio diante do assédio
+As mulheres estão aqui! As praças são nossas! Esta vida é nossa
+
+— РУССКИЙ —
+
+Не трогай! Не убивай!
+Нас не станет меньше ни на одного
+Мы не замолчим ни на один раз
+Эти улицы — наши! Эта жизнь — наша
+
+В ночи внутри нас не страх — растёт ярость
+Мы больше не одни — нас миллионы, один голос
+Крик упал на землю и эхом прошёл по небу
+Они думали — тьма победила… а мы родились заново
+
+Те, кто хочет стереть наше имя, кто давит нас к земле взглядом
+Все, кто считал нас "молчащими" — увидят нас на этой площади
+Стена страха рухнула, этот город больше не спит
+Когда женщины идут — они не молчат, даже камни обретают голос
+
+Мы не замолчим! Мы не замолчим
+Нас не станет меньше ни на одного
+Хватит! Хватит
+Именно мы изменим этот порядок
+
+Не трогай! Не убивай! Не молчи о домогательствах
+Женщины здесь! Площади — наши
+
+Мы сказали "нет" — и нас сделали виновными
+даже улыбка становится мишенью
+Разве нам запрещено просто идти по улице — скажи мне
+В день, когда молчит справедливость, мы говорим в десять раз громче
+Когда плачет одна мать — поднимается целый город
+
+Закон, который нас не защищает, совесть, которая нас не видит
+Все, кто делает нас невидимыми — пусть не забудут этот огонь
+Не страх, а смелость — шага назад больше нет
+Там, где идут женщины, угнетению нет места
+
+Сестра… я держу твою руку
+Я иду навстречу тьме
+На этих улицах нет страха
+Наше имя написано здесь теперь
+
+Не один день — каждый день борьба
+Но в этой борьбе есть надежда
+Потому что мы здесь
+Потому что мы вместе
+
+Мы не замолчим! Мы не замолчим
+Нас не станет меньше ни на одного
+Мы не замолчим! Мы не замолчим
+Женщины не отступят — никогда
+
+Не трогай! Не убивай! Не молчи о домогательствах
+Женщины здесь! Площади — наши! Эта жизнь — наша
+
+— ΕΛΛΗΝΙΚΆ —
+
+Μην αγγίζεις! Μην σκοτώνεις!
+Δεν θα χάσουμε ούτε έναν ακόμα
+Δεν θα σιωπήσουμε ούτε μια φορά ακόμα
+Αυτοί οι δρόμοι είναι δικοί μας! Αυτή η ζωή είναι δική μας
+
+Μέσα στη νύχτα δεν μεγαλώνει φόβος — μεγαλώνει οργή
+Δεν είμαστε πια μόνες — είμαστε εκατομμύρια, μια φωνή
+Μια κραυγή έπεσε στη γη κι αντήχησε στον ουρανό
+Νόμισαν ότι νίκησε το σκοτάδι… εμείς ξαναγεννηθήκαμε
+
+Όσοι θέλουν να σβήσουν τ' όνομά μας, να σκύψουμε το κεφάλι
+Όλοι όσοι μας πίστευαν "σιωπηλές" — θα μας δουν σ' αυτή την πλατεία
+Ο τοίχος του φόβου κατέρρευσε, αυτή η πόλη είναι ξύπνια τώρα
+Όταν οι γυναίκες βαδίζουν, δεν σιωπούν — ακόμα και οι πέτρες μιλούν
+
+Δεν θα σιωπήσουμε! Δεν θα σιωπήσουμε
+Δεν θα χάσουμε ούτε έναν ακόμα
+Φτάνει πια! Φτάνει πια
+Εμείς θα αλλάξουμε αυτή την τάξη πραγμάτων
+
+Μην αγγίζεις! Μην σκοτώνεις! Μην σιωπάς στην παρενόχληση
+Οι γυναίκες είναι εδώ! Οι πλατείες είναι δικές μας
+
+Είπαμε "όχι" και μας έκαναν ένοχες — ακόμα και ένα χαμόγελο γίνεται στόχος
+Μήπως μας απαγορεύεται ακόμα και το περπάτημα σε έναν δρόμο — πες μου
+Την ημέρα που η δικαιοσύνη σωπαίνει, εμείς μιλάμε δέκα φορές πιο δυνατά
+Όταν κλαίει μια μητέρα, ολόκληρη η πόλη σηκώνεται
+
+Ο νόμος που δεν μας προστατεύει, η συνείδηση που μας αγνοεί
+Όσοι μας κάνουν αόρατες — ας μην ξεχάσουν αυτή τη φωτιά
+Όχι φόβος, αλλά θάρρος — δεν υπάρχει πλέον βήμα πίσω
+Εκεί που βαδίζουν οι γυναίκες, η καταπίεση δεν έχει θέση
+
+Αδερφή… κρατώ το χέρι σου
+Βαδίζω μέσα στο σκοτάδι
+Σ' αυτούς τους δρόμους δεν υπάρχει φόβος
+Τ' όνομά μας είναι γραμμένο εδώ πια
+
+Όχι μια μέρα — κάθε μέρα είναι αγώνας
+Αλλά σ' αυτόν τον αγώνα υπάρχει ελπίδα
+Γιατί είμαστε εδώ
+Γιατί είμαστε μαζί
+
+Δεν θα σιωπήσουμε! Δεν θα σιωπήσουμε
+Δεν θα χάσουμε ούτε έναν ακόμα
+Δεν θα σιωπήσουμε! Δεν θα σιωπήσουμε
+Οι γυναίκες δεν θα υποχωρήσουν — ποτέ
+
+Μην αγγίζεις! Μην σκοτώνεις! Μην σιωπάς στην παρενόχληση
+Οι γυναίκες είναι εδώ! Οι πλατείες είναι δικές μας! Αυτή η ζωή είναι δική μας
+
+— العربية —
+
+لا تلمس! لا تقتل!
+
+لن نفقد شخصًا آخر… لن نصمت مرةً أخرى… هذه الشوارع لنا! هذه الحياة لنا!
+في قلب الليل، لا خوفٌ يكبر فينا بل غضب،
+لسنا وحيداتٍ بعد الآن — نحن الملايين، صوت واحد.
+صرخةٌ سقطت على الأرض وارتدّت صداها في السماء،
+ظنّوا أن الظلام قد انتصر… ونحن وُلِدنا من جديد.
+من يريد محو اسمنا، من يجبرنا على إطراق الرأس،
+كل من ظنّنا "صامتات" — سيرانا في هذا الميدان!
+جدار الخوف قد تهاوى، هذه المدينة صاحيةٌ الآن،
+حين تسير النساء لا يصمتن — حتى الحجر يتكلم!
+لن نصمت! لن نصمت!
+لن نفقد شخصًا آخر!
+كفى! كفى!
+نحن من سيغيّر هذا النظام!
+لا تلمس! لا تقتل! لا تصمت على التحرش!
+النساء هنا! الميادين لنا!
+قلنا "لا" فجعلونا مذنباتٍ — حتى الابتسامة صارت هدفًا،
+أيضًا المشي في الشارع أصبح محرّمًا علينا — أخبرني!
+في اليوم الذي تصمت فيه العدالة، نتكلم نحن بصوتٍ أعلى،
+حين تبكي أمٌّ واحدة، تنهض المدينة بأسرها!
+القانون الذي لا يحمينا، الضمير الذي يمحونا،
+كل من يجعلنا غير مرئيات — فليتذكر هذه النار!
+ليس خوف بل شجاعة — لا تراجع بعد اليوم،
+حيثما تمشي النساء، لا يمكن للظلم أن يبقى!
+أختي… أمسك بيدكِ،
+أسير في مواجهة الظلام.
+في هذه الشوارع لا خوف —
+اسمنا مكتوبٌ هنا الآن!
+ليس يومًا واحدًا — كل يومٍ نضال،
+لكن في هذا النضال أملٌ يعيش!
+لأننا هنا… لأننا معًا!
+لن نصمت! لن نصمت!
+لن نفقد شخصًا آخر!
+لن نصمت! لن نصمت!
+النساء لن يتراجعن!
+لا تلمس! لا تقتل! لا تصمت على التحرش!
+النساء هنا! الميادين لنا! هذه الحياة لنا!
+
+— فارسی —
+
+خاموش نخواهیم شد
+یک نفر دیگر از ما کم نخواهد شد…
+یک بار دیگر ساکت نخواهیم ماند…
+این خیابان‌ها از ماست! این زندگی از ماست!
+در دل شب، نه ترس — بلکه خشم در ما می‌روید،
+دیگر تنها نیستیم — میلیون‌هاییم، یک صدا.
+فریادی به زمین افتاد و در آسمان طنین انداخت،
+گمان کردند تاریکی پیروز شد… ما دوباره زاده شدیم.
+آنان که می‌خواهند نامِ ما را پاک کنند، که چشمانمان را به زمین می‌دوزند،
+همه‌ی آن‌هایی که ما را "ساکت" می‌پنداشتند — در این میدان خواهند دید!
+دیوار ترس فرو ریخت، این شهر دیگر بیدار است،
+وقتی زنان راه می‌روند خاموش نمی‌مانند — حتی سنگ‌ها هم به سخن می‌آیند!
+خاموش نخواهیم شد! خاموش نخواهیم شد!
+یک نفر دیگر از ما کم نخواهد شد!
+بس است! بس است!
+این نظام را ما تغییر خواهیم داد!
+دست نزن! نکش! در برابر آزار سکوت مکن!
+زنان اینجا هستند! میدان‌ها از ماست!
+گفتیم "نه" و ما را مقصر دانستند — حتی لبخندمان هدف می‌شود،
+مگر راه رفتن در خیابان هم بر ما حرام است — بگو؟!
+روزی که عدالت خاموش می‌شود، ما ده برابر بلندتر می‌گوییم،
+وقتی مادری گریه می‌کند، تمام شهر به پا می‌خیزد!
+قانونی که حمایتمان نمی‌کند، وجدانی که نادیده‌مان می‌گیرد،
+همه‌ی آنان که ما را نامرئی می‌کنند — این آتش را فراموش نکنند!
+نه ترس، بلکه شجاعت — دیگر قدمی به عقب نیست،
+آنجا که زنان راه می‌روند، ستم جایی برای ماندن ندارد!
+خواهرم… دستت را می‌گیرم،
+در برابر تاریکی راه می‌روم.
+در این خیابان‌ها ترسی نیست —
+نامِ ما اینجا نوشته شده است!
+نه یک روز — هر روز نبرد است،
+اما در این نبرد امید هست!
+چون ما اینجاییم…
+چون ما با هم هستیم!
+خاموش نخواهیم شد! خاموش نخواهیم شد!
+یک نفر دیگر از ما کم نخواهد شد!
+خاموش نخواهیم شد! خاموش نخواهیم شد!
+زنان عقب‌نشینی نخواهند کرد — هرگز!
+دست نزن! نکش! در برابر آزار سکوت مکن!
+زنان اینجا هستند! میدان‌ها از ماست! این زندگی از ماست!
+
+— 한국어 —
+
+침묵하지 않겠다
+단 한 명도 더 잃지 않을 것이다…
+단 한 번도 더 침묵하지 않을 것이다…
+이 거리는 우리의 것! 이 삶은 우리의 것!
+어둠 속에서 두려움이 아닌 분노가 우리 안에서 자라고,
+우리는 더 이상 혼자가 아니다 — 우리는 수백만, 하나의 목소리.
+외침이 땅에 떨어져 하늘에 울려 퍼졌고,
+그들은 어둠이 이겼다고 생각했지만… 우리는 다시 태어났다.
+우리의 이름을 지우려는 자들, 우리의 눈을 땅으로 향하게 하는 자들,
+우리를 "침묵한다"고 여긴 모든 자들 — 이 광장에서 우리를 보게 될 것이다!
+두려움의 벽이 무너졌다, 이 도시는 이제 깨어 있다,
+여성들이 행진할 때 침묵하지 않는다 — 돌멩이조차 목소리를 얻는다!
+침묵하지 않겠다! 침묵하지 않겠다!
+단 한 명도 더 잃지 않겠다!
+이제 됐다! 이제 됐다!
+우리가 이 질서를 바꿀 것이다!
+건드리지 마! 죽이지 마! 괴롭힘에 침묵하지 마!
+여성들이 여기 있다! 광장은 우리의 것!
+"아니오"라고 했다고 죄인이 되고 — 미소조차 표적이 된다,
+길을 걷는 것조차 우리에게 금지된 것이냐 — 말해봐?!
+정의가 침묵하는 날, 우리는 열 배 더 크게 말한다,
+한 어머니가 울면, 온 도시가 일어선다!
+우리를 보호하지 않는 법, 우리를 외면하는 양심,
+우리를 보이지 않게 만드는 모든 자들 — 이 불길을 잊지 마라!
+두려움이 아닌 용기 — 이제 뒤로 물러서지 않는다,
+여성들이 걷는 곳에 억압은 발붙이지 못한다!
+자매여… 나는 네 손을 잡고 있어,
+어둠을 향해 걸어가고 있어.
+이 거리에는 두려움이 없어 —
+우리의 이름이 여기 새겨졌어!
+하루가 아닌 — 매일이 싸움,
+하지만 이 싸움에는 희망이 있다!
+우리가 여기 있기 때문에…
+우리가 함께하기 때문에!
+침묵하지 않겠다! 침묵하지 않겠다!
+단 한 명도 더 잃지 않겠다!
+침묵하지 않겠다! 침묵하지 않겠다!
+여성들은 절대 물러서지 않는다!
+건드리지 마! 죽이지 마! 괴롭힘에 침묵하지 마!
+여성들이 여기 있다! 광장은 우리의 것! 이 삶은 우리의 것!
+
+— 中文 —
+
+我们不会沉默
+我们不会再少一个人…
+我们不会再沉默一次…
+这些街道是我们的！这条命是我们的！
+在黑暗的夜里，不是恐惧——是愤怒在我们心中生长，
+我们不再孤单——我们是百万人，同一个声音。
+一声呐喊落在大地，回荡在天际，
+他们以为黑暗已经胜利……我们却重新诞生。
+那些想抹去我们名字的人，那些逼我们低下眼睛的人，
+所有以为我们会"沉默"的人——将在这广场上看见我们！
+恐惧的高墙倒塌了，这座城市现在醒来，
+当女性行进时，她们不会沉默——连石头都开口说话！
+我们不会沉默！我们不会沉默！
+我们不会再少一个人！
+够了！够了！
+我们将改变这个秩序！
+不许碰！不许杀！不要对骚扰保持沉默！
+女性在这里！广场是我们的！
+我们说"不"，却成了有罪的人——连微笑都成了靶子，
+难道连走一条街对我们也是禁忌——告诉我？！
+正义沉默的那一天，我们说得更响亮十倍，
+当一个母亲哭泣，整座城市站起来！
+不保护我们的法律，视我们于无物的良知，
+所有让我们隐形的人——别忘了这把火！
+不是恐惧，而是勇气——再也不会退步，
+女性所走之处，压迫无法立足！
+姐妹……我握着你的手，
+走向黑暗。
+在这些街道上没有恐惧——
+我们的名字已经写在这里！
+不是一天——每天都是斗争，
+但在这场斗争中有希望！
+因为我们在这里……
+因为我们在一起！
+我们不会沉默！我们不会沉默！
+我们不会再少一个人！
+我们不会沉默！我们不会沉默！
+女性绝不退缩——永远不！
+不许碰！不许杀！不要对骚扰保持沉默！
+女性在这里！广场是我们的！这条命是我们的！
+
+— हिन्दी —
+
+चुप नहीं रहेंगे
+एक और इंसान नहीं खोएंगे हम…
+एक बार और चुप नहीं रहेंगे हम…
+ये सड़कें हमारी हैं! ये ज़िंदगी हमारी है!
+रात के अँधेरे में डर नहीं — हमारे भीतर गुस्सा पलता है,
+अब हम अकेले नहीं — हम लाखों हैं, एक आवाज़ में।
+एक चीख़ ज़मीन पर गिरी, आसमान में गूँज उठी,
+उन्होंने सोचा अँधेरा जीत गया… हम फिर से जन्मे।
+जो हमारा नाम मिटाना चाहते हैं, जो हमारी आँखें झुकाते हैं,
+जिन्होंने हमें "ख़ामोश" समझा — वो हमें इस चौक पर देखेंगे!
+डर की दीवार टूट गई, यह शहर अब जाग चुका है,
+जब औरतें चलती हैं, वो चुप नहीं रहतीं — पत्थर भी बोल उठते हैं!
+चुप नहीं रहेंगे! चुप नहीं रहेंगे!
+एक और इंसान नहीं खोएंगे हम!
+बस करो! बस करो!
+यह व्यवस्था हम बदलेंगे!
+मत छूओ! मत मारो! उत्पीड़न पर चुप मत रहो!
+औरतें यहाँ हैं! चौक हमारे हैं!
+"ना" कहा तो क़सूरवार हम — एक मुस्कान भी निशाना बन जाती है,
+क्या सड़क पर चलना भी हमारे लिए गुनाह है — बताओ?!
+जिस दिन इंसाफ़ चुप हो जाए, हम दस गुना ज़ोर से बोलते हैं,
+जब एक माँ रोती है, पूरा शहर खड़ा हो जाता है!
+वो क़ानून जो हमारी रक्षा नहीं करता, वो ज़मीर जो हमें नज़रअंदाज़ करता है,
+जो हमें अदृश्य बनाते हैं — वो इस आग को न भूलें!
+डर नहीं, हौसला है — अब पीछे हटने का सवाल नहीं,
+जहाँ औरतें चलती हैं, वहाँ ज़ुल्म नहीं टिक सकता!
+बहन… मैं तुम्हारा हाथ थाम रही हूँ,
+अँधेरे के सामने चल रही हूँ।
+इन सड़कों पर डर नहीं —
+हमारा नाम यहाँ लिखा है अब!
+एक दिन नहीं — हर दिन लड़ाई है,
+लेकिन इस लड़ाई में उम्मीद है!
+क्योंकि हम यहाँ हैं…
+क्योंकि हम साथ हैं!
+चुप नहीं रहेंगे! चुप नहीं रहेंगे!
+एक और इंसान नहीं खोएंगे हम!
+चुप नहीं रहेंगे! चुप नहीं रहेंगे!
+औरतें पीछे नहीं हटेंगी — कभी नहीं!
+मत छूओ! मत मारो! उत्पीड़न पर चुप मत रहो!
+औरतें यहाँ हैं! चौक हमारे हैं! ये ज़िंदगी हमारी है!
+
+— 日本語 —
+
+黙らない
+一人も失わない…
+一度も黙らない…
+この街は私たちのもの！
+この命は私たちのもの！
+夜の闇の中で、恐れではなく怒りが育つ、
+もう一人じゃない――何百万、一つの声。
+叫びが大地に落ち、空へと響き渡った、
+暗闇が来たと思っていた…私たちは生まれ変わった。
+私たちの名を消そうとする者、目を伏せさせようとする者、
+「沈黙」と思っていた全ての人よ――この広場で見ることになる！
+恐怖の壁は崩れた、この街は今目覚めた、
+女たちが歩むとき黙らない――石でさえ語り出す！
+黙らない！黙らない！
+もう一人も失わない！
+もう終わりだ！もう終わりだ！
+この秩序を私たちが変える！
+触れるな！殺すな！
+ハラスメントに黙るな！
+女たちはここにいる！広場は私たちのもの！
+「ノー」と言えば罪人にされ――笑顔さえも標的になる、
+通りを歩くことも禁じられているのか――教えてくれ！
+正義が沈黙する日、私たちはより声高く語る、
+母が泣くとき、街全体が立ち上がる！
+私たちを守らない法律、私たちを無視する良心、
+私たちを見えない存在にする全ての人よ――この炎を忘れるな！
+恐れではなく勇気――もう後退はない、
+女たちが歩む場所に、抑圧は居られない！
+黙らない！黙らない！
+もう一人も失わない！
+もう終わりだ！もう終わりだ！
+この秩序を私たちが変える！
+触れるな！殺すな！
+ハラスメントに黙るな！
+女たちはここにいる！広場は私たちのもの！
+姉妹よ…あなたの手を握る、
+暗闇に向かって歩く。
+この通りに恐れはない――
+私たちの名がここに刻まれた！
+一日だけでなく、毎日が戦い、
+しかしこの戦いに希望がある！
+私たちがいるから…
+私たちが共に立っているから！
+黙らない！
+黙らない！
+もう一人も失わない！
+黙らない！
+黙らない！
+女たちは退かない！
+触れるな！殺すな！
+ハラスメントに黙るな！
+女たちはここにいる！
+広場は私たちのもの！
+この命は私たちのもの！`,
 "HOLD ON": `Walking down the empty road
 Carrying this heavy load
 The sun is setting far away
